@@ -28,6 +28,7 @@
   "devDependencies": {
     "choo-devtools": "^2.5.0",
     "dependency-check": "^3.1.0",
+    "now": "^10.2.2",
     "now-cd": "^1.1.0",
     "standard": "^11.0.1"
   },
