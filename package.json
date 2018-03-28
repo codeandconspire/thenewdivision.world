@@ -1,0 +1,47 @@
+{
+  "name": "thenewdivision.world",
+  "version": "1.0.0",
+  "description": "Public website for The New Division",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && dependency-check && dependency-check --unused",
+    "start": "bankai start index.js",
+    "inspect": "bankai inspect index.js",
+    "build": "bankai build index.js"
+  },
+  "sheetify": {
+    "transform": [
+      "sheetify-postcss"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeandconspire/thenewdivision.world.git"
+  },
+  "author": "code and conspire",
+  "license": "CC BY 4.0",
+  "bugs": {
+    "url": "https://github.com/codeandconspire/thenewdivision.world/issues"
+  },
+  "homepage": "https://github.com/codeandconspire/thenewdivision.world#readme",
+  "devDependencies": {
+    "choo-devtools": "^2.5.0",
+    "dependency-check": "^3.1.0",
+    "standard": "^11.0.1"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.2.0",
+    "bankai": "^9.10.3",
+    "choo": "^6.10.3",
+    "choo-service-worker": "^2.4.0",
+    "hyperstream": "^1.2.2",
+    "nanocomponent": "^6.5.1",
+    "normalize.css": "^8.0.0",
+    "postcss-import": "^11.1.0",
+    "prismic-element": "^0.7.0",
+    "prismic-javascript": "^1.5.0-beta.2",
+    "prismic-richtext": "^0.2.7",
+    "sheetify": "^7.3.0",
+    "sheetify-postcss": "git://github.com/tornqvist/sheetify-postcss.git#respect-postcssrc"
+  }
+}
