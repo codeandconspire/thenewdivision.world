@@ -4,8 +4,9 @@
   "description": "Public website for The New Division",
   "main": "index.js",
   "scripts": {
-    "test": "standard && dependency-check && dependency-check --unused",
+    "test": "standard && dependency-check package.json",
     "start": "bankai start index.js",
+    "now-start": "serve dist",
     "inspect": "bankai inspect index.js",
     "build": "bankai build index.js"
   },
@@ -27,6 +28,7 @@
   "devDependencies": {
     "choo-devtools": "^2.5.0",
     "dependency-check": "^3.1.0",
+    "now-cd": "^1.1.0",
     "standard": "^11.0.1"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "prismic-element": "^0.7.0",
     "prismic-javascript": "^1.5.0-beta.2",
     "prismic-richtext": "^0.2.7",
+    "serve": "^6.5.3",
     "sheetify": "^7.3.0",
     "sheetify-postcss": "git://github.com/tornqvist/sheetify-postcss.git#respect-postcssrc"
   }
