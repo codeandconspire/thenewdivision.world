@@ -6,4 +6,4 @@ install:
 script:
   - npm test
 after_success:
-  - npx now-cd codeandconspire
+  - npx now-cd
