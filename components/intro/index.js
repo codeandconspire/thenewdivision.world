@@ -1,12 +1,12 @@
 const css = require('sheetify')
 const html = require('choo/html')
 const raw = require('choo/html/raw')
-const Component = require('nanocomponent')
+const Component = require('choo/component')
 const asElement = require('prismic-element')
 const { Elements } = require('prismic-richtext')
 css('./index')
 
-module.exports = class Intro extends Component {
+module.exports = class extends Component {
   constructor () {
     super('intro')
     this.finished = false
@@ -39,7 +39,7 @@ module.exports = class Intro extends Component {
         }))
       }, Promise.resolve()).then(function () {
         self.finished = true
-        // self.rerender()
+        self.rerender()
       })
     })
 
@@ -64,8 +64,8 @@ module.exports = class Intro extends Component {
     }
   }
 
-  update () {
-    return false
+  update (text) {
+    return text !== this.text
   }
 
   createElement (text) {
@@ -73,16 +73,16 @@ module.exports = class Intro extends Component {
 
     if (this.finished) {
       return html`
-        <div class="Intro">
+        <p class="Intro">
           ${getStrong(text)}
-        </div>
+        </p>
       `
     }
 
     return html`
-      <div class="Intro">
+      <p class="Intro">
         ${asElement(text, fail, serialize)}
-      </div>
+      </p>
     `
   }
 }

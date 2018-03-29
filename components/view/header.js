@@ -1,12 +1,14 @@
 const html = require('choo/html')
-const Component = require('nanocomponent')
+const Component = require('choo/component')
+require('../base')
 
 module.exports = class Header extends Component {
-  update () {
-    return false
+  update (href) {
+    return href !== this.href
   }
 
-  createElement () {
+  createElement (href) {
+    this.href = href
     return html`
       <div class="View-header">
         <svg class="View-logo" width="344" height="106" viewBox="0 0 344 106">
@@ -16,6 +18,7 @@ module.exports = class Header extends Component {
             <path fill="currentColor" d="M229.5 94.8c.5 0 .8-.4.8-.9a.9.9 0 0 0-1.7 0c0 .5.4.9.9.9m2.5 0c.5 0 .9-.4.9-.9s-.4-.9-.9-.9c-.4 0-.8.4-.8.9s.4.9.8.9m-62.1 9.4c-.3 0-.6 0-.8-.2-.3 0-.4-.3-.6-.5v.6h-1.1v-6.3h1.2v2.3l.5-.5.8-.2c.2 0 .5 0 .7.2l.7.5.4.7.1 1-.1 1-.4.8a1.8 1.8 0 0 1-1.4.6m-.3-1c.3 0 .6-.1.7-.3.2-.3.3-.6.3-1 0-.5 0-.8-.3-1.1a.8.8 0 0 0-.7-.4 1 1 0 0 0-.8.4l-.2.5v.6c0 .4 0 .7.2 1 .2.2.5.3.8.3m2.7 1.4h.5l.5-.1.1-.5v-.4a7.7 7.7 0 0 0-.3-.8l-1.2-3.3h1.2l.7 2 .1.4.1.4.1.3.1-.3v-.4l.2-.3.6-2h1.2l-1.5 4.6-.3.7-.3.4a1 1 0 0 1-.5.2 2 2 0 0 1-.6 0h-.7v-.9zM0 80h343.8V.5H.1v79.3zm3.4-3.4h337.1V3.9H3.4v72.7z"/>
           </g>
         </svg>
+        ${this.route === '/' ? html`<h1 class="u-hiddenVisually">The New Division</h1>` : null}
       </div>
     `
   }

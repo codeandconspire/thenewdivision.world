@@ -1,0 +1,38 @@
+/* @define Link */
+
+.Link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.Link--adaptive {
+  color: currentColor;
+}
+
+.Link-figure {
+  position: relative;
+}
+
+.Link-decorator {
+  width: 100%;
+  height: 100%;
+  padding: calc(var(--size) / 2);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.Link-image {
+  display: block;
+  width: 100%;
+}
+
+.Link-plus {
+  float: right;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  position: sticky;
+  top: calc(var(--size) / 2);
+  right: calc(var(--size) / 2);
+}

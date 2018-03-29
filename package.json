@@ -35,10 +35,9 @@
   "dependencies": {
     "autoprefixer": "^8.2.0",
     "bankai": "^9.10.3",
-    "choo": "^6.10.3",
+    "choo": "github:choojs/choo#choojs-components",
     "choo-service-worker": "^2.4.0",
     "hyperstream": "^1.2.2",
-    "nanocomponent": "^6.5.1",
     "normalize.css": "^8.0.0",
     "postcss-import": "^11.1.0",
     "prismic-element": "^0.7.0",

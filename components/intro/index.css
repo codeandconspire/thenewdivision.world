@@ -3,6 +3,8 @@
 @import "../base/global";
 
 .Intro {
+  margin: 0;
+  padding: 0;
   position: relative;
   font-family: var(--giorgio-sans-bold);
   font-size: calc(var(--size) * 2.5);

@@ -23,16 +23,13 @@ function documents (state, emitter) {
     }
   })
 
-  function render () {
-    emitter.emit('render')
-  }
-
   function query (data) {
     assert.equal(typeof data.type, 'string', 'documents: type should be a string')
 
     const opts = {}
     const predicates = []
     if (state.ref) opts.ref = state.ref
+    if (data.fetchLinks) opts.fetchLinks = data.fetchLinks
 
     if (data.uid) {
       predicates.push(Predicates.at(`my.${data.type}.uid`, data.uid))
@@ -56,6 +53,10 @@ function documents (state, emitter) {
       queue -= 1
       if (queue === 0) state.documents.loading = false
     })
+  }
+
+  function render () {
+    emitter.emit('render')
   }
 }
 

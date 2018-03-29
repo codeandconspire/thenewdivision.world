@@ -7,7 +7,6 @@ css('./index')
 
 const DEFAULT_TITLE = 'The New Division'
 
-const header = new Header()
 const text = i18n(require('./lang.json'))
 
 module.exports = createView
@@ -29,7 +28,7 @@ function createView (view, title) {
 
     return html`
       <body class="View">
-        ${header.render()}
+        ${state.cache(Header, 'header').render(state.route)}
         ${children}
       </body>
     `

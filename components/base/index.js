@@ -4,6 +4,7 @@ const css = require('sheetify')
 const common = require('./lang.json')
 
 css('normalize.css')
+css('./index')
 
 // initialize translation utility with given language file
 // obj -> str

@@ -1,0 +1,22 @@
+/* @define Grid */
+
+@import "../base/global";
+
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + var(--size));
+  margin-left: calc(var(--size) / -2);
+  margin-right: calc(var(--size) / -2);
+}
+
+.Grid-cell {
+  display: flex;
+  flex-basis: 100%;
+  min-width: 0;
+  padding: calc(var(--size) / 2) calc(var(--size) / 2) 0 calc(var(--size) / 2);
+}
+
+.Grid-cell--1of2 {
+  flex: 0 1 50%;
+}

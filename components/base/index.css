@@ -1,0 +1,16 @@
+@import "./display";
+@import "./layout";
+@import "./space";
+@import "./size";
+
+@font-face {
+  font-family: "Giorgio Sans Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/assets/giorgio-sans-bold.woff") format("woff");
+  font-display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
