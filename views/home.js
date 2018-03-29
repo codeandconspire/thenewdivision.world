@@ -7,7 +7,6 @@ require('../components/display')
 require('../components/grid')
 require('../components/base')
 
-const intro = new Intro()
 const PREDICATE = {
   type: 'homepage',
   fetchLinks: [
@@ -33,7 +32,7 @@ function home (state, emit) {
 
   return html`
     <main class="View-container">
-      ${intro.render(doc.data.intro)}
+      ${state.cache(Intro, 'homepage-intro').render(doc.data.intro)}
       <h2 class="Display Display--2">Case studies</h2>
       <div class="Grid">
         ${doc.data.featured_cases.map(props => html`
