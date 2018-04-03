@@ -4,6 +4,8 @@
   --accent: #ececec;
   --contain: 1440px;
   --size: 2.2vw;
+  --inview: 1;
+  --scroll: 0;
 
   --giorgio-sans-bold: "Giorgio Sans Bold", "AvenirNextCondensed-DemiBold", "HelveticaNeue-CondensedBold", "Helvetica Inserat", "Franklin Gothic Condensed", Haettenschweiler, Impact, sans-serif-condensed, sans-serif;
   --system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;

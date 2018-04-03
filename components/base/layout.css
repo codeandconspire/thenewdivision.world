@@ -7,3 +7,7 @@
 .u-posStatic {
   position: static !important;
 }
+
+.u-clip {
+  overflow: hidden !important;
+}

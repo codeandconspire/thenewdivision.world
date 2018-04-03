@@ -13,6 +13,10 @@
   position: relative;
 }
 
+.Link-image {
+  transform: scale(calc(1 + ((1 - var(--inview)) * 0.1)));
+}
+
 .Link-decorator {
   width: 100%;
   height: 100%;
@@ -20,6 +24,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
 }
 
 .Link-image {

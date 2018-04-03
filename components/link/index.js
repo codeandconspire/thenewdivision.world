@@ -1,14 +1,23 @@
 const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
+const { observe } = require('../base')
 css('./index')
 
 exports.Figure = class Figure extends Component {
+  load (element) {
+    const detach = this.unload = observe(element, function () {
+      detach()
+    })
+  }
+
   createElement (img) {
     return html`
       <div class="Link-figure">
         ${decorator()}
-        <img src="${img.url}" class="Link-image">
+        <div class="u-clip">
+          <img src="${img.url}" class="Link-image">
+        </div>
       </div>
     `
   }

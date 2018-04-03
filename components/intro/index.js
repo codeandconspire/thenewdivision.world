@@ -9,10 +9,12 @@ css('./index')
 module.exports = class extends Component {
   constructor () {
     super('intro')
-    this.finished = false
+    this.finished = true
   }
 
   load (element) {
+    if (this.finished) return
+
     const self = this
     const groups = [...element.querySelectorAll('.js-group')]
     const children = [...element.childNodes]
