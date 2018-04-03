@@ -6,8 +6,10 @@ css('./index')
 
 exports.Figure = class Figure extends Component {
   load (element) {
-    const detach = this.unload = observe(element, function () {
-      detach()
+    const random = Math.random() * (2.5 - -2.5) + -2.5
+    element.style.setProperty('--rotation', `${random}deg`)
+    this.unload = observe(element, function () {
+      // detach()
     })
   }
 
@@ -15,9 +17,7 @@ exports.Figure = class Figure extends Component {
     return html`
       <div class="Link-figure">
         ${decorator()}
-        <div class="u-clip">
-          <img src="${img.url}" class="Link-image">
-        </div>
+        <img src="${img.url}" class="Link-image">
       </div>
     `
   }

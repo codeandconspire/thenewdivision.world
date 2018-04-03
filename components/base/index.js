@@ -45,16 +45,38 @@ function inview ([el, box, cb]) {
 // (HTMLElement, fn) -> fn
 exports.observe = observe
 function observe (el, cb) {
-  assert(el instanceof window.HTMLElement, 'base: el should be an DOM node')
+  assert(el instanceof window.HTMLElement, 'base: el should be a DOM node')
+
+  let entry
+  const onmousemove = nanoraf(function (event) {
+    el.style.setProperty('--mouse-x', (event.layerX / entry[1].width).toFixed(2))
+    el.style.setProperty('--mouse-y', (event.layerY / entry[1].height).toFixed(2))
+  })
+
   let index = cache.findIndex((item) => item[0] === el)
   if (index === -1) {
-    const box = {top: el.offsetTop, height: el.offsetHeight}
-    index = cache.push([el, box, cb]) - 1
+    entry = [el, {
+      top: el.offsetTop,
+      width: el.offsetWidth,
+      height: el.offsetHeight
+    }, cb]
+    index = cache.push(entry) - 1
+    el.addEventListener('mousemove', onmousemove)
+    el.addEventListener('mouseleave', onmouseleave)
   }
+
   inview(cache[index])
+
   return nanoraf(function () {
     cache.splice(cache.findIndex((item) => item[0] === el), 1)
+    el.removeEventListener('mousemove', onmousemove)
+    el.removeEventListener('mouseleave', onmouseleave)
   })
+
+  function onmouseleave (event) {
+    el.style.setProperty('--mouse-x', 0)
+    el.style.setProperty('--mouse-y', 0)
+  }
 }
 
 // get viewport height

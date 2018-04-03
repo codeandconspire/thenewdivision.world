@@ -3,6 +3,8 @@
 .Link {
   display: inline-block;
   text-decoration: none;
+  --mouse-x: 0;
+  --mouse-y: 0;
 }
 
 .Link--adaptive {
@@ -11,10 +13,19 @@
 
 .Link-figure {
   position: relative;
+  /* transform: translate(calc(-2% * var(--mouse-x)), calc(-2% * var(--mouse-y))); */
+  transform:
+    /* rotate(calc(var(--rotation) * (1 - var(--inview)))) */
+    translateY(calc(20px * (1 - var(--inview))));
+    /* scale(calc(1 + ((1 - var(--inview)) * 0.03))); */
+  transition: transform 175ms ease-out;
+}
+
+.Link-figure:hover {
+  transition: none;
 }
 
 .Link-image {
-  transform: scale(calc(1 + ((1 - var(--inview)) * 0.1)));
 }
 
 .Link-decorator {
