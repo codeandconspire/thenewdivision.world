@@ -1,15 +1,14 @@
 const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
-const { observe } = require('../base')
+const { observe, mousemove } = require('../base')
 css('./index')
 
 exports.Figure = class Figure extends Component {
   load (element) {
-    const random = Math.random() * (2.5 - -2.5) + -2.5
-    element.style.setProperty('--rotation', `${random}deg`)
-    this.unload = observe(element, function () {
-      // detach()
+    mousemove(element)
+    const stopObserving = observe(element, function () {
+      stopObserving()
     })
   }
 

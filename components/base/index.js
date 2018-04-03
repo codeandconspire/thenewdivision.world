@@ -23,7 +23,6 @@ if (typeof window !== 'undefined') {
   }))
   window.addEventListener('scroll', nanoraf(function () {
     for (let i = 0, len = cache.length; i < len; i++) inview(cache[i])
-    document.documentElement.style.setProperty('--scroll', window.scrollY)
   }), {passive: true})
 }
 
@@ -34,49 +33,77 @@ function inview ([el, box, cb]) {
   const scroll = window.scrollY
   const top = Math.max(scroll - box.top, 0)
   const bottom = Math.min((scroll + viewport) - (box.top + box.height), 0)
+
   let fraction = 1 - (Math.abs(top + bottom) / box.height)
   if (fraction < 0) fraction = 0
   else if (fraction > 1) fraction = 1
-  if (fraction === 1 && el.style.getPropertyValue('--inview') !== '1') cb()
+
+  if (fraction === 1 && el.style.getPropertyValue('--inview') !== '1') {
+    cb()
+  }
+
   el.style.setProperty('--inview', fraction.toFixed(3))
+}
+
+// expose relative mouse coordinates as custom variables
+// HTMLElement -> void
+exports.mousemove = mousemove
+function mousemove (el) {
+  let enterTop = 0
+  let enterLeft = 0
+  const {offsetWidth, offsetHeight} = el
+  const onmousemove = nanoraf(function (event) {
+    // el.style.setProperty('--mouse-x', ((event.clientX - offsetWidth) / offsetWidth).toFixed(2))
+    // el.style.setProperty('--mouse-y', ((event.clientY - offsetHeight) / offsetHeight).toFixed(2))
+    const left = ((event.layerX - enterLeft) / offsetWidth).toFixed(2)
+    const top = ((event.layerY - enterTop) / offsetHeight).toFixed(2)
+    el.style.setProperty('--mouse-x', left)
+    el.style.setProperty('--mouse-y', top)
+  })
+
+  el.addEventListener('mousemove', onmousemove)
+  el.addEventListener('mouseleave', onmouseleave)
+  el.addEventListener('mouseenter', onmouseenter)
+
+  return function () {
+    el.removeEventListener('mousemove', onmousemove)
+    el.removeEventListener('mouseleave', onmouseleave)
+    el.removeEventListener('mouseenter', onmouseenter)
+  }
+
+  function onmouseenter (event) {
+    enterTop = event.layerY
+    enterLeft = event.layerX
+  }
+
+  function onmouseleave (event) {
+    if (event.target !== el) return
+    enterTop = enterLeft = 0
+    el.style.removeProperty('--mouse-x')
+    el.style.removeProperty('--mouse-y')
+  }
 }
 
 // observe how much of an element is in view
 // (HTMLElement, fn) -> fn
 exports.observe = observe
 function observe (el, cb) {
-  assert(el instanceof window.HTMLElement, 'base: el should be a DOM node')
+  cb = cb || function () {}
 
-  let entry
-  const onmousemove = nanoraf(function (event) {
-    el.style.setProperty('--mouse-x', (event.layerX / entry[1].width).toFixed(2))
-    el.style.setProperty('--mouse-y', (event.layerY / entry[1].height).toFixed(2))
-  })
+  assert(el instanceof window.HTMLElement, 'base: el should be a DOM node')
+  assert(typeof cb === 'function', 'base: cb should be a function')
 
   let index = cache.findIndex((item) => item[0] === el)
   if (index === -1) {
-    entry = [el, {
-      top: el.offsetTop,
-      width: el.offsetWidth,
-      height: el.offsetHeight
-    }, cb]
-    index = cache.push(entry) - 1
-    el.addEventListener('mousemove', onmousemove)
-    el.addEventListener('mouseleave', onmouseleave)
+    const box = {top: el.offsetTop, height: el.offsetHeight}
+    index = cache.push([el, box, cb]) - 1
   }
 
   inview(cache[index])
 
   return nanoraf(function () {
     cache.splice(cache.findIndex((item) => item[0] === el), 1)
-    el.removeEventListener('mousemove', onmousemove)
-    el.removeEventListener('mouseleave', onmouseleave)
   })
-
-  function onmouseleave (event) {
-    el.style.setProperty('--mouse-x', 0)
-    el.style.setProperty('--mouse-y', 0)
-  }
 }
 
 // get viewport height
