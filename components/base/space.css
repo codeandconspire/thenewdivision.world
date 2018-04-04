@@ -2,21 +2,21 @@
 
 @import "./global";
 
-.u-spaceTxs { margin-top: calc(var(--size) / 4) !important; }
+.u-spaceTxs { margin-top: calc(var(--size) / 6) !important; }
 .u-spaceTs { margin-top: calc(var(--size) / 2) !important; }
 .u-spaceTm { margin-top: var(--size) !important; }
 .u-spaceTl { margin-top: calc(var(--size) * 2) !important; }
-.u-spaceTxl { margin-top: calc(var(--size) * 4) !important; }
+.u-spaceTxl { margin-top: calc(var(--size) * 6) !important; }
 
-.u-spaceBxs { margin-bottom: calc(var(--size) / 4) !important; }
+.u-spaceBxs { margin-bottom: calc(var(--size) / 6) !important; }
 .u-spaceBs { margin-bottom: calc(var(--size) / 2) !important; }
 .u-spaceBm { margin-bottom: var(--size) !important; }
 .u-spaceBl { margin-bottom: calc(var(--size) * 2) !important; }
-.u-spaceBxl { margin-bottom: calc(var(--size) * 4) !important; }
+.u-spaceBxl { margin-bottom: calc(var(--size) * 6) !important; }
 
 .u-spaceVxs {
-  margin-top: calc(var(--size) / 4) !important;
-  margin-bottom: calc(var(--size) / 4) !important;
+  margin-top: calc(var(--size) / 6) !important;
+  margin-bottom: calc(var(--size) / 6) !important;
 }
 
 .u-spaceVs {
@@ -35,6 +35,6 @@
 }
 
 .u-spaceVxl {
-  margin-top: calc(var(--size) * 4) !important;
-  margin-bottom: calc(var(--size) * 4) !important;
+  margin-top: calc(var(--size) * 6) !important;
+  margin-bottom: calc(var(--size) * 6) !important;
 }

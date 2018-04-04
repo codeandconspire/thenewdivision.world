@@ -6,6 +6,14 @@
   font-display: block;
 }
 
+:root {
+  background: var(--theme);
+}
+
+html, body {
+  height: 100%;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -3,6 +3,10 @@
 @import "../base/global";
 
 .View {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   color: var(--color);
   background-color: var(--background);
   font-family: var(--system-font);
@@ -11,17 +15,23 @@
 }
 
 .View-container {
-  max-width: calc(var(--contain) + (var(--size) * 2));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   padding-left: var(--size);
   padding-right: var(--size);
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+}
+
+.View-container--fill {
+  flex: 1 0 auto;
 }
 
 .View-header  {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
+  width: 100%;
   padding: var(--size);
 }
 

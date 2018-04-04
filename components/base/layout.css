@@ -1,13 +1,41 @@
 /* @define utilities */
 
-.u-posRelative {
+.u-relative {
   position: relative !important;
 }
 
-.u-posStatic {
+.u-absolute {
+  position: absolute !important;
+}
+
+.u-static {
   position: static !important;
 }
 
 .u-clip {
   overflow: hidden !important;
+}
+
+.u-flex {
+  display: flex !important;
+}
+
+.u-column {
+  flex-direction: column !important;
+}
+
+.u-justifyCenter {
+  justify-content: center !important;
+}
+
+.u-alignCenter {
+  align-items: center !important;
+}
+
+.u-fill {
+  flex: 1 1 auto !important;
+}
+
+.u-full {
+  flex: 1 0 100% !important;
 }

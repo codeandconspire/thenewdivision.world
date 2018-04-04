@@ -24,7 +24,7 @@ exports.Figure = class Figure extends Component {
     return html`
       <div class="Link-figure">
         ${decorator()}
-        <img src="${img.url}" class="Link-image">
+        <img src="${img.url}" alt="${img.alt || ''}" class="Link-image">
       </div>
     `
   }

@@ -17,7 +17,7 @@
   transform:
     translateX(calc(-1.4% * var(--mouse-x)))
     translateY(calc((20% * (1 - var(--inview))) + (-1.4% * var(--mouse-y))));
-  transition: transform 180ms cubic-bezier(0.62, 0.9, 0.64, 1);
+  transition: transform 180ms var(--snap);
 }
 
 .Link-figure:hover {
@@ -51,7 +51,7 @@
   transform:
     translateX(calc(-25% * var(--mouse-x)))
     translateY(calc(-25% * var(--mouse-y)));
-  transition: transform 260ms cubic-bezier(0.62, 0.9, 0.64, 1);
+  transition: transform 260ms var(--snap);
 }
 
 .Link-figure:hover .Link-plus {

@@ -1,3 +1,30 @@
 /* @define Text */
 
 @import "../base/global";
+
+.Text {
+  display: block;
+  font-size: 1rem;
+}
+
+.Text--large {
+  font-size: 1.5rem;
+}
+
+.Text > p {
+  margin: 1.5em 0;
+}
+
+.Text > p:first-child {
+  margin-top: 0;
+}
+
+.Text > p:last-child {
+  margin-bottom: 0;
+}
+
+.Text > img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}

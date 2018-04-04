@@ -20,8 +20,11 @@ module.exports = view(home)
 function home (state, emit) {
   if (state.documents.error) throw state.documents.error
 
-  const doc = state.documents.items.find(doc => doc.type === 'homepage')
+  if (state.ui.theme !== 'white') {
+    emit('ui:theme', 'white')
+  }
 
+  const doc = state.documents.items.find(doc => doc.type === 'homepage')
   if (!doc) {
     if (!state.documents.loading) emit('doc:fetch', PREDICATE)
     return html`

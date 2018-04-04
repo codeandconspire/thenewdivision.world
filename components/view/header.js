@@ -12,7 +12,7 @@ module.exports = class Header extends Component {
   createElement (href) {
     this.href = href
     return html`
-      <div class="View-header">
+      <div class="View-header ${/^about/.test(href) ? 'u-absolute' : ''}">
         ${this.route === '/' ? html`
           <span class="View-home">
             <h1 class="u-hiddenVisually">The New Division</h1>
@@ -26,7 +26,7 @@ module.exports = class Header extends Component {
         `}
         <nav>
           <a class="View-nav" href="#cases">${text`Cases`}</a>
-          <a class="View-nav" href="/#words">${text`Words`}</a>
+          <a class="View-nav" href="#words">${text`Words`}</a>
           <a class="View-nav" href="/about">${text`About`}</a>
         </nav>
       </div>
