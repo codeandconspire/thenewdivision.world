@@ -25,9 +25,28 @@
   padding: var(--size);
 }
 
-.View-logo {
+.View-home {
+  display: block;
   flex: 0 1 calc(100% / 3);
+  margin-right: auto;
+}
+
+.View-logo {
+  display: block;
+  width: 100%;
   max-width: 205px;
   height: auto;
-  margin-right: auto;
+  color: var(--color);
+}
+
+.View-nav {
+  display: inline-block;
+  padding: calc(var(--size) / 2) var(--size);
+  margin-left: calc(var(--size) / 4);
+  color: currentColor;
+  text-decoration: none;
+}
+
+.View-nav:last-child {
+  margin-right: calc(var(--size) * -1);
 }

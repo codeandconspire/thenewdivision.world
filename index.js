@@ -9,8 +9,10 @@ if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
 
 app.use(require('choo-service-worker')('/sw.js'))
 app.use(require('./stores/documents'))
+app.use(require('./stores/ui'))
 
 app.route('/', require('./views/home'))
+app.route('/:anchor', require('./views/home'))
 app.route('/404', require('./views/404'))
 
 try {

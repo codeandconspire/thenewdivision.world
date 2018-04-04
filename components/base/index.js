@@ -12,6 +12,10 @@ css('./space')
 css('./size')
 css('./index')
 
+if (typeof window !== 'undefined') {
+  require('smoothscroll-polyfill').polyfill()
+}
+
 const cache = []
 if (typeof window !== 'undefined') {
   window.addEventListener('resize', nanoraf(function () {

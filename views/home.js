@@ -33,7 +33,7 @@ function home (state, emit) {
   return html`
     <main class="View-container">
       ${state.cache(Intro, 'homepage-intro').render(doc.data.intro)}
-      <h2 class="Display Display--2">Case studies</h2>
+      <h2 id="cases" class="Display Display--2">Case studies</h2>
       <div class="Grid">
         ${doc.data.featured_cases.map(props => html`
           <div class="Grid-cell Grid-cell--1of2">

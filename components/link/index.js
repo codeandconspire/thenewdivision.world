@@ -12,6 +12,10 @@ exports.Figure = class Figure extends Component {
     })
   }
 
+  update () {
+    return false
+  }
+
   createElement (img) {
     return html`
       <div class="Link-figure">
