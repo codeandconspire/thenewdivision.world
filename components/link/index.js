@@ -6,10 +6,14 @@ css('./index')
 
 exports.Figure = class Figure extends Component {
   load (element) {
-    mousemove(element)
+    const stopMouseMove = mousemove(element)
     const stopObserving = observe(element, function () {
       stopObserving()
     })
+    this.unload = function () {
+      stopMouseMove()
+      stopObserving()
+    }
   }
 
   update () {
