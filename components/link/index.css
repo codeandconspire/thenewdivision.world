@@ -1,11 +1,10 @@
 /* @define Link */
 
+@import "../base/global";
+
 .Link {
   display: inline-block;
   text-decoration: none;
-  --inview: 1;
-  --mouse-x: 0;
-  --mouse-y: 0;
 }
 
 .Link--adaptive {

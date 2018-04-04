@@ -32,10 +32,15 @@
   align-items: center !important;
 }
 
+.u-alignSelfCenter {
+  align-self: center !important;
+}
+
 .u-fill {
   flex: 1 1 auto !important;
 }
 
 .u-full {
+  width: 100%;
   flex: 1 0 100% !important;
 }

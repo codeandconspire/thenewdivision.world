@@ -12,6 +12,7 @@
   color: #fff !important;
 }
 
+.u-bgWhite { background-color: #fff !important; }
 .u-bgGray { background-color: var(--gray) !important; }
 .u-bgBrightBlue { background-color: var(--bright-blue) !important; }
 .u-bgDarkBlue { background-color: var(--dark-blue) !important; }

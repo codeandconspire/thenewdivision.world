@@ -60,3 +60,7 @@
 .View-nav:last-child {
   margin-right: calc(var(--size) * -1);
 }
+
+.View-error {
+  margin: auto;
+}

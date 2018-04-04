@@ -1,0 +1,85 @@
+/* @define Card */
+
+@import "../base/global";
+
+.Card {
+  width: 100%;
+  position: relative;
+}
+
+.Card-block {
+  width: calc((100vw - (var(--size) * 4)) / 3);
+  position: absolute;
+  bottom: -125px;
+  left: calc(((100% / 3) * 2) - var(--size));
+}
+
+.Card-block,
+.Card:not(.Card--hasImage) {
+  display: flex;
+  overflow: hidden;
+  transform:
+    translateX(calc(-1.4% * var(--mouse-x)))
+    translateY(calc((20% * (1 - var(--inview))) + (-1.4% * var(--mouse-y))));
+  transition: transform 180ms var(--snap);
+}
+
+.Card-block:hover,
+.Card:not(.Card--hasImage):hover {
+  transition: none;
+}
+
+.Card-block::before,
+.Card:not(.Card--hasImage)::before {
+  content: "";
+  float: left;
+  width: 0;
+  height: 0;
+  padding-bottom: 123.57%;
+}
+
+.Card-decorator {
+  width: 100%;
+  height: 100%;
+  padding: calc(var(--size) / 2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.Card-plus {
+  float: right;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  position: sticky;
+  top: calc(var(--size) / 2);
+  right: calc(var(--size) / 2);
+  pointer-events: none;
+  transform:
+    translateX(calc(-25% * var(--mouse-x)))
+    translateY(calc(-25% * var(--mouse-y)));
+  transition: transform 260ms var(--snap);
+}
+
+.Card:hover .Card-plus {
+  transition: none;
+}
+
+.Card-figure {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.Card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.Card-caption {
+  display: block;
+  width: 50%;
+}
