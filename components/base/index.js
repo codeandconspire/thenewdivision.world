@@ -39,7 +39,7 @@ function inview ([el, box, cb]) {
   else if (fraction > 1) fraction = 1
 
   if (fraction === 1 && el.style.getPropertyValue('--inview') !== '1') {
-    cb()
+    window.requestAnimationFrame(cb)
   }
 
   el.style.setProperty('--inview', fraction.toFixed(3))
@@ -53,8 +53,6 @@ function mousemove (el) {
   let enterLeft = 0
   const {offsetWidth, offsetHeight} = el
   const onmousemove = nanoraf(function (event) {
-    // el.style.setProperty('--mouse-x', ((event.clientX - offsetWidth) / offsetWidth).toFixed(2))
-    // el.style.setProperty('--mouse-y', ((event.clientY - offsetHeight) / offsetHeight).toFixed(2))
     const left = ((event.layerX - enterLeft) / offsetWidth).toFixed(2)
     const top = ((event.layerY - enterTop) / offsetHeight).toFixed(2)
     el.style.setProperty('--mouse-x', left)
