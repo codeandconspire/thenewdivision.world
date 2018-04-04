@@ -8,13 +8,13 @@ function ui (state, emitter) {
     if (!el) return
 
     const from = window.scrollY
-    window.requestAnimationFrame(function () {
+    window.setTimeout(function () {
       // reset scroll to where it was before navigate
       window.scrollTo(window.scrollX, from)
-      window.requestAnimationFrame(function () {
+      window.setTimeout(function () {
         // smoothly scroll element into view when everything has settled
         el.scrollIntoView({behavior: 'smooth', block: 'start'})
-      })
-    })
+      }, 0)
+    }, 0)
   })
 }
