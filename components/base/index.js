@@ -98,8 +98,12 @@ function observe (el, cb) {
 
   let index = cache.findIndex((item) => item[0] === el)
   if (index === -1) {
-    const box = {top: el.offsetTop, height: el.offsetHeight}
-    index = cache.push([el, box, cb]) - 1
+    let top = el.offsetTop
+    let next = el
+    while ((next = next.offsetParent)) {
+      if (!isNaN(next.offsetTop)) top += next.offsetTop
+    }
+    index = cache.push([el, {top: top, height: el.offsetHeight}, cb]) - 1
   }
 
   inview(cache[index])
