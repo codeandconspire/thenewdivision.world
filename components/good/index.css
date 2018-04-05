@@ -1,0 +1,47 @@
+/* @define Good */
+
+:root {
+  --Good-width: 23vw;
+  --Good-border: 1vw;
+}
+
+.Good {
+
+}
+
+.Good-sticky {
+  height: calc(50vh + (var(--Good-width) / 2));
+  margin-bottom: -1vw;
+  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.Good-row {
+  display: flex;
+  align-items: center;
+  padding-left: calc(50% - (var(--Good-width) / 2));
+  margin-bottom: -1vw;
+}
+
+.Good-heading {
+  flex: 0 0 var(--Good-width);
+  height: auto;
+  width: var(--Good-width);
+}
+
+.Good-title {
+  display: block;
+  height: auto;
+  width: var(--Good-width);
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: calc(-50% + (var(--Good-border) / 2)) calc(100% - (var(--Good-border) / 2));
+  transform:
+    rotate(calc(-90deg * var(--inview)))
+    translateY(-2px)
+    translateX(calc(-50% - 1px));
+}

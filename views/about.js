@@ -3,6 +3,7 @@ const asElement = require('prismic-element')
 const { asText } = require('prismic-richtext')
 const view = require('../components/view')
 const Card = require('../components/card')
+const Good = require('../components/good')
 const { i18n } = require('../components/base')
 const presentation = require('../components/presentation')
 require('../components/grid')
@@ -65,6 +66,11 @@ function about (state, emit) {
               </div>
             </article>
           `)}
+        </div>
+      </section>
+      <section id="who-we-help">
+        <div class="u-spaceVxl">
+          ${state.cache(Good, 'good').render(doc.data)}
         </div>
       </section>
     </main>
