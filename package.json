@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "autoprefixer": "^8.2.0",
-    "bankai": "^9.10.3",
+    "bankai": "^9.10.4",
     "choo": "^6.11.0-preview1",
     "choo-service-worker": "^2.4.0",
     "hyperstream": "^1.2.2",
