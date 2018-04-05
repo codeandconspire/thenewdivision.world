@@ -65,7 +65,7 @@ module.exports = class Card extends Component {
       <div class="Card Card--hasImage">
         <figure class="Card-figure">
           <img class="Card-image" src="${props.image.url}" alt="${props.image.alt || ''}">
-          ${props.image.caption ? html`<figcaption class="Card-caption">${props.caption}</figcaption>` : null}
+          ${props.caption ? html`<figcaption class="Card-caption">${props.caption}</figcaption>` : null}
         </figure>
         ${card}
       </div>
