@@ -18,7 +18,7 @@ function presentation (texts) {
         </svg>
         <div class="Presentation-text">
           ${texts[0]}
-          <a class="Presentation-link" href="#about-us">${text`About us`}</a>
+          <a class="Presentation-link" onclick=${scrollIntoView} href="#about-us">${text`About us`}</a>
         </div>
       </div>
       <div class="Presentation-col" style="flex-basis: ${((374 / size) * 100).toFixed(2)}%">
@@ -27,7 +27,7 @@ function presentation (texts) {
         </svg>
         <div class="Presentation-text">
           ${texts[1]}
-          <a class="Presentation-link" href="#our-services">${text`Our services`}</a>
+          <a class="Presentation-link" onclick=${scrollIntoView} href="#our-services">${text`Our services`}</a>
         </div>
       </div>
       <div class="Presentation-col" style="flex-basis: ${((285 / size) * 100).toFixed(2)}%">
@@ -36,7 +36,7 @@ function presentation (texts) {
         </svg>
         <div class="Presentation-text">
           ${texts[2]}
-          <a class="Presentation-link" href="#who-we-help">${text`Who we help`}</a>
+          <a class="Presentation-link" onclick=${scrollIntoView} href="#who-we-help">${text`Who we help`}</a>
         </div>
       </div>
       <div class="Presentation-col" style="flex-basis: ${((376 / size) * 100).toFixed(2)}%">
@@ -45,9 +45,15 @@ function presentation (texts) {
         </svg>
         <div class="Presentation-text">
           ${texts[3]}
-          <a class="Presentation-link" href="#clients-and-friends">${text`Clients and friends`}</a>
+          <a class="Presentation-link" onclick=${scrollIntoView} href="#clients-and-friends">${text`Clients and friends`}</a>
         </div>
       </div>
     </div>
   `
+}
+
+function scrollIntoView (event) {
+  if (event.target.hash !== document.location.hash) return
+  const el = document.getElementById(event.target.hash.substr(1))
+  if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
 }
