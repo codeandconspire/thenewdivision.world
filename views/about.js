@@ -4,7 +4,6 @@ const { asText } = require('prismic-richtext')
 const view = require('../components/view')
 const Card = require('../components/card')
 const { i18n } = require('../components/base')
-const { Figure } = require('../components/link')
 const presentation = require('../components/presentation')
 require('../components/grid')
 require('../components/text')
@@ -75,7 +74,7 @@ function about (state, emit) {
 
 function coworker (state, doc) {
   return function (person, index, list) {
-    const id = asText(person.name).trim().replace(/[^\w+]/, '-')
+    const id = asText(person.name).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^-\w]+/g, '')
     const children = [
       html`
         <article class="Grid-cell Grid-cell--1of3">
