@@ -36,6 +36,14 @@
   align-self: center !important;
 }
 
+.u-alignSelfStart {
+  align-self: flex-start !important;
+}
+
+.u-alignSelfEnd {
+  align-self: flex-end !important;
+}
+
 .u-fill {
   flex: 1 1 auto !important;
 }
@@ -43,4 +51,12 @@
 .u-full {
   width: 100%;
   flex: 1 0 100% !important;
+}
+
+.u-floatLeft {
+  float: left !important;
+}
+
+.u-floatRight {
+  float: right !important;
 }

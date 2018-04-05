@@ -17,3 +17,13 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+hr {
+  display: block;
+  width: 100%;
+  height: 2px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background-color: currentColor;
+}

@@ -43,33 +43,59 @@ function about (state, emit) {
         <div class="Grid u-spaceBl">
           ${doc.data.coworkers.map(coworker(state, doc))}
         </div>
-        ${state.cache(Card, 'workspace').render({
-          color: 'darkBlue',
-          image: doc.data.workspace_image,
-          caption: doc.data.workspace_image.alt,
-          children: html`
-            <div class="u-fill u-flex u-column u-colorWhite">
-              <div class="u-fill u-flex u-column u-justifyCenter">
-                <h3>
-                  <span class="Display Display--3">${text`Address`}</span>
-                  <span class="Display Display--2">${doc.data.address[0].text}</span>
-                </h3>
-                <div class="Text">
-                  <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
-                </div>
-              </div>
-              <h4 class="Display Display--3">${text`Inquiries`}</h4>
-              <div class="Text Text--large">
-                <p>
-                  <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
-                </p>
-              </div>
+        ${state.cache(Card, 'workspace').render(workspace(doc))}
+      </section>
+      <section id="our-services">
+        <div class="Grid u-spaceVxl">
+          <div class="Grid-cell Grid-cell--1of3"></div>
+          <div class="Grid-cell Grid-cell--2of3">
+            <div class="Text Text--large">
+              ${asElement(doc.data.create_introduction)}
             </div>
-          `
-        })}
+          </div>
+        </div>
+        <div class="Grid">
+          ${doc.data.services.map((props, index, list) => html`
+            <article class="Grid-cell Grid-cell--1of${list.length}">
+              <img src="${props.image.url}" class="u-spaceBm u-alignSelfStart">
+              <hr>
+              <h3 class="Dsiplay Display--3">${asText(props.title)}</h3>
+              <div class="Text">
+                ${asElement(props.description)}
+              </div>
+            </article>
+          `)}
+        </div>
       </section>
     </main>
   `
+}
+
+function workspace (doc) {
+  return {
+    color: 'darkBlue',
+    image: doc.data.workspace_image,
+    caption: doc.data.workspace_image.alt,
+    children: html`
+      <div class="u-fill u-flex u-column u-colorWhite">
+        <div class="u-fill u-flex u-column u-justifyCenter">
+          <h3>
+            <span class="Display Display--3">${text`Address`}</span>
+            <span class="Display Display--2">${doc.data.address[0].text}</span>
+          </h3>
+          <div class="Text">
+            <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
+          </div>
+        </div>
+        <h4 class="Display Display--3">${text`Inquiries`}</h4>
+        <div class="Text Text--large">
+          <p>
+            <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
+          </p>
+        </div>
+      </div>
+    `
+  }
 }
 
 function coworker (state, doc) {
