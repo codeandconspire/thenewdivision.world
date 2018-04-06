@@ -9,8 +9,7 @@
   --bright-sand: #E4DFD1;
   --dark-magenta: #960059;
 
-  --contain: 1440px;
-  --size: 2.2vw;
+  --size: 3vw;
   --inview: 1;
   --mouse-x: 0;
   --mouse-y: 0;
@@ -19,4 +18,41 @@
 
   --giorgio-sans-bold: "Giorgio Sans Bold", "AvenirNextCondensed-DemiBold", "HelveticaNeue-CondensedBold", "Helvetica Inserat", "Franklin Gothic Condensed", Haettenschweiler, Impact, sans-serif-condensed, sans-serif;
   --system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  --font-size: 20px;
+  --font-size-xs: calc(var(--font-size) * 0.7);
+  --font-size-sm: calc(var(--font-size) * 0.8);
+  --font-size-md: var(--font-size);
+  --font-size-lg: calc(var(--font-size) * 1.2);
+  --font-size-xl: calc(var(--font-size) * 1.5);
+}
+
+@media (min-width: 600px) {
+  :root {
+    --size: 2.6vw;
+    --font-size-xl: calc(var(--font-size) * 2.0);
+  }
+}
+
+@media (min-width: 1000px) {
+  :root {
+    --size: 2.2vw;
+    --font-size: 2.1vw;
+  }
+}
+
+@media (min-width: 1500px) {
+  :root {
+    --size: 1.8vw;
+    --font-size: 1.7vw;
+    --font-size-xl: calc(var(--font-size) * 2.2);
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --size: 1.2vw;
+    --font-size: 1.5vw;
+    --font-size-xl: calc(var(--font-size) * 2.5);
+  }
 }

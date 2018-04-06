@@ -7,15 +7,35 @@
   padding: 0;
   position: relative;
   font-family: var(--giorgio-sans-bold);
-  font-size: calc(var(--size) * 2.5);
-  text-align: justify;
+  font-size: var(--font-size-xl);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
-@media (min-width: 900px) {
-  .Intro {
-    font-size: 32px;
+@media (min-width: 600px) {
+  :root {
+    --size: 2.6vw;
   }
 }
+
+@media (min-width: 1000px) {
+  :root {
+    --size: 2.2vw;
+  }
+}
+
+@media (min-width: 1500px) {
+  :root {
+    --size: 1.8vw;
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --size: 1.2vw;
+  }
+}
+
 
 .Intro-final {
   width: 100%;

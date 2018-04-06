@@ -1,3 +1,31 @@
 /* @define Display */
 
 @import "../base/global";
+
+.Display {
+  font-size: inherit;
+}
+
+.Display--bold {
+  font-weight: 600;
+}
+
+.Display--xs {
+  font-size: var(--font-size-xs);
+}
+
+.Display--sm {
+  font-size: var(--font-size-sm);
+}
+
+.Display--md {
+  font-size: var(--font-size);
+}
+
+.Display--lg {
+  font-size: var(--font-size-lg);
+}
+
+.Display--xl {
+  font-size: var(--font-size-xl);
+}

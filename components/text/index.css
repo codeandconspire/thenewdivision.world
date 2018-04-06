@@ -4,15 +4,15 @@
 
 .Text {
   display: block;
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
 }
 
 .Text--large {
-  font-size: 1.5rem;
+  font-size: var(--font-size-md);
 }
 
 .Text > p {
-  margin: 1.5em 0;
+  margin: 1em 0;
 }
 
 .Text > p:first-child {
@@ -25,6 +25,7 @@
 
 .Text > img {
   display: inline-block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  vertical-align: top;
 }

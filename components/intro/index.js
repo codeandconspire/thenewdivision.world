@@ -73,19 +73,24 @@ module.exports = class extends Component {
   createElement (text) {
     this.text = text
 
-    if (this.finished) {
-      return html`
-        <p class="Intro">
-          ${getStrong(text)}
-        </p>
-      `
-    }
-
     return html`
       <p class="Intro">
-        ${asElement(text, fail, serialize)}
+        The New Division transforms information and ideas into clear and future-positive communication. We create powerful communication systems and tell compelling stories that helps business, organizations and governments explain complex issues and build engagement.
       </p>
     `
+    // if (this.finished) {
+    //   return html`
+    //     <p class="Intro">
+    //       ${getStrong(text)}
+    //     </p>
+    //   `
+    // }
+
+    // return html`
+    //   <p class="Intro">
+    //     ${asElement(text, fail, serialize)}
+    //   </p>
+    // `
   }
 }
 

@@ -60,7 +60,7 @@ function about (state, emit) {
             <article class="Grid-cell Grid-cell--1of${list.length}">
               <img src="${props.image.url}" class="u-spaceBm u-alignSelfStart">
               <hr>
-              <h3 class="Dsiplay Display--3">${asText(props.title)}</h3>
+              <h3 class="Display Display--sm">${asText(props.title)}</h3>
               <div class="Text">
                 ${asElement(props.description)}
               </div>
@@ -86,14 +86,14 @@ function workspace (doc) {
       <div class="u-fill u-flex u-column u-colorWhite">
         <div class="u-fill u-flex u-column u-justifyCenter">
           <h3>
-            <span class="Display Display--3">${text`Address`}</span>
-            <span class="Display Display--2">${doc.data.address[0].text}</span>
+            <span class="Display Display--sm">${text`Address`}</span>
+            <span class="Display Display--sm">${doc.data.address[0].text}</span>
           </h3>
           <div class="Text">
             <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
           </div>
         </div>
-        <h4 class="Display Display--3">${text`Inquiries`}</h4>
+        <h4 class="Display Display--sm">${text`Inquiries`}</h4>
         <div class="Text Text--large">
           <p>
             <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
@@ -111,11 +111,11 @@ function coworker (state, doc) {
       html`
         <article class="Grid-cell Grid-cell--1of3">
           ${state.cache(Card, id).render({children: html`
-            <img class="u-block" src="${person.image.url}" alt="${person.image.alt || ''}">
+            <img class="Card-image" src="${person.image.url}" alt="${person.image.alt || ''}">
           `})}
-          <h3 class="Display Display--3">${asText(person.name)}</h3>
+          <h3 class="Display Display--md Display--bold">${asText(person.name)}</h3>
           <div class="Text">
-            <p>${person.role}</p>
+            <p class="Display Display--md">${person.role}</p>
             ${asElement(person.bio)}
           </div>
         </article>
@@ -131,11 +131,11 @@ function coworker (state, doc) {
               <div class="u-flex u-column u-colorWhite">
                 <div class="u-fill u-flex u-column u-justifyCenter">
                   <h3>
-                    <span class="Display Display--3">${text`Want a job?`}</span>
-                    <span class="Display Display--2">${doc.data.recruitment_heading}</span>
+                    <span class="Display Display--sm">${text`Want a job?`}</span>
+                    <span class="Display Display--sm">${doc.data.recruitment_heading}</span>
                   </h3>
                 </div>
-                <h4 class="Display Display--3">${text`Careers`}</h4>
+                <h4 class="Display Display--sm">${text`Careers`}</h4>
                 <div class="Text Text--large">
                   <p>
                     <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>

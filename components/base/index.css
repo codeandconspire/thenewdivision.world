@@ -8,14 +8,30 @@
 
 :root {
   background: var(--theme);
+  font-size: var(--font-size-sm);
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
 }
 
 hr {
