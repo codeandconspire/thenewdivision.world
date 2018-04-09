@@ -28,7 +28,7 @@ function createView (view, title) {
 
     return html`
       <body class="View">
-        ${state.cache(Header, 'header').render(state.route)}
+        ${state.cache(Header, 'header').render(state.href)}
         ${children}
       </body>
     `

@@ -39,12 +39,13 @@
   display: block;
   flex: 0 1 calc(100% / 3);
   margin-right: auto;
+  width: 100%;
+  max-width: 205px;
 }
 
 .View-logo {
   display: block;
   width: 100%;
-  max-width: 205px;
   height: auto;
   color: var(--color);
 }

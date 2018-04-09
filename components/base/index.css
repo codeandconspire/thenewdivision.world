@@ -8,6 +8,7 @@
 
 :root {
   background: var(--theme);
+  background-attachment: fixed;
   font-size: var(--font-size-sm);
 }
 
