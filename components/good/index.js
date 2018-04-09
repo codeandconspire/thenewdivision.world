@@ -19,8 +19,10 @@ module.exports = class Good extends Component {
       if ((window.scrollY + window.innerHeight) >= (top + height)) inview = true
       if (window.scrollY > (top + height)) inview = false
       if (!inview) return
-      const fraction = (top - window.scrollY) / (window.innerHeight - height)
-      element.style.setProperty('--inview', 1 - fraction.toFixed(4))
+      let fraction = (top - window.scrollY) / (window.innerHeight - height)
+      if (fraction < 0) fraction = 0
+      else if (fraction > 1) fraction = 1
+      element.style.setProperty('--inview', 1 - fraction.toFixed(8))
     })
 
     const onresize = nanoraf(function () {
