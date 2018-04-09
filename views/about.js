@@ -73,6 +73,34 @@ function about (state, emit) {
           ${state.cache(Good, 'good').render(doc.data)}
         </div>
       </section>
+      <section id="clients-and-friends">
+        <h2 class="Display Display--md Display--bold u-textCenter u-spaceBxl">
+          ${text`What people say`}
+        </h2>
+        <div class="Grid">
+          ${doc.data.testimonies.map((props, index, list) => {
+            const backgorund = props.color.split(' ').reduce((str, part) => {
+              return str + part[0].toUpperCase() + part.substr(1)
+            }, '') || 'white'
+
+            return html`
+              <div class="Grid-cell Grid-cell--1of${list.length} u-row u-aspect">
+                <div class="u-fill u-flex u-column u-theme${backgorund} u-color u-bg">
+                  <div class="u-fill u-flex u-column u-spaceAm">
+                    <div class="u-fill">
+                      <img src="${props.logotype.url}">
+                    </div>
+                    <blockquote class="Display Display--lg u-textGiorgio u-spaceBm">
+                      ${asElement(props.quote)}
+                    </blockquote>
+                    ${asElement(props.cite)}
+                  </div>
+                </div>
+              </div>
+            `
+          })}
+        </div>
+      </section>
     </main>
   `
 }
@@ -83,7 +111,7 @@ function workspace (doc) {
     image: doc.data.workspace_image,
     caption: doc.data.workspace_image.alt,
     children: html`
-      <div class="u-fill u-flex u-column u-colorWhite">
+      <div class="u-fill u-flex u-column">
         <div class="u-fill u-flex u-column u-justifyCenter">
           <h3>
             <span class="Display Display--sm">${text`Address`}</span>
@@ -128,7 +156,7 @@ function coworker (state, doc) {
           ${state.cache(Card, 'recruit').render({
             color: 'petrol',
             children: html`
-              <div class="u-flex u-column u-colorWhite">
+              <div class="u-flex u-column">
                 <div class="u-fill u-flex u-column u-justifyCenter">
                   <h3>
                     <span class="Display Display--sm">${text`Want a job?`}</span>

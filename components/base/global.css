@@ -8,6 +8,7 @@
   --sand: #BCB296;
   --bright-sand: #E4DFD1;
   --dark-magenta: #960059;
+  --theme: var(--background);
 
   --size: 3vw;
   --inview: 1;
@@ -30,6 +31,7 @@
 @media (min-width: 600px) {
   :root {
     --size: 2.6vw;
+    --font-size-lg: calc(var(--font-size) * 1.5);
     --font-size-xl: calc(var(--font-size) * 2.0);
   }
 }
@@ -45,6 +47,7 @@
   :root {
     --size: 1.8vw;
     --font-size: 1.7vw;
+    --font-size-lg: calc(var(--font-size) * 1.8);
     --font-size-xl: calc(var(--font-size) * 2.2);
   }
 }
@@ -53,6 +56,7 @@
   :root {
     --size: 1.2vw;
     --font-size: 1.5vw;
+    --font-size-lg: calc(var(--font-size) * 2);
     --font-size-xl: calc(var(--font-size) * 2.5);
   }
 }

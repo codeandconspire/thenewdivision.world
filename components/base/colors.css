@@ -1,22 +1,53 @@
 /* @define utilities */
 
-.u-themeWhite {
-  --theme: #fff;
-}
-
 .u-themeBrown {
-  --theme: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAADFBMVEW5r5S8spa6sJW7sZbMQQJDAAAEpklEQVR42r2ai3YkKwhFEf7/nyeIO8fKdJbdZRnndnygvEW0rln7KuaWxZvlP2sW/W8CzUbTwhjMUTpeS6x6Y4nWAp2mRMFaFqCe3ZqiwRaFo9Vsb30ZLKoHxcKgwSqegA6GtSiSznAX34vnAHd0lK5V7SpV8iYxcmpW8OXFM5MBOYui+KuplgVGqocECQ03RqsRGCFrCLhFbwoxmMJgVNZBwoZ+BKupgb4LmeoqIW1L51i69BYordAIht1Z2dtBPVhBQMw1WTn6mvoJjIvWMk+FML9qnCmLRzJYOOVvYhNd4Jvm1cgi/pAtwULi6BmtOtYfDuaoAIWLGJphnInWRokhZ87xoiVVouJXCACwAKx4dHQ3AZYd5AwER2QaCcp5RAvIaep/CwP/gjeFiiASeSGSCgOsjbmgMEYZysqtAAzgVrAmx0AjqAXOS6/YZcNpCsRcvBliClITc1gtpOhhhslyBcS3A0Y1NgVXiOzHJe0fkAIwIRRIMUue7dWKOjdgkH3MejQCEq9KR9XxCCl6EJIQ5sjL8lEKD8LLK6N0S2GDlyRHAqK2iIwvAkLGX8DwnD+vtgR1BTxUUcOmIQMEZrx9cmx22+zxYTPx0MkiP2I2IwCjxP6qAo6+ueIQqDDMJgooT8FS9SSIuJQta7O49Z/CJc7LcskrXY0NAPLtrQZ2dhSKv6hIctIU8/xHZPGE9TZs4WIuebQkK/7iwxSJw6IAir84bDLDAp1CC4FR3+HjcTPDbc3dEkf54hhGUHRKsDWGYiQNMOPITbA2ol51SaHVJZsLWDmQ+YKGITwfFuEGkk+dBDiEfxNHGSiIiSIKJ2+fEyJ+xULtF1Ttntx2PwOh2yRyVCtIMyAJD32cdhFFz1TIEJgUA9NHHNyig+JwWLTGgX84rcuunfZeeDmcR2Tn/PX3RuTO8uF947WAuIeGlf7LY0sKCP5+ZNwPeuAtaywSq+M7MU25nyKuHy/UEH8GYEr15CEDZyAAk5P0HFQv245hLEYKR5GxkeVGkn44pgB+8sr++naIE57M7j/1R+IJYryXgJ68KLqkNzF7iQ96vQrvCxGZB53AlgiEkDk5psPi2SMQpFgOla5fZ/dz121drO+BcIXgSKN70MvojholkLqgDJG1rXesXq0f/v7k1eOvbLLOPfaP5rez2p0LwIk3tLSgqxdo9PC7RLh4EfzZm3c7/3FDHJfnu0SpxUpVmIYg4KFFheov9XoT7D9QrW9r+359PtIDwNI1eOCJYn1N2P8sgQ1OvxCvE7Td0IPltYsP3O9Fkj+I8sNHJUGgFkCQZ5Zg5EF3Php6s1ndy6Bx44lMXjWbz4c5lAVjmeOfr+muP3zRGfuAdDH7Hm2y5IgpKjGQLSYo7CdQRGfVTReHX86n5njIvLnRyjNXPbv/uWLGo7P0VUp63iDtoEP1PsP732DXktu5z6S09UulDGBwtS4AbhEzbiXYXLngf8y7Bt8PlmzE6+1HiHX+sT4jnrjp37nNIhA9OdnrvASZj/7/GMtbpbadORr+1CFt/xPf+raxPJ7BCTGxhY20SA1qYpIFj8uyxcWk+8nGA+/m67vr0cdtstZ/1VsWtCblxswAAAAASUVORK5CYII=');
+  --background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAADFBMVEW5r5S8spa6sJW7sZbMQQJDAAAEpklEQVR42r2ai3YkKwhFEf7/nyeIO8fKdJbdZRnndnygvEW0rln7KuaWxZvlP2sW/W8CzUbTwhjMUTpeS6x6Y4nWAp2mRMFaFqCe3ZqiwRaFo9Vsb30ZLKoHxcKgwSqegA6GtSiSznAX34vnAHd0lK5V7SpV8iYxcmpW8OXFM5MBOYui+KuplgVGqocECQ03RqsRGCFrCLhFbwoxmMJgVNZBwoZ+BKupgb4LmeoqIW1L51i69BYordAIht1Z2dtBPVhBQMw1WTn6mvoJjIvWMk+FML9qnCmLRzJYOOVvYhNd4Jvm1cgi/pAtwULi6BmtOtYfDuaoAIWLGJphnInWRokhZ87xoiVVouJXCACwAKx4dHQ3AZYd5AwER2QaCcp5RAvIaep/CwP/gjeFiiASeSGSCgOsjbmgMEYZysqtAAzgVrAmx0AjqAXOS6/YZcNpCsRcvBliClITc1gtpOhhhslyBcS3A0Y1NgVXiOzHJe0fkAIwIRRIMUue7dWKOjdgkH3MejQCEq9KR9XxCCl6EJIQ5sjL8lEKD8LLK6N0S2GDlyRHAqK2iIwvAkLGX8DwnD+vtgR1BTxUUcOmIQMEZrx9cmx22+zxYTPx0MkiP2I2IwCjxP6qAo6+ueIQqDDMJgooT8FS9SSIuJQta7O49Z/CJc7LcskrXY0NAPLtrQZ2dhSKv6hIctIU8/xHZPGE9TZs4WIuebQkK/7iwxSJw6IAir84bDLDAp1CC4FR3+HjcTPDbc3dEkf54hhGUHRKsDWGYiQNMOPITbA2ol51SaHVJZsLWDmQ+YKGITwfFuEGkk+dBDiEfxNHGSiIiSIKJ2+fEyJ+xULtF1Ttntx2PwOh2yRyVCtIMyAJD32cdhFFz1TIEJgUA9NHHNyig+JwWLTGgX84rcuunfZeeDmcR2Tn/PX3RuTO8uF947WAuIeGlf7LY0sKCP5+ZNwPeuAtaywSq+M7MU25nyKuHy/UEH8GYEr15CEDZyAAk5P0HFQv245hLEYKR5GxkeVGkn44pgB+8sr++naIE57M7j/1R+IJYryXgJ68KLqkNzF7iQ96vQrvCxGZB53AlgiEkDk5psPi2SMQpFgOla5fZ/dz121drO+BcIXgSKN70MvojholkLqgDJG1rXesXq0f/v7k1eOvbLLOPfaP5rez2p0LwIk3tLSgqxdo9PC7RLh4EfzZm3c7/3FDHJfnu0SpxUpVmIYg4KFFheov9XoT7D9QrW9r+359PtIDwNI1eOCJYn1N2P8sgQ1OvxCvE7Td0IPltYsP3O9Fkj+I8sNHJUGgFkCQZ5Zg5EF3Php6s1ndy6Bx44lMXjWbz4c5lAVjmeOfr+muP3zRGfuAdDH7Hm2y5IgpKjGQLSYo7CdQRGfVTReHX86n5njIvLnRyjNXPbv/uWLGo7P0VUp63iDtoEP1PsP732DXktu5z6S09UulDGBwtS4AbhEzbiXYXLngf8y7Bt8PlmzE6+1HiHX+sT4jnrjp37nNIhA9OdnrvASZj/7/GMtbpbadORr+1CFt/xPf+raxPJ7BCTGxhY20SA1qYpIFj8uyxcWk+8nGA+/m67vr0cdtstZ/1VsWtCblxswAAAAASUVORK5CYII=');
 }
 
-.u-colorWhite {
-  color: #fff !important;
+.u-themeWhite {
+  --color: var(--color);
+  --background: #fff;
 }
 
-.u-bgWhite { background-color: #fff !important; }
-.u-bgGray { background-color: var(--gray) !important; }
-.u-bgBrightBlue { background-color: var(--bright-blue) !important; }
-.u-bgDarkBlue { background-color: var(--dark-blue) !important; }
-.u-bgPetrol { background-color: var(--petrol) !important; }
-.u-bgSand { background-color: var(--sand) !important; }
-.u-bgBrightSand { background-color: var(--bright-sand) !important; }
-.u-bgDarkMagenta { background-color: var(--dark-magenta) !important; }
+.u-themeGray {
+  --color: var(--color);
+  --background: var(--gray);
+}
+
+.u-themeBrightBlue {
+  --color: var(--bright-sand);
+  --background: var(--bright-blue);
+}
+
+.u-themeDarkBlue {
+  --color: var(--bright-sand);
+  --background: var(--dark-blue);
+}
+
+.u-themePetrol {
+  --color: var(--bright-sand);
+  --background: var(--petrol);
+}
+
+.u-themeSand {
+  --color: var(--dark-blue);
+  --background: var(--sand);
+}
+
+.u-themeBrightSand {
+  --color: var(--dark-blue);
+  --background: var(--bright-sand);
+}
+
+.u-themeDarkMagenta {
+  --color: var(--bright-sand);
+  --background: var(--dark-magenta);
+}
+
+.u-bg {
+  background: var(--background) !important;
+}
+
+.u-color {
+  color: var(--color) !important;
+}

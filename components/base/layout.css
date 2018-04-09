@@ -24,6 +24,10 @@
   flex-direction: column !important;
 }
 
+.u-row {
+  flex-direction: row !important;
+}
+
 .u-justifyCenter {
   justify-content: center !important;
 }
@@ -59,4 +63,16 @@
 
 .u-floatRight {
   float: right !important;
+}
+
+.u-aspect {
+  display: flex !important;
+}
+
+.u-aspect::before {
+  content: "" !important;
+  float: left !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding-bottom: 123.57% !important;
 }

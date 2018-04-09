@@ -1,5 +1,7 @@
 /* @define Good */
 
+@import "../base/global";
+
 :root {
   --Good-width: 23vw;
   --Good-border: 1vw;

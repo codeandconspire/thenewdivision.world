@@ -2,6 +2,12 @@
 
 @import "./global";
 
+.u-spaceAxs { margin: calc(var(--size) / 6) !important; }
+.u-spaceAs { margin: calc(var(--size) / 2) !important; }
+.u-spaceAm { margin: var(--size) !important; }
+.u-spaceAl { margin: calc(var(--size) * 2) !important; }
+.u-spaceAxl { margin: calc(var(--size) * 6) !important; }
+
 .u-spaceTxs { margin-top: calc(var(--size) / 6) !important; }
 .u-spaceTs { margin-top: calc(var(--size) / 2) !important; }
 .u-spaceTm { margin-top: var(--size) !important; }

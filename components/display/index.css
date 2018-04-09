@@ -3,6 +3,7 @@
 @import "../base/global";
 
 .Display {
+  color: var(--color);
   font-size: inherit;
 }
 

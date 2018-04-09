@@ -6,14 +6,14 @@ const { observe, mousemove } = require('../base')
 css('./index')
 
 const THEMES = {
-  white: 'u-bgWhite',
-  gray: 'u-bgGray',
-  brightBlue: 'u-bgBrightBlue',
-  petrol: 'u-bgPetrol',
-  darkBlue: 'u-bgDarkBlue',
-  sand: 'u-bgSand',
-  brightSand: 'u-bgBrightSand',
-  darkMagenta: 'u-bgDarkMagenta'
+  white: 'u-themeWhite',
+  gray: 'u-themeGray',
+  brightBlue: 'u-themeBrightBlue',
+  petrol: 'u-themePetrol',
+  darkBlue: 'u-themeDarkBlue',
+  sand: 'u-themeSand',
+  brightSand: 'u-themeBrightSand',
+  darkMagenta: 'u-themeDarkMagenta'
 }
 
 module.exports = class Card extends Component {
@@ -49,7 +49,7 @@ module.exports = class Card extends Component {
     const hasImage = this.hasImage = !!props.image
 
     const card = html`
-      <div class="${hasImage ? 'Card-block js-block' : 'Card'} ${THEMES[theme]}">
+      <div class="${hasImage ? 'Card-block js-block' : 'Card'} ${THEMES[theme]} u-bg u-color">
         <div class="Card-decorator">
           <svg class="Card-plus" width="20" height="20" viewBox="0 0 20 20">
             <path fill="#EFECE5" fill-rule="evenodd" d="M12.5 7.5H20v5h-7.5V20h-5v-7.5H0v-5h7.5V0h5v7.5z"/>

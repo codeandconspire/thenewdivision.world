@@ -11,6 +11,7 @@ css('./layout')
 css('./colors')
 css('./space')
 css('./size')
+css('./text')
 css('./index')
 
 if (typeof window !== 'undefined') {
