@@ -74,9 +74,11 @@ module.exports = class extends Component {
     this.text = text
 
     return html`
-      <p class="Intro">
-        The New Division transforms information and ideas into clear and future-positive communication. We create powerful communication systems and tell compelling stories that helps business, organizations and governments explain complex issues and build engagement.
-      </p>
+      <div class="Intro">
+        <p class="Display Display--xl Display--bold">
+          The New Division transforms information and ideas into clear and future-positive communication. We create powerful communication systems and tell compelling stories that helps business, organizations and governments explain complex issues and build engagement.
+        </p>
+      </div>
     `
     // if (this.finished) {
     //   return html`

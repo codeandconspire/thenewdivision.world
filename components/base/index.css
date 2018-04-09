@@ -12,8 +12,7 @@
   font-size: var(--font-size-sm);
 }
 
-html,
-body {
+html {
   height: 100%;
 }
 

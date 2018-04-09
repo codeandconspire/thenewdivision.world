@@ -3,37 +3,19 @@
 @import "../base/global";
 
 .Intro {
-  margin: 0;
-  padding: 0;
+  display: flex;
+  padding: calc(var(--size) * 3) 0;
+  min-height: 60vh;
+  align-items: center;
   position: relative;
+}
+
+.Intro-text {
+  margin: 0;
   font-family: var(--giorgio-sans-bold);
   font-size: var(--font-size-xl);
   line-height: 1.1;
   letter-spacing: 0.01em;
-}
-
-@media (min-width: 600px) {
-  :root {
-    --size: 2.6vw;
-  }
-}
-
-@media (min-width: 1000px) {
-  :root {
-    --size: 2.2vw;
-  }
-}
-
-@media (min-width: 1500px) {
-  :root {
-    --size: 1.8vw;
-  }
-}
-
-@media (min-width: 2400px) {
-  :root {
-    --size: 1.2vw;
-  }
 }
 
 
