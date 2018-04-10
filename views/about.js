@@ -34,9 +34,9 @@ function about (state, emit) {
       ${presentation(['we', 'create', 'good', 'forces'].map(key => asElement(doc.data[key])))}
       <section id="about-us">
         <div class="Grid u-spaceVxl">
-          <div class="Grid-cell u-xl-size1of3"></div>
-          <div class="Grid-cell u-xl-size2of3">
-            <div class="Text Text--large">
+          <div class="Grid-cell u-lg-size1of3"></div>
+          <div class="Grid-cell u-lg-size2of3">
+            <div class="Text u-textSizeMd">
               ${asElement(doc.data.we_introduction)}
             </div>
           </div>
@@ -48,9 +48,9 @@ function about (state, emit) {
       </section>
       <section id="our-services">
         <div class="Grid u-spaceVxl">
-          <div class="Grid-cell u-md-size1of3"></div>
-          <div class="Grid-cell">
-            <div class="Text Text--large">
+          <div class="Grid-cell u-lg-size1of3"></div>
+          <div class="Grid-cell u-lg-size2of3">
+            <div class="Text u-textSizeMd">
               ${asElement(doc.data.create_introduction)}
             </div>
           </div>
@@ -60,7 +60,7 @@ function about (state, emit) {
             <article class="Grid-cell u-md-size1of3">
               <img src="${props.image.url}" class="u-spaceBmd u-alignSelfStart">
               <hr>
-              <h3 class="u-textSizeSm">${asText(props.title)}</h3>
+              <h3>${asText(props.title)}</h3>
               <div class="Text">
                 ${asElement(props.description)}
               </div>
@@ -72,18 +72,18 @@ function about (state, emit) {
         ${state.cache(Good, 'good').render(doc.data)}
       </section>
       <section id="clients-and-friends">
-        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBxl">
+        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBlg">
           ${text`What people say`}
         </h2>
         <div class="Grid">
           ${doc.data.testimonies.map((props, index, list) => {
-            const backgorund = props.color.split(' ').reduce((str, part) => {
+            const background = props.color.split(' ').reduce((str, part) => {
               return str + part[0].toUpperCase() + part.substr(1)
             }, '') || 'white'
 
             return html`
-              <div class="Grid-cell u-md-size1of3 u-row u-aspect">
-                <div class="u-sizeFill u-flex u-column u-theme${backgorund} u-color u-bg">
+              <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTlg u-row u-aspect ${index === 2 ? 'u-lg-show' : ''}">
+                <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
                   <div class="u-sizeFill u-flex u-column u-spaceAmd">
                     <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
@@ -113,7 +113,7 @@ function workspace (doc) {
         <div class="u-sizeFill u-flex u-column u-justifyCenter">
           <h3>
             <span class="u-textSizeMd u-textBold">${text`Address`}</span>
-            <span class="Display Display--lg">
+            <span class="Display Display--md">
               ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
                 return els.concat(part, index < list.length - 1 ? html`<br>` : null)
               }, [])}
@@ -123,8 +123,8 @@ function workspace (doc) {
             <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
           </div>
         </div>
-        <h4 class="u-textSizeMd u-textBold">${text`Inquiries`}</h4>
-        <div class="Text Text--large">
+        <h4 class="u-textBold">${text`Inquiries`}</h4>
+        <div class="Text">
           <p>
             <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
           </p>
@@ -142,7 +142,7 @@ function coworker (state, doc) {
         <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceTlg">
           <article class="Link Link--aspect">
             ${state.cache(Figure, `coworker-${id}`).render(person.image)}
-            <h3 class="u-textSizeSm u-textBold">${asText(person.name)}</h3>
+            <h3 class="u-textBold">${asText(person.name)}</h3>
             <div class="Text">
               <p>${person.role}</p>
               <div class="u-textSizeXs u-md-show">${asElement(person.bio)}</div>
@@ -163,10 +163,11 @@ function coworker (state, doc) {
                   <h3>
                     <span class="u-textSizeMd u-textBold">${text`Want a job?`}</span>
                     <span class="Display Display--md">${doc.data.recruitment_heading}</span>
+                    <span>${text`Talk to Hannah, she’s nice.`}</span>
                   </h3>
                 </div>
-                <h4 class="u-textSizeMd u-textBold">${text`Careers`}</h4>
-                <div class="Text Text--large">
+                <h4 class="u-textBold">${text`Careers`}</h4>
+                <div class="Text">
                   <p>
                     <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
                     <br />

@@ -23,8 +23,8 @@ module.exports = class Footer extends Component {
   createElement (theme) {
     this.theme = theme
     return html`
-      <footer>
-        <h2 class="u-textCenter u-spaceTxl">
+      <footer class="u-textCenter">
+        <h2 class="u-spaceTxl">
           <span class="u-textSizeMd u-textBold u-block u-spaceBsm">
             ${text`Connect with us,`}
           </span>
@@ -32,14 +32,16 @@ module.exports = class Footer extends Component {
             ${text`Become a force for good`}<br>
           </span>
         </h2>
-        <div class="u-textCenter">
+
+        <div>
           <a class="Display Display--xl ${LINK_THEMES[theme]}" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
         </div>
-        <div class="Text u-textCenter u-spaceVxl ${ICON_THEMES[theme]}">
-          <a href="" class="u-inlineBlock u-spaceHxs">${icon.facebook()}</a>
-          <a href="" class="u-inlineBlock u-spaceHxs">${icon.twitter()}</a>
-          <a href="" class="u-inlineBlock u-spaceHxs">${icon.instagram()}</a>
-          <a href="" class="u-inlineBlock u-spaceHxs">${icon.linkedin()}</a>
+
+        <div class="Text u-spaceTxl u-spaceBlg u-inlineBlock ${ICON_THEMES[theme]}">
+          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.facebook()}</a>
+          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.twitter()}</a>
+          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.instagram()}</a>
+          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.linkedin()}</a>
           <p>
             ${text`© 2017 The New Division by Trollbäck + Company.`}<br>
             ${text`All Rights Reserved.`}

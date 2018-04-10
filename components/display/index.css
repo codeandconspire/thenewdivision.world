@@ -2,7 +2,8 @@
 
 @import "../base/global";
 
-.Display {
+.Display,
+.Display:link {
   display: block;
   color: var(--color);
   font-size: inherit;
@@ -10,31 +11,35 @@
   font-family: var(--giorgio-sans-bold);
 }
 
-.Display--xs {
+.Display--xs,
+.Display--xs:link {
   font-size: calc(var(--font-size-xs) * 2);
 }
 
-.Display--sm {
+.Display--sm,
+.Display--sm:link {
   font-size: calc(var(--font-size-sm) * 2);
 }
 
-.Display--md {
+.Display--md,
+.Display--md:link {
   font-size: calc(var(--font-size) * 2);
 }
 
-.Display--lg {
+.Display--lg,
+.Display--lg:link {
   line-height: 1;
   font-size: calc(var(--font-size-lg) * 1.5);
 }
 
-.Display--xl {
+.Display--xl,
+.Display--xl:link {
   line-height: 1;
   font-size: calc(var(--font-size-xl) * 1.6);
 }
 
 .Display:link {
   display: inline-block;
-  text-decoration: none;
   position: relative;
 }
 

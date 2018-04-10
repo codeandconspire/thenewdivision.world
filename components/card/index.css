@@ -8,38 +8,75 @@
 }
 
 .Card-block {
-  width: calc((100vw - (var(--size) * 4)) / 3);
+  width: calc(100vw - (var(--size) * 2));
   position: absolute;
-  bottom: -125px;
-  left: calc(((100% / 3) * 2) - var(--size));
+  bottom: -50vw;
+  right: var(--size);
+}
+
+@media (min-width: 600px) {
+  .Card-block {
+    width: calc((100vw - (var(--size) * 3)) / 2);
+    bottom: -8vw;
+    right: var(--size);
+  }
+}
+
+@media (min-width: 1000px) {
+  .Card-block {
+    width: calc((100vw - (var(--size) * 4)) / 3);
+    right: calc(var(--size) * 2);
+  }
 }
 
 .Card-block,
-.Card:not(.Card--hasImage) {
+.Card {
   display: flex;
-  overflow: hidden;
+  max-height: 95vh;
   transform:
-    translateX(calc(-7px * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (-7px * var(--mouse-y))));
+    translateX(calc(0.5vw * var(--mouse-x)))
+    translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
 }
 
 .Card-block:hover,
-.Card:not(.Card--hasImage):hover {
+.Card:not(.Card--banner):hover {
   transition: none;
 }
 
 .Card-block::before,
-.Card:not(.Card--hasImage)::before {
+.Card::before {
   content: "";
   float: left;
   width: 0;
   height: 0;
-  padding-bottom: 123.57%;
+  padding-bottom: var(--aspect);
+}
+
+/**
+ * Pull banner image to full screen width
+ */
+
+.Card--banner {
+  width: calc(100% + (var(--size) * 2));
+  margin: 0 calc(var(--size) * -1);
+}
+
+@media (min-width: 600px) {
+  .Card--banner {
+    width: 100%;
+    max-height: 80vh;
+    margin: 0;
+  }
+
+  .Card--banner::before {
+    padding-bottom: 60%;
+  }
 }
 
 .Card-figure {
   display: block;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
@@ -57,7 +94,14 @@
 
 .Card-caption {
   display: block;
-  width: 50%;
+  width: 45%;
+  max-width: 37em;
+}
+
+@media (min-width: 1000px) {
+  .Card-caption {
+    width: 60%;
+  }
 }
 
 /**
@@ -73,6 +117,7 @@
   top: 0;
   z-index: 1;
   color: var(--bright-sand);
+  pointer-events: none;
 }
 
 @media (min-width: 600px) {
@@ -91,8 +136,8 @@
   right: calc(var(--size) * 0.8);
   pointer-events: none;
   transform:
-    translateX(calc(-12px * var(--mouse-x)))
-    translateY(calc(-12px * var(--mouse-y)));
+    translateX(calc(0.7vw * var(--mouse-x)))
+    translateY(calc(0.7vw * var(--mouse-y)));
   transition: transform 260ms var(--snap);
 }
 
@@ -115,7 +160,7 @@
 }
 
 .Card-block:hover .Card-plus,
-.Card:not(.Card--hasImage):hover .Card-plus {
+.Card:not(.Card--banner):hover .Card-plus {
   transition: none;
 }
 

@@ -24,7 +24,7 @@ module.exports = class Card extends Component {
   }
 
   load (el) {
-    el = this.hasImage ? el.querySelector('.js-block') : el
+    el = this.banner ? el.querySelector('.js-block') : el
 
     const stopMouseMove = mousemove(el)
     const stopObserving = observe(el, function () {
@@ -46,10 +46,10 @@ module.exports = class Card extends Component {
     const theme = props.color || 'white'
     assert(typeof theme === 'string', 'card: color should be a string')
 
-    const hasImage = this.hasImage = !!props.image
+    const banner = this.banner = !!props.image
 
     const card = html`
-      <div class="${hasImage ? 'Card-block js-block' : 'Card'} ${THEMES[theme]} u-bg u-color">
+      <div class="${banner ? 'Card-block js-block' : 'Card'} ${THEMES[theme]} u-bg u-color">
         <div class="Card-decorator">
           <div class="Card-plus"><div class="Card-circle"></div></div>
         </div>
@@ -57,13 +57,13 @@ module.exports = class Card extends Component {
       </div>
     `
 
-    if (!hasImage) return card
+    if (!banner) return card
 
     return html`
-      <div class="Card Card--hasImage">
+      <div class="Card Card--banner">
         <figure class="Card-figure">
           <img class="Card-image" src="${props.image.url}" alt="${props.image.alt || ''}">
-          ${props.caption ? html`<figcaption class="Card-caption">${props.caption}</figcaption>` : null}
+          ${props.caption ? html`<figcaption class="Card-caption u-textSizeXs u-spaceTsm u-md-show">${props.caption}</figcaption>` : null}
         </figure>
         ${card}
       </div>

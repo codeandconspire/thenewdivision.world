@@ -50,6 +50,11 @@ hr {
   background-color: currentColor;
 }
 
+a:link {
+  text-decoration: none;
+  color: inherit;
+}
+
 blockquote {
   margin: 0;
 }

@@ -11,11 +11,11 @@
 
 .Link-figure {
   position: relative;
-  max-height: 80vh;
+  max-height: 95vh;
   margin-bottom: var(--size);
   transform:
-    translateX(calc(-7px * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (-7px * var(--mouse-y))));
+    translateX(calc(0.5vw * var(--mouse-x)))
+    translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
 }
 
@@ -79,6 +79,7 @@
   top: 0;
   z-index: 1;
   color: var(--bright-sand);
+  pointer-events: none;
 }
 
 @media (min-width: 600px) {
@@ -97,8 +98,8 @@
   right: calc(var(--size) * 0.8);
   pointer-events: none;
   transform:
-    translateX(calc(-12px * var(--mouse-x)))
-    translateY(calc(-12px * var(--mouse-y)));
+    translateX(calc(0.7vw * var(--mouse-x)))
+    translateY(calc(0.7vw * var(--mouse-y)));
   transition: transform 260ms var(--snap);
 }
 
