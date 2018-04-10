@@ -69,9 +69,7 @@ function about (state, emit) {
         </div>
       </section>
       <section id="who-we-help">
-        <div class="u-spaceVxl">
-          ${state.cache(Good, 'good').render(doc.data)}
-        </div>
+        ${state.cache(Good, 'good').render(doc.data)}
       </section>
       <section id="clients-and-friends">
         <h2 class="Display Display--md Display--bold u-textCenter u-spaceBxl">
