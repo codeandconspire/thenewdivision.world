@@ -19,8 +19,8 @@
 @media (min-width: 600px) {
   .Presentation {
     flex: 1 0 100vh;
-    display: flex;
     align-items: flex-end;
+    flex-direction: row;
     margin: 0 calc(var(--size) * -1);
   }
 
@@ -31,11 +31,11 @@
 
   .Presentation-title {
     display: block;
-    width: 100%;
     height: auto;
   }
 
   .Presentation-text {
+    display: block;
     border-top: 2px solid currentColor;
     margin: var(--size) 0;
     padding-top: var(--size);

@@ -5,8 +5,8 @@
 .Grid {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100% + (var(--size) / 2));
-  margin: 0 calc((var(--size) / 4) * -1);
+    width: calc(100% + (var(--size)));
+    margin: 0 calc((var(--size) / 2) * -1)
 }
 
 .Grid-cell {
@@ -16,5 +16,14 @@
   justify-content: flex-start;
   align-items: stretch;
   min-width: 0;
+  padding: 0 calc(var(--size) / 2);
+}
+
+.Grid--tight {
+  width: calc(100% + (var(--size) / 2));
+  margin: 0 calc((var(--size) / 4) * -1);
+}
+
+.Grid--tight .Grid-cell {
   padding: 0 calc(var(--size) / 4);
 }

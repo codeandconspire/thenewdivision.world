@@ -81,5 +81,41 @@
   float: left !important;
   width: 0 !important;
   height: 0 !important;
-  padding-bottom: 123.57% !important;
+  padding-bottom: var(--aspect) !important;
+}
+
+
+/**
+ * Hide / show
+ */
+
+
+/**
+ * Show until breakpoint
+ */
+
+@media (max-width: 399px) {
+  .u-sm-show { display: none !important; }
+}
+
+@media (max-width: 599px) {
+  .u-md-show { display: none !important; }
+}
+
+@media (max-width: 999px) {
+  .u-lg-show { display: none !important; }
+}
+
+@media (max-width: 1499px) {
+  .u-xl-show { display: none !important; }
+}
+
+/**
+ * Print hide
+ */
+
+@media print {
+  .u-printHide {
+    display: none !important;
+  }
 }
