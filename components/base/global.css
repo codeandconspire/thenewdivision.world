@@ -11,6 +11,7 @@
   --theme: var(--background);
 
   --size: 3vw;
+  --aspect: 123.57%;
   --inview: 1;
   --mouse-x: 0;
   --mouse-y: 0;

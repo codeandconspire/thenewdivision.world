@@ -34,7 +34,7 @@ exports.decorator = decorator
 function decorator () {
   return html`
     <div class="Link-decorator">
-      <div class="Link-plus"></div>
+      <div class="Link-plus"><div class="Link-circle"></div></div>
     </div>
   `
 }

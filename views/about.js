@@ -4,6 +4,7 @@ const { asText } = require('prismic-richtext')
 const view = require('../components/view')
 const Card = require('../components/card')
 const Good = require('../components/good')
+const { Figure } = require('../components/link')
 const { i18n } = require('../components/base')
 const presentation = require('../components/presentation')
 require('../components/grid')
@@ -24,8 +25,7 @@ function about (state, emit) {
   if (!doc) {
     if (!state.documents.loading) emit('doc:fetch', {type: 'about'})
     return html`
-      <main class="View-container">
-      </main>
+      <main class="View-container"></main>
     `
   }
 
@@ -34,8 +34,8 @@ function about (state, emit) {
       ${presentation(['we', 'create', 'good', 'forces'].map(key => asElement(doc.data[key])))}
       <section id="about-us">
         <div class="Grid u-spaceVxl">
-          <div class="Grid-cell Grid-cell--1of3"></div>
-          <div class="Grid-cell Grid-cell--2of3">
+          <div class="Grid-cell u-xl-size1of3"></div>
+          <div class="Grid-cell u-xl-size2of3">
             <div class="Text Text--large">
               ${asElement(doc.data.we_introduction)}
             </div>
@@ -48,8 +48,8 @@ function about (state, emit) {
       </section>
       <section id="our-services">
         <div class="Grid u-spaceVxl">
-          <div class="Grid-cell Grid-cell--1of3"></div>
-          <div class="Grid-cell Grid-cell--2of3">
+          <div class="Grid-cell u-md-size1of3"></div>
+          <div class="Grid-cell">
             <div class="Text Text--large">
               ${asElement(doc.data.create_introduction)}
             </div>
@@ -57,7 +57,7 @@ function about (state, emit) {
         </div>
         <div class="Grid">
           ${doc.data.services.map((props, index, list) => html`
-            <article class="Grid-cell Grid-cell--1of${list.length}">
+            <article class="Grid-cell u-md-size1of3">
               <img src="${props.image.url}" class="u-spaceBmd u-alignSelfStart">
               <hr>
               <h3 class="u-textSizeSm">${asText(props.title)}</h3>
@@ -82,7 +82,7 @@ function about (state, emit) {
             }, '') || 'white'
 
             return html`
-              <div class="Grid-cell Grid-cell--1of${list.length} u-row u-aspect">
+              <div class="Grid-cell u-md-size1of3 u-row u-aspect">
                 <div class="u-sizeFill u-flex u-column u-theme${backgorund} u-color u-bg">
                   <div class="u-sizeFill u-flex u-column u-spaceAmd">
                     <div class="u-sizeFill">
@@ -139,26 +139,26 @@ function coworker (state, doc) {
     const id = asText(person.name).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^-\w]+/g, '')
     const children = [
       html`
-        <article class="Grid-cell Grid-cell--1of3">
-          ${state.cache(Card, id).render({children: html`
-            <img class="Card-image" src="${person.image.url}" alt="${person.image.alt || ''}">
-          `})}
-          <h3 class="u-textSizeSm u-textBold u-spaceTsm">${asText(person.name)}</h3>
-          <div class="Text">
-            <p class="u-textSizeSm">${person.role}</p>
-            <div class="u-textSizeXs">${asElement(person.bio)}</div>
-          </div>
-        </article>
+        <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceTlg">
+          <article class="Link Link--aspect">
+            ${state.cache(Figure, `coworker-${id}`).render(person.image)}
+            <h3 class="u-textSizeSm u-textBold">${asText(person.name)}</h3>
+            <div class="Text">
+              <p>${person.role}</p>
+              <div class="u-textSizeXs u-md-show">${asElement(person.bio)}</div>
+            </div>
+          </article>
+        </div>
       `
     ]
 
     if (index === Math.floor((list.length - 1) / 2)) {
       children.push(html`
-        <article class="Grid-cell Grid-cell--1of3">
+        <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTlg">
           ${state.cache(Card, 'recruit').render({
             color: 'petrol',
             children: html`
-              <div class="u-flex u-column u-spaceAmd">
+              <article class="u-flex u-column u-spaceAmd">
                 <div class="u-sizeFill u-flex u-column u-justifyCenter">
                   <h3>
                     <span class="u-textSizeMd u-textBold">${text`Want a job?`}</span>
@@ -169,13 +169,14 @@ function coworker (state, doc) {
                 <div class="Text Text--large">
                   <p>
                     <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
+                    <br />
                     <a href="tel:+46701234567">+46 (0)70 123 45 67</a>
                   </p>
                 </div>
-              </div>
+              </article>
             `
           })}
-        </article>
+        </div>
       `)
     }
 

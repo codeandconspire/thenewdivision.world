@@ -19,16 +19,22 @@
   transition: transform 180ms var(--snap);
 }
 
-.Link-figure::before {
-  content: "";
-  display: block;
-  padding-bottom: 68%;
-}
-
 @media (min-width: 600px) {
   .Link-figure {
     margin-bottom: calc(var(--size) / 2);
   }
+}
+
+@media (min-width: 1000px) {
+  .Link-figure {
+    margin-bottom: calc(var(--size) / 4);
+  }
+}
+
+.Link-figure::before {
+  content: "";
+  display: block;
+  padding-bottom: 68%;
 }
 
 @media (min-width: 600px) {
@@ -38,28 +44,17 @@
 }
 
 @media (min-width: 1000px) {
-  .Link-figure {
-    margin-bottom: calc(var(--size) / 4);
-  }
-
   .Link-figure::before {
     padding-bottom: 100%;
   }
 }
 
-.Link-figure:hover {
-  transition: none;
+.Link--aspect .Link-figure::before {
+  padding-bottom: var(--aspect);
 }
 
-.Link-decorator {
-  width: 100%;
-  height: 100%;
-  padding: calc(var(--size) * 0.8);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  color: var(--bright-sand);
+.Link-figure:hover {
+  transition: none;
 }
 
 .Link-image {
@@ -69,6 +64,27 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/**
+ * Decorator
+ */
+
+.Link-decorator {
+  width: 100%;
+  height: 100%;
+  padding: var(--size);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  color: var(--bright-sand);
+}
+
+@media (min-width: 600px) {
+  .Link:not(.Link--splash) .Link-decorator {
+    padding: calc(var(--size) * 0.8);
+  }
 }
 
 .Link-plus {
@@ -108,7 +124,39 @@
   transition: none;
 }
 
-@media (min-width: 1000px) {
+.Link-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  width: 290%;
+  height: 290%;
+  z-index: -1;
+  transform-origin: center;
+  transition: ease-in 150ms;
+  transition-property: transform, opacity;
+  background: #fff;
+  opacity: 0.2;
+}
+
+.Link:hover {
+  z-index: 1;
+  position: relative;
+}
+
+.Link--splash:hover .Link-circle {
+  transform: translate(-50%, -50%) scale(1);
+  transition-timing-function: ease-out;
+}
+
+.Link--splash:active .Link-circle {
+  transform: translate(-50%, -50%) scale(0.8);
+  transition-duration: 50ms;
+  opacity: 0.3;
+}
+
+@media (min-width: 1500px) {
   .Link-plus {
     width: 20px;
     height: 20px;

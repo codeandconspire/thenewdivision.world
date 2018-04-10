@@ -19,10 +19,9 @@
   display: flex;
   overflow: hidden;
   transform:
-    translateX(calc(-1.4% * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (-1.4% * var(--mouse-y))));
+    translateX(calc(-7px * var(--mouse-x)))
+    translateY(calc((20% * (1 - var(--inview))) + (-7px * var(--mouse-y))));
   transition: transform 180ms var(--snap);
-  will-change: transform;
 }
 
 .Card-block:hover,
@@ -39,40 +38,14 @@
   padding-bottom: 123.57%;
 }
 
-.Card-decorator {
-  width: 100%;
-  height: 100%;
-  padding: calc(var(--size) / 2);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-}
-
-.Card-plus {
-  float: right;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  position: sticky;
-  top: calc(var(--size) / 2);
-  right: calc(var(--size) / 2);
-  pointer-events: none;
-  transform:
-    translateX(calc(-25% * var(--mouse-x)))
-    translateY(calc(-25% * var(--mouse-y)));
-  transition: transform 260ms var(--snap);
-  will-change: transform;
-}
-
-.Card:hover .Card-plus {
-  transition: none;
-}
-
 .Card-figure {
   display: block;
   padding: 0;
   margin: 0;
+}
+
+.Card-figure:hover {
+  transition: none;
 }
 
 .Card-image {
@@ -85,4 +58,112 @@
 .Card-caption {
   display: block;
   width: 50%;
+}
+
+/**
+ * Decorator
+ */
+
+.Card-decorator {
+  width: 100%;
+  height: 100%;
+  padding: var(--size);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  color: var(--bright-sand);
+}
+
+@media (min-width: 600px) {
+  .Card:not(.Card--splash) .Card-decorator {
+    padding: calc(var(--size) * 0.8);
+  }
+}
+
+.Card-plus {
+  float: right;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  position: sticky;
+  top: calc(var(--size) * 0.8);
+  right: calc(var(--size) * 0.8);
+  pointer-events: none;
+  transform:
+    translateX(calc(-12px * var(--mouse-x)))
+    translateY(calc(-12px * var(--mouse-y)));
+  transition: transform 260ms var(--snap);
+}
+
+.Card-plus::before,
+.Card-plus::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: currentColor;
+}
+
+.Card-plus::after {
+  top: 0;
+  left: 6px;
+  width: 3px;
+  height: 100%;
+}
+
+.Card-block:hover .Card-plus,
+.Card:not(.Card--hasImage):hover .Card-plus {
+  transition: none;
+}
+
+.Card-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  width: 290%;
+  height: 290%;
+  z-index: -1;
+  transform-origin: center;
+  transition: ease-in 150ms;
+  transition-property: transform, opacity;
+  background: #fff;
+  opacity: 0.2;
+}
+
+.Card:hover {
+  z-index: 1;
+  position: relative;
+}
+
+.Card--splash:hover .Card-circle {
+  transform: translate(-50%, -50%) scale(1);
+  transition-timing-function: ease-out;
+}
+
+.Card--splash:active .Card-circle {
+  transform: translate(-50%, -50%) scale(0.8);
+  transition-duration: 50ms;
+  opacity: 0.3;
+}
+
+@media (min-width: 1500px) {
+  .Card-plus {
+    width: 20px;
+    height: 20px;
+  }
+
+  .Card-plus::before {
+    top: 8px;
+    height: 4px;
+  }
+
+  .Card-plus::after {
+    left: 8px;
+    width: 4px;
+  }
 }

@@ -51,9 +51,7 @@ module.exports = class Card extends Component {
     const card = html`
       <div class="${hasImage ? 'Card-block js-block' : 'Card'} ${THEMES[theme]} u-bg u-color">
         <div class="Card-decorator">
-          <svg class="Card-plus" width="20" height="20" viewBox="0 0 20 20">
-            <path fill="#EFECE5" fill-rule="evenodd" d="M12.5 7.5H20v5h-7.5V20h-5v-7.5H0v-5h7.5V0h5v7.5z"/>
-          </svg>
+          <div class="Card-plus"><div class="Card-circle"></div></div>
         </div>
         ${props.children}
       </div>
