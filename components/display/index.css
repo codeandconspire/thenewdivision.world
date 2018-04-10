@@ -3,30 +3,31 @@
 @import "../base/global";
 
 .Display {
+  display: block;
   color: var(--color);
   font-size: inherit;
-}
-
-.Display--bold {
-  font-weight: 600;
+  line-height: 1.2;
+  font-family: var(--giorgio-sans-bold);
 }
 
 .Display--xs {
-  font-size: var(--font-size-xs);
+  font-size: calc(var(--font-size-xs) * 2);
 }
 
 .Display--sm {
-  font-size: var(--font-size-sm);
+  font-size: calc(var(--font-size-sm) * 2);
 }
 
 .Display--md {
-  font-size: var(--font-size);
+  font-size: calc(var(--font-size) * 2);
 }
 
 .Display--lg {
-  font-size: var(--font-size-lg);
+  line-height: 1;
+  font-size: calc(var(--font-size-lg) * 1.5);
 }
 
 .Display--xl {
-  font-size: var(--font-size-xl);
+  line-height: 1;
+  font-size: calc(var(--font-size-xl) * 1.5);
 }

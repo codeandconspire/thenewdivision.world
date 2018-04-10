@@ -6,6 +6,14 @@
 .u-textSizeLg { font-size: var(--font-size-lg) !important; }
 .u-textSizeXl { font-size: var(--font-size-xl) !important; }
 
+.u-textBold {
+  font-weight: bold !important;
+}
+
+.u-textItalic {
+  font-style: italic !important;
+}
+
 .u-textCenter {
   text-align: center !important;
 }

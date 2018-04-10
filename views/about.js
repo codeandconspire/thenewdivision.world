@@ -60,7 +60,7 @@ function about (state, emit) {
             <article class="Grid-cell Grid-cell--1of${list.length}">
               <img src="${props.image.url}" class="u-spaceBmd u-alignSelfStart">
               <hr>
-              <h3 class="Display Display--sm">${asText(props.title)}</h3>
+              <h3 class="u-textSizeSm">${asText(props.title)}</h3>
               <div class="Text">
                 ${asElement(props.description)}
               </div>
@@ -72,7 +72,7 @@ function about (state, emit) {
         ${state.cache(Good, 'good').render(doc.data)}
       </section>
       <section id="clients-and-friends">
-        <h2 class="Display Display--md Display--bold u-textCenter u-spaceBxl">
+        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBxl">
           ${text`What people say`}
         </h2>
         <div class="Grid">
@@ -88,7 +88,7 @@ function about (state, emit) {
                     <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
                     </div>
-                    <blockquote class="Display Display--lg u-textGiorgio u-spaceBmd">
+                    <blockquote class="u-textBold u-spaceBmd">
                       ${asElement(props.quote)}
                     </blockquote>
                     ${asElement(props.cite)}
@@ -109,17 +109,21 @@ function workspace (doc) {
     image: doc.data.workspace_image,
     caption: doc.data.workspace_image.alt,
     children: html`
-      <div class="u-sizeFill u-flex u-column">
+      <div class="u-sizeFill u-flex u-column u-spaceAmd">
         <div class="u-sizeFill u-flex u-column u-justifyCenter">
           <h3>
-            <span class="Display Display--sm">${text`Address`}</span>
-            <span class="Display Display--sm">${doc.data.address[0].text}</span>
+            <span class="u-textSizeMd u-textBold">${text`Address`}</span>
+            <span class="Display Display--lg">
+              ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
+                return els.concat(part, index < list.length - 1 ? html`<br>` : null)
+              }, [])}
+            </span>
           </h3>
           <div class="Text">
             <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
           </div>
         </div>
-        <h4 class="Display Display--sm">${text`Inquiries`}</h4>
+        <h4 class="u-textSizeMd u-textBold">${text`Inquiries`}</h4>
         <div class="Text Text--large">
           <p>
             <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
@@ -139,10 +143,10 @@ function coworker (state, doc) {
           ${state.cache(Card, id).render({children: html`
             <img class="Card-image" src="${person.image.url}" alt="${person.image.alt || ''}">
           `})}
-          <h3 class="Display Display--md Display--bold">${asText(person.name)}</h3>
+          <h3 class="u-textSizeSm u-textBold u-spaceTsm">${asText(person.name)}</h3>
           <div class="Text">
-            <p class="Display Display--md">${person.role}</p>
-            ${asElement(person.bio)}
+            <p class="u-textSizeSm">${person.role}</p>
+            <div class="u-textSizeXs">${asElement(person.bio)}</div>
           </div>
         </article>
       `
@@ -154,14 +158,14 @@ function coworker (state, doc) {
           ${state.cache(Card, 'recruit').render({
             color: 'petrol',
             children: html`
-              <div class="u-flex u-column">
+              <div class="u-flex u-column u-spaceAmd">
                 <div class="u-sizeFill u-flex u-column u-justifyCenter">
                   <h3>
-                    <span class="Display Display--sm">${text`Want a job?`}</span>
-                    <span class="Display Display--sm">${doc.data.recruitment_heading}</span>
+                    <span class="u-textSizeMd u-textBold">${text`Want a job?`}</span>
+                    <span class="Display Display--md">${doc.data.recruitment_heading}</span>
                   </h3>
                 </div>
-                <h4 class="Display Display--sm">${text`Careers`}</h4>
+                <h4 class="u-textSizeMd u-textBold">${text`Careers`}</h4>
                 <div class="Text Text--large">
                   <p>
                     <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
