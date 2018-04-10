@@ -4,6 +4,7 @@
 
 .Text {
   display: block;
+  max-width: 27em;
   font-size: var(--font-size-sm);
 }
 
