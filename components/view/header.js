@@ -11,7 +11,7 @@ module.exports = class Header extends Component {
 
   createElement (href) {
     this.href = href
-    const sub = /about/.test(this.href) || /cases/.test(this.href)
+    const sub = /about/.test(this.href) || /cases\//.test(this.href)
 
     return html`
       <div class="View-header ${sub ? 'u-absolute' : ''}">
