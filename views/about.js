@@ -88,7 +88,7 @@ function about (state, emit) {
                     <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
                     </div>
-                    <blockquote class="u-textBold u-spaceBmd">
+                    <blockquote class="Display Display--sm u-spaceBmd">
                       ${asElement(props.quote)}
                     </blockquote>
                     ${asElement(props.cite)}
