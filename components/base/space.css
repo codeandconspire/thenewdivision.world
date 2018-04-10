@@ -44,3 +44,28 @@
   margin-top: calc(var(--size) * 6) !important;
   margin-bottom: calc(var(--size) * 6) !important;
 }
+
+.u-spaceHxs {
+  margin-right: calc(var(--size) / 6) !important;
+  margin-left: calc(var(--size) / 6) !important;
+}
+
+.u-spaceHsm {
+  margin-right: calc(var(--size) / 2) !important;
+  margin-left: calc(var(--size) / 2) !important;
+}
+
+.u-spaceHmd {
+  margin-right: var(--size) !important;
+  margin-left: var(--size) !important;
+}
+
+.u-spaceHlg {
+  margin-right: calc(var(--size) * 2) !important;
+  margin-left: calc(var(--size) * 2) !important;
+}
+
+.u-spaceHxl {
+  margin-right: calc(var(--size) * 6) !important;
+  margin-left: calc(var(--size) * 6) !important;
+}

@@ -4,6 +4,10 @@
   display: block !important;
 }
 
+.u-inlineBlock {
+  display: inline-block !important;
+}
+
 .u-hidden {
   display: none !important;
 }

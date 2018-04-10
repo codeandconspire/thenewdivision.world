@@ -2,6 +2,7 @@ const html = require('choo/html')
 const css = require('sheetify')
 const error = require('./error')
 const Header = require('./header')
+const Footer = require('./footer')
 const { i18n } = require('../base')
 css('./index')
 
@@ -30,6 +31,7 @@ function createView (view, title) {
       <body class="View">
         ${state.cache(Header, 'header').render(state.href)}
         ${children}
+        ${state.cache(Footer, 'footer').render(state.ui.theme)}
       </body>
     `
   }

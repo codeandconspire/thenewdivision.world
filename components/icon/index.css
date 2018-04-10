@@ -1,0 +1,45 @@
+/* @define Icon */
+
+@import "../base/global";
+
+.Icon {
+  display: inline-block;
+  user-select: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  vertical-align: bottom;
+
+  color: var(--background);
+  background-color: var(--color);
+  border-radius: calc(20rem / 16);
+  transform-origin: 50% 50%;
+  transition: transform 175ms var(--snap);
+  will-change: transform;
+}
+
+.Icon:hover {
+  transform: scale(1.1);
+}
+
+.Icon:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease-out;
+}
+
+.Icon-image {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 11px 0 0 11px;
+  position: relative;
+  position: relative;
+}
+
+.Icon--linkedin .Icon-image {
+  top: -1px;
+}
+
+.Icon--twitter .Icon-image {
+  right: -1px;
+}
