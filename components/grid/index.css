@@ -5,9 +5,8 @@
 .Grid {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100% + var(--size));
-  margin-left: calc(var(--size) / -2);
-  margin-right: calc(var(--size) / -2);
+  width: calc(100% + (var(--size) / 2));
+  margin: 0 calc((var(--size) / 4) * -1);
 }
 
 .Grid-cell {
@@ -17,26 +16,5 @@
   justify-content: flex-start;
   align-items: stretch;
   min-width: 0;
-  padding: calc(var(--size) / 2) calc(var(--size) / 2) 0 calc(var(--size) / 2);
-}
-
-.Grid-cell--1of2 {
-  flex: 0 1 50%;
-}
-
-.Grid-cell--1of2:nth-child(-n+2) {
-  padding-top: 0;
-}
-
-.Grid-cell--1of3 {
-  flex: 0 1 calc(100% / 3);
-}
-
-.Grid-cell--2of3 {
-  flex: 0 1 calc((100% / 3) * 2);
-}
-
-.Grid-cell--1of3:nth-child(-n+3),
-.Grid-cell--2of3:nth-child(-n+3) {
-  padding-top: 0;
+  padding: 0 calc(var(--size) / 4);
 }

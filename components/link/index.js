@@ -24,7 +24,7 @@ exports.Figure = class Figure extends Component {
     return html`
       <div class="Link-figure">
         ${decorator()}
-        <img src="${img.url}" alt="${img.alt || ''}" class="Link-image">
+        <img class="Link-image" src="${img.url}" alt="${img.alt || ''}">
       </div>
     `
   }
@@ -33,10 +33,8 @@ exports.Figure = class Figure extends Component {
 exports.decorator = decorator
 function decorator () {
   return html`
-    <span class="Link-decorator">
-      <svg class="Link-plus" width="20" height="20" viewBox="0 0 20 20">
-        <path fill="#EFECE5" fill-rule="evenodd" d="M12.5 7.5H20v5h-7.5V20h-5v-7.5H0v-5h7.5V0h5v7.5z"/>
-      </svg>
-    </span>
+    <div class="Link-decorator">
+      <div class="Link-plus"></div>
+    </div>
   `
 }

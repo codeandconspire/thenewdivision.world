@@ -3,21 +3,48 @@
 @import "../base/global";
 
 .Link {
-  display: inline-block;
+  display: block;
   text-decoration: none;
-}
-
-.Link--adaptive {
   color: currentColor;
+  background: none;
 }
 
 .Link-figure {
   position: relative;
-  margin-bottom: calc(var(--size) / 2);
+  max-height: 80vh;
+  margin-bottom: var(--size);
   transform:
-    translateX(calc(-1.4% * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (-1.4% * var(--mouse-y))));
+    translateX(calc(-7px * var(--mouse-x)))
+    translateY(calc((20% * (1 - var(--inview))) + (-7px * var(--mouse-y))));
   transition: transform 180ms var(--snap);
+}
+
+.Link-figure::before {
+  content: "";
+  display: block;
+  padding-bottom: 68%;
+}
+
+@media (min-width: 600px) {
+  .Link-figure {
+    margin-bottom: calc(var(--size) / 2);
+  }
+}
+
+@media (min-width: 600px) {
+  .Link-figure::before {
+    padding-bottom: 100%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Link-figure {
+    margin-bottom: calc(var(--size) / 4);
+  }
+
+  .Link-figure::before {
+    padding-bottom: 100%;
+  }
 }
 
 .Link-figure:hover {
@@ -27,33 +54,73 @@
 .Link-decorator {
   width: 100%;
   height: 100%;
-  padding: calc(var(--size) / 2);
+  padding: calc(var(--size) * 0.8);
   position: absolute;
   left: 0;
   top: 0;
   z-index: 1;
+  color: var(--bright-sand);
 }
 
 .Link-image {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .Link-plus {
   float: right;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   position: absolute;
   position: sticky;
-  top: calc(var(--size) / 2);
-  right: calc(var(--size) / 2);
+  top: calc(var(--size) * 0.8);
+  right: calc(var(--size) * 0.8);
   pointer-events: none;
   transform:
-    translateX(calc(-25% * var(--mouse-x)))
-    translateY(calc(-25% * var(--mouse-y)));
+    translateX(calc(-12px * var(--mouse-x)))
+    translateY(calc(-12px * var(--mouse-y)));
   transition: transform 260ms var(--snap);
+}
+
+.Link-plus::before,
+.Link-plus::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: currentColor;
+}
+
+.Link-plus::after {
+  top: 0;
+  left: 6px;
+  width: 3px;
+  height: 100%;
 }
 
 .Link-figure:hover .Link-plus {
   transition: none;
+}
+
+@media (min-width: 1000px) {
+  .Link-plus {
+    width: 20px;
+    height: 20px;
+  }
+
+  .Link-plus::before {
+    top: 8px;
+    height: 4px;
+  }
+
+  .Link-plus::after {
+    left: 8px;
+    width: 4px;
+  }
 }
