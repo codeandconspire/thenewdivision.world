@@ -39,6 +39,11 @@
   --background: var(--sand);
 }
 
+.u-themeLightSand {
+  --color: var(--dark-blue);
+  --background: var(--bright-sand);
+}
+
 .u-themeBrightSand {
   --color: var(--dark-blue);
   --background: var(--bright-sand);
