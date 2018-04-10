@@ -36,11 +36,11 @@ function home (state, emit) {
   return html`
     <main class="View-container">
       ${state.cache(Intro, 'homepage-intro').render(doc.data.intro)}
-      <h2 id="cases" class="Display Display--md Display--bold">Case studies</h2>
+      <h2 id="cases" class="Display Display--md Display--bold u-spaceBlg">Case studies</h2>
       <div class="Grid">
         ${doc.data.featured_cases.map(props => html`
-          <div class="Grid-cell Grid-cell--1of2">
-            <a href="/cases/${props.case.uid}" class="Link Link--adaptive u-block">
+          <div class="Grid-cell Grid-cell--cases">
+            <a href="/cases/${props.case.uid}" class="Link Link--adaptive u-block u-aspectAlt u-spaceBsm">
               ${state.cache(Figure, `case-${props.case.uid}`).render(props.image)}
               <h3 class="Display Display--bold">${asText(props.case.data.title)}</h3>
               <p>${asText(props.case.data.preamble)}</p>

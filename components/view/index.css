@@ -54,12 +54,9 @@
   display: inline-block;
   padding: calc(var(--size) / 2) var(--size);
   margin-left: calc(var(--size) / 4);
+  font-size: var(--font-size-xs);
   color: currentColor;
   text-decoration: none;
-}
-
-.View-nav:last-child {
-  margin-right: calc(var(--size) * -1);
 }
 
 .View-error {

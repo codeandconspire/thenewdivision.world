@@ -1,5 +1,13 @@
 /* @define utilities */
 
+.u-clip {
+  overflow: hidden !important;
+}
+
+/**
+ * Position
+ */
+
 .u-relative {
   position: relative !important;
 }
@@ -12,9 +20,9 @@
   position: static !important;
 }
 
-.u-clip {
-  overflow: hidden !important;
-}
+/**
+ * Flex
+ */
 
 .u-flex {
   display: flex !important;
@@ -48,14 +56,9 @@
   align-self: flex-end !important;
 }
 
-.u-fill {
-  flex: 1 1 auto !important;
-}
-
-.u-full {
-  width: 100%;
-  flex: 1 0 100% !important;
-}
+/**
+ * Float
+ */
 
 .u-floatLeft {
   float: left !important;
@@ -64,6 +67,10 @@
 .u-floatRight {
   float: right !important;
 }
+
+/**
+ * Aspect Box
+ */
 
 .u-aspect {
   display: flex !important;

@@ -12,12 +12,11 @@
 
 .Intro-text {
   margin: 0;
-  font-family: var(--giorgio-sans-bold);
   font-size: var(--font-size-xl);
-  line-height: 1.1;
-  letter-spacing: 0.01em;
+  font-family: var(--giorgio-sans-bold) !important;
+  line-height: var(--giorgio-sans-bold-line-height);
+  letter-spacing: var(--giorgio-sans-bold-letter-spacing);
 }
-
 
 .Intro-final {
   width: 100%;

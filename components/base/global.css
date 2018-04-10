@@ -20,6 +20,11 @@
   --giorgio-sans-bold: "Giorgio Sans Bold", "AvenirNextCondensed-DemiBold", "HelveticaNeue-CondensedBold", "Helvetica Inserat", "Franklin Gothic Condensed", Haettenschweiler, Impact, sans-serif-condensed, sans-serif;
   --system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
+  --system-font-line-height: 1.35;
+  --system-font-letter-spacing: auto;
+  --giorgio-sans-bold-line-height: 1.1;
+  --giorgio-sans-bold-letter-spacing: 0.01em;
+
   --font-size: 20px;
   --font-size-xs: calc(var(--font-size) * 0.7);
   --font-size-sm: calc(var(--font-size) * 0.8);

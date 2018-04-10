@@ -41,7 +41,7 @@ function about (state, emit) {
             </div>
           </div>
         </div>
-        <div class="Grid u-spaceBl">
+        <div class="Grid u-spaceBlg">
           ${doc.data.coworkers.map(coworker(state, doc))}
         </div>
         ${state.cache(Card, 'workspace').render(workspace(doc))}
@@ -58,7 +58,7 @@ function about (state, emit) {
         <div class="Grid">
           ${doc.data.services.map((props, index, list) => html`
             <article class="Grid-cell Grid-cell--1of${list.length}">
-              <img src="${props.image.url}" class="u-spaceBm u-alignSelfStart">
+              <img src="${props.image.url}" class="u-spaceBmd u-alignSelfStart">
               <hr>
               <h3 class="Display Display--sm">${asText(props.title)}</h3>
               <div class="Text">
@@ -83,12 +83,12 @@ function about (state, emit) {
 
             return html`
               <div class="Grid-cell Grid-cell--1of${list.length} u-row u-aspect">
-                <div class="u-fill u-flex u-column u-theme${backgorund} u-color u-bg">
-                  <div class="u-fill u-flex u-column u-spaceAm">
-                    <div class="u-fill">
+                <div class="u-sizeFill u-flex u-column u-theme${backgorund} u-color u-bg">
+                  <div class="u-sizeFill u-flex u-column u-spaceAmd">
+                    <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
                     </div>
-                    <blockquote class="Display Display--lg u-textGiorgio u-spaceBm">
+                    <blockquote class="Display Display--lg u-textGiorgio u-spaceBmd">
                       ${asElement(props.quote)}
                     </blockquote>
                     ${asElement(props.cite)}
@@ -109,8 +109,8 @@ function workspace (doc) {
     image: doc.data.workspace_image,
     caption: doc.data.workspace_image.alt,
     children: html`
-      <div class="u-fill u-flex u-column">
-        <div class="u-fill u-flex u-column u-justifyCenter">
+      <div class="u-sizeFill u-flex u-column">
+        <div class="u-sizeFill u-flex u-column u-justifyCenter">
           <h3>
             <span class="Display Display--sm">${text`Address`}</span>
             <span class="Display Display--sm">${doc.data.address[0].text}</span>
@@ -155,7 +155,7 @@ function coworker (state, doc) {
             color: 'petrol',
             children: html`
               <div class="u-flex u-column">
-                <div class="u-fill u-flex u-column u-justifyCenter">
+                <div class="u-sizeFill u-flex u-column u-justifyCenter">
                   <h3>
                     <span class="Display Display--sm">${text`Want a job?`}</span>
                     <span class="Display Display--sm">${doc.data.recruitment_heading}</span>

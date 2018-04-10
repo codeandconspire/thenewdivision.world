@@ -11,11 +11,11 @@ module.exports = class Header extends Component {
 
   createElement (href) {
     this.href = href
-    const about = /about/.test(this.href)
+    const sub = /about/.test(this.href) || /cases/.test(this.href)
 
     return html`
-      <div class="View-header ${about ? 'u-absolute' : ''}">
-        ${about ? html`
+      <div class="View-header ${sub ? 'u-absolute' : ''}">
+        ${sub ? html`
           <a href="/" class="View-home">
             <span class="u-hiddenVisually">The New Division</span>
             ${logo()}
@@ -27,7 +27,7 @@ module.exports = class Header extends Component {
           </span>
         `}
 
-        ${about ? html`
+        ${sub ? html`
           <a class="View-nav" href="/">Close</a>
         ` : html`
           <nav>

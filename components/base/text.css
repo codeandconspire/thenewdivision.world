@@ -12,8 +12,12 @@
 
 .u-textSystem {
   font-family: var(--system-font) !important;
+  line-height: var(--system-font-line-height);
+  letter-spacing: var(--system-font-letter-spacing);
 }
 
 .u-textGiorgio {
   font-family: var(--giorgio-sans-bold) !important;
+  line-height: var(--giorgio-sans-bold-line-height);
+  letter-spacing: var(--giorgio-sans-bold-letter-spacing);
 }

@@ -13,6 +13,7 @@
 
 .Link-figure {
   position: relative;
+  margin-bottom: calc(var(--size) / 2);
   transform:
     translateX(calc(-1.4% * var(--mouse-x)))
     translateY(calc((20% * (1 - var(--inview))) + (-1.4% * var(--mouse-y))));

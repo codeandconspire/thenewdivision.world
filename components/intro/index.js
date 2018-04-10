@@ -75,9 +75,11 @@ module.exports = class extends Component {
 
     if (this.finished) {
       return html`
-        <p class="Intro">
-          ${getStrong(text)}
-        </p>
+        <div class="Intro">
+          <p class="Intro-text">
+            ${getStrong(text)}
+          </p>
+        </div>
       `
     }
 
