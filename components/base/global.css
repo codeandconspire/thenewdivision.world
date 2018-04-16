@@ -13,6 +13,7 @@
   --space: 2px;
   --aspect: 123.57%;
   --inview: 1;
+  --offset: 0;
   --mouse-x: 0;
   --mouse-y: 0;
   --scroll: 0;
