@@ -8,7 +8,7 @@
 }
 
 .Good {
-  margin: calc(var(--size) * 6) 0 0;
+  margin: calc(var(--space) * 6) 0 0;
   padding-bottom: calc((var(--Good-width) * 1.652173913) - (var(--Good-width) / 2));
 }
 

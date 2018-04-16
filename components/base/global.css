@@ -10,7 +10,7 @@
   --dark-magenta: #960059;
   --theme: var(--background);
 
-  --size: 3vw;
+  --space: 2px;
   --aspect: 123.57%;
   --inview: 1;
   --mouse-x: 0;
@@ -39,7 +39,7 @@
 
 @media (min-width: 350px) {
   :root {
-    --size: 2.6vw;
+    --space: 3px;
 
     --font-size-xs: 14px;
     --font-size-sm: 14px;
@@ -55,7 +55,7 @@
 
 @media (min-width: 600px) and (min-height: 400px) {
   :root {
-    --size: 2.6vw;
+    --space: 6px;
 
     --font-size-xs: 16px;
     --font-size-sm: 16px;
@@ -71,7 +71,7 @@
 
 @media (min-width: 1000px) and (min-height: 600px) {
   :root {
-    --size: 2.2vw;
+    --space: 8px;
 
     --font-size-xs: 16px;
     --font-size-sm: 20px;
@@ -87,7 +87,7 @@
 
 @media (min-width: 1500px) and (min-height: 800px) {
   :root {
-    --size: 1.8vw;
+    --space: 10px;
 
     --font-size-xs: 20px;
     --font-size-sm: 24px;
@@ -103,7 +103,7 @@
 
 @media (min-width: 2400px) and (min-height: 1000px) {
   :root {
-    --size: 1.2vw;
+    --space: 14px;
 
     --font-size-xs: 24px;
     --font-size-sm: 30px;

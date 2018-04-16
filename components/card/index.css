@@ -8,24 +8,24 @@
 }
 
 .Card-block {
-  width: calc(100vw - (var(--size) * 2));
+  width: calc(100vw - (var(--space) * 2));
   position: absolute;
   bottom: -50vw;
-  right: var(--size);
+  right: var(--space);
 }
 
 @media (min-width: 600px) {
   .Card-block {
-    width: calc((100vw - (var(--size) * 3)) / 2);
+    width: calc((100vw - (var(--space) * 3)) / 2);
     bottom: -8vw;
-    right: var(--size);
+    right: var(--space);
   }
 }
 
 @media (min-width: 1000px) {
   .Card-block {
-    width: calc((100vw - (var(--size) * 4)) / 3);
-    right: calc(var(--size) * 2);
+    width: calc((100vw - (var(--space) * 4)) / 3);
+    right: calc(var(--space) * 2);
   }
 }
 
@@ -58,8 +58,8 @@
  */
 
 .Card--banner {
-  width: calc(100% + (var(--size) * 2));
-  margin: 0 calc(var(--size) * -1);
+  width: calc(100% + (var(--space) * 2));
+  margin: 0 calc(var(--space) * -1);
 }
 
 @media (min-width: 600px) {
@@ -111,7 +111,7 @@
 .Card-decorator {
   width: 100%;
   height: 100%;
-  padding: var(--size);
+  padding: var(--space);
   position: absolute;
   left: 0;
   top: 0;
@@ -122,7 +122,7 @@
 
 @media (min-width: 600px) {
   .Card:not(.Card--splash) .Card-decorator {
-    padding: calc(var(--size) * 0.8);
+    padding: calc(var(--space) * 0.8);
   }
 }
 
@@ -132,8 +132,8 @@
   height: 15px;
   position: absolute;
   position: sticky;
-  top: calc(var(--size) * 0.8);
-  right: calc(var(--size) * 0.8);
+  top: calc(var(--space) * 0.8);
+  right: calc(var(--space) * 0.8);
   pointer-events: none;
   transform:
     translateX(calc(0.7vw * var(--mouse-x)))

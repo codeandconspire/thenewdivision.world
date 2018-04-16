@@ -12,23 +12,11 @@
 .Link-figure {
   position: relative;
   max-height: 95vh;
-  margin-bottom: var(--size);
+  margin-bottom: calc(var(--space) * 1.5);
   transform:
     translateX(calc(0.5vw * var(--mouse-x)))
     translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
-}
-
-@media (min-width: 600px) {
-  .Link-figure {
-    margin-bottom: calc(var(--size) / 2);
-  }
-}
-
-@media (min-width: 1000px) {
-  .Link-figure {
-    margin-bottom: calc(var(--size) / 4);
-  }
 }
 
 .Link-figure::before {
@@ -73,7 +61,7 @@
 .Link-decorator {
   width: 100%;
   height: 100%;
-  padding: var(--size);
+  padding: calc(var(--space) * 3);
   position: absolute;
   left: 0;
   top: 0;
@@ -82,20 +70,14 @@
   pointer-events: none;
 }
 
-@media (min-width: 600px) {
-  .Link:not(.Link--splash) .Link-decorator {
-    padding: calc(var(--size) * 0.8);
-  }
-}
-
 .Link-plus {
   float: right;
   width: 15px;
   height: 15px;
   position: absolute;
   position: sticky;
-  top: calc(var(--size) * 0.8);
-  right: calc(var(--size) * 0.8);
+  top: calc(var(--space) * 0.8);
+  right: calc(var(--space) * 0.8);
   pointer-events: none;
   transform:
     translateX(calc(0.7vw * var(--mouse-x)))

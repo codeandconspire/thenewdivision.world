@@ -1,19 +1,12 @@
 const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
-const { observe, mousemove } = require('../base')
+const { mousemove } = require('../base')
 css('./index')
 
 exports.Figure = class Figure extends Component {
   load (element) {
-    const stopMouseMove = mousemove(element)
-    const stopObserving = observe(element, function () {
-      stopObserving()
-    })
-    this.unload = function () {
-      stopMouseMove()
-      stopObserving()
-    }
+    this.unload = mousemove(element)
   }
 
   update () {

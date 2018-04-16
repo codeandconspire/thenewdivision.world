@@ -39,8 +39,8 @@ function home (state, emit) {
       <h2 id="cases" class="u-textSizeLg u-textBold">Case studies</h2>
       <div class="Grid Grid--tight">
         ${doc.data.featured_cases.map(props => html`
-          <div class="Grid-cell u-md-size1of2 u-spaceTmd">
-            <a href="/cases/${props.case.uid}" class="Link Link--splash">
+          <div class="Grid-cell u-md-size1of2 u-spaceT3">
+            <a href="/cases/${props.case.uid}" class="Link Link--splash u-spaceB2">
               ${state.cache(Figure, `case-${props.case.uid}`).render(props.image)}
               <h3 class="u-textBold">${asText(props.case.data.title)}</h3>
               <p>${asText(props.case.data.preamble)}</p>

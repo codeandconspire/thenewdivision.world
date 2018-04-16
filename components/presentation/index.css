@@ -21,12 +21,12 @@
     flex: 1 0 100vh;
     align-items: flex-end;
     flex-direction: row;
-    margin: 0 calc(var(--size) * -1);
+    margin: 0 calc((var(--space) * 1) * -1);
   }
 
   .Presentation-col {
     flex: 0 1 auto;
-    margin: 0 var(--size);
+    margin: 0 calc(var(--space) * 3);
   }
 
   .Presentation-title {
@@ -37,8 +37,8 @@
   .Presentation-text {
     display: block;
     border-top: 2px solid currentColor;
-    margin: var(--size) 0;
-    padding-top: var(--size);
+    margin: var(--space) 0;
+    padding-top: var(--space);
     font-size: var(--font-size-xs);
   }
 
