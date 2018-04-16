@@ -58,3 +58,12 @@ a:link {
 blockquote {
   margin: 0;
 }
+
+pre {
+  white-space: pre-wrap;
+  font: 13px/1.4 monospace;
+  max-width: 100%;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 1em;
+}
