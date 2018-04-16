@@ -39,7 +39,7 @@ function home (state, emit) {
       <h2 id="cases" class="u-textSizeMd u-textBold">Case studies</h2>
       <div class="Grid Grid--tight">
         ${doc.data.featured_cases.map(props => html`
-          <div class="Grid-cell u-md-size1of2 u-spaceTlg">
+          <div class="Grid-cell u-md-size1of2 u-spaceTmd">
             <a href="/cases/${props.case.uid}" class="Link Link--splash">
               ${state.cache(Figure, `case-${props.case.uid}`).render(props.image)}
               <h3 class="u-textSizeSm u-textBold">${asText(props.case.data.title)}</h3>

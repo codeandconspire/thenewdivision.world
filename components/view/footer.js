@@ -24,8 +24,8 @@ module.exports = class Footer extends Component {
     this.theme = theme
     return html`
       <footer class="u-textCenter">
-        <h2 class="u-spaceTxl">
-          <span class="u-textSizeMd u-textBold u-block u-spaceBsm">
+        <h2 class="u-spaceTlg">
+          <span class="u-textSizeMd u-textBold u-block u-spaceBxs">
             ${text`Connect with us,`}
           </span>
           <span class="Display Display--xl">
@@ -37,11 +37,11 @@ module.exports = class Footer extends Component {
           <a class="Display Display--xl ${LINK_THEMES[theme]}" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
         </div>
 
-        <div class="Text u-spaceTxl u-spaceBlg u-inlineBlock ${ICON_THEMES[theme]}">
-          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.facebook()}</a>
-          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.twitter()}</a>
-          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.instagram()}</a>
-          <a href="#" class="u-inlineBlock u-spaceHxs">${icon.linkedin()}</a>
+        <div class="Text u-spaceTlg u-spaceBmd u-inlineBlock ${ICON_THEMES[theme]}">
+          <a href="#" class="u-inlineBlock u-spaceLch u-spaceRch">${icon.facebook()}</a>
+          <a href="#" class="u-inlineBlock u-spaceRch">${icon.twitter()}</a>
+          <a href="#" class="u-inlineBlock u-spaceRch">${icon.instagram()}</a>
+          <a href="#" class="u-inlineBlock u-spaceRch">${icon.linkedin()}</a>
           <p>
             ${text`© 2017 The New Division by Trollbäck + Company.`}<br>
             ${text`All Rights Reserved.`}

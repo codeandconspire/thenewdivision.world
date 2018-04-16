@@ -33,7 +33,7 @@ function about (state, emit) {
     <main class="View-container View-container--fill">
       ${presentation(['we', 'create', 'good', 'forces'].map(key => asElement(doc.data[key])))}
       <section id="about-us">
-        <div class="Grid u-spaceVxl">
+        <div class="Grid u-spaceVlg">
           <div class="Grid-cell u-lg-size1of3"></div>
           <div class="Grid-cell u-lg-size2of3">
             <div class="Text u-textSizeMd">
@@ -41,13 +41,13 @@ function about (state, emit) {
             </div>
           </div>
         </div>
-        <div class="Grid u-spaceBlg">
+        <div class="Grid u-spaceBmd">
           ${doc.data.coworkers.map(coworker(state, doc))}
         </div>
         ${state.cache(Card, 'workspace').render(workspace(doc))}
       </section>
       <section id="our-services">
-        <div class="Grid u-spaceVxl">
+        <div class="Grid u-spaceVlg">
           <div class="Grid-cell u-lg-size1of3"></div>
           <div class="Grid-cell u-lg-size2of3">
             <div class="Text u-textSizeMd">
@@ -58,7 +58,7 @@ function about (state, emit) {
         <div class="Grid">
           ${doc.data.services.map((props, index, list) => html`
             <article class="Grid-cell u-md-size1of3">
-              <img src="${props.image.url}" class="u-spaceBmd u-alignSelfStart">
+              <img src="${props.image.url}" class="u-spaceBsm u-alignSelfStart">
               <hr>
               <h3>${asText(props.title)}</h3>
               <div class="Text">
@@ -72,7 +72,7 @@ function about (state, emit) {
         ${state.cache(Good, 'good').render(doc.data)}
       </section>
       <section id="clients-and-friends">
-        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBlg">
+        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBmd">
           ${text`What people say`}
         </h2>
         <div class="Grid">
@@ -82,13 +82,13 @@ function about (state, emit) {
             }, '') || 'white'
 
             return html`
-              <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTlg u-row u-aspect ${index === 2 ? 'u-lg-show' : ''}">
+              <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTmd u-row u-aspect ${index === 2 ? 'u-lg-show' : ''}">
                 <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
-                  <div class="u-sizeFill u-flex u-column u-spaceAmd">
+                  <div class="u-sizeFill u-flex u-column u-spaceAsm">
                     <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
                     </div>
-                    <blockquote class="Display Display--sm u-spaceBmd">
+                    <blockquote class="Display Display--sm u-spaceBsm">
                       ${asElement(props.quote)}
                     </blockquote>
                     ${asElement(props.cite)}
@@ -109,7 +109,7 @@ function workspace (doc) {
     image: doc.data.workspace_image,
     caption: doc.data.workspace_image.alt,
     children: html`
-      <div class="u-sizeFill u-flex u-column u-spaceAmd">
+      <div class="u-sizeFill u-flex u-column u-spaceAsm">
         <div class="u-sizeFill u-flex u-column u-justifyCenter">
           <h3>
             <span class="u-textSizeMd u-textBold">${text`Address`}</span>
@@ -139,7 +139,7 @@ function coworker (state, doc) {
     const id = asText(person.name).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^-\w]+/g, '')
     const children = [
       html`
-        <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceTlg">
+        <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceTmd">
           <article class="Link Link--aspect">
             ${state.cache(Figure, `coworker-${id}`).render(person.image)}
             <h3 class="u-textBold">${asText(person.name)}</h3>
@@ -154,11 +154,11 @@ function coworker (state, doc) {
 
     if (index === Math.floor((list.length - 1) / 2)) {
       children.push(html`
-        <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTlg">
+        <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceTmd">
           ${state.cache(Card, 'recruit').render({
             color: 'petrol',
             children: html`
-              <article class="u-flex u-column u-spaceAmd">
+              <article class="u-flex u-column u-spaceAsm">
                 <div class="u-sizeFill u-flex u-column u-justifyCenter">
                   <h3>
                     <span class="u-textSizeMd u-textBold">${text`Want a job?`}</span>

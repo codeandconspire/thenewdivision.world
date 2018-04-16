@@ -2,23 +2,149 @@
 
 @import "./global";
 
-.u-spaceAxs { margin: calc(var(--size) / 6) !important; }
-.u-spaceAsm { margin: calc(var(--size) / 2) !important; }
-.u-spaceAmd { margin: var(--size) !important; }
-.u-spaceAlg { margin: calc(var(--size) * 2) !important; }
-.u-spaceAxl { margin: calc(var(--size) * 10) !important; }
+/**
+ * All
+ */
 
-.u-spaceTxs { margin-top: calc(var(--size) / 6) !important; }
-.u-spaceTsm { margin-top: calc(var(--size) / 2) !important; }
-.u-spaceTmd { margin-top: var(--size) !important; }
-.u-spaceTlg { margin-top: calc(var(--size) * 2) !important; }
-.u-spaceTxl { margin-top: calc(var(--size) * 10) !important; }
+.u-spaceAxs {
+  margin: calc(var(--size) / 2) !important;
+}
 
-.u-spaceBxs { margin-bottom: calc(var(--size) / 6) !important; }
-.u-spaceBsm { margin-bottom: calc(var(--size) / 2) !important; }
-.u-spaceBmd { margin-bottom: var(--size) !important; }
-.u-spaceBlg { margin-bottom: calc(var(--size) * 2) !important; }
-.u-spaceBxl { margin-bottom: calc(var(--size) * 10) !important; }
+.u-spaceAsm {
+  margin: var(--size) !important;
+}
+
+.u-spaceAsm {
+  margin: calc(var(--size) * 1.5) !important;
+}
+
+.u-spaceAmd {
+  margin: calc(var(--size) * 2) !important;
+}
+
+.u-spaceAlg {
+  margin: calc(var(--size) * 5) !important;
+}
+
+.u-spaceAch {
+  margin: 1ch !important;
+}
+
+/**
+ * Top
+ */
+
+.u-spaceTxs {
+  margin-top: calc(var(--size) / 2) !important;
+}
+
+.u-spaceTsm {
+  margin-top: var(--size) !important;
+}
+
+.u-spaceTsm {
+  margin-top: calc(var(--size) * 1.5) !important;
+}
+
+.u-spaceTmd {
+  margin-top: calc(var(--size) * 2) !important;
+}
+
+.u-spaceTlg {
+  margin-top: calc(var(--size) * 5) !important;
+}
+
+.u-spaceTch {
+  margin-top: 1ch !important;
+}
+
+/**
+ * Bottom
+ */
+
+.u-spaceBxs {
+  margin-bottom: calc(var(--size) / 2) !important;
+}
+
+.u-spaceBsm {
+  margin-bottom: var(--size) !important;
+}
+
+.u-spaceBsm {
+  margin-bottom: calc(var(--size) * 1.5) !important;
+}
+
+.u-spaceBmd {
+  margin-bottom: calc(var(--size) * 2) !important;
+}
+
+.u-spaceBlg {
+  margin-bottom: calc(var(--size) * 5) !important;
+}
+
+.u-spaceBch {
+  margin-bottom: 1ch !important;
+}
+
+/**
+ * Right
+ */
+
+.u-spaceRxs {
+  margin-right: calc(var(--size) / 6) !important;
+}
+
+.u-spaceRsm {
+  margin-right: calc(var(--size) / 2) !important;
+}
+
+.u-spaceRsm {
+  margin-right: var(--size) !important;
+}
+
+.u-spaceRmd {
+  margin-right: calc(var(--size) * 2) !important;
+}
+
+.u-spaceRlg {
+  margin-right: calc(var(--size) * 10) !important;
+}
+
+.u-spaceRch {
+  margin-right: 1ch !important;
+}
+
+/**
+ * Left
+ */
+
+.u-spaceLxs {
+  margin-left: calc(var(--size) / 6) !important;
+}
+
+.u-spaceLsm {
+  margin-left: calc(var(--size) / 2) !important;
+}
+
+.u-spaceLsm {
+  margin-left: var(--size) !important;
+}
+
+.u-spaceLmd {
+  margin-left: calc(var(--size) * 2) !important;
+}
+
+.u-spaceLlg {
+  margin-left: calc(var(--size) * 10) !important;
+}
+
+.u-spaceLch {
+  margin-left: 1ch !important;
+}
+
+/**
+ * Vertical
+ */
 
 .u-spaceVxs {
   margin-top: calc(var(--size) / 6) !important;
@@ -30,20 +156,29 @@
   margin-bottom: calc(var(--size) / 2) !important;
 }
 
-.u-spaceVmd {
+.u-spaceVsm {
   margin-top: var(--size) !important;
   margin-bottom: var(--size) !important;
 }
 
-.u-spaceVlg {
+.u-spaceVmd {
   margin-top: calc(var(--size) * 2) !important;
   margin-bottom: calc(var(--size) * 2) !important;
 }
 
-.u-spaceVxl {
+.u-spaceVlg {
   margin-top: calc(var(--size) * 10) !important;
   margin-bottom: calc(var(--size) * 10) !important;
 }
+
+.u-spacVch {
+  margin-top: 1ch !important;
+  margin-bottom: 1ch !important;
+}
+
+/**
+ * Horizontal
+ */
 
 .u-spaceHxs {
   margin-right: calc(var(--size) / 6) !important;
@@ -55,17 +190,22 @@
   margin-left: calc(var(--size) / 2) !important;
 }
 
-.u-spaceHmd {
+.u-spaceHsm {
   margin-right: var(--size) !important;
   margin-left: var(--size) !important;
 }
 
-.u-spaceHlg {
+.u-spaceHmd {
   margin-right: calc(var(--size) * 2) !important;
   margin-left: calc(var(--size) * 2) !important;
 }
 
-.u-spaceHxl {
+.u-spaceHlg {
   margin-right: calc(var(--size) * 10) !important;
   margin-left: calc(var(--size) * 10) !important;
+}
+
+.u-spaceHch {
+  margin-right: 1ch !important;
+  margin-left: 1ch !important;
 }
