@@ -4,7 +4,6 @@
 .u-textSizeSm { font-size: var(--font-size-sm) !important; }
 .u-textSizeMd { font-size: var(--font-size-md) !important; }
 .u-textSizeLg { font-size: var(--font-size-lg) !important; }
-.u-textSizeXl { font-size: var(--font-size-xl) !important; }
 
 .u-textBold {
   font-weight: bold !important;

@@ -25,16 +25,16 @@ module.exports = class Footer extends Component {
     return html`
       <footer class="u-textCenter">
         <h2 class="u-spaceTlg">
-          <span class="u-textSizeMd u-textBold u-block u-spaceBxs">
+          <span class="u-textSizeLg u-textBold u-block u-spaceBxs">
             ${text`Connect with us,`}
           </span>
-          <span class="Display Display--xl">
+          <span class="Display Display--footer">
             ${text`Become a force for good`}<br>
           </span>
         </h2>
 
-        <div>
-          <a class="Display Display--xl ${LINK_THEMES[theme]}" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
+        <div class="Display Display--footer">
+          <a class="Display-link ${LINK_THEMES[theme]}" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
         </div>
 
         <div class="Text u-spaceTlg u-spaceBmd u-inlineBlock ${ICON_THEMES[theme]}">
@@ -42,7 +42,7 @@ module.exports = class Footer extends Component {
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.twitter()}</a>
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.instagram()}</a>
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.linkedin()}</a>
-          <p>
+          <p class="u-textSizeSm">
             ${text`© 2017 The New Division by Trollbäck + Company.`}<br>
             ${text`All Rights Reserved.`}
           </p>

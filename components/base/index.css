@@ -9,7 +9,7 @@
 :root {
   background: var(--theme);
   background-attachment: fixed;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   line-height: var(--system-font-line-height);
   letter-spacing: var(--system-font-letter-spacing);
 }

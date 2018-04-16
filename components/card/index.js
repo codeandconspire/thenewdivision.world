@@ -63,7 +63,7 @@ module.exports = class Card extends Component {
       <div class="Card Card--banner">
         <figure class="Card-figure">
           <img class="Card-image" src="${props.image.url}" alt="${props.image.alt || ''}">
-          ${props.caption ? html`<figcaption class="Card-caption u-textSizeXs u-spaceTxs u-md-show">${props.caption}</figcaption>` : null}
+          ${props.caption ? html`<figcaption class="Card-caption u-textSizeSm u-spaceTxs u-md-show">${props.caption}</figcaption>` : null}
         </figure>
         ${card}
       </div>

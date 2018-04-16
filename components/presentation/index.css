@@ -39,6 +39,7 @@
     border-top: 2px solid currentColor;
     margin: var(--size) 0;
     padding-top: var(--size);
+    font-size: var(--font-size-xs);
   }
 
   .Presentation-text > p:first-child {

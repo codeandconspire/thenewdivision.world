@@ -36,7 +36,7 @@ function about (state, emit) {
         <div class="Grid u-spaceVlg">
           <div class="Grid-cell u-lg-size1of3"></div>
           <div class="Grid-cell u-lg-size2of3">
-            <div class="Text u-textSizeMd">
+            <div class="Text u-textSizeLg">
               ${asElement(doc.data.we_introduction)}
             </div>
           </div>
@@ -50,7 +50,7 @@ function about (state, emit) {
         <div class="Grid u-spaceVlg">
           <div class="Grid-cell u-lg-size1of3"></div>
           <div class="Grid-cell u-lg-size2of3">
-            <div class="Text u-textSizeMd">
+            <div class="Text u-textSizeLg">
               ${asElement(doc.data.create_introduction)}
             </div>
           </div>
@@ -72,7 +72,7 @@ function about (state, emit) {
         ${state.cache(Good, 'good').render(doc.data)}
       </section>
       <section id="clients-and-friends">
-        <h2 class="u-textSizeMd u-textBold u-textCenter u-spaceBmd">
+        <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceBmd">
           ${text`What people say`}
         </h2>
         <div class="Grid">
@@ -88,7 +88,7 @@ function about (state, emit) {
                     <div class="u-sizeFill">
                       <img src="${props.logotype.url}">
                     </div>
-                    <blockquote class="Display Display--sm u-spaceBsm">
+                    <blockquote class="Display Display--4 u-spaceBsm">
                       ${asElement(props.quote)}
                     </blockquote>
                     ${asElement(props.cite)}
@@ -112,8 +112,8 @@ function workspace (doc) {
       <div class="u-sizeFill u-flex u-column u-spaceAsm">
         <div class="u-sizeFill u-flex u-column u-justifyCenter">
           <h3>
-            <span class="u-textSizeMd u-textBold">${text`Address`}</span>
-            <span class="Display Display--md">
+            <span class="u-textSizeLg u-textBold">${text`Address`}</span>
+            <span class="Display Display--2">
               ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
                 return els.concat(part, index < list.length - 1 ? html`<br>` : null)
               }, [])}
@@ -161,8 +161,8 @@ function coworker (state, doc) {
               <article class="u-flex u-column u-spaceAsm">
                 <div class="u-sizeFill u-flex u-column u-justifyCenter">
                   <h3>
-                    <span class="u-textSizeMd u-textBold">${text`Want a job?`}</span>
-                    <span class="Display Display--md">${doc.data.recruitment_heading}</span>
+                    <span class="u-textSizeLg u-textBold">${text`Want a job?`}</span>
+                    <span class="Display Display--2">${doc.data.recruitment_heading}</span>
                     <span>${text`Talk to Hannah, she’s nice.`}</span>
                   </h3>
                 </div>
