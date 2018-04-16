@@ -1,0 +1,33 @@
+/* @definr Words */
+
+.Words {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 calc(var(--size) * -1);
+}
+
+.Words-col {
+  flex: 0 1 50%;
+  padding: 0 var(--size);
+  transform: translateY(var(--offset));
+  will-change: transform;
+}
+
+@media (min-width: 1440px) {
+  .Words-col {
+    flex: 0 1 calc(100% / 3);
+  }
+}
+
+.Words-cell {
+  border-top: 2px solid currentColor;
+  padding-top: var(--size);
+  margin-top: var(--size);
+}
+
+.Words-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: calc(var(--size) / 2);
+}
