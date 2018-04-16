@@ -54,7 +54,7 @@ function home (state, emit) {
           `)}
         </div>
       </section>
-      <section id="words" class="u-spaceTlg">
+      <section id="words" class="u-spaceT8">
         <h2 class="u-textSizeLg u-textBold">${text`Words`}</h2>
         ${state.cache(Words, 'words').render(doc.data.words)}
       </section>

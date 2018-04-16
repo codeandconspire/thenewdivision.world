@@ -50,7 +50,7 @@ module.exports = class Words extends Component {
           <h3 class="Display Display--3 u-spaceB3">${heading}</h3>
         ` : null}
         ${first.text ? html`
-          <div class="Text u-textSizeXs u-spaceT3">
+          <div class="Text u-textSizeXs u-spaceT2">
             ${asElement([first])}
             ${expanded ? asElement(props.body.slice(1)) : null}
           </div>

@@ -1,14 +1,16 @@
 /* @definr Words */
 
+@import "../base/global";
+
 .Words {
   display: flex;
   align-items: flex-start;
-  margin: 0 calc(var(--size) * -1);
+  margin: 0 calc(var(--space) * -2);
 }
 
 .Words-col {
-  flex: 0 1 auto;
-  padding: 0 var(--size);
+  flex: 0 1 50%;
+  padding: 0 calc(var(--space) * 2);
 }
 
 .Words-col--2 {
@@ -32,13 +34,13 @@
 
 .Words-cell {
   border-top: 2px solid currentColor;
-  padding-top: var(--size);
-  margin-top: var(--size);
+  padding-top: calc(var(--space) * 4);
+  margin-top: calc(var(--space) * 4);
 }
 
 .Words-image {
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: calc(var(--size) / 2);
+  margin-bottom: calc(var(--space) * 2);
 }
