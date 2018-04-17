@@ -2,21 +2,36 @@ const html = require('choo/html')
 const Component = require('choo/component')
 const { i18n } = require('../base')
 
+const HOMEPAGE = {
+  type: 'homepage',
+  fetchLinks: [
+    'case.title',
+    'case.preamble'
+  ]
+}
+
 const text = i18n(require('./lang.json'))
 
 module.exports = class Header extends Component {
+  constructor (id, state, emit) {
+    super(id)
+    this.state = state
+    this.emit = emit
+  }
+
   update (href) {
     return href !== this.href
   }
 
   createElement (href) {
     this.href = href
-    const sub = /about/.test(this.href) || /cases\//.test(this.href)
+    const { state, emit } = this
+    const sub = !!state.params.anchor
 
     return html`
       <div class="View-header ${sub ? 'u-absolute' : ''}">
         ${sub ? html`
-          <a href="/" class="View-home">
+          <a href="/" class="View-home" onmouseover=${prefetch(HOMEPAGE)} tontouchstart=${prefetch(HOMEPAGE)}>
             <span class="u-hiddenVisually">The New Division</span>
             ${logo()}
           </a>
@@ -33,11 +48,18 @@ module.exports = class Header extends Component {
           <nav>
             <a class="View-nav" href="#cases">${text`Cases`}</a>
             <a class="View-nav" href="#words">${text`Words`}</a>
-            <a class="View-nav" href="/about">${text`About`}</a>
+            <a class="View-nav" href="/about" onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
           </nav>
         `}
       </div>
     `
+
+    function prefetch (query) {
+      return function () {
+        const doc = state.documents.items.find(item => item.type === query.type)
+        if (!doc) emit('doc:fetch', query, {silent: true})
+      }
+    }
   }
 }
 

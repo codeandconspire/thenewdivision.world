@@ -13,28 +13,32 @@ function documents (state, emitter) {
   }
 
   let queue = 0
-  emitter.on('doc:fetch', function (data) {
+  emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
       if (state._experimental_prefetch) {
-        state._experimental_prefetch.push(query(data))
+        state._experimental_prefetch.push(api(query))
       }
     } else {
-      query(data).then(render, render)
+      api(query).then(done, done)
+    }
+
+    function done () {
+      if (!opts.silent) render()
     }
   })
 
-  function query (data) {
-    assert.equal(typeof data.type, 'string', 'documents: type should be a string')
+  function api (query) {
+    assert.equal(typeof query.type, 'string', 'documents: type should be a string')
 
     const opts = {}
     const predicates = []
     if (state.ref) opts.ref = state.ref
-    if (data.fetchLinks) opts.fetchLinks = data.fetchLinks
+    if (query.fetchLinks) opts.fetchLinks = query.fetchLinks
 
-    if (data.uid) {
-      predicates.push(Predicates.at(`my.${data.type}.uid`, data.uid))
+    if (query.uid) {
+      predicates.push(Predicates.at(`my.${query.type}.uid`, query.uid))
     } else {
-      predicates.push(Predicates.at('document.type', data.type))
+      predicates.push(Predicates.at('document.type', query.type))
     }
 
     assert(predicates.length, 'documents: could not construct predicates')

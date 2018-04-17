@@ -14,7 +14,7 @@
 }
 
 .Words-col--2 {
-  margin-bottom: -75vh;
+  margin-bottom: -200px;
   transform: translateY(calc(-200px * var(--offset)));
   will-change: transform;
 }
