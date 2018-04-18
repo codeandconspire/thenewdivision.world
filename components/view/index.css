@@ -33,6 +33,8 @@
   align-items: center;
   width: 100%;
   padding: calc(var(--space) * 4);
+  position: relative;
+  z-index: 1;
 }
 
 .View-home {
@@ -41,6 +43,7 @@
   margin-right: auto;
   width: 100%;
   max-width: 128px;
+  position: relative;
 }
 
 @media (min-width: 600px) {
@@ -82,12 +85,42 @@
   font-size: var(--font-size-xs);
   color: currentColor;
   text-decoration: none;
+  position: relative;
 }
 
 .View-error {
   margin: auto;
 }
 
-.View-divider {
+.View-takeover {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
 
+.View-cover {
+  position: absolute;
+  width: 30vw;
+  height: 30vw;
+  background: var(--background);
+  background-size: 30px 30px;
+  background-position: 100% 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 100%;
+  animation: View-takeover--appear 375ms forwards linear;
+  will-change: transform;
+}
+
+.View-cover--portrait {
+  width: 1vh;
+  height: 1vh;
+}
+
+@keyframes View-takeover--appear {
+  to {
+    transform: translate(-50%, -50%) scale(10);
+  }
 }

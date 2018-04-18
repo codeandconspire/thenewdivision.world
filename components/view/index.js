@@ -14,6 +14,8 @@ module.exports = createView
 
 function createView (view, title) {
   return function (state, emit) {
+    if (state.ui.isPartial) return view(state, emit)
+
     let children
     try {
       children = state.error ? error(state.error) : view(state, emit)
@@ -29,7 +31,7 @@ function createView (view, title) {
 
     return html`
       <body class="View">
-        ${state.cache(Header, 'header').render(state.href)}
+        ${state.cache(Header, 'header').render(state.route)}
         ${children}
         ${state.cache(Footer, 'footer').render(state.ui.theme)}
       </body>

@@ -5,10 +5,30 @@ const THEMES = {
   brown: 'u-themeBrown'
 }
 
-function ui (state, emitter) {
+function ui (state, emitter, app) {
   state.ui = {
-    theme: 'white'
+    theme: 'white',
+    isPartial: false,
+    inTransition: false
   }
+
+  emitter.on('ui:transition', function (href) {
+    state.ui.inTransition = true
+    emitter.emit('pushState', href)
+    window.requestAnimationFrame(function () {
+      state.ui.inTransition = false
+      emitter.emit('render')
+    })
+  })
+
+  emitter.on('ui:partial', function (href, getPartial) {
+    getPartial(function (...args) {
+      state.ui.isPartial = true
+      const result = app.router.match(href).cb(...args)
+      state.ui.isPartial = false
+      return result
+    })
+  })
 
   emitter.on('ui:theme', function (name) {
     state.ui.theme = name
@@ -28,6 +48,8 @@ function ui (state, emitter) {
 
   // circumvent choo default scroll-to-anchor behavior
   emitter.on('navigate', function () {
+    if (state.ui.inTransition) return
+
     const el = document.getElementById(state.params.anchor)
 
     if (!el) return

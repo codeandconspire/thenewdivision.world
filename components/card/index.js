@@ -2,7 +2,7 @@ const css = require('sheetify')
 const assert = require('assert')
 const html = require('choo/html')
 const Component = require('choo/component')
-const { observe, mousemove } = require('../base')
+const { mousemove } = require('../base')
 css('./index')
 
 const THEMES = {

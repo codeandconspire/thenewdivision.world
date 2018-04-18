@@ -50,7 +50,7 @@ hr {
   background-color: currentColor;
 }
 
-a:link {
+:link {
   text-decoration: none;
   color: inherit;
 }

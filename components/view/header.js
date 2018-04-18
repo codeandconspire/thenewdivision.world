@@ -19,19 +19,19 @@ module.exports = class Header extends Component {
     this.emit = emit
   }
 
-  update (href) {
-    return href !== this.href
+  update (route) {
+    return route !== this.route
   }
 
-  createElement (href) {
-    this.href = href
-    const { state, emit } = this
-    const sub = !!state.params.anchor
+  createElement (route) {
+    this.route = route
+    const self = this
+    const isHomepage = /^(:anchor)?$/.test(route)
 
     return html`
-      <div class="View-header ${sub ? 'u-absolute' : ''}">
-        ${sub ? html`
-          <a href="/" class="View-home" onmouseover=${prefetch(HOMEPAGE)} tontouchstart=${prefetch(HOMEPAGE)}>
+      <div class="View-header ${!isHomepage && route === this.state.route ? 'u-absolute' : ''}">
+        ${!isHomepage ? html`
+          <a href="/" class="View-home" onmouseover=${prefetch(HOMEPAGE)} ontouchstart=${prefetch(HOMEPAGE)}>
             <span class="u-hiddenVisually">The New Division</span>
             ${logo()}
           </a>
@@ -42,13 +42,13 @@ module.exports = class Header extends Component {
           </span>
         `}
 
-        ${sub ? html`
-          <a class="View-nav" href="/">Close</a>
+        ${!isHomepage ? html`
+          <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>Close</a>
         ` : html`
           <nav>
             <a class="View-nav" href="#cases">${text`Cases`}</a>
             <a class="View-nav" href="#words">${text`Words`}</a>
-            <a class="View-nav" href="/about" onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
+            <a class="View-nav" href="/about" onclick=${explode('brown')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
           </nav>
         `}
       </div>
@@ -56,8 +56,38 @@ module.exports = class Header extends Component {
 
     function prefetch (query) {
       return function () {
-        const doc = state.documents.items.find(item => item.type === query.type)
-        if (!doc) emit('doc:fetch', query, {silent: true})
+        const doc = self.state.documents.items.find(item => item.type === query.type)
+        if (!doc) self.emit('doc:fetch', query, {silent: true})
+      }
+    }
+
+    function explode (theme) {
+      return function (event) {
+        const href = event.target.pathname
+        self.emit('ui:partial', event.target.pathname, function (view) {
+          const {left, top, height, width} = event.target.getBoundingClientRect()
+          const style = `left: ${left + width / 2}px; top: ${top + height / 2}px`
+          const cover = html`<div class="View-cover ${window.innerHeight > window.innerWidth ? 'View-cover--portrait' : ''}" style="${style}"></div>`
+          const takeover = html`
+            <div class="View-takeover u-theme${theme[0].toUpperCase() + theme.substr(1)}">
+              ${cover}
+              <div class="u-relative">
+                ${view(self.state, self.emit)}
+              </div>
+            </div>
+          `
+          cover.addEventListener('animationend', function onanimationend () {
+            cover.removeEventListener('animationend', onanimationend)
+            self.element.removeChild(takeover)
+            self.emit('ui:transition', href)
+          })
+          window.requestAnimationFrame(function () {
+            self.render(href)
+            document.body.style.overflow = 'hidden'
+            self.element.insertBefore(takeover, self.element.firstElementChild)
+          })
+        })
+        event.preventDefault()
       }
     }
   }
