@@ -65,7 +65,7 @@
   .Presentation-col {
     opacity: 0;
     transform: translateY(10vh);
-    animation: Presentation-col--appear 250ms forwards cubic-bezier(0.31, 0.96, 0.66, 1.05);
+    animation: Presentation-col--appear 250ms forwards var(--slide-in);
     will-change: transform;
   }
 

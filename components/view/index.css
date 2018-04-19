@@ -33,7 +33,7 @@
   align-items: center;
   width: 100%;
   padding: calc(var(--space) * 4);
-  position: relative;
+  position: absolute;
   z-index: 1;
 }
 

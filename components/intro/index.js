@@ -7,9 +7,11 @@ const { Elements } = require('prismic-richtext')
 css('./index')
 
 module.exports = class extends Component {
-  constructor () {
-    super('intro')
-    this.finished = true
+  constructor (id, state, emit, opts = {}) {
+    super(id)
+    Object.assign(this, opts, {
+      finished: true
+    })
   }
 
   load (element) {
@@ -75,7 +77,7 @@ module.exports = class extends Component {
 
     if (this.finished) {
       return html`
-        <div class="Intro">
+        <div class="Intro ${this.static ? 'Intro--static' : ''}">
           <p class="Intro-text">
             ${getStrong(text)}
           </p>

@@ -6,6 +6,7 @@ const nanoraf = require('nanoraf')
 const common = require('./lang.json')
 
 css('normalize.css')
+css('./transitions')
 css('./display')
 css('./layout')
 css('./colors')

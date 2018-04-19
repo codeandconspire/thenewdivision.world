@@ -29,7 +29,7 @@ module.exports = class Header extends Component {
     const isHomepage = /^(:anchor)?$/.test(route)
 
     return html`
-      <div class="View-header ${!isHomepage && route === this.state.route ? 'u-absolute' : ''}">
+      <div class="View-header">
         ${!isHomepage ? html`
           <a href="/" class="View-home" onmouseover=${prefetch(HOMEPAGE)} ontouchstart=${prefetch(HOMEPAGE)}>
             <span class="u-hiddenVisually">The New Division</span>
@@ -43,7 +43,9 @@ module.exports = class Header extends Component {
         `}
 
         ${!isHomepage ? html`
-          <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>Close</a>
+          <nav>
+            <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch(HOMEPAGE)} ontouchstart=${prefetch({type: 'about'})}>Close</a>
+          </nav>
         ` : html`
           <nav>
             <a class="View-nav" href="#cases">${text`Cases`}</a>
@@ -82,7 +84,7 @@ module.exports = class Header extends Component {
             self.emit('ui:transition', href)
           })
           window.requestAnimationFrame(function () {
-            self.render(href)
+            self.render(href.replace(/^\/$/, ''))
             document.body.style.overflow = 'hidden'
             self.element.insertBefore(takeover, self.element.firstElementChild)
           })
