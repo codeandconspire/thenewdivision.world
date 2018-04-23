@@ -6,7 +6,7 @@ const asElement = require('prismic-element')
 const { Elements } = require('prismic-richtext')
 css('./index')
 
-module.exports = class extends Component {
+module.exports = class Intro extends Component {
   constructor (id, state, emit, opts = {}) {
     super(id)
     Object.assign(this, opts, {

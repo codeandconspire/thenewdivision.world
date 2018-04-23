@@ -115,8 +115,8 @@
 }
 
 .View-cover--portrait {
-  width: 1vh;
-  height: 1vh;
+  width: 30vh;
+  height: 30vh;
 }
 
 @keyframes View-takeover--appear {

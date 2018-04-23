@@ -40,7 +40,7 @@ function about (state, emit) {
       ${presentation.render(['we', 'create', 'good', 'forces'].map(key => asElement(doc.data[key])))}
       ${state.ui.isPartial ? null : html`
         <div>
-          <section id="about-us">
+          <section id="about-us" class="u-slideInY">
             <div class="Grid u-spaceV8">
               <div class="Grid-cell u-lg-size1of3"></div>
               <div class="Grid-cell u-lg-size2of3 u-spaceV8">

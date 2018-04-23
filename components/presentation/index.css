@@ -16,6 +16,49 @@
   width: 100%;
 }
 
+.Presentation-col {
+  opacity: 0;
+  transform: translateX(-20vh);
+  animation: Presentation-col--appear 250ms forwards var(--slide-in);
+  will-change: transform;
+}
+
+.Presentation--static .Presentation-col {
+  opacity: 1;
+  transform: none;
+  animation: none;
+  will-change: unset;
+}
+
+.Presentation-col:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.Presentation-col:nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.Presentation-col:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.Presentation-col:nth-child(4) {
+  animation-delay: 275ms;
+}
+
+@keyframes Presentation-col--appear {
+  to {
+    opacity: 1;
+    transform: translate(0vh, 0vw);
+  }
+}
+
+@media (orientation: landscape) and (min-width: 600px) {
+  .Presentation-col {
+    transform: translateY(10vh);
+  }
+}
+
 @media (min-width: 600px) {
   .Presentation {
     flex: 1 0 100vh;
@@ -62,20 +105,6 @@
     background-position: 0 0.45em;
   }
 
-  .Presentation-col {
-    opacity: 0;
-    transform: translateY(10vh);
-    animation: Presentation-col--appear 250ms forwards var(--slide-in);
-    will-change: transform;
-  }
-
-  .Presentation--static .Presentation-col {
-    opacity: 1;
-    transform: none;
-    animation: none;
-    will-change: none;
-  }
-
   .Presentation-col:nth-last-child(1) {
     animation-delay: 100ms;
   }
@@ -90,12 +119,5 @@
 
   .Presentation-col:nth-last-child(4) {
     animation-delay: 275ms;
-  }
-
-  @keyframes Presentation-col--appear {
-    to {
-      opacity: 1;
-      transform: translateY(0vh);
-    }
   }
 }
