@@ -50,7 +50,8 @@ hr {
   background-color: currentColor;
 }
 
-:link {
+:link,
+:visited {
   text-decoration: none;
   color: inherit;
 }

@@ -35,13 +35,13 @@
  * Display link
  */
 
-.Display-link:link {
+.Display-link {
   display: inline-block;
   position: relative;
   color: var(--color);
 }
 
-.Display-link:link::after {
+.Display-link::after {
   content: "";
   width: 100%;
   height: 2px;
@@ -55,6 +55,6 @@
   will-change: transform;
 }
 
-.Display-link:link:hover::after {
+.Display-link:hover::after {
   transform: translateY(4px);
 }

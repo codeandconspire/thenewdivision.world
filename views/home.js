@@ -35,7 +35,7 @@ function home (state, emit) {
         ${state.cache(Intro, `intro-partial:${state.ui.isPartial}`, {static: state.ui.inTransition}).render(doc.data.intro)}
       </div>
       <section id="cases">
-        <h2 class="u-textSizeLg u-textBold ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
+        <h2 class="u-textSizeLg u-textBold u-spaceB2 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
           ${text`Case studies`}
         </h2>
         <div class="Grid Grid--tight">

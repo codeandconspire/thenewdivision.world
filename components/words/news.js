@@ -5,6 +5,7 @@ const asElement = require('prismic-element')
 const { asText } = require('prismic-richtext')
 const Figure = require('../figure')
 const { i18n } = require('../base')
+const button = require('../button')
 require('../base')
 css('./index')
 
@@ -50,14 +51,12 @@ module.exports = class Words extends Component {
           <h3 class="Display Display--3 u-spaceB3">${heading}</h3>
         ` : null}
         ${first.text ? html`
-          <div class="Text u-textSizeXs u-spaceT2">
+          <div class="Text u-textSizeSm u-spaceT2">
             ${asElement([first])}
             ${expanded ? asElement(props.body.slice(1)) : null}
           </div>
         ` : null}
-        ${!expanded && props.body.length > 1 ? html`
-          <button class="" onclick=${() => this.expand()}>${text`More`}</button>
-        ` : null}
+        ${!expanded && props.body.length > 1 ? button(() => this.expand(), text`More`) : null}
       </article>
     `
   }

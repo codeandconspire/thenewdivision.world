@@ -19,7 +19,7 @@
   will-change: transform;
 }
 
-@media (min-width: 100px) {
+@media (min-width: 1000px) {
   .Words-col--2 {
     transform: translateY(calc(-300px * var(--offset)));
     will-change: transform;
@@ -34,6 +34,6 @@
 
 .Words-cell {
   border-top: 2px solid currentColor;
-  padding-top: calc(var(--space) * 4);
-  margin-top: calc(var(--space) * 4);
+  padding-top: calc(var(--space) * 5);
+  margin-top: calc(var(--space) * 5);
 }
