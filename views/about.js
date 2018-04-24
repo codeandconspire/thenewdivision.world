@@ -91,13 +91,13 @@ function about (state, emit) {
                   }, '') || 'white'
 
                   return html`
-                    <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceT4 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''}">
+                    <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
                       <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
                         <div class="u-sizeFill u-flex u-column u-spaceA4">
                           <div class="u-sizeFill">
                             <img src="${props.logotype.url}">
                           </div>
-                          <blockquote class="Display Display--3 u-spaceB2">
+                          <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
                             ${asElement(props.quote)}
                           </blockquote>
                           ${asElement(props.cite)}
