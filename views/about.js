@@ -4,7 +4,7 @@ const { asText } = require('prismic-richtext')
 const view = require('../components/view')
 const Card = require('../components/card')
 const Good = require('../components/good')
-const { Figure } = require('../components/link')
+const Figure = require('../components/figure')
 const { i18n } = require('../components/base')
 const Presentation = require('../components/presentation')
 require('../components/grid')
@@ -148,12 +148,12 @@ function workspace (doc) {
 
 function coworker (state, doc) {
   return function (person, index, list) {
-    const id = asText(person.name).trim().toLowerCase().replace(/\s+/g, '-').replace(/[^-\w]+/g, '')
+    const id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
     const children = [
       html`
         <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">
-            ${state.cache(Figure, `coworker-${id}`).render(person.image)}
+            ${state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image)}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
             <div class="Text u-textSizeSm">
               <p>${person.role}</p>

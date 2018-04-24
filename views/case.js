@@ -147,7 +147,7 @@ function caseView (state, emit) {
                   <div class="Grid-cell u-md-size1of2 u-spaceT3">
                     <a href="${state.documents.resolve(item.link)}" class="Link--splash u-spaceB2">
                       ${state.cache(Figure, `${doc.uid}-${Figure.id(item.image)}`, {interactive: true}).render(item.image)}
-                      <h3 class="u-textBold u-spaceT2">${asText(item.link.data.title)}</h3>
+                      <h3 class="u-textBold u-spaceT1">${asText(item.link.data.title)}</h3>
                       <p>${asText(item.link.data.description)}</p>
                     </a>
                   </div>

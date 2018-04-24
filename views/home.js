@@ -4,7 +4,7 @@ const view = require('../components/view')
 const Intro = require('../components/intro')
 const Words = require('../components/words')
 const { i18n } = require('../components/base')
-const { Figure } = require('../components/link')
+const Figure = require('../components/figure')
 require('../components/display')
 require('../components/grid')
 require('../components/base')
@@ -42,8 +42,8 @@ function home (state, emit) {
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="Grid-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2">
-                ${state.cache(Figure, `case-${props.case.uid}-${state.ui.isPartial}`).render(props.image)}
-                <h3 class="u-textBold">${asText(props.case.data.title)}</h3>
+                ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}`, {interactive: true}).render(props.image)}
+                <h3 class="u-textBold u-spaceT1">${asText(props.case.data.title)}</h3>
                 <p>${asText(props.case.data.description)}</p>
               </a>
             </div>
@@ -53,7 +53,7 @@ function home (state, emit) {
       ${state.ui.isPartial ? null : html`
         <section id="words" class="u-spaceT8">
           <h2 class="u-textSizeLg u-textBold">${text`Words`}</h2>
-          ${state.cache(Words, 'words-homepage').render(doc.data.words)}
+          ${state.cache(Words, `${doc.id}-words`).render(doc.data.words)}
         </section>
       `}
     </main>
