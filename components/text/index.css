@@ -4,7 +4,18 @@
 
 .Text {
   display: block;
+  width: 100%;
   max-width: 27em;
+}
+
+@media (min-width: 600px) {
+  .Text {
+    max-width: 50vw;
+  }
+}
+
+.Text--full {
+  max-width: none;
 }
 
 .Text > p {
@@ -25,3 +36,32 @@
   height: auto;
   vertical-align: top;
 }
+
+/**
+ * 1. Maintain 16/9 aspect ratio for embedded content
+ */
+
+.Text iframe {
+  width: 100vw;
+  height: calc((100vw - calc(var(--space) * 8)) * 9/16); /* 1 */
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.Text h1,
+.Text h2,
+.Text h3,
+.Text h4,
+.Text h5,
+.Text h6 {
+  margin: 0;
+  font-family: var(--system-font);
+  font-weight: bold;
+}
+
+.Text h1 { font-size: var(--font-size-heading-3); }
+.Text h2 { font-size: var(--font-size-heading-lg); }
+.Text h3 { font-size: var(--font-size-heading-md); }
+.Text h4 { font-size: var(--font-size-heading-sm); }
+.Text h5 { font-size: var(--font-size-heading-sm); }
+.Text h6 { font-size: var(--font-size-heading-sm); }

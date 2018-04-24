@@ -27,6 +27,10 @@
   flex: 1 0 auto;
 }
 
+.View-container--nudge {
+  padding-top: calc(var(--space) * 20);
+}
+
 .View-header  {
   flex: 0 0 auto;
   display: flex;
@@ -90,6 +94,18 @@
 
 .View-error {
   margin: auto;
+}
+
+.View-divider {
+  margin: calc(var(--space) * 20) 0;
+}
+
+.View-divder--sm {
+  margin: calc(var(--space) * 15) 0;
+}
+
+.View-divder--lg {
+  margin: calc(var(--space) * 50) 0;
 }
 
 .View-takeover {

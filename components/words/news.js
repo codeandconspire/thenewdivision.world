@@ -3,6 +3,7 @@ const html = require('choo/html')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
 const { asText } = require('prismic-richtext')
+const Figure = require('../figure')
 const { i18n } = require('../base')
 require('../base')
 css('./index')
@@ -13,6 +14,7 @@ module.exports = class Words extends Component {
   constructor (id, state, emit) {
     super(id)
     this.id = id
+    this.cache = state.cache
     this.local = state.components[id] = state.components[id] || {}
   }
 
@@ -43,9 +45,7 @@ module.exports = class Words extends Component {
 
     return html`
       <article class="Words-cell js-cell" id="${this.id}">
-        ${props.image.url ? html`
-          <img class="Words-image" src="${props.image.url}" width="${props.image.dimensions.width}" height="${props.image.dimensions.height}">
-        ` : null}
+        ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`).render(props.image) : null}
         ${heading.length ? html`
           <h3 class="Display Display--3 u-spaceB3">${heading}</h3>
         ` : null}

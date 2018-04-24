@@ -28,17 +28,33 @@ module.exports = class Words extends Component {
     let prev = window.innerWidth
     const top = element.offsetTop
 
+    let above = false
+    let below = false
     const onscroll = nanoraf(() => {
       const { scrollY } = window
 
-      if (scrollY < top) return
+      if (scrollY < top && above) return
 
       for (let i = 1, len = cols.length, col; i < len; i++) {
         col = cols[i]
-        if (scrollY > top + col.height) continue
-        const inview = scrollY - top
-        const fraction = inview / col.height
-        col.el.style.setProperty('--offset', fraction.toFixed(6))
+        if (scrollY < top) {
+          col.el.style.setProperty('--offset', 0)
+          above = true
+          below = false
+        } else if (scrollY > top + col.height) {
+          if (below) {
+            continue
+          } else {
+            col.el.style.setProperty('--offset', 1)
+            above = false
+            below = true
+          }
+        } else {
+          const inview = scrollY - top
+          const fraction = inview / col.height
+          col.el.style.setProperty('--offset', fraction.toFixed(6))
+          above = below = false
+        }
       }
     })
 
@@ -72,10 +88,11 @@ module.exports = class Words extends Component {
     const last = []
     const cols = [...this.element.querySelectorAll('.js-col')]
 
-    for (let i = 0, len = cols.length; i < len; i++) {
-      last.push(...Array.prototype.slice.call(cols[i].childNodes, -2))
-      cols[i].removeChild(cols[i].lastElementChild)
-      cols[i].removeChild(cols[i].lastElementChild)
+    for (let i = 0, len = cols.length, col; i < len; i++) {
+      col = cols[i]
+      last.push(...Array.prototype.slice.call(col.childNodes, -2))
+      if (col.childElementCount) col.removeChild(col.lastElementChild)
+      if (col.childElementCount) col.removeChild(col.lastElementChild)
     }
 
     for (let i = 0, len = last.length; i < len; i++) {
@@ -108,7 +125,7 @@ module.exports = class Words extends Component {
             ${cells.map((slice, cell) => {
               const props = slice.primary
               switch (slice.slice_type) {
-                case 'news': return this.cache(News, `${News.id(props)}-${col}:${cell}`).render(props)
+                case 'news': return this.cache(News, `${this.id}-${News.id(props)}-${col}:${cell}`).render(props)
                 case 'quote': return html`
                   <article class="Words-cell js-cell">
                     <h3 class="Display Display--3">${asText(props.text)}</h3>

@@ -2,14 +2,6 @@ const html = require('choo/html')
 const Component = require('choo/component')
 const { i18n } = require('../base')
 
-const HOMEPAGE = {
-  type: 'homepage',
-  fetchLinks: [
-    'case.title',
-    'case.preamble'
-  ]
-}
-
 const text = i18n(require('./lang.json'))
 
 module.exports = class Header extends Component {
@@ -26,12 +18,15 @@ module.exports = class Header extends Component {
   createElement (route) {
     this.route = route
     const self = this
-    const isHomepage = /^(:anchor)?$/.test(route)
+
+    let isHomepage = route === ''
+    // there are no hashes in ssr but clientside we have to check the pathname
+    if (this._hasWindow) isHomepage = window.location.pathname === '/'
 
     return html`
       <div class="View-header">
         ${!isHomepage ? html`
-          <a href="/" class="View-home" onmouseover=${prefetch(HOMEPAGE)} ontouchstart=${prefetch(HOMEPAGE)}>
+          <a href="/" class="View-home" onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'homepage'})}>
             <span class="u-hiddenVisually">The New Division</span>
             ${logo()}
           </a>
@@ -44,7 +39,7 @@ module.exports = class Header extends Component {
 
         ${!isHomepage ? html`
           <nav>
-            <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch(HOMEPAGE)} ontouchstart=${prefetch({type: 'about'})}>Close</a>
+            <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'about'})}>Close</a>
           </nav>
         ` : html`
           <nav>

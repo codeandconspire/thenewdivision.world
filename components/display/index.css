@@ -23,6 +23,10 @@
   font-size: var(--font-size-heading-3);
 }
 
+.Display--4 {
+  font-size: var(--font-size-heading-4);
+}
+
 .Display--footer {
   font-size: var(--font-size-heading-footer);
 }

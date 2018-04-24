@@ -9,14 +9,6 @@ require('../components/display')
 require('../components/grid')
 require('../components/base')
 
-const PREDICATE = {
-  type: 'homepage',
-  fetchLinks: [
-    'case.title',
-    'case.preamble'
-  ]
-}
-
 const text = i18n()
 
 module.exports = view(home)
@@ -30,15 +22,15 @@ function home (state, emit) {
 
   const doc = state.documents.items.find(doc => doc.type === 'homepage')
   if (!doc) {
-    if (!state.documents.loading) emit('doc:fetch', PREDICATE)
+    if (!state.documents.loading) emit('doc:fetch', {type: 'homepage'})
     return html`
-      <main class="View-container">
+      <main class="View-container View-container--nudge">
       </main>
     `
   }
 
   return html`
-    <main class="View-container">
+    <main class="View-container View-container--nudge">
       <div class="${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
         ${state.cache(Intro, `intro-partial:${state.ui.isPartial}`, {static: state.ui.inTransition}).render(doc.data.intro)}
       </div>
@@ -49,10 +41,10 @@ function home (state, emit) {
         <div class="Grid Grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="Grid-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
-              <a href="/cases/${props.case.uid}" class="Link--splash u-spaceB2">
+              <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2">
                 ${state.cache(Figure, `case-${props.case.uid}-${state.ui.isPartial}`).render(props.image)}
                 <h3 class="u-textBold">${asText(props.case.data.title)}</h3>
-                <p>${asText(props.case.data.preamble)}</p>
+                <p>${asText(props.case.data.description)}</p>
               </a>
             </div>
           `)}
@@ -61,7 +53,7 @@ function home (state, emit) {
       ${state.ui.isPartial ? null : html`
         <section id="words" class="u-spaceT8">
           <h2 class="u-textSizeLg u-textBold">${text`Words`}</h2>
-          ${state.cache(Words, 'words').render(doc.data.words)}
+          ${state.cache(Words, 'words-homepage').render(doc.data.words)}
         </section>
       `}
     </main>

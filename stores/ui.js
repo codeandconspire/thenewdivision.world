@@ -50,7 +50,7 @@ function ui (state, emitter, app) {
   emitter.on('navigate', function () {
     if (state.ui.inTransition) return
 
-    const el = document.getElementById(state.params.anchor)
+    const el = document.getElementById(window.location.hash.substr(1))
 
     if (!el) return
 

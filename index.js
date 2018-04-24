@@ -16,7 +16,7 @@ app.use(require('./stores/documents'))
 app.use(require('./stores/ui'))
 
 app.route('/', require('./views/home'))
-app.route('/:anchor', require('./views/home'))
+app.route('/:slug', catchall)
 app.route('/about', require('./views/about'))
 app.route('/about/:anchor', require('./views/about'))
 app.route('/404', require('./views/404'))
@@ -27,4 +27,9 @@ try {
   if (typeof window !== 'undefined') {
     document.documentElement.classList.remove('has-js')
   }
+}
+
+function catchall (state, emit) {
+  if (window.location.hash) return require('./views/home')(state, emit)
+  return require('./views/case')(state, emit)
 }

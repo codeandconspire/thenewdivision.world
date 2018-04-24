@@ -37,10 +37,3 @@
   padding-top: calc(var(--space) * 4);
   margin-top: calc(var(--space) * 4);
 }
-
-.Words-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-bottom: calc(var(--space) * 2);
-}

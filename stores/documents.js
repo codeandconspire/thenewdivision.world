@@ -9,6 +9,7 @@ function documents (state, emitter) {
   state.documents = {
     error: null,
     loading: false,
+    resolve: resolve,
     items: state.documents ? [...state.documents.items] : []
   }
 
@@ -33,7 +34,10 @@ function documents (state, emitter) {
     const opts = {}
     const predicates = []
     if (state.ref) opts.ref = state.ref
+
+    // default to fetching case title and description
     if (query.fetchLinks) opts.fetchLinks = query.fetchLinks
+    else opts.fetchLinks = ['case.title', 'case.description']
 
     if (query.uid) {
       predicates.push(Predicates.at(`my.${query.type}.uid`, query.uid))
@@ -61,6 +65,19 @@ function documents (state, emitter) {
 
   function render () {
     emitter.emit('render')
+  }
+
+  resolve.toJSON = function () {
+    return null
+  }
+
+  function resolve (doc) {
+    switch (doc.type) {
+      case 'homepage': return '/'
+      case 'about': return '/about'
+      case 'case': return `/${doc.uid}`
+      default: return '/404'
+    }
   }
 }
 
