@@ -30,6 +30,8 @@ try {
 }
 
 function catchall (state, emit) {
-  if (window.location.hash) return require('./views/home')(state, emit)
+  if (typeof window !== 'undefined' && window.location.hash) {
+    return require('./views/home')(state, emit)
+  }
   return require('./views/case')(state, emit)
 }
