@@ -1,8 +1,8 @@
 /* eslint-env serviceworker */
 
 const TRACKING_REGEX = /https?:\/\/((www|ssl)\.)?google-analytics\.com/
-const BUILD_VERSION = process.env.npm_package_version
-const PRISMIC_ENDPOINT = 'https://globalgoalslab.cdn.prismic.io/api/v2'
+const BUILD_VERSION = '1.0.0'
+const PRISMIC_ENDPOINT = 'https://thenewdivision.cdn.prismic.io'
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 const FILES = [
   '/'
@@ -50,11 +50,9 @@ self.addEventListener('fetch', function onfetch (event) {
         }
 
         return self.fetch(req).then(response => {
-          if (!response.ok) throw response
+          if (!response.ok && fallback) return fallback
           cache.put(req, response.clone())
           return response
-        }).catch(function (err) {
-          return fallback || Promise.reject(err)
         })
       }
     })
