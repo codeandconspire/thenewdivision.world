@@ -4,18 +4,29 @@
 
 .Intro {
   display: flex;
-  padding: calc(var(--space) * 3) 0;
-  min-height: 60vh;
+  margin-bottom: calc(var(--space) * 9);
   align-items: center;
   position: relative;
 }
 
 .Intro-text {
   margin: 0;
-  font-size: var(--font-size-xl);
+  font-size: 30px;
   font-family: var(--giorgio-sans-bold) !important;
   line-height: var(--giorgio-sans-bold-line-height);
   letter-spacing: var(--giorgio-sans-bold-letter-spacing);
+}
+
+@media (min-width: 600px) {
+  .Intro-text {
+    font-size: 45px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Intro-text {
+    font-size: 60px;
+  }
 }
 
 .Intro-final {

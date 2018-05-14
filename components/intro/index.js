@@ -47,6 +47,8 @@ module.exports = class Intro extends Component {
       })
     })
 
+    // sequentially remove words of group
+    // HTMLElement -> Promise
     function empty (group) {
       const queue = []
       const chunks = shuffle([...group.querySelectorAll('.js-chunk')])
@@ -58,6 +60,8 @@ module.exports = class Intro extends Component {
       return Promise.all(queue)
     }
 
+    // fade out element
+    // (HTMLElement, num) -> Promise
     function fadeOut (el, delay) {
       return new Promise(function (resolve) {
         el.addEventListener('transitionend', resolve)
@@ -103,9 +107,10 @@ function getStrong (text) {
     return str + ' ' + value
   }, '').split(' ')
 
-  return words.map((word) => html`
-    <span class="Intro-word js-word">${word + ' '}</span>
-  `)
+  return words.reduce((all, word) => all.concat(
+    html`<span class="Intro-word js-word">${word}</span>`,
+    raw('&nbsp;')
+  ), [])
 }
 
 // shuffle array in place
