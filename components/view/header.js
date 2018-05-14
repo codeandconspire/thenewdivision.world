@@ -53,7 +53,7 @@ module.exports = class Header extends Component {
 
     function prefetch (query) {
       return function () {
-        const doc = self.state.documents.items.find(item => item.type === query.type)
+        const doc = self.state.documents.items.find((item) => item.type === query.type)
         if (!doc) self.emit('doc:fetch', query, {silent: true})
       }
     }

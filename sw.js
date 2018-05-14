@@ -12,7 +12,7 @@ self.addEventListener('install', function oninstall (event) {
   event.waitUntil(
     caches
       .open(BUILD_VERSION)
-      .then(cache => cache.addAll(FILES))
+      .then((cache) => cache.addAll(FILES))
       .then(() => self.skipWaiting())
   )
 })
@@ -27,8 +27,8 @@ self.addEventListener('fetch', function onfetch (event) {
   const isHTML = req.headers.get('accept').includes('text/html')
 
   event.respondWith(
-    caches.open(BUILD_VERSION).then(cache => {
-      return cache.match(req).then(cached => {
+    caches.open(BUILD_VERSION).then((cache) => {
+      return cache.match(req).then((cached) => {
         const isLocal = self.location.origin === url.origin
         const isCMS = url.href.indexOf(PRISMIC_ENDPOINT) === 0
 
@@ -49,7 +49,7 @@ self.addEventListener('fetch', function onfetch (event) {
           return fallback
         }
 
-        return self.fetch(req).then(response => {
+        return self.fetch(req).then((response) => {
           if (!response.ok && fallback) return fallback
           cache.put(req, response.clone())
           return response
@@ -60,7 +60,7 @@ self.addEventListener('fetch', function onfetch (event) {
 })
 
 function clear () {
-  return caches.keys().then(keys => {
-    return Promise.all(keys.map(key => caches.delete(key)))
+  return caches.keys().then((keys) => {
+    return Promise.all(keys.map((key) => caches.delete(key)))
   })
 }

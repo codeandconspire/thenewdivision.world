@@ -100,7 +100,7 @@ module.exports = class Intro extends Component {
 // pluck out only words that are strong
 // arr -> arr
 function getStrong (text) {
-  const spans = text[0].spans.filter(span => span.type === 'strong')
+  const spans = text[0].spans.filter((span) => span.type === 'strong')
   const words = spans.reduce(function (str, span) {
     const value = text[0].text.substring(span.start, span.end)
     if (!str) return value
@@ -152,7 +152,7 @@ function serialize (element, content, children) {
         <span class="Intro-group js-group">
           ${group.map((chunk) => html`
             <span class="Intro-chunk js-chunk">
-              ${chunk.split('').map(char => html`
+              ${chunk.split('').map((char) => html`
                 <span class="Intro-word js-word">
                   ${char === ' ' ? raw('&nbsp;\n') : char}
                 </span>

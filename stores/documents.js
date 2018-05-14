@@ -52,7 +52,7 @@ function documents (state, emitter) {
     return endpoint.then(function (api) {
       return api.query(predicates, opts).then(function (response) {
         state.documents.items.push(...response.results.filter(function (doc) {
-          return !state.documents.items.find(existing => existing.id === doc.id)
+          return !state.documents.items.find((existing) => existing.id === doc.id)
         }))
       })
     }).catch(function (err) {

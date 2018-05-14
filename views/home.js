@@ -20,7 +20,7 @@ function home (state, emit) {
     emit('ui:theme', 'white')
   }
 
-  const doc = state.documents.items.find(doc => doc.type === 'homepage')
+  const doc = state.documents.items.find((doc) => doc.type === 'homepage')
   if (!doc) {
     if (!state.documents.loading) emit('doc:fetch', {type: 'homepage'})
     return html`

@@ -96,12 +96,12 @@ function caseView (state, emit) {
             </div>
           `
           case 'video': {
-            let embed = slice.primary.video.find(block => block.type === 'embed')
+            let embed = slice.primary.video.find((block) => block.type === 'embed')
 
             if (embed) {
               embed = asElement([embed])
             } else {
-              embed = slice.primary.video.find(block => block.type === 'preformatted')
+              embed = slice.primary.video.find((block) => block.type === 'preformatted')
               if (!embed) return null
               embed = raw(embed.text)
             }
@@ -186,7 +186,7 @@ class LazyWords extends Words {
   }
 
   getHomepage () {
-    return this.state.documents.items.find(doc => doc.type === 'homepage')
+    return this.state.documents.items.find((doc) => doc.type === 'homepage')
   }
 
   load (el) {
@@ -250,7 +250,7 @@ class Topic extends Component {
       .toLowerCase()
       .split(' ')
       .slice(0, 6)
-      .map(word => word.replace(/[^\w]/g, ''))
+      .map((word) => word.replace(/[^\w]/g, ''))
       .join('-')
   }
 
@@ -286,7 +286,7 @@ class Topic extends Component {
 
 function title (state) {
   if (state.documents.loading) return text`Loading`
-  const doc = state.documents.items.find(item => item.uid === state.params.slug)
+  const doc = state.documents.items.find((item) => item.uid === state.params.slug)
   if (!doc) {
     const err = new Error('Page not found')
     err.status = 404

@@ -26,7 +26,7 @@ module.exports = class Words extends Component {
       .toLowerCase()
       .split(' ')
       .slice(0, 6)
-      .map(word => word.replace(/[^\w]/g, ''))
+      .map((word) => word.replace(/[^\w]/g, ''))
       .join('-')
   }
 

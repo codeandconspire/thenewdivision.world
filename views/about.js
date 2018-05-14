@@ -21,7 +21,7 @@ function about (state, emit) {
     emit('ui:theme', 'brown')
   }
 
-  const doc = state.documents.items.find(doc => doc.type === 'about')
+  const doc = state.documents.items.find((doc) => doc.type === 'about')
   if (!doc && !state.ui.isPartial) {
     if (!state.documents.loading) emit('doc:fetch', {type: 'about'})
     return html`
@@ -37,7 +37,7 @@ function about (state, emit) {
 
   return html`
     <main class="View-container View-container--fill">
-      ${presentation.render(['we', 'create', 'good', 'forces'].map(key => asElement(doc.data[key])))}
+      ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
       ${state.ui.isPartial ? null : html`
         <div>
           <section id="about-us" class="u-slideInY">
@@ -132,7 +132,7 @@ function workspace (doc) {
             </span>
           </h3>
           <div class="Text u-textSizeSm">
-            <p>${doc.data.address.slice(1).map(part => [part.text, html`<br>`])}</p>
+            <p>${doc.data.address.slice(1).map((part) => [part.text, html`<br>`])}</p>
           </div>
         </div>
         <h4 class="u-textBold">${text`Inquiries`}</h4>
