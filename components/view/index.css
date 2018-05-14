@@ -88,6 +88,12 @@
   position: relative;
 }
 
+.View-navIcon {
+  margin-right: 1ch;
+  position: relative;
+  top: -0.06em;
+}
+
 .View-error {
   margin: auto;
 }
