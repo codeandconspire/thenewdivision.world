@@ -58,7 +58,7 @@ function caseView (state, emit) {
       <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
         ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
       </div>
-      ${doc.data.body.map((slice) => {
+      ${!state.ui.isPartial && doc.data.body.map((slice) => {
         switch (slice.slice_type) {
           case 'gallery': return html`
             <div class="Grid">
