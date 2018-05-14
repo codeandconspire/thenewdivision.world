@@ -23,10 +23,8 @@ function about (state, emit) {
 
   const doc = state.documents.items.find((doc) => doc.type === 'about')
   if (!doc && !state.ui.isPartial) {
-    if (!state.documents.loading) emit('doc:fetch', {type: 'about'})
-    return html`
-      <main class="View-container"></main>
-    `
+    emit('doc:fetch', {type: 'about'})
+    return html`<main class="View-container View-container--fill"></main>`
   }
 
   const presentation = state.cache(
