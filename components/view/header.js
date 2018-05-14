@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const Component = require('choo/component')
+const Takeover = require('../takeover')
 const { i18n } = require('../base')
 
 const text = i18n(require('./lang.json'))
@@ -61,28 +62,9 @@ module.exports = class Header extends Component {
     function explode (theme) {
       return function (event) {
         const href = event.target.pathname
-        self.emit('ui:partial', event.target.pathname, function (view) {
-          const {left, top, height, width} = event.target.getBoundingClientRect()
-          const style = `left: ${left + width / 2}px; top: ${top + height / 2}px`
-          const cover = html`<div class="View-cover ${window.innerHeight > window.innerWidth ? 'View-cover--portrait' : ''}" style="${style}"></div>`
-          const takeover = html`
-            <div class="View-takeover u-theme${theme[0].toUpperCase() + theme.substr(1)}">
-              ${cover}
-              <div class="u-relative">
-                ${view(self.state, self.emit)}
-              </div>
-            </div>
-          `
-          cover.addEventListener('animationend', function onanimationend () {
-            cover.removeEventListener('animationend', onanimationend)
-            self.element.removeChild(takeover)
-            self.emit('ui:transition', href)
-          })
-          window.requestAnimationFrame(function () {
-            self.render(href.replace(/^\/$/, ''))
-            document.body.style.overflow = 'hidden'
-            self.element.insertBefore(takeover, self.element.firstElementChild)
-          })
+        self.state.cache(Takeover, Takeover.id()).open(href, event.target.getBoundingClientRect(), theme)
+        window.requestAnimationFrame(function () {
+          self.render(href.replace(/^\/$/, ''))
         })
         event.preventDefault()
       }

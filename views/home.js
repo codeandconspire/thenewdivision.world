@@ -5,6 +5,7 @@ const Intro = require('../components/intro')
 const Words = require('../components/words')
 const { i18n } = require('../components/base')
 const Figure = require('../components/figure')
+const Takeover = require('../components/takeover')
 require('../components/display')
 require('../components/grid')
 require('../components/base')
@@ -22,9 +23,9 @@ function home (state, emit) {
 
   const doc = state.documents.items.find((doc) => doc.type === 'homepage')
   if (!doc) {
-    if (!state.documents.loading) emit('doc:fetch', {type: 'homepage'})
+    emit('doc:fetch', {type: 'homepage'})
     return html`
-      <main class="View-container View-container--nudge">
+      <main class="View-container View-container--nudge View-container--fill">
       </main>
     `
   }
@@ -41,7 +42,7 @@ function home (state, emit) {
         <div class="Grid Grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="Grid-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
-              <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2" onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
+              <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
                 ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}`, {interactive: true}).render(props.image)}
                 <h3 class="u-textBold u-spaceT1">${asText(props.case.data.title)}</h3>
                 <p>${asText(props.case.data.description)}</p>
@@ -58,6 +59,12 @@ function home (state, emit) {
       `}
     </main>
   `
+
+  function explode (event) {
+    const plus = event.currentTarget.querySelector('.js-plus')
+    state.cache(Takeover, Takeover.id()).open(event.currentTarget.pathname, plus.getBoundingClientRect())
+    event.preventDefault()
+  }
 
   function prefetch (id) {
     return function () {

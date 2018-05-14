@@ -4,12 +4,14 @@
   opacity: 0;
   transform: translateY(50px);
   animation: slideIn 250ms 200ms forwards var(--slide-in);
+  will-change: transform, opacity;
 }
 
 .u-slideInX {
   opacity: 0;
   transform: translateX(50px);
   animation: slideIn 250ms 200ms forwards var(--slide-in);
+  will-change: transform, opacity;
 }
 
 @keyframes slideIn {

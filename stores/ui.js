@@ -18,14 +18,20 @@ function ui (state, emitter, app) {
     window.requestAnimationFrame(function () {
       state.ui.inTransition = false
       emitter.emit('render')
+      window.scrollTo(0, 0)
     })
   })
 
   emitter.on('ui:partial', function (href, getPartial) {
-    getPartial(function (...args) {
-      state.ui.isPartial = true
-      const result = app.router.match(href).cb(...args)
-      state.ui.isPartial = false
+    getPartial(function () {
+      const matched = app.router.match(href)
+      const _state = Object.assign({}, state, {
+        href: href,
+        route: matched.route,
+        params: matched.params,
+        ui: Object.assign({}, state.ui, {isPartial: true})
+      })
+      const result = matched.cb(_state, emitter.emit.bind(emitter))
       return result
     })
   })

@@ -28,9 +28,9 @@ function caseView (state, emit) {
 
       return html`
         <main class="View-container View-container--nudge View-container--fill">
-          <h1 class="Display Display--1">${asText(doc.data.title).trim()}</h1>
+          <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <section class="Grid u-spaceV8"></section>
-          <div class="u-spaceB4">
+          <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
             ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
           </div>
         </main>
@@ -39,22 +39,22 @@ function caseView (state, emit) {
 
     return html`
       <main class="View-container View-container--nudge View-container--fill">
-        <h1 class="Display Display--1 u-loading">${text`Content is loading`}</h1>
+        <h1 class="Display Display--1 u-loading ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${text`Content is loading`}</h1>
       </main>
     `
   }
 
   return html`
     <main class="View-container View-container--nudge">
-      <h1 class="Display Display--1">${asText(doc.data.title).trim()}</h1>
-      <section class="Grid u-spaceV8">
+      <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
+      <section class="Grid u-spaceV8 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
         ${doc.data.introduction.map((item, index, list) => html`
           <div class="Grid-cell u-size1of${list.length > 3 ? 2 : list.length}">
             ${state.cache(Topic, [doc.id, Topic.id(item)].join('-')).render(item)}
           </div>
         `)}
       </section>
-      <div class="u-spaceB4">
+      <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
         ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
       </div>
       ${doc.data.body.map((slice) => {

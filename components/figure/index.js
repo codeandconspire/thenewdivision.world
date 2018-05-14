@@ -57,7 +57,7 @@ function createElement (img) {
 function decorator () {
   return html`
     <div class="Figure-decorator">
-      <div class="Figure-plus"><div class="Figure-circle"></div></div>
+      <div class="Figure-plus js-plus"><div class="Figure-circle"></div></div>
     </div>
   `
 }

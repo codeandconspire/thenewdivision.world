@@ -4,6 +4,7 @@ const error = require('./error')
 const Header = require('./header')
 const Footer = require('./footer')
 const { i18n } = require('../base')
+const Takeover = require('../takeover')
 css('./index')
 
 const DEFAULT_TITLE = 'The New Division'
@@ -34,6 +35,7 @@ function createView (view, title) {
         ${state.cache(Header, 'header').render(state.route)}
         ${children}
         ${state.cache(Footer, 'footer').render(state.ui.theme)}
+        ${state.cache(Takeover, Takeover.id()).render()}
       </body>
     `
   }

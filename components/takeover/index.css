@@ -1,0 +1,43 @@
+/* @define Takeover */
+
+.Takeover {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.Takeover.is-active {
+  display: flex;
+}
+
+.Takeover-circle {
+  position: absolute;
+  width: 30vw;
+  height: 30vw;
+  background: var(--background);
+  background-size: 30px 30px;
+  background-position: 100% 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 100%;
+  animation: Takeover--appear 375ms forwards linear;
+  will-change: transform;
+}
+
+.Takeover-circle--slow {
+  animation-duration: 575ms;
+}
+
+.Takeover-circle--portrait {
+  width: 30vh;
+  height: 30vh;
+}
+
+@keyframes Takeover--appear {
+  to {
+    transform: translate(-50%, -50%) scale(10);
+  }
+}
