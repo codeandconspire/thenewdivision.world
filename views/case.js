@@ -7,6 +7,7 @@ const { asText, Elements } = require('prismic-richtext')
 const view = require('../components/view')
 const Words = require('../components/words')
 const Figure = require('../components/figure')
+const button = require('../components/button')
 const { i18n } = require('../components/base')
 require('../components/grid')
 
@@ -278,9 +279,7 @@ class Topic extends Component {
         <hr class="u-spaceB2">
         <h2 class="u-textSizeMd">${asText(props.heading).trim()}</h2>
         ${asElement(props.body.slice(0, 1), this.resolve, serialize)}
-        ${!this.local.expanded && props.body.length > 1 ? html`
-          <button class="" onclick=${() => this.expand()}>${text`More`}</button>
-        ` : asElement(props.body.slice(1))}
+        ${!this.local.expanded && props.body.length > 1 ? button(this.expand.bind(this), text`More`) : asElement(props.body.slice(1))}
       </div>
     `
 
