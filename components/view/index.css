@@ -24,7 +24,7 @@
 }
 
 .View-container--fill {
-  flex: 1 0 auto;
+  min-height: 100vh;
 }
 
 .View-container--nudge {

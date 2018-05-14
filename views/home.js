@@ -41,7 +41,7 @@ function home (state, emit) {
         <div class="Grid Grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="Grid-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
-              <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2">
+              <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2" onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
                 ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}`, {interactive: true}).render(props.image)}
                 <h3 class="u-textBold u-spaceT1">${asText(props.case.data.title)}</h3>
                 <p>${asText(props.case.data.description)}</p>
@@ -58,4 +58,11 @@ function home (state, emit) {
       `}
     </main>
   `
+
+  function prefetch (id) {
+    return function () {
+      const doc = state.documents.items.find((item) => item.id === id)
+      if (!doc) emit('doc:fetch', {id}, {silent: true})
+    }
+  }
 }

@@ -28,21 +28,35 @@ function documents (state, emitter) {
     }
   })
 
+  if (
+    typeof window !== 'undefined' ||
+    !state.documents.items.find((item) => item.type === 'homepage')
+  ) {
+    // preemtively fetch homepage
+    emitter.emit('doc:fetch', {type: 'homepage'}, {silent: true})
+  }
+
   function api (query) {
-    assert.equal(typeof query.type, 'string', 'documents: type should be a string')
+    if (!query.id) assert.equal(typeof query.type, 'string', 'documents: type should be a string')
 
     const opts = {}
     const predicates = []
     if (state.ref) opts.ref = state.ref
 
-    // default to fetching case title and description
+    // default to fetching primary case fields
     if (query.fetchLinks) opts.fetchLinks = query.fetchLinks
-    else opts.fetchLinks = ['case.title', 'case.description']
+    else opts.fetchLinks = ['case.title', 'case.description', 'case.image']
 
-    if (query.uid) {
-      predicates.push(Predicates.at(`my.${query.type}.uid`, query.uid))
-    } else {
-      predicates.push(Predicates.at('document.type', query.type))
+    if (query.id) {
+      predicates.push(Predicates.at('document.id', query.id))
+    }
+
+    if (query.type) {
+      if (query.uid) {
+        predicates.push(Predicates.at(`my.${query.type}.uid`, query.uid))
+      } else {
+        predicates.push(Predicates.at('document.type', query.type))
+      }
     }
 
     assert(predicates.length, 'documents: could not construct predicates')

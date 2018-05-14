@@ -15,24 +15,33 @@ const text = i18n()
 module.exports = view(caseView, title)
 
 function caseView (state, emit) {
-  let doc = state.documents.items.find(item => item.uid === state.params.slug)
+  let doc = state.documents.items.find((item) => item.uid === state.params.slug)
   if (!doc) {
+    emit('doc:fetch', {type: 'case', uid: state.params.slug})
+
     // try and lookup case as linked item on homepage
-    const parent = state.documents.items.find(doc => doc.type === 'homepage')
+    const parent = state.documents.items.find((doc) => doc.type === 'homepage')
     if (parent) {
-      doc = parent.data.featured_cases.find(item => item.uid === state.params.slug)
-    }
+      doc = parent.data.featured_cases.find(function (item) {
+        return item.case.uid === state.params.slug
+      }).case
 
-    if (!state.documents.loading) {
-      emit('doc:fetch', {type: 'case', uid: state.params.slug})
-    }
-
-    if (!doc) {
       return html`
-        <main class="View-container View-container--nudge">
+        <main class="View-container View-container--nudge View-container--fill">
+          <h1 class="Display Display--1">${asText(doc.data.title).trim()}</h1>
+          <section class="Grid u-spaceV8"></section>
+          <div class="u-spaceB4">
+            ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
+          </div>
         </main>
       `
     }
+
+    return html`
+      <main class="View-container View-container--nudge View-container--fill">
+        <h1 class="Display Display--1 u-loading">${text`Content is loading`}</h1>
+      </main>
+    `
   }
 
   return html`
@@ -41,7 +50,7 @@ function caseView (state, emit) {
       <section class="Grid u-spaceV8">
         ${doc.data.introduction.map((item, index, list) => html`
           <div class="Grid-cell u-size1of${list.length > 3 ? 2 : list.length}">
-            ${state.cache(Topic, [doc.uid, Topic.id(item)].join('-')).render(item)}
+            ${state.cache(Topic, [doc.id, Topic.id(item)].join('-')).render(item)}
           </div>
         `)}
       </section>
@@ -286,11 +295,22 @@ class Topic extends Component {
 
 function title (state) {
   if (state.documents.loading) return text`Loading`
-  const doc = state.documents.items.find((item) => item.uid === state.params.slug)
+  let doc = state.documents.items.find((item) => item.uid === state.params.slug)
+
   if (!doc) {
-    const err = new Error('Page not found')
-    err.status = 404
-    throw err
+    const parent = state.documents.items.find((doc) => doc.type === 'homepage')
+
+    if (parent) {
+      doc = parent.data.featured_cases.find(function (item) {
+        return item.case.uid === state.params.slug
+      }).case
+    }
+
+    if (!doc) {
+      const err = new Error('Page not found')
+      err.status = 404
+      throw err
+    }
   }
   return asText(doc.data.title).trim()
 }
