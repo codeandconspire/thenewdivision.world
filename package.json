@@ -8,7 +8,7 @@
     "start": "bankai start index.js",
     "inspect": "bankai inspect index.js",
     "build": "bankai build index.js",
-    "now-start": "serve dist"
+    "now-start": "serve dist --single"
   },
   "sheetify": {
     "transform": [
