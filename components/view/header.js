@@ -31,10 +31,10 @@ module.exports = class Header extends Component {
             ${logo()}
           </a>
         ` : html`
-          <span class="View-home">
+          <div class="View-home">
             <h1 class="u-hiddenVisually">The New Division</h1>
             ${logo()}
-          </span>
+          </div>
         `}
 
         ${!isHomepage ? html`
