@@ -46,7 +46,7 @@ module.exports = class Header extends Component {
           <nav>
             <a class="View-nav" href="#cases">${text`Cases`}</a>
             <a class="View-nav" href="#words">${text`Words`}</a>
-            <a class="View-nav" href="/about" onclick=${explode('brown')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
+            <a class="View-nav" href="/about" onclick=${explode('sand')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
           </nav>
         `}
       </div>

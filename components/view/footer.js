@@ -5,12 +5,12 @@ const icon = require('../icon')
 
 const LINK_THEMES = {
   'white': 'u-colorBrightBlue',
-  'brown': 'u-colorWhite'
+  'sand': 'u-colorWhite'
 }
 
 const ICON_THEMES = {
   'white': 'u-themeWhite',
-  'brown': 'u-themeBlack'
+  'sand': 'u-themeBlack'
 }
 
 const text = i18n(require('./lang.json'))

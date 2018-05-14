@@ -2,7 +2,7 @@ module.exports = ui
 
 const THEMES = {
   white: 'u-themeWhite',
-  brown: 'u-themeBrown'
+  sand: 'u-themeSand'
 }
 
 function ui (state, emitter, app) {

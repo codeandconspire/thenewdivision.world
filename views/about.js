@@ -17,8 +17,8 @@ module.exports = view(about, title)
 function about (state, emit) {
   if (state.documents.error) throw state.documents.error
 
-  if (state.ui.theme !== 'brown' && !state.ui.isPartial) {
-    emit('ui:theme', 'brown')
+  if (state.ui.theme !== 'sand' && !state.ui.isPartial) {
+    emit('ui:theme', 'sand')
   }
 
   const doc = state.documents.items.find((doc) => doc.type === 'about')
