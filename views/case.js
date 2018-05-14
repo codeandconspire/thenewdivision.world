@@ -31,7 +31,7 @@ function caseView (state, emit) {
         <main class="View-container View-container--nudge View-container--fill">
           <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <section class="Grid u-spaceV8"></section>
-          <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
+          <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
             ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
           </div>
         </main>
@@ -55,7 +55,7 @@ function caseView (state, emit) {
           </div>
         `)}
       </section>
-      <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
+      <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
         ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
       </div>
       ${doc.data.body.map((slice) => {
@@ -75,7 +75,7 @@ function caseView (state, emit) {
                 ${slice.primary.align.toLowerCase() === 'right' ? html`
                   <div class="Grid-cell u-md-size1of2 u-lg-size1of3"></div>
                 ` : null}
-                <div class="Grid-cell u-md-size1of2 u-lg-size2of3 u-spaceV8">
+                <div class="Grid-cell u-md-size1of2 u-lg-size2of3">
                   <div class="Text u-textSizeLg u-spaceV4">
                     ${asElement(slice.primary.body)}
                   </div>
