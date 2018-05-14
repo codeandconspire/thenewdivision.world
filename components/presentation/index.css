@@ -61,7 +61,7 @@
 
 @media (min-width: 600px) {
   .Presentation {
-    flex: 1 0 100vh;
+    height: 100vh;
     align-items: flex-end;
     flex-direction: row;
     margin: 0 calc((var(--space) * 1) * -1);
