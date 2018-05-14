@@ -44,7 +44,7 @@
     "prismic-richtext": "^0.2.7",
     "serve": "^6.5.6",
     "sheetify": "^7.3.0",
-    "sheetify-postcss": "git://github.com/tornqvist/sheetify-postcss.git#respect-postcssrc",
+    "sheetify-postcss": "^1.2.0",
     "smoothscroll-polyfill": "^0.4.3"
   }
 }
