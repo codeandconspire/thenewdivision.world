@@ -1,4 +1,5 @@
 const assert = require('assert')
+const html = require('choo/html')
 const { getApi, Predicates } = require('prismic-javascript')
 
 module.exports = documents
@@ -65,6 +66,7 @@ function documents (state, emitter) {
     state.documents.loading = true
     return endpoint.then(function (api) {
       return api.query(predicates, opts).then(function (response) {
+        response.results.forEach(preload)
         state.documents.items.push(...response.results.filter(function (doc) {
           return !state.documents.items.find((existing) => existing.id === doc.id)
         }))
@@ -77,14 +79,31 @@ function documents (state, emitter) {
     })
   }
 
+  // preload critical images in document
+  // obj -> void
+  function preload (doc) {
+    if (doc.type === 'homepage') {
+      doc.data.featured_cases.forEach(function (props) {
+        html`<img src="${props.image.url}">`
+        if (props.case.data.image) html`<img src="${props.case.data.image.url}">`
+      })
+    } else if (doc.type === 'case') {
+      html`<img src="${doc.data.image.url}">`
+    }
+  }
+
+  // utility function for emitting a render event
   function render () {
     emitter.emit('render')
   }
 
+  // keep state serializable by stripping out resolve
   resolve.toJSON = function () {
     return null
   }
 
+  // resolve href to document
+  // obj -> str
   function resolve (doc) {
     switch (doc.type) {
       case 'homepage': return '/'
