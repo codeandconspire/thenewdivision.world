@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && dependency-check package.json",
-    "start": "bin/server index.js",
-    "now-start": "serve dist --single"
+    "start": "bin/server index.js"
   },
   "sheetify": {
     "transform": [
@@ -65,7 +64,6 @@
     "prismic-javascript": "^1.5.0-beta.2",
     "prismic-richtext": "^0.2.7",
     "resolve": "^1.7.1",
-    "serve": "^6.5.6",
     "sheetify": "^7.3.0",
     "sheetify-postcss": "^1.2.0",
     "smoothscroll-polyfill": "^0.4.3",

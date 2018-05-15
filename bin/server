@@ -1,4 +1,4 @@
-#! /usr/bin/env node --inspect
+#! /usr/bin/env node
 
 var path = require('path')
 var http = require('http')
