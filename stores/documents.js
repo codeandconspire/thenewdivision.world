@@ -11,7 +11,7 @@ function documents (state, emitter) {
     error: null,
     loading: false,
     resolve: resolve,
-    items: state.documents ? [...state.documents.items] : []
+    items: state.documents && !state.prefetch ? [...state.documents.items] : []
   }
 
   let queue = 0
@@ -59,7 +59,7 @@ function documents (state, emitter) {
     state.documents.loading = true
     return endpoint.then(function (api) {
       return api.query(predicates, opts).then(function (response) {
-        response.results.forEach(preload)
+        if (typeof window !== 'undefined') response.results.forEach(preload)
         state.documents.items.push(...response.results.filter(function (doc) {
           return !state.documents.items.find((existing) => existing.id === doc.id)
         }))

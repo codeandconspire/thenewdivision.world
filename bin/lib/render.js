@@ -36,7 +36,9 @@ async function prefetch (app, href) {
   var state = {}
   state.prefetch = []
   app.toString(href, state)
-  await Promise.all(state.prefetch)
-  delete state.prefetch
-  return state
+  var result = Object.assign({}, app.state)
+  delete app.state.prefetch
+  await Promise.all(result.prefetch)
+  delete result.prefetch
+  return result
 }
