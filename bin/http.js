@@ -38,9 +38,9 @@ function start (entry, opts = {}) {
   app.use(require('koa-conditional-get')())
   app.use(require('koa-etag')())
 
-  app.use(get(/^\/\w+\/bundle\.js(\.map)?$/, script(entry, app)))
+  app.use(get(/^\/(\w+\/)?bundle\.js(\.map)?$/, script(entry, app)))
   app.use(get(/^\/(sw|service-worker)\.js(\.map)?$/, script(path.resolve(dir, 'sw.js'), app)))
-  app.use(get(/^\/\w+\/bundle\.css(\.map)?$/, style(opts.css, app)))
+  app.use(get(/^\/(\w+\/)?bundle\.css(\.map)?$/, style(opts.css, app)))
 
   if (app.env === 'development') app.use(serve(dir, {maxage: 0}))
   app.use(serve(path.resolve(dir, 'assets'), {maxage: 1000 * 60 * 60 * 24 * 365}))
