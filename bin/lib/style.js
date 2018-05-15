@@ -12,7 +12,6 @@ function style (entry, app) {
   var watcher = watch && new Watcher()
 
   var files = []
-  var changed = false
   if (entry) files.push(entry)
 
   entry = entry || path.resolve(basedir, 'index.css')
@@ -41,6 +40,7 @@ function style (entry, app) {
   var bundle = config.then(({plugins}) => postcss(plugins))
   var processing = config.then(({options}) => process(options))
 
+  var deps = new Set()
   app.on('bundle:file', function (file) {
     if (!/\.js$/.test(file)) return
 
@@ -56,19 +56,17 @@ function style (entry, app) {
     }
 
     resolve(path.dirname(file), opts, function (err, result) {
-      if (err || files.includes(result)) return
-      changed = true
-      files.push(result)
+      if (!err) deps.add(result)
     })
   })
 
   app.on('progress', function (file) {
-    if (file === app.entry) files = []
+    if (file === app.entry) deps.clear()
   })
 
   app.on('bundle:script', function (file) {
-    if (!changed) return
-    changed = false
+    if (!difference(deps, new Set(files))) return
+    files = [...deps]
     processing = config.then(({options}) => process(options))
   })
 
@@ -116,4 +114,14 @@ function style (entry, app) {
       app.emit('error', err)
     }
   }
+}
+
+// compare two sets
+// (Set, Set) -> boolean
+function difference (setA, setB) {
+  var diff = new Set(setA)
+  for (var elem of setB) {
+    diff.delete(elem)
+  }
+  return diff.size !== 0
 }
