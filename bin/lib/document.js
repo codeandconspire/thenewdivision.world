@@ -29,6 +29,8 @@ function document (html, state, app) {
   if (state.title) {
     d.transform(addToHead, `<title>${state.title.trim().replace(/\n/g, '')}</title>`)
   }
+  d.transform(addToHead, '<meta name="viewport" content="width=device-width, initial-scale=1">')
+  // TODO: og tags
   d.transform(addToHead, `<script>window.initialState = ${stringify(state)}</script>`)
 
   if (app.env === 'development') {
