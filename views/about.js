@@ -158,7 +158,7 @@ function coworker (state, doc) {
       html`
         <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">
-            ${state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image)}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
             <div class="Text u-textSizeSm">
               <p>${person.role}</p>
