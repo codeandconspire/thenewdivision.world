@@ -47,7 +47,6 @@ function middleware (entry, app) {
     })
   } else {
     let dir = path.dirname(entry)
-    let sourcemap = path.relative(dir, path.basename(entry) + '.map')
     let browsers = browserslist(null, {path: dir})
     if (!browsers.length) browsers = DEFAULT_BROWSERS
     b.transform(require('babelify').configure({
@@ -64,14 +63,14 @@ function middleware (entry, app) {
     app.emit('progress', entry, 0)
     b.bundle().pipe(exorcist(concat({encoding: 'buffer'}, function (buff) {
       map = buff
-    }), sourcemap)).pipe(concat({encoding: 'buffer'}, function (buff) {
+    }), 'bundle.js.map')).pipe(concat({encoding: 'buffer'}, function (buff) {
       bundle = buff
       app.emit('bundle:script', entry, buff)
     }))
   }
 
   return function (ctx) {
-    ctx.type = 'application/json'
+    ctx.type = 'application/javascript'
     ctx.set('Cache-Control', `max-age=${watch ? 0 : 60 * 60 * 24 * 365}`)
 
     if (watch) {

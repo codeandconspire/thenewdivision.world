@@ -30,7 +30,7 @@ function style (entry, app) {
 
   var ctx = {
     from: entry,
-    map: {inline: app.env === 'development'}
+    map: app.env === 'development' ? 'inline' : false
   }
   var config = postcssrc(ctx, basedir).then(function (result) {
     result.plugins.unshift(...plugins)
