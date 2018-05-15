@@ -8,6 +8,7 @@ const text = i18n(require('./lang.json'))
 module.exports = class Header extends Component {
   constructor (id, state, emit) {
     super(id)
+    this.id = id
     this.state = state
     this.emit = emit
   }
@@ -25,7 +26,7 @@ module.exports = class Header extends Component {
     if (this._hasWindow) isHomepage = window.location.pathname === '/'
 
     return html`
-      <div class="View-header">
+      <div class="View-header" id="${this.id}">
         ${!isHomepage ? html`
           <a href="/" class="View-home" onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'homepage'})}>
             <span class="u-hiddenVisually">The New Division</span>

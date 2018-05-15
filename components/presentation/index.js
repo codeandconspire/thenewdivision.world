@@ -9,7 +9,9 @@ const text = i18n(require('./lang.json'))
 module.exports = class Presentation extends Component {
   constructor (id, state, emit, opts) {
     super(id)
+    this.id = id
     Object.assign(this, opts)
+    if (typeof window === 'undefined') this.static = true
     if (!this.static) this.load = this.done
   }
 
@@ -30,7 +32,7 @@ module.exports = class Presentation extends Component {
 
   createElement (texts) {
     return html`
-      <div class="Presentation ${this.static ? 'Presentation--static' : ''}" id="presentation">
+      <div class="Presentation ${this.static ? 'Presentation--static' : ''}" id="${this.id.replace(/[^\w]+/g, '-')}">
         <div class="Presentation-col" style="flex-basis: ${((167 / SIZE) * 100).toFixed(2)}%">
           <svg class="Presentation-title" width="167" height="131" viewBox="0 0 167 131">
             <path fill="#FFF" fill-rule="evenodd" d="M50.7 49.4h-.2L38.3 129H18L.7.2h21l10 81.7h.2L42.7.2h17.7l12 81.7h.1L82.5.2h18.2L83.9 129H63.4L50.7 49.4zm96.5 37h19.7v12.8c0 19.3-9.1 31.3-29.8 31.3-21 0-31-13.5-31-32.7V52.4c0-19.4 10-32.6 31-32.6 20.7 0 29.8 12 29.8 31.3v26H127v24c0 7.4 3.4 12.1 10.5 12.1 6.8 0 9.7-4.5 9.7-12.1V86.4zM127 49.2v12.7h19.8V49.2c0-7.4-2.9-12.2-9.7-12.2-7 0-10 4.8-10 12.2z"/>
