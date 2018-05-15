@@ -116,7 +116,7 @@ function caseView (state, emit) {
             }
 
             return html`
-              <div class="Text Text--full">
+              <div class="Text Text--full u-spaceB4">
                 ${embed}
               </div>
             `
