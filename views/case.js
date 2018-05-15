@@ -9,7 +9,6 @@ const Words = require('../components/words')
 const Figure = require('../components/figure')
 const button = require('../components/button')
 const { i18n } = require('../components/base')
-require('../components/grid')
 
 const text = i18n()
 
@@ -30,7 +29,7 @@ function caseView (state, emit) {
       return html`
         <main class="View-container View-container--nudge View-container--fill">
           <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
-          <section class="Grid u-spaceV8"></section>
+          <section class="View-grid u-spaceV8"></section>
           <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
             ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
           </div>
@@ -48,9 +47,9 @@ function caseView (state, emit) {
   return html`
     <main class="View-container View-container--nudge">
       <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
-      <section class="Grid u-spaceV8 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
+      <section class="View-grid u-spaceV8 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
         ${doc.data.introduction.map((item, index, list) => html`
-          <div class="Grid-cell u-size1of${list.length > 3 ? 2 : list.length}">
+          <div class="View-cell u-size1of${list.length > 3 ? 2 : list.length}">
             ${state.cache(Topic, [doc.id, Topic.id(item)].join('-')).render(item)}
           </div>
         `)}
@@ -61,9 +60,9 @@ function caseView (state, emit) {
       ${!state.ui.isPartial && doc.data.body.map((slice) => {
         switch (slice.slice_type) {
           case 'gallery': return html`
-            <div class="Grid">
+            <div class="View-grid">
               ${slice.items.map((item, index, list) => html`
-                <div class="Grid-cell u-md-size1of${list.length > 3 ? 2 : list.length} u-spaceB4">
+                <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length} u-spaceB4">
                   ${state.cache(Figure, Figure.id(item.image)).render(item.image)}
                 </div>
               `)}
@@ -71,11 +70,11 @@ function caseView (state, emit) {
           `
           case 'text': return html`
             <div class="View-divider">
-              <div class="Grid">
+              <div class="View-grid">
                 ${slice.primary.align.toLowerCase() === 'right' ? html`
-                  <div class="Grid-cell u-md-size1of2 u-lg-size1of3"></div>
+                  <div class="View-cell u-md-size1of2 u-lg-size1of3"></div>
                 ` : null}
-                <div class="Grid-cell u-md-size1of2 u-lg-size2of3">
+                <div class="View-cell u-md-size1of2 u-lg-size2of3">
                   <div class="Text u-textSizeLg u-spaceV4">
                     ${asElement(slice.primary.body)}
                   </div>
@@ -85,16 +84,16 @@ function caseView (state, emit) {
           `
           case 'heading': return html`
             <div class="View-divider">
-              <div class="Grid u-spaceV8">
-                <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceB6">
+              <div class="View-grid u-spaceV8">
+                <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceB6">
                   <div class="Text">
                     <h2 class="u-textSizeMd">${asText(slice.primary.heading).trim()}</h2>
                   </div>
                 </div>
-                <div class="Grid-cell u-md-size1of2 u-lg-size2of3">
-                  <div class="Grid">
+                <div class="View-cell u-md-size1of2 u-lg-size2of3">
+                  <div class="View-grid">
                     ${slice.items.map((item) => html`
-                      <div class="Grid-cell u-lg-size1of2 u-spaceB6">
+                      <div class="View-cell u-lg-size1of2 u-spaceB6">
                         <div class="Text u-textSizeLg">
                           ${asElement(item.body)}
                         </div>
@@ -123,18 +122,18 @@ function caseView (state, emit) {
             `
           }
           case 'testimonies': return html`
-            <div class="Grid">
+            <div class="View-grid">
               ${slice.items.map((props, index, list) => {
                 const background = props.color.split(' ').reduce((str, part) => {
                   return str + part[0].toUpperCase() + part.substr(1)
                 }, '') || 'white'
 
                 return html`
-                  <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
+                  <div class="View-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
                     <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
                       <div class="u-sizeFill u-flex u-column u-spaceA4">
                         <div class="u-sizeFill">
-                          <img src="${props.logotype.url}">
+                          ${props.logotype.url ? html`<img src="${props.logotype.url}">` : null}
                         </div>
                         <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
                           ${asElement(props.quote)}
@@ -152,9 +151,9 @@ function caseView (state, emit) {
               <h2 class="u-textSizeLg u-textBold">
                 ${text`More case studies`}
               </h2>
-              <div class="Grid Grid--tight">
+              <div class="View-grid View-grid--tight">
                 ${slice.items.map((item, index, list) => html`
-                  <div class="Grid-cell u-md-size1of2 u-spaceT3">
+                  <div class="View-cell u-md-size1of2 u-spaceT3">
                     <a href="${state.documents.resolve(item.link)}" class="Link--splash u-spaceB2">
                       ${state.cache(Figure, `${doc.uid}-${Figure.id(item.image)}`, {interactive: true}).render(item.image)}
                       <h3 class="u-textBold u-spaceT1">${asText(item.link.data.title)}</h3>

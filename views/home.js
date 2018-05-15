@@ -6,9 +6,6 @@ const Words = require('../components/words')
 const { i18n } = require('../components/base')
 const Figure = require('../components/figure')
 const Takeover = require('../components/takeover')
-require('../components/display')
-require('../components/grid')
-require('../components/base')
 
 const text = i18n()
 
@@ -39,9 +36,9 @@ function home (state, emit) {
         <h2 class="u-textSizeLg u-textBold u-spaceB2 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
           ${text`Case studies`}
         </h2>
-        <div class="Grid Grid--tight">
+        <div class="View-grid View-grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
-            <div class="Grid-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
+            <div class="View-cell u-md-size1of2 u-spaceT3 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Link--splash u-spaceB2" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
                 ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}`, {interactive: true}).render(props.image)}
                 <h3 class="u-textBold u-spaceT1">${asText(props.case.data.title)}</h3>

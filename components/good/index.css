@@ -1,6 +1,7 @@
 /* @define Good */
 
 @import "../base/global";
+@import "../text";
 
 :root {
   --Good-width: 23vw;

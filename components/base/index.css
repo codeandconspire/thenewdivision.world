@@ -1,8 +1,18 @@
+@import "normalize.css";
+@import "./transitions";
+@import "./display";
+@import "./loading";
+@import "./layout";
+@import "./colors";
+@import "./space";
+@import "./size";
+@import "./text";
+
 @font-face {
   font-family: "Giorgio Sans Bold";
   font-style: normal;
   font-weight: bold;
-  src: url("/assets/giorgio-sans-bold.woff") format("woff");
+  src: url("./giorgio-sans-bold.woff") format("woff");
   font-display: block;
 }
 

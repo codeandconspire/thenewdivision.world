@@ -1,11 +1,9 @@
 const html = require('choo/html')
-const css = require('sheetify')
 const error = require('./error')
 const Header = require('./header')
 const Footer = require('./footer')
 const { i18n } = require('../base')
 const Takeover = require('../takeover')
-css('./index')
 
 const DEFAULT_TITLE = 'The New Division'
 

@@ -1,7 +1,5 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
-css('./index')
 
 module.exports = class Takeover extends Component {
   constructor (id, state, emit) {

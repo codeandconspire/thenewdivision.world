@@ -16,6 +16,7 @@
  * Explicit
  */
 
+.u-colorBlack { --color: #000; }
 .u-colorWhite { --color: #fff; }
 .u-colorGray { --color: var(--gray); }
 .u-colorBrightBlue { --color: var(--bright-blue); }

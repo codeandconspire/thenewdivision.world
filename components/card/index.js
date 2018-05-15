@@ -1,9 +1,7 @@
-const css = require('sheetify')
 const assert = require('assert')
 const html = require('choo/html')
 const Component = require('choo/component')
 const { mousemove } = require('../base')
-css('./index')
 
 const THEMES = {
   white: 'u-themeWhite',

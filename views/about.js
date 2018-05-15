@@ -7,8 +7,6 @@ const Good = require('../components/good')
 const Figure = require('../components/figure')
 const { i18n } = require('../components/base')
 const Presentation = require('../components/presentation')
-require('../components/grid')
-require('../components/text')
 
 const text = i18n()
 
@@ -39,31 +37,31 @@ function about (state, emit) {
       ${state.ui.isPartial ? null : html`
         <div>
           <section id="about-us" class="u-slideInY">
-            <div class="Grid u-spaceV8">
-              <div class="Grid-cell u-lg-size1of3"></div>
-              <div class="Grid-cell u-lg-size2of3 u-spaceV8">
+            <div class="View-grid u-spaceV8">
+              <div class="View-cell u-lg-size1of3"></div>
+              <div class="View-cell u-lg-size2of3 u-spaceV8">
                 <div class="Text u-textSizeLg u-spaceV4">
                   ${asElement(doc.data.we_introduction)}
                 </div>
               </div>
             </div>
-            <div class="Grid u-spaceB6">
+            <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
             ${state.cache(Card, 'workspace').render(workspace(doc))}
           </section>
           <section id="our-services u-spaceT8">
-            <div class="Grid u-spaceV8">
-              <div class="Grid-cell u-lg-size1of3"></div>
-              <div class="Grid-cell u-lg-size2of3 u-spaceV8">
+            <div class="View-grid u-spaceV8">
+              <div class="View-cell u-lg-size1of3"></div>
+              <div class="View-cell u-lg-size2of3 u-spaceV8">
                 <div class="Text u-textSizeLg u-spaceV8">
                   ${asElement(doc.data.create_introduction)}
                 </div>
               </div>
             </div>
-            <div class="Grid">
+            <div class="View-grid">
               ${doc.data.services.map((props, index, list) => html`
-                <article class="Grid-cell u-md-size1of3">
+                <article class="View-cell u-md-size1of3">
                   <img src="${props.image.url}" class="u-spaceB2 u-alignSelfStart">
                   <hr>
                   <h3>${asText(props.title)}</h3>
@@ -75,8 +73,8 @@ function about (state, emit) {
             </div>
           </section>
           <section id="who-we-help">
-            <div class="Grid u-spaceV8">
-              <div class="Grid-cell u-lg-size2of3 u-spaceV8">
+            <div class="View-grid u-spaceV8">
+              <div class="View-cell u-lg-size2of3 u-spaceV8">
                 <div class="Text u-textSizeLg u-spaceV8">
                   ${asElement(doc.data.good_introduction)}
                 </div>
@@ -89,14 +87,14 @@ function about (state, emit) {
               ${text`What people say`}
             </h2>
             <div class="u-clip">
-              <div class="Grid u-spaceT4">
+              <div class="View-grid u-spaceT4">
                 ${doc.data.testimonies.map((props, index, list) => {
                   const background = props.color.split(' ').reduce((str, part) => {
                     return str + part[0].toUpperCase() + part.substr(1)
                   }, '') || 'white'
 
                   return html`
-                    <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
+                    <div class="View-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
                       <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
                         <div class="u-sizeFill u-flex u-column u-spaceA4">
                           <div class="u-sizeFill">
@@ -156,7 +154,7 @@ function coworker (state, doc) {
     const id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
     const children = [
       html`
-        <div class="Grid-cell u-size1of2 u-lg-size1of3 u-spaceT6">
+        <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">
             ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
@@ -171,7 +169,7 @@ function coworker (state, doc) {
 
     if (index === Math.floor((list.length - 1) / 2)) {
       children.push(html`
-        <div class="Grid-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
+        <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
           ${state.cache(Card, 'recruit').render({
             color: 'petrol',
             children: html`

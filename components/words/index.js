@@ -1,11 +1,8 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const nanoraf = require('nanoraf')
 const Component = require('choo/component')
 const { asText } = require('prismic-richtext')
 const News = require('./news')
-require('../base')
-css('./index')
 
 module.exports = class Words extends Component {
   constructor (id, state, emit) {

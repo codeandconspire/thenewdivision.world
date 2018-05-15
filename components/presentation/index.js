@@ -1,8 +1,6 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
 const { i18n } = require('../base')
-css('./index')
 
 const SIZE = 167 + 374 + 285 + 376
 

@@ -1,7 +1,5 @@
 const html = require('choo/html')
 const { i18n } = require('../base')
-require('../text')
-require('../display')
 
 const text = i18n(require('./lang.json'))
 

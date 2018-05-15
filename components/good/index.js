@@ -1,8 +1,6 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const nanoraf = require('nanoraf')
 const Component = require('choo/component')
-css('./index')
 
 const GOOD_WIDTH_PORPORTION = 0.23
 const GOOD_BORDER_PORPORTION = 0.01

@@ -2,13 +2,9 @@ const choo = require('choo')
 
 const app = choo()
 
-if (process.env.NODE_ENV === 'development') {
-  if (typeof window !== 'undefined') {
-    app.use(require('choo-devtools')())
-    app.use(require('choo-service-worker/clear')())
-  } else {
-    global.perf_hooks.performance.maxEntries = 500
-  }
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  app.use(require('choo-devtools')())
+  app.use(require('choo-service-worker/clear')())
 }
 
 app.use(require('choo-service-worker')('/sw.js'))

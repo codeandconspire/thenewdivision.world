@@ -1,6 +1,8 @@
 /* @define View */
 
 @import "../base/global";
+@import "../display";
+@import "../text";
 
 .View {
   display: flex;
@@ -108,4 +110,34 @@
 
 .View-divder--lg {
   margin: calc(var(--space) * 50) 0;
+}
+
+/**
+ * Grid
+ */
+
+.View-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + (var(--space) * 4));
+  margin: 0 calc((var(--space) * 2) * -1)
+}
+
+.View-cell {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-width: 0;
+  padding: 0 calc(var(--space) * 2);
+}
+
+.View-grid--tight {
+  width: calc(100% + (var(--space) * 2));
+  margin: 0 calc(var(--space) * -1);
+}
+
+.View-grid--tight .View-cell {
+  padding: 0 var(--space);
 }

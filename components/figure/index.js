@@ -1,8 +1,6 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
 const { mousemove } = require('../base')
-css('./index')
 
 module.exports = Figure
 

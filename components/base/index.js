@@ -1,20 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const css = require('sheetify')
 const assert = require('assert')
 const nanoraf = require('nanoraf')
 const common = require('./lang.json')
-
-css('normalize.css')
-css('./transitions')
-css('./display')
-css('./loading')
-css('./layout')
-css('./colors')
-css('./space')
-css('./size')
-css('./text')
-css('./index')
 
 if (typeof window !== 'undefined') {
   require('smoothscroll-polyfill').polyfill()

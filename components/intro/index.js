@@ -1,10 +1,8 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const raw = require('choo/html/raw')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
 const { Elements } = require('prismic-richtext')
-css('./index')
 
 module.exports = class Intro extends Component {
   constructor (id, state, emit, opts = {}) {

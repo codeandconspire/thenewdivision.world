@@ -1,4 +1,3 @@
-const css = require('sheetify')
 const html = require('choo/html')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
@@ -6,8 +5,6 @@ const { asText } = require('prismic-richtext')
 const Figure = require('../figure')
 const { i18n } = require('../base')
 const button = require('../button')
-require('../base')
-css('./index')
 
 const text = i18n(require('./lang.json'))
 

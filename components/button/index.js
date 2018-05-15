@@ -1,6 +1,4 @@
-const css = require('sheetify')
 const html = require('choo/html')
-css('./index')
 
 module.exports = button
 
