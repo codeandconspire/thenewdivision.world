@@ -75,6 +75,13 @@ function about (state, emit) {
             </div>
           </section>
           <section id="who-we-help">
+            <div class="Grid u-spaceV8">
+              <div class="Grid-cell u-lg-size2of3 u-spaceV8">
+                <div class="Text u-textSizeLg u-spaceV8">
+                  ${asElement(doc.data.good_introduction)}
+                </div>
+              </div>
+            </div>
             ${state.cache(Good, 'good').render(doc.data)}
           </section>
           <section id="clients-and-friends u-spaceV8">
