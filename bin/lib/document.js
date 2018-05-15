@@ -9,11 +9,18 @@ function document (html, state, app) {
   var selector = require(app.entry).selector || 'body'
   var d = documentify(`
     <!doctype html>
-    <html lang="${state.language || 'en'}"
+    <html lang="${state.language || 'en'}">
     <head></head>
     <body></body>
     </html>
   `)
+
+  if (state.ui.theme === 'sand') {
+    // TODO: figure put ergonomic api for this
+    d.transform(function () {
+      return hyperstream({html: {class: 'u-bgSand'}})
+    })
+  }
 
   d.transform(function () {
     return hyperstream({[selector]: {_replaceHtml: html}})
@@ -22,7 +29,6 @@ function document (html, state, app) {
   if (state.title) {
     d.transform(addToHead, `<title>${state.title.trim().replace(/\n/g, '')}</title>`)
   }
-  d.transform(addToHead, `<script>document.documentElement.classList.add('has-js')</script>`)
   d.transform(addToHead, `<script>window.initialState = ${stringify(state)}</script>`)
 
   if (app.env === 'development') {
@@ -40,7 +46,7 @@ function document (html, state, app) {
       <script src="/${app.context.script.hash.toString('hex').slice(0, 16)}/bundle.js" integrity="sha512-${app.context.script.hash.toString('base64')}" defer></script>
       <link rel="stylesheet" href="/${app.context.style.hash.toString('hex').slice(0, 16)}/bundle.css">
     `)
-    d.transform(posthtmlify, {use: [minifier]})
+    d.transform(posthtmlify, {use: [minifier], order: 'end'})
   }
 
   return d.bundle()

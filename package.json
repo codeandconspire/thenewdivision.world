@@ -7,9 +7,14 @@
     "test": "standard && dependency-check package.json",
     "start": "bin/server index.js"
   },
-  "sheetify": {
+  "documentify": {
     "transform": [
-      "sheetify-postcss"
+      [
+        "./lib/document",
+        {
+          "order": "end"
+        }
+      ]
     ]
   },
   "repository": {
@@ -38,6 +43,7 @@
     "choo": "^6.11.0-preview1",
     "choo-service-worker": "^2.4.0",
     "concat-stream": "^1.6.2",
+    "dedent": "^0.7.0",
     "documentify": "^3.2.2",
     "envify": "^4.1.0",
     "exorcist": "^1.0.1",
