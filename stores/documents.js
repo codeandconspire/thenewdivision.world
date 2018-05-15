@@ -17,9 +17,7 @@ function documents (state, emitter) {
   let queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
-      if (state._experimental_prefetch) {
-        state._experimental_prefetch.push(api(query))
-      }
+      if (state.prefetch) state.prefetch.push(api(query))
     } else {
       api(query).then(done, done)
     }
@@ -29,13 +27,8 @@ function documents (state, emitter) {
     }
   })
 
-  if (
-    typeof window !== 'undefined' ||
-    !state.documents.items.find((item) => item.type === 'homepage')
-  ) {
-    // preemtively fetch homepage
-    emitter.emit('doc:fetch', {type: 'homepage'}, {silent: true})
-  }
+  // preemtively fetch homepage
+  if (state.prefetch) state.prefetch.push(api({type: 'homepage'}))
 
   function api (query) {
     if (!query.id) assert.equal(typeof query.type, 'string', 'documents: type should be a string')
