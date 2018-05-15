@@ -84,7 +84,7 @@ function style (entry, app) {
       ctx.body = map.mappings
     } else {
       ctx.type = 'text/css'
-      ctx.set('Cache-Control', `max-age=${watch ? 0 : 1000 * 60 * 60 * 24 * 365}`)
+      ctx.set('Cache-Control', `max-age=${watch ? 0 : 60 * 60 * 24 * 365}`)
       ctx.body = css
     }
   }

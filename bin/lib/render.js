@@ -10,7 +10,7 @@ function render (entry) {
       if (!ctx.body) {
         let app = require(entry)
         let html = app.toString(ctx.path, ctx.state)
-        let cache = `s-maxage=${1000 * 60 * 60 * 24 * 7}, max-age=${1000 * 60 * 10}`
+        let cache = `s-maxage=${60 * 60 * 24 * 7}, max-age=${60 * 10}`
 
         if (ctx.app.env === 'development') cache = 'max-age=0'
 

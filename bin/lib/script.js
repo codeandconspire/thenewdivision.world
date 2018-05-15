@@ -72,7 +72,7 @@ function middleware (entry, app) {
 
   return function (ctx) {
     ctx.type = 'application/json'
-    ctx.set('Cache-Control', `max-age=${watch ? 0 : 1000 * 60 * 60 * 24 * 365}`)
+    ctx.set('Cache-Control', `max-age=${watch ? 0 : 60 * 60 * 24 * 365}`)
 
     if (watch) {
       return new Promise(function (resolve, reject) {
