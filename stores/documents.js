@@ -4,7 +4,7 @@ const { getApi, Predicates } = require('prismic-javascript')
 
 module.exports = documents
 
-const endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
+let endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
 
 function documents (state, emitter) {
   state.documents = {
@@ -17,6 +17,7 @@ function documents (state, emitter) {
   let queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
+      endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
       if (state.prefetch) state.prefetch.push(api(query))
     } else {
       api(query).then(done, done)
