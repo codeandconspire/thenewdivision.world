@@ -3,20 +3,15 @@
 @import "../base/global";
 
 .Card {
+  display: flex;
   width: 100%;
   position: relative;
-}
-
-.Card-block {
-  width: calc(100vw - (var(--space) * 2));
-  position: absolute;
-  bottom: -50vw;
-  right: var(--space);
 }
 
 @media (min-width: 600px) {
   .Card-block {
     width: calc((100vw - (var(--space) * 3)) / 2);
+    position: absolute;
     bottom: -8vw;
     right: var(--space);
   }
@@ -58,12 +53,31 @@
  */
 
 .Card--banner {
+  display: block;
+  max-height: none;
   width: calc(100% + (var(--space) * 2));
   margin: 0 calc(var(--space) * -1);
 }
 
+.Card-block {
+  margin: -50% calc(var(--space) * 3) 0;
+}
+
+.Card-figure {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.Card-figure:hover {
+  transition: none;
+}
+
 @media (min-width: 600px) {
   .Card--banner {
+    display: flex;
     width: 100%;
     max-height: 80vh;
     margin: 0;
@@ -72,17 +86,14 @@
   .Card--banner::before {
     padding-bottom: 60%;
   }
-}
 
-.Card-figure {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
+  .Card-block {
+    margin: 0;
+  }
 
-.Card-figure:hover {
-  transition: none;
+  .Card-figure {
+    height: auto;
+  }
 }
 
 .Card-image {
@@ -93,9 +104,17 @@
 }
 
 .Card-caption {
-  display: block;
+  display: none;
+  margin-top: calc(var(--space) * 2);
   width: 45%;
   max-width: 37em;
+  font-size: var(--font-size-xs);
+}
+
+@media (min-width: 600px) {
+  .Card-caption {
+    display: block;
+  }
 }
 
 @media (min-width: 1000px) {
