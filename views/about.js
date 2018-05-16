@@ -80,7 +80,6 @@ function about (state, emit) {
                 </div>
               </div>
             </div>
-            ${state.cache(Good, 'good').render(doc.data)}
           </section>
           <section id="clients-and-friends u-spaceV8">
             <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
