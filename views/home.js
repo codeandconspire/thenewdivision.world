@@ -2,7 +2,6 @@ const html = require('choo/html')
 const { asText } = require('prismic-richtext')
 const view = require('../components/view')
 const Intro = require('../components/intro')
-const Words = require('../components/words')
 const { i18n } = require('../components/base')
 const Figure = require('../components/figure')
 const Takeover = require('../components/takeover')
@@ -54,12 +53,6 @@ function home (state, emit) {
           `)}
         </div>
       </section>
-      ${state.ui.isPartial ? null : html`
-        <section id="words" class="u-spaceT8">
-          <h2 class="u-textSizeLg u-textBold">${text`Words`}</h2>
-          ${state.cache(Words, `${doc.id}-words`).render(doc.data.words)}
-        </section>
-      `}
     </main>
   `
 

@@ -1,11 +1,9 @@
 const html = require('choo/html')
-const nanoraf = require('nanoraf')
 const raw = require('choo/html/raw')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
 const { asText, Elements } = require('prismic-richtext')
 const view = require('../components/view')
-const Words = require('../components/words')
 const Figure = require('../components/figure')
 const button = require('../components/button')
 const { i18n } = require('../components/base')
@@ -170,85 +168,11 @@ function caseView (state, emit) {
               </div>
             </div>
           `
-          case 'words': return html`
-            <div class="View-divider">
-              ${state.cache(LazyWords, doc.id).render()}
-            </div>
-          `
           default: return null
         }
       })}
     </main>
   `
-}
-
-class LazyWords extends Words {
-  constructor (id, state, emit) {
-    super(`${id}-words`, state, emit)
-    this.id = id
-    this.local.ready = false
-    this.state = state
-    this.emit = emit
-  }
-
-  update () {
-    if (!this.local.ready) return !!this.getHomepage()
-    return false
-  }
-
-  afterupdate (el) {
-    if (this.local.ready) super.load(el)
-  }
-
-  getHomepage () {
-    return this.state.documents.items.find((doc) => doc.type === 'homepage')
-  }
-
-  load (el) {
-    let top = offset()
-
-    const onresize = nanoraf(function () {
-      top = offset()
-    })
-
-    const onscroll = nanoraf(() => {
-      if (window.scrollY + window.innerHeight >= top) {
-        this.emit('doc:fetch', {type: 'homepage'})
-        window.removeEventListener('scroll', onscroll)
-        window.removeEventListener('resize', onresize)
-      }
-    })
-
-    const unload = super.unload
-    this.unload = (el) => {
-      window.removeEventListener('scroll', onscroll)
-      window.removeEventListener('resize', onresize)
-      if (unload) unload.call(this, el)
-    }
-
-    window.addEventListener('scroll', onscroll, {passive: true})
-    window.addEventListener('resize', onresize, {passive: true})
-
-    function offset () {
-      let top = el.offsetTop
-      let next = el
-      while ((next = next.offsetParent)) {
-        if (!isNaN(next.offsetTop)) top += next.offsetTop
-      }
-      return top
-    }
-  }
-
-  createElement () {
-    const doc = this.getHomepage()
-
-    if (!doc) return html`<div></div>`
-
-    this.local.ready = true
-    return super.createElement(doc.data.words.filter((slice) => {
-      return slice.primary.case.id === this.id
-    }))
-  }
 }
 
 class Topic extends Component {
