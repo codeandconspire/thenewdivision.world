@@ -114,7 +114,7 @@ function imgattrs (props, sizes = []) {
   const uri = props.url.split(PRISMIC_CDN_URL)[1]
   const attrs = {
     alt: props.alt || '',
-    src: `${IMAGE_CDN_URL}tr:w-1280,q-75,pr-true/${uri}`,
+    src: `${IMAGE_CDN_URL}tr:w-1280,q-85,pr-true/${uri}`,
     width: props.dimensions.width,
     height: props.dimensions.height
   }
