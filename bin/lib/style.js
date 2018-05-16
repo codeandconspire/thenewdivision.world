@@ -32,9 +32,12 @@ function style (entry, app) {
     map: app.env === 'development' ? 'inline' : false
   }
   var config = postcssrc(ctx, basedir)
-    .catch(() => ({plugins: plugins, options: ctx}))
     .then(function (result) {
       result.plugins.unshift(...plugins)
+      return result
+    })
+    .catch(() => ({plugins: plugins, options: ctx}))
+    .then(function (result) {
       if (watch) result.plugins.push(watcher.plugin())
       return result
     })
