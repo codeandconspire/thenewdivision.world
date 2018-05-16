@@ -5,18 +5,50 @@
 .Presentation {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: baseline;
+  min-height: 100vh;
+  padding-top: 10vh;
 }
 
 .Presentation-text {
   display: none;
 }
 
+.Presentation-link--tilted {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  font-size: 12px;
+  transform: translate(100%) rotate(90deg) translate(-78%, calc(-100% - 12px));
+  transform-origin: 0 0;
+  white-space: nowrap;
+}
+
+.Presentation-link--tilted::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  position: relative;
+  bottom: -4px;
+  left: 6px;
+  background: url("./arrow.svg") 0 0 no-repeat;
+  background-size: 6px;
+}
+
 .Presentation-title {
-  width: 100%;
+  width: auto;
+  height: 100%;
+  position: relative;
 }
 
 .Presentation-col {
+  height: 12vh;
+  margin: 2vh;
+  position: relative;
   opacity: 0;
   transform: translateX(-20vh);
   animation: Presentation-col--appear 250ms forwards var(--slide-in);
@@ -31,18 +63,22 @@
 }
 
 .Presentation-col:nth-child(1) {
+  left: 0%;
   animation-delay: 100ms;
 }
 
 .Presentation-col:nth-child(2) {
+  left: 14vw;
   animation-delay: 130ms;
 }
 
 .Presentation-col:nth-child(3) {
+  left: 10vw;
   animation-delay: 200ms;
 }
 
 .Presentation-col:nth-child(4) {
+  left: 26vw;
   animation-delay: 275ms;
 }
 
@@ -60,21 +96,40 @@
 }
 
 @media (min-width: 600px) {
+  .Presentation-col {
+    height: 16vh;
+  }
+
+  .Presentation-link--tilted {
+    font-size: 1em;
+  }
+
+  .Presentation-link--tilted::after {
+    bottom: -2px;
+    background-size: 8px;
+  }
+}
+
+@media (min-width: 900px) {
   .Presentation {
-    height: 100vh;
     align-items: flex-end;
     flex-direction: row;
+    height: 100vh;
     margin: 0 calc((var(--space) * 1) * -1);
   }
 
-  .Presentation-col {
+  .Presentation .Presentation-col {
     flex: 0 1 auto;
+    height: auto;
+    height: unset;
     margin: 0 calc(var(--space) * 3);
+    left: 0;
   }
 
   .Presentation-title {
     display: block;
     height: auto;
+    width: 100%;
   }
 
   .Presentation-text {
@@ -100,6 +155,10 @@
     background-position: 0 0.25em;
     transition: background-position 125ms var(--snap);
     user-select: none;
+  }
+
+  .Presentation-link--tilted {
+    display: none;
   }
 
   .Presentation-link:hover {
