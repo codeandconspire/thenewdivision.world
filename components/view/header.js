@@ -22,8 +22,6 @@ module.exports = class Header extends Component {
     const self = this
 
     let isHomepage = route === '/'
-    // there are no hashes in ssr but clientside we have to check the pathname
-    if (this._hasWindow) isHomepage = window.location.pathname === '/'
 
     return html`
       <div class="View-header" id="${this.id}">
@@ -67,7 +65,7 @@ module.exports = class Header extends Component {
         const href = event.target.pathname
         self.state.cache(Takeover, Takeover.id()).open(href, event.target.getBoundingClientRect(), theme)
         window.requestAnimationFrame(function () {
-          self.render(href.replace(/^\/$/, ''))
+          self.render(href)
         })
         event.preventDefault()
       }
