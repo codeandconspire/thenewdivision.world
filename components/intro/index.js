@@ -18,7 +18,7 @@ module.exports = class Intro extends Component {
     const self = this
     const groups = [...element.querySelectorAll('.js-group')]
     const children = [...element.childNodes]
-    const final = getStrong(this.text)
+    const final = Intro.getStrong(this.text)
 
     element.appendChild(html`<div class="Intro-final">${final}</div>`)
 
@@ -70,6 +70,26 @@ module.exports = class Intro extends Component {
     }
   }
 
+  // pluck out only words that are strong
+  // arr -> arr
+  static getWords (text) {
+    const spans = text[0].spans.filter((span) => span.type === 'strong')
+    const words = spans.reduce(function (str, span) {
+      const value = text[0].text.substring(span.start, span.end)
+      if (!str) return value
+      return str + ' ' + value
+    }, '').split(' ')
+
+    return words
+  }
+
+  static getStrong (text) {
+    return Intro.getWords(text).reduce((all, word) => all.concat(
+      html`<span class="Intro-word js-word">${word}</span>`,
+      raw('&nbsp;')
+    ), [])
+  }
+
   update (text) {
     return text !== this.text
   }
@@ -81,7 +101,7 @@ module.exports = class Intro extends Component {
       return html`
         <div class="Intro ${this.static ? 'Intro--static' : ''}">
           <p class="Intro-text">
-            ${getStrong(text)}
+            ${Intro.getStrong(text)}
           </p>
         </div>
       `
@@ -93,22 +113,6 @@ module.exports = class Intro extends Component {
       </p>
     `
   }
-}
-
-// pluck out only words that are strong
-// arr -> arr
-function getStrong (text) {
-  const spans = text[0].spans.filter((span) => span.type === 'strong')
-  const words = spans.reduce(function (str, span) {
-    const value = text[0].text.substring(span.start, span.end)
-    if (!str) return value
-    return str + ' ' + value
-  }, '').split(' ')
-
-  return words.reduce((all, word) => all.concat(
-    html`<span class="Intro-word js-word">${word}</span>`,
-    raw('&nbsp;')
-  ), [])
 }
 
 // shuffle array in place

@@ -27,6 +27,12 @@ function home (state, emit) {
     `
   }
 
+  emit('meta', {
+    image: 'https://www.thenewdivision.world/share.png',
+    title: 'The New Division',
+    description: Intro.getWords(doc.data.intro).join(' ')
+  })
+
   return html`
     <main class="View-container View-container--nudge">
       <div class="${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">

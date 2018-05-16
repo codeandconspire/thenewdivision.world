@@ -30,7 +30,13 @@ function document (html, state, app) {
     d.transform(addToHead, `<title>${state.title.trim().replace(/\n/g, '')}</title>`)
   }
   d.transform(addToHead, '<meta name="viewport" content="width=device-width, initial-scale=1">')
-  // TODO: og tags
+  d.transform(addToHead, '<meta name="theme-color" content="#fff" property="theme">')
+  d.transform(addToHead, '<meta name="twitter:card" content="summary_large_image">')
+  d.transform(addToHead, `<meta property="og:title" content="${state.meta.title}">`)
+  d.transform(addToHead, `<meta property="og:description" content="${state.meta.description}">`)
+  d.transform(addToHead, `<meta property="og:image" content="${state.meta.image}">`)
+  d.transform(addToHead, `<meta property="og:url" content="https://www.thenewdivision.world${state.href}">`)
+
   d.transform(addToHead, `<script>window.initialState = ${stringify(state)}</script>`)
 
   if (app.env === 'development') {

@@ -25,6 +25,11 @@ function about (state, emit) {
     return html`<main class="View-container View-container--fill"></main>`
   }
 
+  emit('meta', {
+    image: 'https://www.thenewdivision.world/share.png',
+    description: doc.data.summary[0].text
+  })
+
   const presentation = state.cache(
     Presentation,
     `presentation-partial:${state.ui.isPartial}`,
@@ -158,8 +163,7 @@ function coworker (state, doc) {
             ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
             <div class="Text u-textSizeSm">
-              <p>${person.role}</p>
-              <div class="u-textSizeXs u-md-show">${asElement(person.bio)}</div>
+              <p>${person.role} <br />${asElement(person.bio)}</p>
             </div>
           </article>
         </div>

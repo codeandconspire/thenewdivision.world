@@ -44,6 +44,12 @@ function caseView (state, emit) {
     `
   }
 
+  emit('meta', {
+    image: doc.data.image.url,
+    title: doc.data.title[0].text,
+    description: doc.data.description[0].text
+  })
+
   return html`
     <main class="View-container View-container--nudge">
       <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>

@@ -17,11 +17,11 @@ function createView (view, title) {
 
     let children
     try {
-      children = state.error ? error(state.error) : view(state, emit)
       let next = typeof title === 'function' ? title(state) : title
       if (!next) next = DEFAULT_TITLE
       else next = `${next} | ${DEFAULT_TITLE}`
       if (state.title !== next) emit('DOMTitleChange', next)
+      children = state.error ? error(state.error) : view(state, emit)
     } catch (err) {
       err.status = err.status || 500
       children = error(err)
