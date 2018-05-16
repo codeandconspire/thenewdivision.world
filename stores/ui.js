@@ -12,14 +12,8 @@ function ui (state, emitter, app) {
     inTransition: false
   }
 
-  emitter.on('ui:transition', function (href) {
-    state.ui.inTransition = true
-    emitter.emit('pushState', href)
-    window.requestAnimationFrame(function () {
-      state.ui.inTransition = false
-      emitter.emit('render')
-      window.scrollTo(0, 0)
-    })
+  emitter.on('ui:transition', function (next = true) {
+    state.ui.inTransition = next
   })
 
   emitter.on('ui:partial', function (href, getPartial) {
@@ -54,20 +48,22 @@ function ui (state, emitter, app) {
 
   // circumvent choo default scroll-to-anchor behavior
   emitter.on('navigate', function () {
-    if (state.ui.inTransition) return
+    state.ui.inTransition = false
 
     const el = document.getElementById(window.location.hash.substr(1))
 
-    if (!el) return
-
-    const from = window.scrollY
-    window.setTimeout(function () {
-      // reset scroll to where it was before navigate
-      window.scrollTo(window.scrollX, from)
+    if (!el) {
+      window.scrollTo(0, 0)
+    } else {
+      const from = window.scrollY
       window.setTimeout(function () {
-        // smoothly scroll element into view when everything has settled
-        el.scrollIntoView({behavior: 'smooth', block: 'start'})
+        // reset scroll to where it was before navigate
+        window.scrollTo(window.scrollX, from)
+        window.setTimeout(function () {
+          // smoothly scroll element into view when everything has settled
+          el.scrollIntoView({behavior: 'smooth', block: 'start'})
+        }, 0)
       }, 0)
-    }, 0)
+    }
   })
 }

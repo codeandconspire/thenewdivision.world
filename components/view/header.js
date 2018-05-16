@@ -62,6 +62,7 @@ module.exports = class Header extends Component {
 
     function explode (theme) {
       return function (event) {
+        if (self.state.ui.inTransition) return event.preventDefault()
         const href = event.target.pathname
         self.state.cache(Takeover, Takeover.id()).open(href, event.target.getBoundingClientRect(), theme)
         window.requestAnimationFrame(function () {

@@ -20,6 +20,7 @@ module.exports = class Takeover extends Component {
     const self = this
     const el = this.element
 
+    self.emit('ui:transition')
     this.emit('ui:partial', href, function (view) {
       const {innerHeight, innerWidth} = window
       const left = origin.left + origin.width / 2
@@ -33,7 +34,7 @@ module.exports = class Takeover extends Component {
 
       circle.addEventListener('animationend', function onanimationend () {
         circle.removeEventListener('animationend', onanimationend)
-        self.emit('ui:transition', href)
+        self.emit('pushState', href)
         self.rerender()
         window.removeEventListener('wheel', onscroll)
         window.removeEventListener('touchmove', onscroll)
