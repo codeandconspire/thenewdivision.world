@@ -26,7 +26,7 @@ module.exports = class Takeover extends Component {
       const top = origin.top + origin.height / 2
       const style = `left: ${left}px; top: ${top}px;`
       const isSlow = (
-        (left > innerWidth / 4 && left < innerWidth * 0.8) ||
+        (left > innerWidth / 4 && left < innerWidth * 0.8) &&
         (top > innerHeight / 4 && top < innerHeight * 0.8)
       )
       const circle = html`<div class="Takeover-circle ${innerHeight > innerWidth ? 'Takeover-circle--portrait' : ''} ${isSlow ? 'Takeover-circle--slow' : ''}" style="${style}"></div>`
