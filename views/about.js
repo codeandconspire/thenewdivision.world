@@ -159,7 +159,7 @@ function coworker (state, doc) {
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true}).render(person.image) : null}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
             <div class="Text u-textSizeSm">
               <p>${person.role} <br />${asElement(person.bio)}</p>

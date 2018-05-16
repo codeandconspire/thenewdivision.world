@@ -104,6 +104,40 @@ function observe (el, cb) {
   })
 }
 
+const IMAGE_CDN_URL = `https://ik.imagekit.io/ryozgj42m/`
+const PRISMIC_CDN_URL = 'https://thenewdivision.cdn.prismic.io/thenewdivision/'
+
+// construct image attr hash for prismic image
+// (obj, arr?) -> obj
+exports.imgattrs = imgattrs
+function imgattrs (props, sizes = []) {
+  const uri = props.url.split(PRISMIC_CDN_URL)[1]
+  const attrs = {
+    alt: props.alt || '',
+    src: `${IMAGE_CDN_URL}tr:w-1280,q-75,pr-true/${uri}`,
+    width: props.dimensions.width,
+    height: props.dimensions.height
+  }
+
+  if (sizes.length) {
+    // Join sizes like: `[(min-width: <brk>)] <size>`
+    attrs.sizes = sizes.map(function ([size, brk]) {
+      return `${brk ? `(min-width: ${brk}px) ` : ''}${size}`
+    }).join(',')
+
+    // Join sizes like: `<url> <brk>w`
+    attrs.srcset = [`${IMAGE_CDN_URL}tr:w-${attrs.width},q-75,pr-true/${uri} ${attrs.width}w`]
+    for (let i = 0, len = sizes.length; i < len; i++) {
+      if (sizes[i][1]) {
+        attrs.srcset.push(`${IMAGE_CDN_URL}tr:w-${sizes[i][1]},q-75,pr-true/${uri} ${sizes[i][1]}w`)
+      }
+    }
+    attrs.srcset = attrs.srcset.join(',')
+  }
+
+  return attrs
+}
+
 // get viewport height
 // () -> num
 exports.vh = vh
