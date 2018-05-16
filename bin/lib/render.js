@@ -22,10 +22,12 @@ function render (entry) {
         if (ctx.app.env === 'development') cache = 'max-age=0'
         ctx.set('Cache-Control', cache)
         ctx.type = 'text/html'
-        ctx.append('Link', [
-          `</${ctx.script.hash.toString('hex').slice(0, 16)}/bundle.js>; rel=preload; as=script`,
-          `</${ctx.style.hash.toString('hex').slice(0, 16)}/bundle.css>; rel=preload; as=style`
-        ])
+        if (ctx.app.env !== 'development') {
+          ctx.append('Link', [
+            `</${ctx.script.hash.toString('hex').slice(0, 16)}/bundle.js>; rel=preload; as=script`,
+            `</${ctx.style.hash.toString('hex').slice(0, 16)}/bundle.css>; rel=preload; as=style`
+          ])
+        }
 
         performance.clearMarks()
         performance.clearMeasures()
