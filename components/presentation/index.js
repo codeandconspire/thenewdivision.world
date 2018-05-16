@@ -39,7 +39,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[0]}
-            <a class="Presentation-link" onclick=${scrollIntoView} href="#about-us">${text`About us`}</a>
+            <a class="Presentation-link" onclick=${scrollIntoView} href="#about">${text`Who we are`}</a>
           </div>
         </div>
         <div class="Presentation-col" style="flex-basis: ${((374 / SIZE) * 100).toFixed(2)}%">
@@ -48,7 +48,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[1]}
-            <a class="Presentation-link" onclick=${scrollIntoView} href="#our-services">${text`Our services`}</a>
+            <a class="Presentation-link" onclick=${scrollIntoView} href="#services">${text`What we do`}</a>
           </div>
         </div>
         <div class="Presentation-col" style="flex-basis: ${((285 / SIZE) * 100).toFixed(2)}%">
@@ -57,7 +57,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[2]}
-            <a class="Presentation-link" onclick=${scrollIntoView} href="#who-we-help">${text`Who we help`}</a>
+            <a class="Presentation-link" onclick=${scrollIntoView} href="#process">${text`How we work`}</a>
           </div>
         </div>
         <div class="Presentation-col" style="flex-basis: ${((376 / SIZE) * 100).toFixed(2)}%">
@@ -66,7 +66,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[3]}
-            <a class="Presentation-link" onclick=${scrollIntoView} href="#clients-and-friends">${text`Clients and friends`}</a>
+            <a class="Presentation-link" onclick=${scrollIntoView} href="#clients">${text`Who we work with`}</a>
           </div>
         </div>
       </div>

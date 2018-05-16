@@ -40,7 +40,7 @@ function about (state, emit) {
       ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
       ${state.ui.isPartial ? null : html`
         <div>
-          <section id="about-us" class="u-slideInY">
+          <section id="about" class="u-slideInY">
             <div class="View-grid u-spaceV8">
               <div class="View-cell u-lg-size1of3"></div>
               <div class="View-cell u-lg-size2of3 u-spaceV8">
@@ -54,7 +54,7 @@ function about (state, emit) {
             </div>
             ${state.cache(Card, 'workspace').render(workspace(doc))}
           </section>
-          <section id="our-services u-spaceT8">
+          <section id="services" class="u-spaceV8">
             <div class="View-grid u-spaceV8">
               <div class="View-cell u-lg-size1of3"></div>
               <div class="View-cell u-lg-size2of3 u-spaceV8">
@@ -76,8 +76,9 @@ function about (state, emit) {
               `)}
             </div>
           </section>
-          <section id="who-we-help">
+          <section id="process" class="u-spaceV8">
             <div class="View-grid u-spaceV8">
+              <div class="View-cell u-lg-size1of3 u-spaceV8"></div>
               <div class="View-cell u-lg-size2of3 u-spaceV8">
                 <div class="Text u-textSizeLg u-spaceV8">
                   ${asElement(doc.data.good_introduction)}
@@ -85,7 +86,7 @@ function about (state, emit) {
               </div>
             </div>
           </section>
-          <section id="clients-and-friends u-spaceV8">
+          <section id="clients" class="u-spaceV8">
             <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
               ${text`What people say`}
             </h2>
