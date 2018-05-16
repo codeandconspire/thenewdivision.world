@@ -239,3 +239,17 @@
   margin-left: 1ch !important;
   margin-right: 1ch !important;
 }
+
+/**
+ * Intro
+ */
+
+.u-spaceIntro {
+  margin-top: 15vh;
+}
+
+@media (min-width: 600px) {
+  .u-spaceIntro {
+    margin-top: 10vh;
+  }
+}

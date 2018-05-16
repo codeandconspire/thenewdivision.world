@@ -92,9 +92,10 @@
 }
 
 .View-navIcon {
-  margin-right: 1ch;
+  margin-right: 0.5ch;
   position: relative;
-  top: -0.06em;
+  width: 0.7em;
+  height: 0.7em;
 }
 
 .View-error {

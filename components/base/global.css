@@ -12,7 +12,7 @@
   --link-color: var(--bright-blue);
   --selection-color: rgba(188, 178, 150, 0.5);
 
-  --space: 2px;
+  --space: 3px;
   --aspect: 123.57%;
   --inview: 1;
   --offset: 0;

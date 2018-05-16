@@ -4,7 +4,7 @@
 
 .Intro {
   display: flex;
-  margin-bottom: calc(var(--space) * 9);
+  margin: calc(var(--space) * 8) 0 calc(var(--space) * 12);
   align-items: center;
   position: relative;
 }

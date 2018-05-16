@@ -14,22 +14,24 @@
   font: inherit;
   line-height: inherit;
   outline: 0;
-  margin-top: calc(var(--space) * 2)
+  margin-top: calc(var(--space) * 2);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
 }
 
 .Button-plus {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   position: relative;
-  margin-right: 1ch;
+  margin-right: 0.5ch;
 }
 
 .Button-plus::before,
 .Button-plus::after {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 0;
   width: 100%;
   height: 3px;
@@ -38,7 +40,7 @@
 
 .Button-plus::after {
   top: 0;
-  left: 6px;
+  left: 5px;
   width: 3px;
   height: 100%;
 }
@@ -68,6 +70,23 @@
   transform: translate(-50%, -50%) scale(0.8);
   transition-duration: 50ms;
   opacity: 0.3;
+}
+
+@media (min-width: 1000px) {
+  .Button-plus {
+    width: 15px;
+    height: 15px;
+  }
+
+  .Button-plus::before {
+    top: 6px;
+    height: 3px;
+  }
+
+  .Button-plus::after {
+    left: 6px;
+    width: 3px;
+  }
 }
 
 @media (min-width: 1500px) {

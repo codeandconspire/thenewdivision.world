@@ -50,10 +50,10 @@ function caseView (state, emit) {
 
   return html`
     <main class="View-container View-container--nudge">
-      <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
-      <section class="View-grid u-spaceV8 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
+      <h1 class="Display Display--1 u-spaceIntro ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
+      <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
         ${doc.data.introduction.map((item, index, list) => html`
-          <div class="View-cell u-size1of${list.length > 3 ? 2 : list.length}">
+          <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
             ${state.cache(Topic, [doc.id, Topic.id(item)].join('-')).render(item)}
           </div>
         `)}
@@ -209,11 +209,18 @@ class Topic extends Component {
 
   createElement (props) {
     return html`
-      <div class="Text u-textSizeSm" id="${this.id}">
-        <hr class="u-spaceB2">
-        <h2 class="u-textSizeMd">${asText(props.heading).trim()}</h2>
-        ${asElement(props.body.slice(0, 1), this.resolve, serialize)}
-        ${!this.local.expanded && props.body.length > 1 ? button(this.expand.bind(this), text`More`) : asElement(props.body.slice(1))}
+      <div id="${this.id}">
+        <div class="Text Text--full">
+          <hr class="u-spaceB2">
+          <h2 class="u-textSizeMd">${asText(props.heading).trim()}</h2>
+        </div>
+        <div class="Text Text--full u-textSizeSm u-spaceT1">
+          ${asElement(props.body.slice(0, 1), this.resolve, serialize)}
+        </div>
+        <div class="Text u-spaceB6">
+          <div></div>
+          ${!this.local.expanded && props.body.length > 1 ? button(this.expand.bind(this), text`More`) : asElement(props.body.slice(1))}
+        </div>
       </div>
     `
 
