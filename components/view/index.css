@@ -143,3 +143,33 @@
 .View-grid--tight .View-cell {
   padding: 0 var(--space);
 }
+
+.View-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+}
+
+.View-reverse--sm,
+.View-reverse--md,
+.View-reverse--lg {
+  flex-direction: column;
+}
+
+@media (min-width: 400px) {
+  .View-reverse--sm {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 600px) {
+  .View-reverse--md {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 1000px) {
+  .View-reverse--lg {
+    flex-direction: column-reverse;
+  }
+}
