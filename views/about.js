@@ -167,35 +167,6 @@ function coworker (state, doc) {
       `
     ]
 
-    if (index === Math.floor((list.length - 1) / 2)) {
-      children.push(html`
-        <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
-          ${state.cache(Card, 'recruit').render({
-            color: 'petrol',
-            children: html`
-              <article class="u-flex u-column u-spaceA4">
-                <div class="u-sizeFill u-flex u-column u-justifyCenter">
-                  <h3>
-                    <span class="u-textSizeLg u-textBold">${text`Want a job?`}</span>
-                    <span class="Display Display--2 u-spaceT2">${doc.data.recruitment_heading}</span>
-                    <span class="u-textSizeSm">${text`Talk to Hannah, she’s nice.`}</span>
-                  </h3>
-                </div>
-                <h4 class="u-textBold">${text`Careers`}</h4>
-                <div class="Text">
-                  <p>
-                    <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
-                    <br />
-                    <a href="tel:+46701234567">+46 (0)70 123 45 67</a>
-                  </p>
-                </div>
-              </article>
-            `
-          })}
-        </div>
-      `)
-    }
-
     return children
   }
 }
