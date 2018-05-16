@@ -31,11 +31,13 @@ function style (entry, app) {
     from: entry,
     map: app.env === 'development' ? 'inline' : false
   }
-  var config = postcssrc(ctx, basedir).then(function (result) {
-    result.plugins.unshift(...plugins)
-    if (watch) result.plugins.push(watcher.plugin())
-    return {plugins: result.plugins, options: result.options}
-  }).catch(() => ({plugins: plugins, options: ctx}))
+  var config = postcssrc(ctx, basedir)
+    .catch(() => ({plugins: plugins, options: ctx}))
+    .then(function (result) {
+      result.plugins.unshift(...plugins)
+      if (watch) result.plugins.push(watcher.plugin())
+      return result
+    })
 
   var bundle = config.then(({plugins}) => postcss(plugins))
   var processing = config.then(({options}) => process(options))
