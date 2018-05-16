@@ -21,7 +21,7 @@ module.exports = class Header extends Component {
     this.route = route
     const self = this
 
-    let isHomepage = route === ''
+    let isHomepage = route === '/'
     // there are no hashes in ssr but clientside we have to check the pathname
     if (this._hasWindow) isHomepage = window.location.pathname === '/'
 
