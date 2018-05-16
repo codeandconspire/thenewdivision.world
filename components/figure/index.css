@@ -9,6 +9,7 @@
   text-decoration: none;
   color: currentColor;
   background: transparent;
+  user-select: none;
 }
 
 .Figure-container {
@@ -91,7 +92,7 @@
   height: 100%;
 }
 
-.Figure-figure:hover .Figure-plus {
+.Figure:hover .Figure-plus {
   transition: none;
 }
 

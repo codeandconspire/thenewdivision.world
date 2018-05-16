@@ -1,8 +1,8 @@
 module.exports = ui
 
 const THEMES = {
-  white: 'u-bgWhite',
-  sand: 'u-bgSand'
+  white: 'u-themeWhite',
+  sand: 'u-themeSand'
 }
 
 function ui (state, emitter, app) {
@@ -42,8 +42,8 @@ function ui (state, emitter, app) {
       const theme = THEMES[name] || ''
 
       let value = document.documentElement.classList.value
-      if (/u-bg\w+/.test(value)) {
-        value = value.replace(/u-bg\w+/, theme)
+      if (/u-theme\w+/.test(value)) {
+        value = value.replace(/u-theme\w+/, theme)
       } else {
         value += ` ${theme}`
       }

@@ -11,22 +11,11 @@
 
 .Intro-text {
   margin: 0;
-  font-size: 30px;
+  font-size: var(--font-size-heading-intro);
   font-family: var(--giorgio-sans-bold) !important;
   line-height: var(--giorgio-sans-bold-line-height);
   letter-spacing: var(--giorgio-sans-bold-letter-spacing);
-}
-
-@media (min-width: 600px) {
-  .Intro-text {
-    font-size: 45px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .Intro-text {
-    font-size: 60px;
-  }
+  user-select: none;
 }
 
 .Intro-final {
@@ -49,4 +38,5 @@
 .Intro-word {
   display: inline-block;
   transition: transform 250ms ease-out;
+  user-select: auto;
 }

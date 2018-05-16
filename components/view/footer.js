@@ -3,11 +3,6 @@ const Component = require('choo/component')
 const { i18n } = require('../base')
 const icon = require('../icon')
 
-const LINK_THEMES = {
-  'white': 'u-colorBrightBlue',
-  'sand': 'u-colorWhite'
-}
-
 const ICON_THEMES = {
   'white': 'u-themeWhite',
   'sand': 'u-themeBlack'
@@ -25,7 +20,7 @@ module.exports = class Footer extends Component {
     return html`
       <footer class="u-textCenter u-spaceT8">
         <h2 class="u-spaceT8">
-          <span class="u-textSizeLg u-textBold u-block u-spaceT8 u-spaceB2">
+          <span class="u-textSizeLg u-textBold u-block u-spaceT8 u-spaceB4">
             ${text`Connect with us,`}
           </span>
           <span class="Display Display--footer">
@@ -34,7 +29,7 @@ module.exports = class Footer extends Component {
         </h2>
 
         <div class="Display Display--footer u-spaceB8">
-          <a class="Display-link ${LINK_THEMES[theme]} u-spaceB8" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
+          <a class="Display-link u-spaceB8" href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
         </div>
 
         <div class="Text u-spaceV8 u-inlineBlock ${ICON_THEMES[theme]}">
@@ -42,9 +37,12 @@ module.exports = class Footer extends Component {
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.twitter()}</a>
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.instagram()}</a>
           <a href="#" class="u-inlineBlock u-spaceRch">${icon.linkedin()}</a>
-          <p class="u-textSizeXs u-spaceB8 u-spaceT6">
-            ${text`© 2017 The New Division by Trollbäck + Company.`}<br>
+          <p class="u-textSizeXs u-spaceT4">
+            ${text`© 2018 The New Division by Trollbäck + Company.`}<br>
             ${text`All Rights Reserved.`}
+            <br>
+            <br>
+            <a href="https://github.com/codeandconspire/thenewdivision.world">${text`This website is open-source`}</a>
           </p>
         </div>
       </footer>

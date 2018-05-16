@@ -93,12 +93,13 @@
     display: inline-block;
     padding-left: 1.5em;
     margin-top: 1em;
-    color: #fff;
+    color: var(--link-color);
     text-decoration: none;
     background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2213%22%20height%3D%229%22%20viewBox%3D%220%200%2013%209%22%3E%3Cpath%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M6.4%204.5L10.6.3l2.1%202.1-6.3%206.3L.1%202.4%202.2.3l4.2%204.2z%22/%3E%3C/svg%3E);
     background-repeat: no-repeat;
     background-position: 0 0.25em;
     transition: background-position 125ms var(--snap);
+    user-select: none;
   }
 
   .Presentation-link:hover {

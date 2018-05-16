@@ -29,6 +29,7 @@
 
 .Display--footer {
   font-size: var(--font-size-heading-footer);
+  line-height: 0.9;
 }
 
 /**
@@ -38,7 +39,7 @@
 .Display-link {
   display: inline-block;
   position: relative;
-  color: var(--color);
+  color: var(--link-color);
 }
 
 .Display-link::after {
@@ -47,7 +48,7 @@
   height: 2px;
 
   position: absolute;
-  bottom: 0;
+  bottom: 0.13em;
   left: 0;
 
   background: currentColor;
@@ -56,5 +57,5 @@
 }
 
 .Display-link:hover::after {
-  transform: translateY(4px);
+  transform: translateY(0.13em);
 }

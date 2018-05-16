@@ -37,6 +37,14 @@
   vertical-align: top;
 }
 
+.Text a {
+  color: var(--link-color);
+}
+
+.Text a:hover {
+  color: var(--link-color);
+}
+
 /**
  * 1. Maintain 16/9 aspect ratio for embedded content
  */
@@ -46,6 +54,7 @@
   height: calc((100vw - calc(var(--space) * 8)) * 9/16); /* 1 */
   max-width: 100%;
   vertical-align: top;
+  user-select: none;
 }
 
 .Text h1,

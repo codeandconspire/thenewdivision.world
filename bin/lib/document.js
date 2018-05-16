@@ -18,7 +18,7 @@ function document (html, state, app) {
   if (state.ui.theme === 'sand') {
     // TODO: figure put ergonomic api for this
     d.transform(function () {
-      return hyperstream({html: {class: 'u-bgSand'}})
+      return hyperstream({html: {class: 'u-themeSand'}})
     })
   }
 

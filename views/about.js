@@ -162,7 +162,7 @@ function coworker (state, doc) {
             ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
             <div class="Text u-textSizeSm">
-              <p>${person.role} <br />${asElement(person.bio)}</p>
+              <p>${person.role} <br>${asElement(person.bio)}</p>
             </div>
           </article>
         </div>

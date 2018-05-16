@@ -24,6 +24,14 @@
   letter-spacing: var(--system-font-letter-spacing);
 }
 
+::selection {
+  background: var(--selection-color);
+}
+
+::-moz-selection {
+  background: var(--selection-color);
+}
+
 html {
   min-height: 100%;
 }

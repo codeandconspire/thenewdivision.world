@@ -16,6 +16,7 @@
   transform-origin: 50% 50%;
   transition: transform 175ms var(--snap);
   will-change: transform;
+  user-select: none;
 }
 
 .Icon:hover {

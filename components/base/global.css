@@ -9,6 +9,8 @@
   --bright-sand: #F3F0EA;
   --dark-magenta: #960059;
   --theme: var(--background);
+  --link-color: var(--bright-blue);
+  --selection-color: rgba(188, 178, 150, 0.5);
 
   --space: 2px;
   --aspect: 123.57%;
@@ -35,6 +37,7 @@
   --font-size-heading-2: 32px;
   --font-size-heading-3: 28px;
   --font-size-heading-4: 28px;
+  --font-size-heading-intro: 28px;
   --font-size-heading-footer: 32px;
 }
 
@@ -50,6 +53,7 @@
     --font-size-heading-2: 48px;
     --font-size-heading-3: 31px;
     --font-size-heading-4: 31px;
+    --font-size-heading-intro: 31px;
     --font-size-heading-footer: 40px;
   }
 }
@@ -66,6 +70,7 @@
     --font-size-heading-2: 48px;
     --font-size-heading-3: 40px;
     --font-size-heading-4: 32px;
+    --font-size-heading-intro: 48px;
     --font-size-heading-footer: 72px;
   }
 }
@@ -82,6 +87,7 @@
     --font-size-heading-2: 60px;
     --font-size-heading-3: 48px;
     --font-size-heading-4: 40px;
+    --font-size-heading-intro: 60px;
     --font-size-heading-footer: 96px;
   }
 }
@@ -98,6 +104,7 @@
     --font-size-heading-2: 72px;
     --font-size-heading-3: 56px;
     --font-size-heading-4: 48px;
+    --font-size-heading-intro: 75px;
     --font-size-heading-footer: 136px;
   }
 }
@@ -114,6 +121,7 @@
     --font-size-heading-2: 88px;
     --font-size-heading-3: 72px;
     --font-size-heading-4: 56px;
+    --font-size-heading-intro: 100px;
     --font-size-heading-footer: 200px;
   }
 }

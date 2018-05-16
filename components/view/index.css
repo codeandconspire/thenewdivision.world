@@ -37,6 +37,7 @@
   padding: calc(var(--space) * 4);
   position: absolute;
   z-index: 2;
+  user-select: none;
 }
 
 .View-home {
