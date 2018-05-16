@@ -66,9 +66,8 @@ function about (state, emit) {
               ${doc.data.services.map((props, index, list) => html`
                 <article class="View-cell u-md-size1of3">
                   <img src="${props.image.url}" class="u-spaceB2 u-alignSelfStart">
-                  <hr>
-                  <h3>${asText(props.title)}</h3>
-                  <div class="Text">
+                  <h3 class="u-textBold u-textSizeSm">${asText(props.title)}</h3>
+                  <div class="Text u-textSizeSm">
                     ${asElement(props.description)}
                   </div>
                 </article>
