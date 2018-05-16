@@ -64,8 +64,8 @@
   height: 15px;
   position: absolute;
   position: sticky;
-  top: calc(var(--space) * 0.8);
-  right: calc(var(--space) * 0.8);
+  top: calc(var(--space) * 3);
+  right: calc(var(--space) * 3);
   pointer-events: none;
   transform:
     translateX(calc(0.7vw * var(--mouse-x)))
