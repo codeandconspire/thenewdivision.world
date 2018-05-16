@@ -29,7 +29,7 @@ module.exports = class Footer extends Component {
             ${text`Connect with us,`}
           </span>
           <span class="Display Display--footer">
-            ${text`Become a force for good`}<br>
+            ${text`Be a force for good`}<br>
           </span>
         </h2>
 
