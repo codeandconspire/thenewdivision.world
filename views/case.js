@@ -14,6 +14,7 @@ module.exports = view(caseView, title)
 
 function caseView (state, emit) {
   let doc = state.documents.items.find((item) => item.uid === state.params.slug)
+
   if (!doc) {
     emit('doc:fetch', {type: 'case', uid: state.params.slug})
 
@@ -29,7 +30,7 @@ function caseView (state, emit) {
           <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <div class="View-reverse View-reverse--md">
             <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
-              ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
+              ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
             </div>
           </div>
         </main>
@@ -54,12 +55,12 @@ function caseView (state, emit) {
       <h1 class="Display Display--1 u-spaceIntro ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
       <div class="View-reverse View-reverse--md">
         <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
-          ${doc.data.image.url ? state.cache(Figure, Figure.id(doc.data.image)).render(doc.data.image) : null}
+          ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
         </div>
         <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
             <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
-              ${state.cache(Topic, [doc.id, Topic.id(item)].join('-')).render(item)}
+              ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-')).render(item)}
             </div>
           `)}
         </section>

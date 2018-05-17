@@ -31,7 +31,8 @@ function about (state, emit) {
 
   const presentation = state.cache(
     Presentation,
-    `presentation-partial:${state.ui.isPartial}`
+    `presentation-partial:${state.ui.isPartial}`,
+    {static: !state.ui.isPartial}
   )
 
   return html`

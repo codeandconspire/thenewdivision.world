@@ -35,9 +35,11 @@ module.exports = class Takeover extends Component {
       circle.addEventListener('animationend', function onanimationend () {
         circle.removeEventListener('animationend', onanimationend)
         self.emit('pushState', href)
-        self.rerender()
-        window.removeEventListener('wheel', onscroll)
-        window.removeEventListener('touchmove', onscroll)
+        window.requestAnimationFrame(function () {
+          self.rerender()
+          window.removeEventListener('wheel', onscroll)
+          window.removeEventListener('touchmove', onscroll)
+        })
       })
 
       window.requestAnimationFrame(function () {
