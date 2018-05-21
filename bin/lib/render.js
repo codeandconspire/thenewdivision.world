@@ -18,7 +18,7 @@ function render (entry) {
           stream.pipe(concat({encoding: 'buffer'}, resolve))
         })
 
-        let cache = `s-maxage=${60 * 60 * 24 * 7}, max-age=${60 * 10}`
+        let cache = `s-maxage=${60 * 60 * 4}, max-age=${60 * 10}`
         if (ctx.app.env === 'development') cache = 'max-age=0'
         ctx.set('Cache-Control', cache)
         ctx.type = 'text/html'
