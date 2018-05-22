@@ -41,6 +41,10 @@ function start (entry, opts = {}) {
   app.use(require('koa-conditional-get')())
   app.use(require('koa-etag')())
 
+  if (process.env.NODE_ENV !== 'development') {
+    app.use(require('./lib/queue')(app))
+  }
+
   app.use(get(/^\/(\w+\/)?bundle\.js(\.map)?$/, script(entry, app)))
   app.use(get(/^\/(sw|service-worker)\.js(\.map)?$/, script(path.resolve(dir, 'sw.js'), app)))
   app.use(get(/^\/(\w+\/)?bundle\.css(\.map)?$/, style(opts.css, app)))
