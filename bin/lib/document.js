@@ -33,7 +33,7 @@ function document (html, state, app) {
   d.transform(addToHead, '<meta name="theme-color" content="#fff" property="theme">')
   d.transform(addToHead, '<meta name="twitter:card" content="summary_large_image">')
   d.transform(addToHead, `<meta property="og:title" content="${state.meta.title}">`)
-  d.transform(addToHead, `<meta property="og:description" content="${state.meta.description}">`)
+  d.transform(addToHead, `<meta property="description" content="${state.meta.description}">`)
   d.transform(addToHead, `<meta property="og:image" content="${state.meta.image}">`)
   d.transform(addToHead, `<meta property="og:url" content="https://www.thenewdivision.world${state.href}">`)
 
