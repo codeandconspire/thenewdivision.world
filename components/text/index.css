@@ -18,6 +18,10 @@
   max-width: none;
 }
 
+.Text--wide {
+  max-width: 50em;
+}
+
 .Text > p {
   margin: 1em 0;
 }

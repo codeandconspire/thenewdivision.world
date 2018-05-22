@@ -60,7 +60,7 @@ function caseView (state, emit) {
         <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
             <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
-              ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-')).render(item)}
+              ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-'), {size: list.length > 1 ? 'small' : 'large'}).render(item)}
             </div>
           `)}
         </section>
@@ -100,7 +100,7 @@ function caseView (state, emit) {
               <div class="View-grid u-spaceV8">
                 <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceB6">
                   <div class="Text">
-                    <h2 class="u-textSizeMd">${asText(slice.primary.heading).trim()}</h2>
+                    <h2 class="u-textSizeLg">${asText(slice.primary.heading).trim()}</h2>
                   </div>
                 </div>
                 <div class="View-cell u-md-size1of2 u-lg-size2of3">
@@ -185,9 +185,10 @@ function caseView (state, emit) {
 }
 
 class Topic extends Component {
-  constructor (id, state) {
+  constructor (id, state, opts = {}) {
     super(id)
     this.id = id
+    this.size = opts.size
     this.resolve = state.documents.resolve
     this.local = state.components[id] = state.components[id] || {}
   }
@@ -214,11 +215,13 @@ class Topic extends Component {
   createElement (props) {
     return html`
       <div id="${this.id}">
-        <div class="Text Text--full">
-          <hr class="u-spaceB2">
-          <h2 class="u-textSizeMd">${asText(props.heading).trim()}</h2>
-        </div>
-        <div class="Text Text--full u-textSizeSm u-spaceT1">
+        ${props.heading ? html`
+          <div class="Text Text--full">
+            <hr class="u-spaceB2">
+            <h2 class="u-textSize${this.size === 'small' ? 'Md' : 'Lg'}">${asText(props.heading).trim()}</h2>
+          </div>
+        ` : null}
+        <div class="Text Text--wide u-textSize${this.size === 'small' ? 'Sm' : 'Lg'} u-spaceT1">
           ${asElement(props.body.slice(0, 1), this.resolve, serialize)}
         </div>
         <div class="Text u-spaceB6">
