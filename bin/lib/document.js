@@ -36,6 +36,7 @@ function document (html, state, app) {
   d.transform(addToHead, `<meta property="description" content="${state.meta.description}">`)
   d.transform(addToHead, `<meta property="og:image" content="${state.meta.image}">`)
   d.transform(addToHead, `<meta property="og:url" content="https://www.thenewdivision.world${state.href}">`)
+  d.transform(addToHead, `<meta rel="manifest" href="/manifest.json">`)
 
   d.transform(addToHead, `<script>window.initialState = ${stringify(state)}</script>`)
 

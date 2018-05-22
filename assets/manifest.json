@@ -1,0 +1,8 @@
+{
+  "name": "The New Division",
+  "short_name": "TND",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#fff",
+  "theme_color": "#fff"
+}
