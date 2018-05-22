@@ -13,6 +13,8 @@ const text = i18n()
 module.exports = view(caseView, title)
 
 function caseView (state, emit) {
+  if (state.documents.error) throw state.documents.error
+
   let doc = state.documents.items.find((item) => item.uid === state.params.slug)
 
   if (!doc) {
