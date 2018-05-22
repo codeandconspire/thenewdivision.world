@@ -30,6 +30,7 @@
   "devDependencies": {
     "choo-devtools": "^2.5.0",
     "dependency-check": "^3.1.0",
+    "minify-stream": "~1.1.0",
     "standard": "^10.0.3"
   },
   "dependencies": {
@@ -55,7 +56,6 @@
     "koa-etag": "^3.0.0",
     "koa-route": "^3.2.0",
     "koa-static": "^4.0.2",
-    "nanohtml": "^1.2.4",
     "nanoraf": "^3.0.1",
     "normalize.css": "^8.0.0",
     "postcss": "^6.0.22",
@@ -68,13 +68,14 @@
     "posthtmlify": "^0.1.0",
     "prismic-element": "^0.7.0",
     "prismic-javascript": "^1.5.0-beta.2",
-    "prismic-richtext": "^0.2.7",
+    "prismic-richtext": "^0.4.0",
     "resolve": "^1.7.1",
     "sheetify": "^7.3.0",
     "sheetify-postcss": "^1.2.0",
     "smoothscroll-polyfill": "^0.4.3",
     "source-map-support": "^0.5.6",
-    "tinyify": "^2.4.0",
-    "watchify-middleware": "^1.8.0"
+    "tinyify": "2.4.0",
+    "watchify-middleware": "^1.8.0",
+    "yo-yoify": "^4.1.0"
   }
 }

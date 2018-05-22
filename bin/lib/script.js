@@ -57,7 +57,7 @@ function middleware (entry, app) {
       ]
     }))
 
-    b.transform(require('nanohtml'))
+    b.transform(require('yo-yoify'))
     b.plugin(require('tinyify'))
 
     app.emit('progress', entry, 0)
