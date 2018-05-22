@@ -5,14 +5,11 @@ var http = require('http')
 var assert = require('assert')
 var getPort = require('get-port')
 var stack = require('./http')
-var ui = require('./lib/ui')
 
 assert(process.argv[2], 'stack: entry file should be supplied')
 
 var app = stack(path.resolve(process.cwd(), process.argv[2]))
 var server = http.createServer(app.callback())
-
-ui(app)
 
 getPort({port: process.env.PORT || 8080}).then(function (port) {
   server.listen(port, function () {

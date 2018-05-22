@@ -3,6 +3,7 @@ var path = require('path')
 var crypto = require('crypto')
 var {get} = require('koa-route')
 var serve = require('koa-static')
+var ui = require('./lib/ui')
 var style = require('./lib/style')
 var script = require('./lib/script')
 var render = require('./lib/render')
@@ -14,6 +15,8 @@ function start (entry, opts = {}) {
   var app = new Koa()
   app.entry = entry
   app.silent = true
+
+  if (!opts.silent) ui(app)
 
   app.on('bundle:script', function (file, buf) {
     if (file !== entry) return
