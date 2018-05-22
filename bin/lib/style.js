@@ -6,15 +6,15 @@ var postcssrc = require('postcss-load-config')
 
 module.exports = style
 
-function style (entry, app) {
-  var basedir = path.dirname(entry || app.entry)
+function style (_entry, app) {
+  var basedir = path.dirname(_entry || app.entry)
   var watch = app.env === 'development'
   var watcher = watch && new Watcher()
 
   var files = []
-  if (entry) files.push(entry)
+  if (_entry) files.push(_entry)
 
-  entry = entry || path.resolve(basedir, 'index.css')
+  var entry = _entry || path.resolve(basedir, 'index.css')
 
   var plugins = [
     require('postcss-import'),
@@ -43,7 +43,9 @@ function style (entry, app) {
     })
 
   var bundle = config.then(({plugins}) => postcss(plugins))
-  var processing = config.then(({options}) => process(options))
+  var processing = _entry
+    ? config.then(({options}) => process(options))
+    : Promise.resolve({css: '', map: {}})
 
   var deps = new Set()
   app.on('bundle:file', function (file) {
