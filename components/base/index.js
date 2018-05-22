@@ -128,7 +128,7 @@ function imgattrs (props, sizes = []) {
     // Join sizes like: `<url> <brk>w`
     attrs.srcset = [`${IMAGE_CDN_URL}tr:w-${attrs.width},q-75,pr-true/${uri} ${attrs.width}w`]
     for (let i = 0, len = sizes.length; i < len; i++) {
-      if (sizes[i][1]) {
+      if (sizes[i][1] && sizes[i][1] !== attrs.width) {
         attrs.srcset.push(`${IMAGE_CDN_URL}tr:w-${sizes[i][1]},q-75,pr-true/${uri} ${sizes[i][1]}w`)
       }
     }
