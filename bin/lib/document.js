@@ -52,7 +52,7 @@ function document (html, state, app) {
     }
 
     d.transform(addToHead, `
-      <script src="/${app.context.script.hash.toString('hex').slice(0, 16)}/bundle.js" integrity="sha512-${app.context.script.hash.toString('base64')}" defer></script>
+      <script src="/${app.context.script.hash.toString('hex').slice(0, 16)}/bundle.js" defer></script>
       <link rel="stylesheet" href="/${app.context.style.hash.toString('hex').slice(0, 16)}/bundle.css">
     `)
     d.transform(posthtmlify, {use: [minifier], order: 'end'})
