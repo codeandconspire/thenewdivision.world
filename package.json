@@ -1,6 +1,6 @@
 {
   "name": "thenewdivision.world",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Public website for The New Division",
   "main": "index.js",
   "scripts": {
