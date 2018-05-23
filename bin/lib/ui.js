@@ -27,7 +27,7 @@ function ui (app) {
     if (app.env === 'development') {
       console.log(`● Server listening at http://localhost:${port}`)
     } else {
-      console.log(`● Server running`)
+      console.log(`● Server listening on port ${port}`)
     }
   })
 }
