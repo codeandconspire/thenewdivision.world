@@ -21,21 +21,14 @@ module.exports = class Header extends Component {
     this.route = route
     const self = this
 
-    let isHomepage = route === '/'
+    let isHomepage = route === '/' || route === ':slug'
 
     return html`
       <div class="View-header" id="${this.id}">
-        ${!isHomepage ? html`
-          <a href="/" class="View-home" onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'homepage'})}>
-            <span class="u-hiddenVisually">The New Division</span>
-            ${logo()}
-          </a>
-        ` : html`
-          <div class="View-home">
-            <h1 class="u-hiddenVisually">The New Division</h1>
-            ${logo()}
-          </div>
-        `}
+        <a href="/" class="View-home" onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'homepage'})} onclick=${top}>
+          <span class="u-hiddenVisually">The New Division</span>
+          ${logo()}
+        </a>
 
         ${!isHomepage ? html`
           <nav>
@@ -47,6 +40,9 @@ module.exports = class Header extends Component {
           </nav>
         ` : html`
           <nav>
+            <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">${text`Store`}</a>
+            <a class="View-nav View-nav--supplemental" href="#cases" onclick=${cleanHash}>${text`Cases`}</a>
+            <a class="View-nav View-nav--supplemental" href="#words" onclick=${cleanHash}>${text`Words`}</a>
             <a class="View-nav" href="/about" onclick=${explode('sand')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
           </nav>
         `}
@@ -58,6 +54,14 @@ module.exports = class Header extends Component {
         const doc = self.state.documents.items.find((item) => item.type === query.type)
         if (!doc) self.emit('doc:fetch', query, {silent: true})
       }
+    }
+
+    function top () {
+      window.scrollTo(0, 0)
+    }
+
+    function cleanHash () {
+      window.location.hash = ''
     }
 
     function explode (theme) {

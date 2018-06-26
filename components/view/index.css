@@ -40,6 +40,10 @@
   user-select: none;
 }
 
+/**
+ * 1. Fix the alignment with the nav. Taking the logo subline into account.
+ */
+
 .View-home {
   display: block;
   flex: 0 1 100%;
@@ -47,6 +51,7 @@
   width: 100%;
   max-width: 128px;
   position: relative;
+  margin-bottom: -10px; /* 1 */
 }
 
 @media (min-width: 600px) {
@@ -83,12 +88,34 @@
 .View-nav {
   display: inline-block;
   padding: 0 var(--space);
+  font-size: var(--font-size-xs);
   margin-left: calc(var(--space) * 2);
   margin-right: calc(var(--space) * 2);
-  font-size: var(--font-size-xs);
   color: currentColor;
   text-decoration: none;
   position: relative;
+}
+
+.View-nav--supplemental {
+  display: none;
+}
+
+@media (min-width: 375px) {
+  .View-nav {
+    margin-left: calc(var(--space) * 0.5);
+    margin-right: calc(var(--space) * 0.5);
+  }
+  
+  .View-nav--supplemental {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 400px) {
+  .View-nav {
+    margin-left: calc(var(--space) * 2);
+    margin-right: calc(var(--space) * 2);
+  }
 }
 
 .View-navIcon {
