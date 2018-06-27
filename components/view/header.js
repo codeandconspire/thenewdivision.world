@@ -20,8 +20,9 @@ module.exports = class Header extends Component {
   createElement (route) {
     this.route = route
     const self = this
-
-    let isHomepage = route === '/' || route === ':slug'
+    const href = this.state.href
+    let isAbout = route === '/about'
+    let isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/words'))
 
     return html`
       <div class="View-header" id="${this.id}">
