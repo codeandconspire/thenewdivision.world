@@ -9,7 +9,7 @@ module.exports = class Words extends Component {
     super(id)
     this.id = id
     this.cache = state.cache
-    this.local = state.components[id] = state.components[id] || {
+    this.local = state.components[id] = {
       expanded: []
     }
   }

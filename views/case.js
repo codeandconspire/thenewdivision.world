@@ -192,7 +192,7 @@ class Topic extends Component {
     this.id = id
     this.size = opts.size
     this.resolve = state.documents.resolve
-    this.local = state.components[id] = state.components[id] || {}
+    this.local = state.components[id] = {expanded: false}
   }
 
   static id (props) {
@@ -212,6 +212,10 @@ class Topic extends Component {
   expand () {
     this.local.expanded = true
     this.rerender()
+  }
+
+  unload () {
+    this.local.expanded = false
   }
 
   createElement (props) {
