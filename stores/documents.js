@@ -1,10 +1,10 @@
-const assert = require('assert')
-const html = require('choo/html')
-const { getApi, Predicates } = require('prismic-javascript')
+var assert = require('assert')
+var html = require('choo/html')
+var {getApi, Predicates} = require('prismic-javascript')
 
 module.exports = documents
 
-let endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
+var endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
 
 function documents (state, emitter) {
   state.documents = {
@@ -14,7 +14,7 @@ function documents (state, emitter) {
     items: state.documents && !state.prefetch ? [...state.documents.items] : []
   }
 
-  let queue = 0
+  var queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
       endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
@@ -34,8 +34,8 @@ function documents (state, emitter) {
   function api (query) {
     if (!query.id) assert.equal(typeof query.type, 'string', 'documents: type should be a string')
 
-    const opts = {}
-    const predicates = []
+    var opts = {}
+    var predicates = []
     if (state.ref) opts.ref = state.ref
 
     // default to fetching primary case fields
@@ -119,7 +119,7 @@ class DocumentError extends Error {
   }
 
   toJSON () {
-    const props = {
+    var props = {
       name: this.name,
       message: this.message
     }

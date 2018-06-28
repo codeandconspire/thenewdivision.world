@@ -1,9 +1,9 @@
-const assert = require('assert')
-const html = require('choo/html')
-const Component = require('choo/component')
-const { mousemove } = require('../base')
+var assert = require('assert')
+var html = require('choo/html')
+var Component = require('choo/component')
+var {mousemove} = require('../base')
 
-const THEMES = {
+var THEMES = {
   white: 'u-themeWhite',
   gray: 'u-themeGray',
   brightBlue: 'u-themeBrightBlue',
@@ -33,12 +33,12 @@ module.exports = class Card extends Component {
   createElement (props) {
     assert(props.children, 'card: children should be defined')
 
-    const theme = props.color || 'white'
+    var theme = props.color || 'white'
     assert(typeof theme === 'string', 'card: color should be a string')
 
-    const banner = this.banner = !!props.image
+    var banner = this.banner = !!props.image
 
-    const card = html`
+    var card = html`
       <div class="${banner ? 'Card-block js-block' : 'Card'} ${THEMES[theme]} u-bg u-color">
         <div class="Card-decorator">
           <div class="Card-plus"><div class="Card-circle"></div></div>

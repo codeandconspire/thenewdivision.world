@@ -1,13 +1,13 @@
-const html = require('choo/html')
-const { asText } = require('prismic-richtext')
-const view = require('../components/view')
-const Intro = require('../components/intro')
-const Words = require('../components/words')
-const { i18n } = require('../components/base')
-const Figure = require('../components/figure')
-const Takeover = require('../components/takeover')
+var html = require('choo/html')
+var {asText} = require('prismic-richtext')
+var view = require('../components/view')
+var Intro = require('../components/intro')
+var Words = require('../components/words')
+var {i18n} = require('../components/base')
+var Figure = require('../components/figure')
+var Takeover = require('../components/takeover')
 
-const text = i18n()
+var text = i18n()
 
 module.exports = view(home)
 
@@ -18,7 +18,7 @@ function home (state, emit) {
     emit('ui:theme', 'white')
   }
 
-  const doc = state.documents.items.find((doc) => doc.type === 'homepage')
+  var doc = state.documents.items.find((doc) => doc.type === 'homepage')
   if (!doc) {
     emit('doc:fetch', {type: 'homepage'})
     return html`
@@ -62,14 +62,14 @@ function home (state, emit) {
   `
 
   function explode (event) {
-    const plus = event.currentTarget.querySelector('.js-plus')
+    var plus = event.currentTarget.querySelector('.js-plus')
     state.cache(Takeover, Takeover.id()).open(event.currentTarget.pathname, plus.getBoundingClientRect())
     event.preventDefault()
   }
 
   function prefetch (id) {
     return function () {
-      const doc = state.documents.items.find((item) => item.id === id)
+      var doc = state.documents.items.find((item) => item.id === id)
       if (!doc) emit('doc:fetch', {id}, {silent: true})
     }
   }

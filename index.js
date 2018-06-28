@@ -1,6 +1,6 @@
-const choo = require('choo')
+var choo = require('choo')
 
-const app = choo()
+var app = choo()
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   app.use(require('choo-devtools')())

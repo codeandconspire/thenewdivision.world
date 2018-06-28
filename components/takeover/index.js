@@ -1,5 +1,5 @@
-const html = require('choo/html')
-const Component = require('choo/component')
+var html = require('choo/html')
+var Component = require('choo/component')
 
 module.exports = class Takeover extends Component {
   constructor (id, state, emit) {
@@ -17,20 +17,20 @@ module.exports = class Takeover extends Component {
   }
 
   open (href, origin, theme = 'white') {
-    const self = this
-    const el = this.element
+    var self = this
+    var el = this.element
 
     self.emit('ui:transition')
     this.emit('ui:partial', href, function (view) {
-      const {innerHeight, innerWidth} = window
-      const left = origin.left + origin.width / 2
-      const top = origin.top + origin.height / 2
-      const style = `left: ${left}px; top: ${top}px;`
-      const isSlow = (
+      var {innerHeight, innerWidth} = window
+      var left = origin.left + origin.width / 2
+      var top = origin.top + origin.height / 2
+      var style = `left: ${left}px; top: ${top}px;`
+      var isSlow = (
         (left > innerWidth / 4 && left < innerWidth * 0.8) &&
         (top > innerHeight / 4 && top < innerHeight * 0.8)
       )
-      const circle = html`<div class="Takeover-circle ${innerHeight > innerWidth ? 'Takeover-circle--portrait' : ''} ${isSlow ? 'Takeover-circle--slow' : ''}" style="${style}"></div>`
+      var circle = html`<div class="Takeover-circle ${innerHeight > innerWidth ? 'Takeover-circle--portrait' : ''} ${isSlow ? 'Takeover-circle--slow' : ''}" style="${style}"></div>`
 
       circle.addEventListener('animationend', function onanimationend () {
         circle.removeEventListener('animationend', onanimationend)

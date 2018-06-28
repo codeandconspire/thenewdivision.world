@@ -1,9 +1,9 @@
-const html = require('choo/html')
-const Component = require('choo/component')
-const Takeover = require('../takeover')
-const { i18n } = require('../base')
+var html = require('choo/html')
+var Component = require('choo/component')
+var Takeover = require('../takeover')
+var {i18n} = require('../base')
 
-const text = i18n(require('./lang.json'))
+var text = i18n(require('./lang.json'))
 
 module.exports = class Header extends Component {
   constructor (id, state, emit) {
@@ -19,10 +19,10 @@ module.exports = class Header extends Component {
 
   createElement (route) {
     this.route = route
-    const self = this
-    const href = this.state.href
-    let isAbout = route === '/about'
-    let isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/words'))
+    var self = this
+    var href = this.state.href
+    var isAbout = route === '/about'
+    var isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/words'))
 
     return html`
       <div class="View-header" id="${this.id}">
@@ -52,7 +52,7 @@ module.exports = class Header extends Component {
 
     function prefetch (query) {
       return function () {
-        const doc = self.state.documents.items.find((item) => item.type === query.type)
+        var doc = self.state.documents.items.find((item) => item.type === query.type)
         if (!doc) self.emit('doc:fetch', query, {silent: true})
       }
     }
@@ -68,7 +68,7 @@ module.exports = class Header extends Component {
     function explode (theme) {
       return function (event) {
         if (self.state.ui.inTransition) return event.preventDefault()
-        const href = event.target.pathname
+        var href = event.target.pathname
         self.state.cache(Takeover, Takeover.id()).open(href, event.target.getBoundingClientRect(), theme)
         window.requestAnimationFrame(function () {
           self.render(href)

@@ -1,9 +1,9 @@
-const Intro = require('../components/intro')
+var Intro = require('../components/intro')
 
 module.exports = meta
 
 function meta (state, emitter, app) {
-  const doc = state.documents.items.find((item) => item.type === 'homepage')
+  var doc = state.documents.items.find((item) => item.type === 'homepage')
 
   state.meta = Object.assign({
     image: 'https://www.thenewdivision.world/share.png',

@@ -1,10 +1,10 @@
-const html = require('choo/html')
-const Component = require('choo/component')
-const { i18n } = require('../base')
+var html = require('choo/html')
+var Component = require('choo/component')
+var {i18n} = require('../base')
 
-const SIZE = 167 + 374 + 285 + 376
+var SIZE = 167 + 374 + 285 + 376
 
-const text = i18n(require('./lang.json'))
+var text = i18n(require('./lang.json'))
 
 module.exports = class Presentation extends Component {
   constructor (id, state, emit, opts) {
@@ -16,8 +16,8 @@ module.exports = class Presentation extends Component {
   }
 
   done (element) {
-    let i = 0
-    const onanimationend = () => {
+    var i = 0
+    var onanimationend = () => {
       if (i++ < 3) return
       element.removeEventListener('animationend', onanimationend)
       this.static = true
@@ -80,12 +80,12 @@ module.exports = class Presentation extends Component {
 
 function anchor (id) {
   return function (event) {
-    const el = document.getElementById(id)
+    var el = document.getElementById(id)
     if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
   }
 }
 
 function scrollIntoView (event) {
-  const el = document.getElementById(event.target.hash.substr(1))
+  var el = document.getElementById(event.target.hash.substr(1))
   if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
 }

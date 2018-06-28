@@ -1,6 +1,6 @@
-const html = require('choo/html')
-const Component = require('choo/component')
-const { mousemove, imgattrs } = require('../base')
+var html = require('choo/html')
+var Component = require('choo/component')
+var {mousemove, imgattrs} = require('../base')
 
 module.exports = Figure
 
@@ -39,7 +39,7 @@ class InteractiveFigure extends Component {
 }
 
 function createElement (img) {
-  const attrs = imgattrs(img, this.sizes)
+  var attrs = imgattrs(img, this.sizes)
   return html`
     <figure class="Figure">
       <div class="Figure-container" style="padding-bottom:${(img.dimensions.height / img.dimensions.width * 100).toFixed(2)}%;">

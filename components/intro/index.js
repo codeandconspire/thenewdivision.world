@@ -1,8 +1,8 @@
-const html = require('choo/html')
-const raw = require('choo/html/raw')
-const Component = require('choo/component')
-const asElement = require('prismic-element')
-const { Elements } = require('prismic-richtext')
+var html = require('choo/html')
+var raw = require('choo/html/raw')
+var Component = require('choo/component')
+var asElement = require('prismic-element')
+var {Elements} = require('prismic-richtext')
 
 module.exports = class Intro extends Component {
   constructor (id, state, emit, opts = {}) {
@@ -15,21 +15,21 @@ module.exports = class Intro extends Component {
   load (element) {
     if (this.finished) return
 
-    const self = this
-    const groups = [...element.querySelectorAll('.js-group')]
-    const children = [...element.childNodes]
-    const final = Intro.getStrong(this.text)
+    var self = this
+    var groups = [...element.querySelectorAll('.js-group')]
+    var children = [...element.childNodes]
+    var final = Intro.getStrong(this.text)
 
     element.appendChild(html`<div class="Intro-final">${final}</div>`)
 
     window.requestAnimationFrame(function () {
-      let offset = 0
+      var offset = 0
       groups.reduce(function (prev, group) {
-        const index = children.indexOf(group)
+        var index = children.indexOf(group)
 
         return empty(group).then(() => prev.then(function () {
-          const words = children.slice(offset, index)
-          const targets = final.splice(0, words.length)
+          var words = children.slice(offset, index)
+          var targets = final.splice(0, words.length)
 
           for (let i = 0, len = words.length, to, from; i < len; i++) {
             from = words[i].getBoundingClientRect()
@@ -48,8 +48,8 @@ module.exports = class Intro extends Component {
     // sequentially remove words of group
     // HTMLElement -> Promise
     function empty (group) {
-      const queue = []
-      const chunks = shuffle([...group.querySelectorAll('.js-chunk')])
+      var queue = []
+      var chunks = shuffle([...group.querySelectorAll('.js-chunk')])
 
       for (let i = 0, len = chunks.length; i < len; i++) {
         queue.push(fadeOut(chunks[i], 225 * i))
@@ -73,9 +73,9 @@ module.exports = class Intro extends Component {
   // pluck out only words that are strong
   // arr -> arr
   static getWords (text) {
-    const spans = text[0].spans.filter((span) => span.type === 'strong')
-    const words = spans.reduce(function (str, span) {
-      const value = text[0].text.substring(span.start, span.end)
+    var spans = text[0].spans.filter((span) => span.type === 'strong')
+    var words = spans.reduce(function (str, span) {
+      var value = text[0].text.substring(span.start, span.end)
       if (!str) return value
       return str + ' ' + value
     }, '').split(' ')
@@ -119,8 +119,8 @@ module.exports = class Intro extends Component {
 // arr -> arr
 function shuffle (a) {
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    const x = a[i]
+    let j = Math.floor(Math.random() * (i + 1))
+    let x = a[i]
     a[i] = a[j]
     a[j] = x
   }
@@ -139,8 +139,8 @@ function fail () {
 function serialize (element, content, children) {
   switch (element.type) {
     case Elements.span: {
-      const group = []
-      const words = content.split(' ')
+      var group = []
+      var words = content.split(' ')
 
       for (let i = 0, len = words.length, chunk = []; i < len; i++) {
         chunk.push(words[i])

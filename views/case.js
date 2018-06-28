@@ -1,27 +1,27 @@
-const html = require('choo/html')
-const raw = require('choo/html/raw')
-const Component = require('choo/component')
-const asElement = require('prismic-element')
-const { asText, Elements } = require('prismic-richtext')
-const view = require('../components/view')
-const Figure = require('../components/figure')
-const button = require('../components/button')
-const { i18n } = require('../components/base')
+var html = require('choo/html')
+var raw = require('choo/html/raw')
+var Component = require('choo/component')
+var asElement = require('prismic-element')
+var {asText, Elements} = require('prismic-richtext')
+var view = require('../components/view')
+var Figure = require('../components/figure')
+var button = require('../components/button')
+var {i18n} = require('../components/base')
 
-const text = i18n()
+var text = i18n()
 
 module.exports = view(caseView, title)
 
 function caseView (state, emit) {
   if (state.documents.error) throw state.documents.error
 
-  let doc = state.documents.items.find((item) => item.uid === state.params.slug)
+  var doc = state.documents.items.find((item) => item.uid === state.params.slug)
 
   if (!doc) {
     emit('doc:fetch', {type: 'case', uid: state.params.slug})
 
     // try and lookup case as linked item on homepage
-    const parent = state.documents.items.find((doc) => doc.type === 'homepage')
+    let parent = state.documents.items.find((doc) => doc.type === 'homepage')
     if (parent) {
       doc = parent.data.featured_cases.find(function (item) {
         return item.case.uid === state.params.slug
@@ -139,7 +139,7 @@ function caseView (state, emit) {
           case 'testimonies': return html`
             <div class="View-grid">
               ${slice.items.map((props, index, list) => {
-                const background = props.color.split(' ').reduce((str, part) => {
+                var background = props.color.split(' ').reduce((str, part) => {
                   return str + part[0].toUpperCase() + part.substr(1)
                 }, '') || 'white'
 
@@ -248,10 +248,10 @@ class Topic extends Component {
 
 function title (state) {
   if (state.documents.loading) return text`Loading`
-  let doc = state.documents.items.find((item) => item.uid === state.params.slug)
+  var doc = state.documents.items.find((item) => item.uid === state.params.slug)
 
   if (!doc) {
-    const parent = state.documents.items.find((doc) => doc.type === 'homepage')
+    let parent = state.documents.items.find((doc) => doc.type === 'homepage')
 
     if (parent) {
       doc = parent.data.featured_cases.find(function (item) {
@@ -260,7 +260,7 @@ function title (state) {
     }
 
     if (!doc) {
-      const err = new Error('Page not found')
+      let err = new Error('Page not found')
       err.status = 404
       throw err
     }

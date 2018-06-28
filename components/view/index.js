@@ -1,13 +1,13 @@
-const html = require('choo/html')
-const error = require('./error')
-const Header = require('./header')
-const Footer = require('./footer')
-const { i18n } = require('../base')
-const Takeover = require('../takeover')
+var html = require('choo/html')
+var error = require('./error')
+var Header = require('./header')
+var Footer = require('./footer')
+var {i18n} = require('../base')
+var Takeover = require('../takeover')
 
-const DEFAULT_TITLE = 'The New Division'
+var DEFAULT_TITLE = 'The New Division'
 
-const text = i18n(require('./lang.json'))
+var text = i18n(require('./lang.json'))
 
 module.exports = createView
 
@@ -15,7 +15,7 @@ function createView (view, title) {
   return function (state, emit) {
     if (state.ui.isPartial) return view(state, emit)
 
-    let children
+    var children
     try {
       let next = typeof title === 'function' ? title(state) : title
       if (!next) next = DEFAULT_TITLE

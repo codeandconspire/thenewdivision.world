@@ -1,13 +1,13 @@
-const html = require('choo/html')
-const asElement = require('prismic-element')
-const { asText } = require('prismic-richtext')
-const view = require('../components/view')
-const Card = require('../components/card')
-const Figure = require('../components/figure')
-const { i18n } = require('../components/base')
-const Presentation = require('../components/presentation')
+var html = require('choo/html')
+var asElement = require('prismic-element')
+var {asText} = require('prismic-richtext')
+var view = require('../components/view')
+var Card = require('../components/card')
+var Figure = require('../components/figure')
+var {i18n} = require('../components/base')
+var Presentation = require('../components/presentation')
 
-const text = i18n()
+var text = i18n()
 
 module.exports = view(about, title)
 
@@ -18,7 +18,7 @@ function about (state, emit) {
     emit('ui:theme', 'sand')
   }
 
-  const doc = state.documents.items.find((doc) => doc.type === 'about')
+  var doc = state.documents.items.find((doc) => doc.type === 'about')
   if (!doc && !state.ui.isPartial) {
     emit('doc:fetch', {type: 'about'})
     return html`<main class="View-container View-container--fill"></main>`
@@ -29,7 +29,7 @@ function about (state, emit) {
     description: doc.data.summary[0].text
   })
 
-  const presentation = state.cache(
+  var presentation = state.cache(
     Presentation,
     `presentation-partial:${state.ui.isPartial}`,
     {static: !state.ui.isPartial}
@@ -92,7 +92,7 @@ function about (state, emit) {
             <div class="u-clip">
               <div class="View-grid u-spaceT4">
                 ${doc.data.testimonies.map((props, index, list) => {
-                  const background = props.color.split(' ').reduce((str, part) => {
+                  var background = props.color.split(' ').reduce((str, part) => {
                     return str + part[0].toUpperCase() + part.substr(1)
                   }, '') || 'white'
 
@@ -154,8 +154,8 @@ function workspace (doc) {
 
 function coworker (state, doc) {
   return function (person, index, list) {
-    const id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
-    const children = [
+    var id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
+    var children = [
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">

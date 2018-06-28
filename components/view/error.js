@@ -1,7 +1,7 @@
-const html = require('choo/html')
-const { i18n } = require('../base')
+var html = require('choo/html')
+var {i18n} = require('../base')
 
-const text = i18n(require('./lang.json'))
+var text = i18n(require('./lang.json'))
 
 module.exports = error
 

@@ -1,6 +1,6 @@
 module.exports = ui
 
-const THEMES = {
+var THEMES = {
   white: 'u-themeWhite',
   sand: 'u-themeSand'
 }
@@ -18,14 +18,14 @@ function ui (state, emitter, app) {
 
   emitter.on('ui:partial', function (href, getPartial) {
     getPartial(function () {
-      const matched = app.router.match(href)
-      const _state = Object.assign({}, state, {
+      var matched = app.router.match(href)
+      var _state = Object.assign({}, state, {
         href: href,
         route: matched.route,
         params: matched.params,
         ui: Object.assign({}, state.ui, {isPartial: true})
       })
-      const result = matched.cb(_state, emitter.emit.bind(emitter))
+      var result = matched.cb(_state, emitter.emit.bind(emitter))
       return result
     })
   })
@@ -33,9 +33,9 @@ function ui (state, emitter, app) {
   emitter.on('ui:theme', function (name) {
     state.ui.theme = name
     if (typeof window !== 'undefined') {
-      const theme = THEMES[name] || ''
+      var theme = THEMES[name] || ''
 
-      let value = document.documentElement.classList.value
+      var value = document.documentElement.classList.value
       if (/u-theme\w+/.test(value)) {
         value = value.replace(/u-theme\w+/, theme)
       } else {
@@ -50,12 +50,12 @@ function ui (state, emitter, app) {
   emitter.on('navigate', function () {
     state.ui.inTransition = false
 
-    const el = document.getElementById(window.location.hash.substr(1))
+    var el = document.getElementById(window.location.hash.substr(1))
 
     if (!el) {
       window.scrollTo(0, 0)
     } else {
-      const from = window.scrollY
+      let from = window.scrollY
       window.setTimeout(function () {
         // reset scroll to where it was before navigate
         window.scrollTo(window.scrollX, from)

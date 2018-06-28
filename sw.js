@@ -22,15 +22,15 @@ self.addEventListener('activate', function onactivate (event) {
 })
 
 self.addEventListener('fetch', function onfetch (event) {
-  const req = event.request
-  const url = new self.URL(req.url)
-  const isHTML = req.headers.get('accept').includes('text/html')
+  var req = event.request
+  var url = new self.URL(req.url)
+  var isHTML = req.headers.get('accept').includes('text/html')
 
   event.respondWith(
     caches.open(CACHE_KEY).then(cache => {
       return cache.match(req).then(cached => {
-        const isLocal = self.location.origin === url.origin
-        const isCMS = url.href.indexOf(PRISMIC_ENDPOINT) === 0
+        var isLocal = self.location.origin === url.origin
+        var isCMS = url.href.indexOf(PRISMIC_ENDPOINT) === 0
 
         // bypass cache for certain types
         if ((isHTML && isLocal) || isCMS || IS_DEVELOPMENT) {

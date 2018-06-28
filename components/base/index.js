@@ -1,14 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-const assert = require('assert')
-const nanoraf = require('nanoraf')
-const common = require('./lang.json')
+var fs = require('fs')
+var path = require('path')
+var assert = require('assert')
+var nanoraf = require('nanoraf')
+var common = require('./lang.json')
 
 if (typeof window !== 'undefined') {
   require('smoothscroll-polyfill').polyfill()
 }
 
-const cache = []
+var cache = []
 if (typeof window !== 'undefined') {
   window.addEventListener('resize', nanoraf(function () {
     for (let i = 0, len = cache.length, el; i < len; i++) {
@@ -25,12 +25,12 @@ if (typeof window !== 'undefined') {
 // inspect element position relative to scroll offset
 // arr -> void
 function inview ([el, box, cb]) {
-  const viewport = vh()
-  const scroll = window.scrollY
-  const top = Math.max(scroll - box.top, 0)
-  const bottom = Math.min((scroll + viewport) - (box.top + box.height), 0)
+  var viewport = vh()
+  var scroll = window.scrollY
+  var top = Math.max(scroll - box.top, 0)
+  var bottom = Math.min((scroll + viewport) - (box.top + box.height), 0)
 
-  let fraction = 1 - (Math.abs(top + bottom) / box.height)
+  var fraction = 1 - (Math.abs(top + bottom) / box.height)
   if (fraction < 0) fraction = 0
   else if (fraction > 1) fraction = 1
 
@@ -45,12 +45,12 @@ function inview ([el, box, cb]) {
 // HTMLElement -> void
 exports.mousemove = mousemove
 function mousemove (el) {
-  let enterTop = 0
-  let enterLeft = 0
-  const {offsetWidth, offsetHeight} = el
-  const onmousemove = nanoraf(function (event) {
-    const left = ((event.layerX - enterLeft) / offsetWidth).toFixed(2)
-    const top = ((event.layerY - enterTop) / offsetHeight).toFixed(2)
+  var enterTop = 0
+  var enterLeft = 0
+  var {offsetWidth, offsetHeight} = el
+  var onmousemove = nanoraf(function (event) {
+    var left = ((event.layerX - enterLeft) / offsetWidth).toFixed(2)
+    var top = ((event.layerY - enterTop) / offsetHeight).toFixed(2)
     el.style.setProperty('--mouse-x', left)
     el.style.setProperty('--mouse-y', top)
   })
@@ -87,7 +87,7 @@ function observe (el, cb) {
   assert(el instanceof window.HTMLElement, 'base: el should be a DOM node')
   assert(typeof cb === 'function', 'base: cb should be a function')
 
-  let index = cache.findIndex((item) => item[0] === el)
+  var index = cache.findIndex((item) => item[0] === el)
   if (index === -1) {
     let top = el.offsetTop
     let next = el
@@ -104,15 +104,15 @@ function observe (el, cb) {
   })
 }
 
-const IMAGE_CDN_URL = `https://ik.imagekit.io/ryozgj42m/`
-const PRISMIC_CDN_URL = 'https://thenewdivision.cdn.prismic.io/thenewdivision/'
+var IMAGE_CDN_URL = `https://ik.imagekit.io/ryozgj42m/`
+var PRISMIC_CDN_URL = 'https://thenewdivision.cdn.prismic.io/thenewdivision/'
 
 // construct image attr hash for prismic image
 // (obj, arr?) -> obj
 exports.imgattrs = imgattrs
 function imgattrs (props, sizes = []) {
-  const uri = props.url.split(PRISMIC_CDN_URL)[1]
-  const attrs = {
+  var uri = props.url.split(PRISMIC_CDN_URL)[1]
+  var attrs = {
     alt: props.alt || '',
     src: `${IMAGE_CDN_URL}tr:w-1280,q-85,pr-true/${uri}`,
     width: props.dimensions.width,
@@ -163,13 +163,13 @@ function i18n (source) {
   return function (strings, ...parts) {
     parts = parts || []
 
-    const key = Array.isArray(strings) ? strings.join('%s') : strings
-    let value = source[key] || common[key]
+    var key = Array.isArray(strings) ? strings.join('%s') : strings
+    var value = source[key] || common[key]
 
     if (!value) {
       value = common[key] = key
       if (typeof window === 'undefined') {
-        const file = path.join(__dirname, 'lang.json')
+        var file = path.join(__dirname, 'lang.json')
         fs.writeFileSync(file, JSON.stringify(common, null, 2))
       }
     }
