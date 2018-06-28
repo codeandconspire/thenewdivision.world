@@ -7,7 +7,7 @@ module.exports = error
 
 function error (err) {
   return html`
-    <main class="View-error">
+    <main class="View-container View-container--nudge View-container--center">
       <h1 class="Display Display--2">${text`Oops`}</h1>
       <div class="Text Text--center">
         ${err.status === 404 ? html`

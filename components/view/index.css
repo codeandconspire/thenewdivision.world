@@ -29,6 +29,10 @@
   padding-top: calc(var(--space) * 20);
 }
 
+.View-container--center {
+  margin: auto;
+}
+
 .View-header  {
   flex: 0 0 auto;
   display: flex;
@@ -105,7 +109,7 @@
     margin-left: calc(var(--space) * 0.5);
     margin-right: calc(var(--space) * 0.5);
   }
-  
+
   .View-nav--supplemental {
     display: inline-block;
   }
@@ -123,10 +127,6 @@
   position: relative;
   width: 0.7em;
   height: 0.7em;
-}
-
-.View-error {
-  margin: auto;
 }
 
 .View-divider {
