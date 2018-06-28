@@ -17,6 +17,15 @@
       ]
     ]
   },
+  "now": {
+    "env": {
+      "NODE_ENV": "production",
+      "PRISMIC_THENEWDIVISION_SECRET": "@prismic-thenewdivision-secret",
+      "CLOUDFLARE_THENEWDIVISION_ZONE": "@cloudflare-thenewdivision-zone",
+      "CLOUDFLARE_CODEANDCONSPIRE_EMAIL": "@cloudflare-codeandconspire-email",
+      "CLOUDFLARE_CODEANDCONSPIRE_KEY": "@cloudflare-codeandconspire-key"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codeandconspire/thenewdivision.world.git"
