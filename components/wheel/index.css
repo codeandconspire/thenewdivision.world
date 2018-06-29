@@ -1,5 +1,33 @@
 /* @define Wheel */
 
-.Wheel {
+@supports (position: sticky) {
+  .Wheel {
+    height: calc(100vh * 6);
+    padding-top: 20vh;
+  }
+}
 
+.Wheel-graphic {
+  height: 100vh;
+  width: auto;
+  position: sticky;
+  top: 0;
+  left: 0;
+  transform-origin: 50% 50%;
+  transform: scale(3) translate(-31%, -1%) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
+  /* will-change: transform; */
+}
+
+.Wheel-title {
+  font-size: 42px;
+  font-family: var(--giorgio-sans-bold);
+  line-height: var(--giorgio-sans-bold-line-height);
+  letter-spacing: var(--giorgio-sans-bold-letter-spacing);
+}
+
+.Wheel-text {
+  font-size: 24px;
+  opacity: var(--part-progress);
+  transform: translateY(calc(var(--part-progress) * var(--part-inview) * 10vh));
+  /* will-change: transform, opacity; */
 }

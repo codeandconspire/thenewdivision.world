@@ -78,6 +78,18 @@ function mousemove (el) {
   }
 }
 
+// walk DOM upwards calulating offset top
+// (HTMLElement) -> num
+exports.offset = offset
+function offset (el) {
+  var top = el.offsetTop
+  var next = el
+  while ((next = next.offsetParent)) {
+    if (!isNaN(next.offsetTop)) top += next.offsetTop
+  }
+  return top
+}
+
 // observe how much of an element is in view
 // (HTMLElement, fn) -> fn
 exports.observe = observe
@@ -89,12 +101,7 @@ function observe (el, cb) {
 
   var index = cache.findIndex((item) => item[0] === el)
   if (index === -1) {
-    let top = el.offsetTop
-    let next = el
-    while ((next = next.offsetParent)) {
-      if (!isNaN(next.offsetTop)) top += next.offsetTop
-    }
-    index = cache.push([el, {top: top, height: el.offsetHeight}, cb]) - 1
+    index = cache.push([el, {top: offset(el), height: el.offsetHeight}, cb]) - 1
   }
 
   inview(cache[index])

@@ -1,6 +1,7 @@
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
+var {offset} = require('../base')
 
 var GOOD_WIDTH_PORPORTION = 0.23
 var GOOD_BORDER_PORPORTION = 0.01
@@ -60,12 +61,7 @@ module.exports = class Good extends Component {
       border = viewport * GOOD_BORDER_PORPORTION
       size = rows.reduce((sum, el) => sum + el.offsetHeight - border, height)
 
-      top = element.offsetTop
-      var next = element
-      while ((next = next.offsetParent)) {
-        if (!isNaN(next.offsetTop)) top += next.offsetTop
-      }
-
+      top = offset(element)
       onscroll()
     })
 

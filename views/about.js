@@ -3,8 +3,9 @@ var asElement = require('prismic-element')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
 var Card = require('../components/card')
-var Figure = require('../components/figure')
+var Wheel = require('../components/wheel')
 var {i18n} = require('../components/base')
+var Figure = require('../components/figure')
 var Presentation = require('../components/presentation')
 
 var text = i18n()
@@ -74,6 +75,7 @@ function about (state, emit) {
                 </article>
               `)}
             </div>
+            ${state.cache(Wheel, 'services-wheel').render()}
           </section>
           <section id="process" class="u-spaceV8">
             <div class="View-grid u-spaceV8">
