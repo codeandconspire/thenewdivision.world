@@ -33,20 +33,21 @@
   margin: auto;
 }
 
+/**
+ * 1. Fix the alignment with the nav and nav information.
+ */
+
 .View-header  {
   flex: 0 0 auto;
   display: flex;
-  align-items: center;
+  align-items: top;
   width: 100%;
   padding: calc(var(--space) * 4);
+  padding-top: calc(var(--space) * 6); /* 1 */
   position: absolute;
   z-index: 2;
   user-select: none;
 }
-
-/**
- * 1. Fix the alignment with the nav. Taking the logo subline into account.
- */
 
 .View-home {
   display: block;
@@ -55,7 +56,7 @@
   width: 100%;
   max-width: 128px;
   position: relative;
-  margin-bottom: -10px; /* 1 */
+  margin-top: calc((var(--space) * 2) * -1); /* 1 */
 }
 
 @media (min-width: 600px) {
@@ -67,6 +68,11 @@
 @media (min-width: 1000px) {
   .View-home {
     max-width: 205px;
+    margin-top: -5px; /* 1 */
+  }
+
+  .View-header {
+    padding-top: calc((var(--space) * 4) + 5px); /* 1 */
   }
 }
 
@@ -98,6 +104,7 @@
   color: currentColor;
   text-decoration: none;
   position: relative;
+  white-space: nowrap;
 }
 
 .View-nav--supplemental {
@@ -128,6 +135,43 @@
   width: 0.7em;
   height: 0.7em;
 }
+
+/**
+ * Nav address & contact
+ */
+
+.View-navWrap {
+  display: flex;
+  align-items: baseline;
+  text-align: right;
+}
+
+.View-navInfo {
+  font-size: var(--font-size-xs);
+  display: none;
+  color: #fff;
+  margin-right: calc(var(--space) * 7);
+}
+
+.View-navHeading {
+  color: #000;
+}
+
+@media (min-width: 800px) {
+  .View-navInfo {
+    display: block;
+  }
+}
+
+@media (min-width: 1300px) {
+  .View-navInfo {
+    margin-right: calc(var(--space) * 12);
+  }
+}
+
+/**
+ * Dividers
+ */
 
 .View-divider {
   margin: calc(var(--space) * 20) 0;

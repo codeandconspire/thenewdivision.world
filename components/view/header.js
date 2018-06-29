@@ -21,7 +21,7 @@ module.exports = class Header extends Component {
     this.route = route
     var self = this
     var href = this.state.href
-    var isAbout = route === '/about'
+    var isAbout = route === '/about' || route === 'about'
     var isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/words'))
 
     return html`
@@ -32,13 +32,32 @@ module.exports = class Header extends Component {
         </a>
 
         ${!isHomepage ? html`
-          <nav>
-            <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'about'})}>
-              <svg width="10" height="10" viewBox="0 0 10 10" class="View-navIcon">
-                <path fill-rule="evenodd" fill="currentColor" d="M6.4 5L10 8.6 8.6 10 5 6.4 1.4 10 0 8.6 3.6 5 0 1.4 1.4 0 5 3.6 8.6 0 10 1.4 6.4 5z"/>
-              </svg> ${text`Close`}
-            </a>
-          </nav>
+          <div class="View-navWrap">
+            ${isAbout ? html`
+              <div class="View-navWrap">
+                <section class="View-navInfo">
+                  <h1 class="View-navHeading">Contact us</h1>
+                  <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a><br />
+                  <a href="tel:+46834950230">+46 834 950 230</a>
+                </section>
+                <section class="View-navInfo">
+                  <h1 class="View-navHeading">Address</h1>
+                  <a href="https://goo.gl/maps/TEWDAjA4sds" target="_blank" rel="noopener noreferrer">
+                    The New Divison<br />
+                    C/o Alma, Nybrogatan 8<br />
+                    Stockholm, Sweden
+                  </a>
+                </section>
+              </div>
+            ` : null}
+            <nav>
+              <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'about'})}>
+                <svg width="10" height="10" viewBox="0 0 10 10" class="View-navIcon">
+                  <path fill-rule="evenodd" fill="currentColor" d="M6.4 5L10 8.6 8.6 10 5 6.4 1.4 10 0 8.6 3.6 5 0 1.4 1.4 0 5 3.6 8.6 0 10 1.4 6.4 5z"/>
+                </svg> ${text`Close`}
+              </a>
+            </nav>
+          </div>
         ` : html`
           <nav>
             <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">${text`Store`}</a>
