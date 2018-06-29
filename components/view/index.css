@@ -136,6 +136,39 @@
   height: 0.7em;
 }
 
+.View-navBanner {
+  width: calc(var(--font-size-xs) *1.4);
+  height: calc(var(--font-size-xs) *1.4);
+  vertical-align: middle;
+  position: relative;
+  top: calc((var(--font-size-xs) * 0.15) * -1);
+  left: calc((var(--font-size-xs) * 0.4) * -1);
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .View-navBanner {
+    display: inline-block
+  }
+}
+
+@media (min-width: 1500px) {
+  .View-navBanner {
+    width: 26px;
+    height: 26px;
+    left: -9px;
+  }
+}
+
+@media (min-width: 2400px) {
+  .View-navBanner {
+    width: 30px;
+    height: 30px;
+    left: -11px;
+    top: -5px;
+  }
+}
+
 /**
  * Nav address & contact
  */
@@ -151,10 +184,12 @@
   display: none;
   color: #fff;
   margin-right: calc(var(--space) * 7);
+  user-select: auto;
 }
 
 .View-navHeading {
   color: #000;
+  user-select: none;
 }
 
 @media (min-width: 800px) {

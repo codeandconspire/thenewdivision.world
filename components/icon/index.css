@@ -37,6 +37,18 @@
   position: relative;
 }
 
+.Icon--fill,
+.Icon--fill:hover,
+.Icon--fill:active {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 0;
+  transition: none;
+  transform: none;
+  will-change: auto;
+}
+
 .Icon--linkedin .Icon-image {
   top: -1px;
 }

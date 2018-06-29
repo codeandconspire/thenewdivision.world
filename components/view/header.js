@@ -2,6 +2,7 @@ var html = require('choo/html')
 var Component = require('choo/component')
 var Takeover = require('../takeover')
 var {i18n} = require('../base')
+var icon = require('../icon')
 
 var text = i18n(require('./lang.json'))
 
@@ -60,7 +61,10 @@ module.exports = class Header extends Component {
           </div>
         ` : html`
           <nav>
-            <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">${text`Store`}</a>
+            <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">
+              <span class="View-navBanner">${icon.globalgoals()}</span>
+              ${text`Store`}
+            </a>
             <a class="View-nav View-nav--supplemental" href="#cases" onclick=${cleanHash}>${text`Cases`}</a>
             <a class="View-nav View-nav--supplemental" href="#words" onclick=${cleanHash}>${text`Words`}</a>
             <a class="View-nav" href="/about" onclick=${explode('sand')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
