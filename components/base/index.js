@@ -229,7 +229,7 @@ function supports (rule) {
   try {
     var computedPseudoStyle = window.getComputedStyle(el, ':before')
     var pseudoContentValue = computedPseudoStyle.getPropertyValue('content')
-    result = pseudoContentValue === `"${id}"`
+    result = pseudoContentValue.indexOf(id) !== -1
   } catch (err) {
     result = false
   }

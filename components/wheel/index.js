@@ -22,7 +22,9 @@ module.exports = class Wheel extends Component {
   constructor (id) {
     super(id)
     this.branches = []
-    this.hasSticky = typeof window === 'undefined' || supports('position: sticky')
+    this.hasSticky = typeof window === 'undefined' ||
+      supports('position: sticky') ||
+      supports('position: -webkit-sticky')
   }
 
   load (element) {
