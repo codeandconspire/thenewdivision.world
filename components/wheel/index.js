@@ -1,20 +1,21 @@
+var assert = require('assert')
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
-var {offset, vh} = require('../base')
+var {offset, vh, modulate} = require('../base')
 
 var BRANCHES = [
-  // [[pathX, pathY], pathLine, branchTranslate, titleX, rotationAxisOffset, number, title]
-  [[701, 304.8], 'l172.6.2', '699.8 248.68', 32.7, 0.2, '01', 'Awareness'],
-  [[942.3, 409.4], 'l181-.2', '941.27 353.25', 36.6, 0.3, '02', 'Connecting'],
-  [[1063.6, 588.1], 'l219.2.1', '1062.35 532.14', 37.4, 1, '03', 'Business Case'],
-  [[1065.8, 852.6], 'l149.2-.1', '1066.64 796.27', 38.3, 1, '04', 'Strategy'],
-  [[920, 1030.3], 'l137.5-.1', '925.27 973.97', 37.6, 0, '05', 'Culture'],
-  [[692.3, 1118.3], 'l142.6-.2', '706.03 1062.17', 38.1, -0.5, '06', 'Design'],
-  [[471.4, 1018.4], 'l244.8-.2', '485.03 962.23', 35.4, -0.55, '07', 'Communication'],
-  [[346.9, 826.6], 'l175-.2', '352.46 770.5', 38.3, -0.55, '08', 'Activation'],
-  [[322.6, 581.5], 'l174.9.1', '325.9 525.5', 38.1, 0.15, '09', 'Evaluation'],
-  [[464.3, 383.2], 'l159.2-.2', '471.44 326.99', 32.7, -0.21, '10', 'Evolution']
+  // [[pathX, pathY], pathLine, branchTranslate, titleX, rotationAxisOffset, number, title, descriptionId]
+  [[701, 304.8], 'l172.6.2', '699.8 248.68', 32.7, 0.2, '01', 'Awareness', 'awareness_description'],
+  [[942.3, 409.4], 'l181-.2', '941.27 353.25', 36.6, 0.3, '02', 'Impact', 'impact_description'],
+  [[1063.6, 588.1], 'l219.2.1', '1062.35 532.14', 37.4, 1, '03', 'Business Case', 'business_case_description'],
+  [[1065.8, 852.6], 'l149.2-.1', '1066.64 796.27', 38.3, 1, '04', 'Strategy', 'strategy_description'],
+  [[920, 1030.3], 'l137.5-.1', '925.27 973.97', 37.6, 0, '05', 'Culture', 'culture_description'],
+  [[692.3, 1118.3], 'l142.6-.2', '706.03 1062.17', 38.1, -0.5, '06', 'Design', 'design_description'],
+  [[471.4, 1018.4], 'l244.8-.2', '485.03 962.23', 35.4, -0.55, '07', 'Communication', 'communication_description'],
+  [[346.9, 826.6], 'l175-.2', '352.46 770.5', 38.3, -0.55, '08', 'Activation', 'activation_description'],
+  [[322.6, 581.5], 'l174.9.1', '325.9 525.5', 38.1, 0.15, '09', 'Evaluation', 'evaluation_description'],
+  [[464.3, 383.2], 'l159.2-.2', '471.44 326.99', 32.7, -0.21, '10', 'Evolution', 'evolution_description']
 ]
 
 module.exports = class Wheel extends Component {
@@ -48,9 +49,21 @@ module.exports = class Wheel extends Component {
 
         el.style.removeProperty('visibility')
         anchors[i].style.removeProperty('visibility')
+
+        // figure out each slices position (deg)
         let position = (progress * 360 + 72) - ((i + 1) * 36)
+        // convert where slice is in view (between -35° and 72°) to decimals
         let inview = (position - -35) / (72 - -35)
-        el.style.setProperty('--part-progress', inview.toFixed(2))
+
+        let visible
+        if (inview > 0.3 && inview < 0.8) {
+          if (inview < 0.4) visible = modulate(inview, [0.3, 0.4], [0, 1])
+          else if (inview > 0.7) visible = modulate(inview, [0.8, 0.7], [0, 1])
+          else visible = 1
+        } else {
+          visible = 0
+        }
+        el.style.setProperty('--part-progress', visible.toFixed(2))
 
         // el.style.setProperty('--part-inview', 1 : 0)
         let value = `rotate(${360 * progress - 72}, ${x}, ${y + offset})`
@@ -80,7 +93,9 @@ module.exports = class Wheel extends Component {
     return false
   }
 
-  createElement () {
+  createElement (doc) {
+    assert(typeof doc === 'object', 'wheel: doc should be an object')
+
     var self = this
 
     return html`
@@ -120,7 +135,7 @@ module.exports = class Wheel extends Component {
     // create and cache wheel branch from props
     // (arr, num) -> HTMLElement
     function branch (props, index) {
-      var [coordinates, line, translate, x, , num, title] = props
+      var [coordinates, line, translate, x, , num, title, descriptionId] = props
       var d = 'M' + coordinates.join(' ') + line
 
       var el
@@ -142,7 +157,9 @@ module.exports = class Wheel extends Component {
               <tspan x="${x}" y="42" class="Wheel-title">${title}</tspan>
             </text>
             <text fill="#FFF">
-              <tspan x="0" y="104" class="Wheel-text">Trololol</tspan>
+              ${doc.data[descriptionId][0].text.split('\n').map((line, index) => html`
+                <tspan x="0" y="${88 + index * 16}" class="Wheel-text">${line}</tspan>
+              `)}
             </text>
           </g>
         </g>

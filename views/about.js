@@ -75,7 +75,7 @@ function about (state, emit) {
                 </article>
               `)}
             </div>
-            ${state.cache(Wheel, 'services-wheel').render()}
+            ${state.cache(Wheel, 'services-wheel').render(doc)}
           </section>
           <section id="process" class="u-spaceV8">
             <div class="View-grid u-spaceV8">

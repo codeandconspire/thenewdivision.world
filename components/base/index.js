@@ -184,3 +184,24 @@ function i18n (source) {
     return value
   }
 }
+
+// modulate value in range (from Framer.js)
+// (num, arr, arr, bool) -> num
+exports.modulate = modulate
+function modulate (value, rangeA, rangeB, limit = false) {
+  var [fromLow, fromHigh] = rangeA
+  var [toLow, toHigh] = rangeB
+  var result = toLow + (((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow))
+
+  if (limit === true) {
+    if (toLow < toHigh) {
+      if (result < toLow) { return toLow }
+      if (result > toHigh) { return toHigh }
+    } else {
+      if (result > toLow) { return toLow }
+      if (result < toHigh) { return toHigh }
+    }
+  }
+
+  return result
+}
