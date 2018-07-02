@@ -120,7 +120,6 @@ var PRISMIC_CDN_URL = 'https://thenewdivision.cdn.prismic.io/thenewdivision/'
 exports.imgattrs = imgattrs
 function imgattrs (props, sizes = []) {
   var uri = decodeURIComponent(props.url).split(PRISMIC_CDN_URL)[1]
-  console.log(uri)
   var attrs = {
     alt: props.alt || '',
     src: `${IMAGE_CDN_URL}tr:w-1280,q-90,pr-true/${uri}`,
