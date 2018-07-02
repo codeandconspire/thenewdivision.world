@@ -2,21 +2,26 @@
 
 .u-slideInY {
   opacity: 0;
-  transform: translateY(50px);
-  animation: slideIn 250ms 200ms forwards var(--slide-in);
+  transform: translateY(150px);
+  animation: slideIn 500ms 200ms forwards var(--slide-in), fadeIn 350ms 200ms forwards var(--slide-in);
   will-change: transform, opacity;
 }
 
-.u-slideInX {
+.u-fadeInX {
   opacity: 0;
-  transform: translateX(50px);
-  animation: slideIn 250ms 200ms forwards var(--slide-in);
+  transform: translateX(150px);
+  animation: slideIn 500ms 200ms forwards var(--slide-in), slideIn 350ms 200ms forwards var(--slide-in);
   will-change: transform, opacity;
 }
 
 @keyframes slideIn {
   to {
-    opacity: 1;
     transform: translate(0px, 0px);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }

@@ -8,6 +8,7 @@ var THEMES = {
 function ui (state, emitter, app) {
   state.ui = {
     theme: 'white',
+    isFirst: true,
     isPartial: false,
     inTransition: false
   }
@@ -49,6 +50,8 @@ function ui (state, emitter, app) {
   // circumvent choo default scroll-to-anchor behavior
   emitter.on('navigate', function () {
     state.ui.inTransition = false
+
+    state.ui.isFirst = false
 
     var el = document.getElementById(window.location.hash.substr(1))
 

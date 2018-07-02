@@ -37,10 +37,5 @@
   "Who we work with": "Who we work with",
   "Read more": "Read more",
   "Store": "Store",
-  "Case studies": "Case studies",
-  "Cannot read property 'square' of undefined": "Cannot read property 'square' of undefined",
-  "t.map is not a function": "t.map is not a function",
-  "Cannot read property 'map' of undefined": "Cannot read property 'map' of undefined",
-  "Cannot read property '0' of undefined": "Cannot read property '0' of undefined",
-  "this.cache is not a function": "this.cache is not a function"
+  "Case studies": "Case studies"
 }

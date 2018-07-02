@@ -19,10 +19,15 @@ function home (state, emit) {
     emit('ui:theme', 'white')
   }
 
+  var animate = state.ui.isPartial || (state.ui.isFirst && typeof window !== 'undefined')
+
   var presentation = state.cache(
     Presentation,
     `presentation-partial:${state.ui.isPartial}`,
-    {static: !state.ui.isPartial}
+    {
+      static: !animate,
+      ltr: state.ui.isFirst
+    }
   )
 
   var doc = state.documents.items.find((doc) => doc.type === 'homepage')
@@ -40,14 +45,22 @@ function home (state, emit) {
     description: doc.data.summary[0].text
   })
 
+  function delay (i) {
+    if (state.ui.isFirst) {
+      return 250 + 50 * (i % 2)
+    } else if (state.ui.isPartial) {
+      return 300 - 50 * (i % 2)
+    }
+  }
+
   return html`
-    <main class="View-container View-container--nudge">
+    <main class="View-container">
       ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
       <section id="cases">
         <h2 class="u-hiddenVisually">${text`Case studies`}</h2>
         <div class="View-grid View-grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
-            <div class="View-cell u-md-size1of2 u-spaceT5 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? `animation-delay: ${300 - 100 * (i % 2)}ms;` : ''}">
+            <div class="View-cell u-md-size1of2 u-spaceT5 ${animate ? 'u-slideInY' : ''}" style="${animate ? `animation-delay: ${delay(i)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Figure-outer" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
                 ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, {interactive: true, sizes: [['50vw', 600]]}).render(props.image)}
                 <h3 class="u-textBold u-spaceT2">${asText(props.case.data.title)}</h3>

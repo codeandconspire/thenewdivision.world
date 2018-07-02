@@ -31,7 +31,7 @@ function caseView (state, emit) {
         <main class="View-container View-container--nudge View-container--fill">
           <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <div class="View-reverse View-reverse--md">
-            <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
+            <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
               ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`, {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(doc.data.image) : null}
             </div>
           </div>
@@ -59,10 +59,10 @@ function caseView (state, emit) {
         <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
           ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`, {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(doc.data.image) : null}
         </div>
-        <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 125ms;' : ''}">
+        <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
             <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
-              ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-'), {size: list.length > 1 ? 'small' : 'large'}).render(item)}
+              ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-')).render(item)}
             </div>
           `)}
         </section>
@@ -190,7 +190,6 @@ class Topic extends Component {
   constructor (id, state, opts = {}) {
     super(id)
     this.id = id
-    this.size = opts.size
     this.resolve = state.documents.resolve
     this.local = state.components[id] = {expanded: false}
   }
@@ -223,11 +222,11 @@ class Topic extends Component {
       <div id="${this.id}">
         ${props.heading ? html`
           <div class="Text Text--full">
-            <hr class="u-spaceB2">
-            <h2 class="u-textSize${this.size === 'small' ? 'Md' : 'Lg'}">${asText(props.heading).trim()}</h2>
+            <hr class="u-spaceB3">
+            <h2 class="u-textSizeSm">${asText(props.heading).trim()}</h2>
           </div>
         ` : null}
-        <div class="Text Text--wide u-textSize${this.size === 'small' ? 'Sm' : 'Lg'} u-spaceT1">
+        <div class="Text Text--wide u-spaceT1">
           ${asElement(props.body.slice(0, 1), this.resolve, serialize)}
         </div>
         <div class="Text u-spaceB6">

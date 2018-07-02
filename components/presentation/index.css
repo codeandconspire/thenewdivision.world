@@ -7,37 +7,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
-  min-height: 100vh;
-  padding-top: 10vh;
-  overflow: hidden;
+  padding: 19vh 0 4vh;
 }
 
 .Presentation-text {
   display: none;
-}
-
-.Presentation-link--tilted {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #fff;
-  font-size: 12px;
-  transform: translate(100%) rotate(90deg) translate(-78%, calc(-100% - 12px));
-  transform-origin: 0 0;
-  white-space: nowrap;
-}
-
-.Presentation-link--tilted::after {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  position: relative;
-  bottom: -4px;
-  left: 6px;
-  background: url("./arrow.svg") 0 0 no-repeat;
-  background-size: 6px;
 }
 
 .Presentation-title {
@@ -47,88 +21,92 @@
 }
 
 .Presentation-col {
-  height: 12vh;
-  margin: 2vh;
+  height: 13.5vh;
+  margin: 0 0 3vh 0;
   position: relative;
-  opacity: 0;
-  transform: translateX(-20vh);
-  animation: Presentation-col--appear 250ms forwards var(--slide-in);
+  opacity: 1;
+  transform: translate(0px, 100px);
+  animation: Presentation-col--fade 350ms forwards var(--slide-in), Presentation-col--slide 500ms forwards var(--slide-in);
   will-change: transform;
 }
 
-.Presentation--static .Presentation-col {
+:root.has-js .Presentation-col {
+  opacity: 0;
+}
+
+:root.has-js .Presentation--static .Presentation-col {
   opacity: 1;
   transform: none;
   animation: none;
   will-change: unset;
+  transform: translate(0px, 0px);
+}
+
+.Presentation-col:first-child .Presentation-title {
+  transform: translateX(-3%);
 }
 
 .Presentation-col:nth-child(1) {
-  left: 0%;
+  left: 1vw;
   animation-delay: 100ms;
 }
 
 .Presentation-col:nth-child(2) {
-  left: 14vw;
+  left: 11vw;
   animation-delay: 130ms;
 }
 
 .Presentation-col:nth-child(3) {
-  left: 10vw;
+  left: 7vw;
   animation-delay: 200ms;
 }
 
 .Presentation-col:nth-child(4) {
-  left: 18vw;
+  left: 23vw;
   animation-delay: 275ms;
 }
 
-@keyframes Presentation-col--appear {
+@keyframes Presentation-col--slide {
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes Presentation-col--fade {
   to {
     opacity: 1;
-    transform: translate(0vh, 0vw);
   }
-}
-
-@media (orientation: landscape) and (min-width: 600px) {
-  .Presentation-col {
-    transform: translateY(10vh);
-  }
-}
-
-@media (min-width: 600px) {
-  .Presentation-col {
-    height: 16vh;
-  }
-
-  .Presentation-link--tilted {
-    font-size: 1em;
-  }
-
-  .Presentation-link--tilted::after {
-    bottom: -2px;
-    background-size: 8px;
-  }
-
-  .Presentation-col:nth-child(2) { left: 14vw; }
-  .Presentation-col:nth-child(3) { left: 10vw; }
-  .Presentation-col:nth-child(4) { left: 26vw; }
 }
 
 @media (min-width: 900px) {
   .Presentation {
     align-items: flex-end;
     flex-direction: row;
-    height: 100vh;
     margin: 0 calc((var(--space) * 1) * -1);
+    min-height: 78vh;
+    padding: 30vh 0 0 0;
   }
 
   .Presentation .Presentation-col {
     flex: 0 1 auto;
     height: auto;
     height: unset;
-    margin: 0 calc(var(--space) * 3);
     left: 0;
+    transform: translate(0px, 150px);
+    margin: var(--space) var(--space) 0;
+  }
+
+  .Presentation .Presentation-col + .Presentation-col {
+    margin-left: calc(var(--space) * 3);
+  }
+
+  .Presentation-col {
+    transition: transform 500ms var(--ease);
+  }
+
+  .Presentation-col:hover {
+    transform: translateY(-8px);
+    transition-delay: 20ms;
   }
 
   .Presentation-title {
@@ -139,27 +117,12 @@
 
   .Presentation-text {
     display: block;
-    border-top: 2px solid currentColor;
-    margin: calc(var(--space) * 3) 0;
-    padding-top: calc(var(--space) * 2);
-    font-size: var(--font-size-xs);
+    margin: calc(var(--space) * 3) 0 var(--space) 0;
+    font-size: var(--font-size-sm);
   }
 
   .Presentation-text > p + p {
     margin-top: 1em;
-  }
-
-  .Presentation-link {
-    display: inline-block;
-    padding-left: 1.5em;
-    margin-top: 1em;
-    color: var(--link-color);
-    text-decoration: none;
-    background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2213%22%20height%3D%229%22%20viewBox%3D%220%200%2013%209%22%3E%3Cpath%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M6.4%204.5L10.6.3l2.1%202.1-6.3%206.3L.1%202.4%202.2.3l4.2%204.2z%22/%3E%3C/svg%3E);
-    background-repeat: no-repeat;
-    background-position: 0 0.25em;
-    transition: background-position 125ms var(--snap);
-    user-select: none;
   }
 
   .Presentation-link--tilted {
@@ -175,7 +138,7 @@
   }
 
   .Presentation-col:nth-last-child(2) {
-    animation-delay: 130ms;
+    animation-delay: 150ms;
   }
 
   .Presentation-col:nth-last-child(3) {
@@ -183,6 +146,46 @@
   }
 
   .Presentation-col:nth-last-child(4) {
-    animation-delay: 275ms;
+    animation-delay: 250ms;
+  }
+
+  .Presentation--ltr .Presentation-col:nth-last-child(1) {
+    animation-delay: 250ms;
+  }
+
+  .Presentation--ltr .Presentation-col:nth-last-child(2) {
+    animation-delay: 200ms;
+  }
+
+  .Presentation--ltr .Presentation-col:nth-last-child(3) {
+    animation-delay: 150ms;
+  }
+
+  .Presentation--ltr .Presentation-col:nth-last-child(4) {
+    animation-delay: 100ms;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Presentation .Presentation-col + .Presentation-col {
+    margin-left: calc(var(--space) * 4);
+  }
+}
+
+@media (min-width: 900px) and (min-height: 1000px) {
+  .Presentation {
+    padding-top: 18vh;
+  }
+}
+
+@media (min-width: 1400px) and (max-height: 600px) {
+  .Presentation .Presentation-col + .Presentation-col {
+    margin-left: calc(var(--space) * 10);
+  }
+}
+
+@media (min-width: 900px) and (max-height: 400px) {
+  .Presentation .Presentation-col + .Presentation-col {
+    margin-left: calc(var(--space) * 10);
   }
 }
