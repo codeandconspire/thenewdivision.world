@@ -34,9 +34,6 @@ module.exports = class Wheel extends Component {
     var onscroll = nanoraf(() => {
       var viewport = vh()
       var {scrollY} = window
-      if (scrollY > top + height || scrollY + viewport < top) {
-        return
-      }
 
       if (!this.hasSticky) {
         if (scrollY + viewport <= top + height && scrollY >= top) {
@@ -53,6 +50,8 @@ module.exports = class Wheel extends Component {
           }
         }
       }
+
+      if (scrollY > top + height || scrollY + viewport < top) return
 
       var progress = (scrollY - top) / height
       element.style.setProperty('--progress', progress.toFixed(5))
