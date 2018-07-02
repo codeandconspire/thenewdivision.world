@@ -85,8 +85,8 @@ if (process.env.NOW && process.env.NODE_ENV === 'production') {
 function resolvePreview (doc) {
   switch (doc.type) {
     case 'homepage': return '/'
-    case 'invite': return '/invite'
-    case 'story': return `/stories/${doc.uid}`
+    case 'about': return '/about'
+    case 'case': return `/${doc.uid}`
     default: throw new Error('Preview not available')
   }
 }
