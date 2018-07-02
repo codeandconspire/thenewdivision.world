@@ -19,7 +19,7 @@
   list-style: none;
   border: solid transparent;
   border-width: 0 calc(var(--space) * 3);
-  margin-top: calc(var(--space) * 6)
+  margin-top: calc(var(--space) * 12)
 }
 
 @media (min-width: 600px) {
