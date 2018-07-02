@@ -78,6 +78,12 @@
   }
 }
 
+@media (min-height: 670) and (max-width: 900px) {
+  .Presentation-col {
+    height: 90px
+  }
+}
+
 @media (min-width: 900px) {
   .Presentation {
     align-items: flex-end;
