@@ -66,7 +66,6 @@ module.exports = class Wheel extends Component {
         }
         el.style.setProperty('--part-progress', visible.toFixed(2))
 
-        // el.style.setProperty('--part-inview', 1 : 0)
         let value = `rotate(${360 * progress - 72}, ${x}, ${y + offset})`
         el.setAttribute('transform', value)
       }
