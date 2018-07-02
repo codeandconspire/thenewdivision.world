@@ -1,5 +1,3 @@
-var Intro = require('../components/intro')
-
 module.exports = meta
 
 function meta (state, emitter, app) {
