@@ -283,3 +283,19 @@
     margin: 10vh 0 0;
   }
 }
+
+/**
+ * Padding for anchor links
+ */
+
+.u-spaceTP8 {
+  padding-top: calc(var(--space) * 8) !important;
+}
+
+/**
+ * Pull upp
+ */
+
+.u-spacePullT8 {
+  margin-top: calc((var(--space) * 8) * -1) !important;
+}

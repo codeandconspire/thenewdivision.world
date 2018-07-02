@@ -65,69 +65,79 @@ function about (state, emit) {
             </div>
             ${state.cache(Card, 'workspace').render(workspace(doc))}
           </section>
-          <section id="services" class="u-spaceV8">
-            <div class="View-grid u-spaceV8">
+          <section id="services" class="u-spaceT8">
+            <div class="View-grid u-spaceT8">
               <div class="View-cell u-lg-size1of3"></div>
-              <div class="View-cell u-lg-size2of3 u-spaceV8">
-                <div class="Text u-textSizeLg u-spaceV8">
+              <div class="View-cell u-lg-size2of3 u-spaceT8">
+                <div class="Text u-textSizeLg u-spaceT8">
                   ${asElement(doc.data.create_introduction)}
+                </div>
+              </div>
+            </div>
+            <div class="View-uncontain">
+              ${state.cache(Wheel, 'services-wheel').render(doc)}
+            </div>
+            <div class="View-grid u-spaceB8">
+              <div class="View-cell u-lg-size1of3"></div>
+              <div class="View-cell u-lg-size2of3">
+                <div class="Text u-textSizeLg">
+                  ${asElement(doc.data.create_services_introduction)}
                 </div>
               </div>
             </div>
             <div class="View-grid">
               ${doc.data.services.map((props, index, list) => html`
-                <article class="View-cell u-md-size1of3">
-                  <img src="${props.image.url}" class="u-spaceB2 u-alignSelfStart">
+                <article class="View-cell u-md-size1of3 u-spaceV8">
+                  <img src="${props.image.url}" class="u-spaceB4 u-alignSelfStart">
                   <h3 class="u-textBold u-textSizeSm">${asText(props.title)}</h3>
-                  <div class="Text u-textSizeSm">
+                  <div class="Text u-textSizeSm u-spaceT2">
                     ${asElement(props.description)}
                   </div>
                 </article>
               `)}
             </div>
-            <div class="View-uncontain">
-              ${state.cache(Wheel, 'services-wheel').render(doc)}
-            </div>
           </section>
-          <section id="process" class="u-spaceV8">
-            <div class="View-grid u-spaceV8">
-              <div class="View-cell u-lg-size1of3 u-spaceV8"></div>
-              <div class="View-cell u-lg-size2of3 u-spaceV8">
-                <div class="Text u-textSizeLg u-spaceV8">
+          <section id="process" class="u-spaceT8 u-spaceTP8">
+            <div class="View-grid">
+              <div class="View-cell u-lg-size1of3"></div>
+              <div class="View-cell u-lg-size2of3">
+                <div class="Text u-textSizeLg">
                   ${asElement(doc.data.good_introduction)}
                 </div>
               </div>
             </div>
           </section>
           <section id="clients" class="u-spaceV8">
-            <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
-              ${text`What people say`}
-            </h2>
-            <div class="u-clip">
-              <div class="View-grid u-spaceT4">
-                ${doc.data.testimonies.map((props, index, list) => {
-                  var background = props.color.split(' ').reduce((str, part) => {
-                    return str + part[0].toUpperCase() + part.substr(1)
-                  }, '') || 'white'
+            <div class="u-nbfc">
+              <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
+                ${text`What people say`}
+              </h2>
+              <div class="u-clip">
+                <div class="View-grid u-spaceT4">
+                  ${doc.data.testimonies.map((props, index, list) => {
+                    var background = props.color.split(' ').reduce((str, part) => {
+                      return str + part[0].toUpperCase() + part.substr(1)
+                    }, '') || 'white'
 
-                  return html`
-                    <div class="View-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
-                      <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
-                        <div class="u-sizeFill u-flex u-column u-spaceA4">
-                          <div class="u-sizeFill">
-                            <img width="150" src="${props.logotype.url}">
-                          </div>
-                          <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
-                            ${asElement(props.quote)}
-                          </blockquote>
-                          <div class="u-textSizeSm">
-                            ${asElement(props.cite)}
+                    return html`
+                      <div class="View-cell u-md-size1of2 u-lg-size1of3 u-row u-aspect ${index === 2 ? 'u-lg-show' : ''} u-spaceB4">
+                        <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
+                          <div class="u-sizeFill u-flex u-column u-spaceA4">
+                            <div class="u-sizeFill">
+                              <img width="150" src="${props.logotype.url}">
+                            </div>
+                            <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
+                              ${asElement(props.quote)}
+                            </blockquote>
+                            <div class="u-textSizeSm">
+                              ${asElement(props.cite)}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  `
-                })}
+                    `
+                  })}
+                </div>
               </div>
             </div>
           </section>

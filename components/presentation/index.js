@@ -40,7 +40,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[0]}
-            ${button(text`Who we are`, {wrap: true, href: '/about#about'})}
+            ${button(text`Who we are`, {wrap: true, href: '/about'})}
           </div>
         </div>
         <div class="Presentation-col Button-wrapper" style="flex-basis: ${((374 / SIZE) * 100).toFixed(2)}%">

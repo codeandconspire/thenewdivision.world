@@ -124,7 +124,7 @@
 
 @media (min-width: 120vh) {
   :root.has-js .Wheel {
-    padding-top: 20vh;
+    padding-top: 10vh;
   }
 
   :root.has-js .Wheel-graphic {
