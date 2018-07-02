@@ -117,11 +117,13 @@
   position: relative;
 }
 
+.Figure-outer:hover .Figure-circle,
 .Figure:hover .Figure-circle {
   transform: translate(-50%, -50%) scale(1);
   transition-timing-function: ease-out;
 }
 
+.Figure-outer:active .Figure-circle,
 .Figure:active .Figure-circle {
   transform: translate(-50%, -50%) scale(0.8);
   transition-duration: 50ms;

@@ -15,7 +15,7 @@ function Figure (id, state, emit, opts) {
 Figure.prototype.render = createElement
 
 Figure.id = function (img) {
-  return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif)$/)[1]
+  return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif|webp)$/)[1]
 }
 
 class InteractiveFigure extends Component {
@@ -23,10 +23,11 @@ class InteractiveFigure extends Component {
     super(id)
     Object.assign(this, opts)
     this.createElement = createElement
+    this.aspect = opts.aspect
   }
 
   static id (img) {
-    return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif)$/)[1]
+    return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif|webp)$/)[1]
   }
 
   load (element) {
@@ -42,7 +43,7 @@ function createElement (img) {
   var attrs = imgattrs(img, this.sizes)
   return html`
     <figure class="Figure">
-      <div class="Figure-container" style="padding-bottom:${(img.dimensions.height / img.dimensions.width * 100).toFixed(2)}%;">
+      <div class="Figure-container" style="padding-bottom:${this.aspect ? 'var(--aspect)' : ((img.dimensions.height / img.dimensions.width * 100).toFixed(2) + '%')};">
         ${this.interactive ? decorator() : null}
         <img class="Figure-image" ${attrs}>
       </div>

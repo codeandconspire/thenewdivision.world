@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.Card--square {
+  --aspect: 100%;
+}
+
 @media (min-width: 600px) {
   .Card-block {
     width: calc((100vw - (var(--space) * 3)) / 2);

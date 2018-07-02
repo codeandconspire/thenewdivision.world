@@ -152,23 +152,6 @@
   }
 }
 
-@media (min-width: 1500px) {
-  .View-navBanner {
-    width: 26px;
-    height: 26px;
-    left: -9px;
-  }
-}
-
-@media (min-width: 2400px) {
-  .View-navBanner {
-    width: 30px;
-    height: 30px;
-    left: -11px;
-    top: -5px;
-  }
-}
-
 /**
  * Nav address & contact
  */

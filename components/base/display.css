@@ -12,8 +12,12 @@
   display: none !important;
 }
 
-.u-nbfc {
-  overflow: hidden;
+/**
+ * New block formatting context
+ */
+
+ .u-nbfc {
+  display: table-cell !important;
 }
 
 .u-hiddenVisually {

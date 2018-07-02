@@ -121,7 +121,7 @@ function imgattrs (props, sizes = []) {
   var uri = props.url.split(PRISMIC_CDN_URL)[1]
   var attrs = {
     alt: props.alt || '',
-    src: `${IMAGE_CDN_URL}tr:w-1280,q-85,pr-true/${uri}`,
+    src: `${IMAGE_CDN_URL}tr:w-1280,q-90,pr-true/${uri}`,
     width: props.dimensions.width,
     height: props.dimensions.height
   }
@@ -133,10 +133,10 @@ function imgattrs (props, sizes = []) {
     }).join(',')
 
     // Join sizes like: `<url> <brk>w`
-    attrs.srcset = [`${IMAGE_CDN_URL}tr:w-${attrs.width},q-75,pr-true/${uri} ${attrs.width}w`]
+    attrs.srcset = [`${IMAGE_CDN_URL}tr:w-${attrs.width},q-90,pr-true/${uri} ${attrs.width}w`]
     for (let i = 0, len = sizes.length; i < len; i++) {
       if (sizes[i][1] && sizes[i][1] !== attrs.width) {
-        attrs.srcset.push(`${IMAGE_CDN_URL}tr:w-${sizes[i][1]},q-75,pr-true/${uri} ${sizes[i][1]}w`)
+        attrs.srcset.push(`${IMAGE_CDN_URL}tr:w-${sizes[i][1]},q-90,pr-true/${uri} ${sizes[i][1]}w`)
       }
     }
     attrs.srcset = attrs.srcset.join(',')

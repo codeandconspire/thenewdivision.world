@@ -1,4 +1,5 @@
 var html = require('choo/html')
+var Component = require('choo/component')
 var asElement = require('prismic-element')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
@@ -7,6 +8,7 @@ var Wheel = require('../components/wheel')
 var {i18n} = require('../components/base')
 var Figure = require('../components/figure')
 var Presentation = require('../components/presentation')
+var button = require('../components/button')
 
 var text = i18n()
 
@@ -108,7 +110,9 @@ function about (state, emit) {
                           <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
                             ${asElement(props.quote)}
                           </blockquote>
-                          ${asElement(props.cite)}
+                          <div class="u-textSizeSm">
+                            ${asElement(props.cite)}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -161,17 +165,90 @@ function coworker (state, doc) {
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
-            <h3 class="u-textBold u-textSizeSm">${asText(person.name)}</h3>
-            <div class="Text u-textSizeSm">
-              <p>${person.role} <br><a href="mailto:${asText(person.bio)}">${asText(person.bio)}</a></p>
-            </div>
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: false, aspect: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
+            <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
+            <p class="u-textSizeSm">${person.role}</p>
+            ${state.cache(ContactInfo, ContactInfo.id(person)).render(person)}
           </article>
         </div>
       `
     ]
 
+    if (index === Math.floor((list.length - 1) / 2)) {
+      children.push(html`
+        <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
+          <div class="Card u-themePetrol u-bg u-color">
+            <article class="u-flex u-column u-spaceA4">
+              <div class="u-sizeFill u-flex u-column u-justifyCenter">
+                <h3>
+                  <span class="u-textSizeLg u-textBold">${text`Want a job?`}</span>
+                  <span class="Display Display--2 u-spaceT2">${doc.data.recruitment_heading}</span>
+                  <span class="u-textSizeSm">${text`Talk to Hannah, she’s nice.`}</span>
+                </h3>
+              </div>
+              <h4 class="u-textBold">${text`Careers`}</h4>
+              <div class="Text u-textSizeSm">
+                <p>
+                  <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
+                  <br />
+                  <a href="tel:+46701234567">+46 (0)70 123 45 67</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      `)
+    }
+
     return children
+  }
+}
+
+var ContactInfo = class ContactInfo extends Component {
+  constructor (id, state, emit) {
+    super(id)
+    this.id = id
+    this.cache = state.cache
+    this.local = state.components[id] = {}
+  }
+
+  static id (person) {
+    var first = person.bio[0]
+    return (first.text)
+      .toLowerCase()
+      .split(' ')
+      .slice(0, 6)
+      .map((word) => word.replace(/[^\w]/g, ''))
+      .join('-')
+  }
+
+  update () {
+    return false
+  }
+
+  expand () {
+    this.local.expanded = true
+    this.rerender()
+  }
+
+  createElement (person) {
+    var expanded = typeof window === 'undefined' || this.local.expanded
+    var first = person.bio[0]
+    return html`
+      <div id="${this.id}">
+        <div class="Text u-textSizeXs u-spaceT2">
+          ${asElement([first])}
+          ${expanded ? asElement(person.bio.slice(1)) : null}
+          ${expanded ? html`
+            <p class="Text u-textSizeXs u-spaceT2">
+              ${person.email ? html`<div>Email: <a href="mailto:${person.email}">${person.email}</div></a>` : null}
+              ${person.phone ? html`<div>Phone: <a href="tel:${person.phone}">${person.phone}</div></a>` : null}
+            </p>
+          ` : null}
+        </div>
+        ${!expanded && person.bio.length > 1 ? button(() => this.expand(), text`More info`, 'white') : null}
+      </div>
+    `
   }
 }
 
