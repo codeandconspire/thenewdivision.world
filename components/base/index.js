@@ -1,6 +1,7 @@
 var fs = require('fs')
 var path = require('path')
 var assert = require('assert')
+var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var common = require('./lang.json')
 
@@ -203,5 +204,37 @@ function modulate (value, rangeA, rangeB, limit = false) {
     }
   }
 
+  return result
+}
+
+// test wether css rule is supported
+// str -> bool
+exports.supports = supports
+function supports (rule) {
+  var id = `_${(new Date() % 9e6).toString(36)}`
+  var el = html`<div id="${id}"></div>`
+  var style = html`
+    <style>
+      @supports (${rule}) {
+        #${id}::before {
+          content: "${id}";
+        }
+      }
+    </style>
+  `
+  document.head.appendChild(style)
+  document.body.appendChild(el)
+
+  var result
+  try {
+    var computedPseudoStyle = window.getComputedStyle(el, ':before')
+    var pseudoContentValue = computedPseudoStyle.getPropertyValue('content')
+    result = pseudoContentValue === `"${id}"`
+  } catch (err) {
+    result = false
+  }
+
+  style.parentElement.removeChild(style)
+  el.parentElement.removeChild(el)
   return result
 }
