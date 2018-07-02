@@ -25,15 +25,32 @@ module.exports = class Wheel extends Component {
   }
 
   load (element) {
-    if (!supports('position: sticky')) return
-    var top, height
+    var top, height, isSticky
+    var hasSticky = supports('position: sticky')
     var anchors = element.querySelector('.js-anchors').childNodes
 
     var onscroll = nanoraf(() => {
       var viewport = vh()
       var {scrollY} = window
-      if (scrollY > top + height) return
-      if (scrollY + viewport < top) return
+      if (scrollY > top + height || scrollY + viewport < top) {
+        return
+      }
+
+      if (!hasSticky) {
+        if (scrollY + viewport <= top + height && scrollY >= top) {
+          if (!isSticky) {
+            isSticky = true
+            element.classList.add('is-sticky')
+            element.classList.remove('is-bottom')
+          }
+        } else if (isSticky) {
+          isSticky = false
+          element.classList.remove('is-sticky')
+          if (scrollY + viewport >= top + height) {
+            element.classList.add('is-bottom')
+          }
+        }
+      }
 
       var progress = (scrollY - top) / height
       element.style.setProperty('--progress', progress.toFixed(5))
@@ -114,7 +131,6 @@ module.exports = class Wheel extends Component {
         <div class="Wheel-container">
           <svg class="Wheel-graphic" width="1400" height="1400" viewBox="0 0 1400 1400">
             <g fill="none" fill-rule="evenodd">
-              <path fill="#BCB296" d="M0 0h1400v1400H0z"/>
               <g stroke="#FFF" stroke-width="3" class="js-anchors">
                 <path d="M702.7 405.5V288.9"/>
                 <path d="M875.1 463.2l58.15-78.25"/>

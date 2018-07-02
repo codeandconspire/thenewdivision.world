@@ -13,6 +13,7 @@ function documents (state, emitter) {
     resolve: resolve,
     items: state.documents && !state.prefetch ? [...state.documents.items] : []
   }
+  state.ref = state.ref || 'https://thenewdivision.prismic.io/previews/WzouISAAANV3f581'
 
   var queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
