@@ -50,23 +50,24 @@ function ui (state, emitter, app) {
   // circumvent choo default scroll-to-anchor behavior
   emitter.on('navigate', function () {
     state.ui.inTransition = false
-
     state.ui.isFirst = false
 
-    var el = document.getElementById(window.location.hash.substr(1))
+    window.requestAnimationFrame(function () {
+      var el = document.getElementById(window.location.hash.substr(1))
 
-    if (!el) {
-      window.scrollTo(0, 0)
-    } else {
-      let from = window.scrollY
-      window.setTimeout(function () {
-        // reset scroll to where it was before navigate
-        window.scrollTo(window.scrollX, from)
+      if (!el) {
+        window.scrollTo(0, 0)
+      } else {
+        let from = window.scrollY
         window.setTimeout(function () {
-          // smoothly scroll element into view when everything has settled
-          el.scrollIntoView({behavior: 'smooth', block: 'start'})
+          // reset scroll to where it was before navigate
+          window.scrollTo(window.scrollX, from)
+          window.setTimeout(function () {
+            // smoothly scroll element into view when everything has settled
+            el.scrollIntoView({behavior: 'smooth', block: 'start'})
+          }, 0)
         }, 0)
-      }, 0)
-    }
+      }
+    })
   })
 }

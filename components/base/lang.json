@@ -37,5 +37,6 @@
   "Who we work with": "Who we work with",
   "Read more": "Read more",
   "Store": "Store",
-  "Case studies": "Case studies"
+  "Case studies": "Case studies",
+  "Cannot read property 'text' of undefined": "Cannot read property 'text' of undefined"
 }

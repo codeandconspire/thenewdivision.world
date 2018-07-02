@@ -256,7 +256,7 @@ var ContactInfo = class ContactInfo extends Component {
             </p>
           ` : null}
         </div>
-        ${!expanded && person.bio.length > 1 ? button(() => this.expand(), text`More info`, 'white') : null}
+        ${!expanded && person.bio.length > 1 ? button(text`More info`, {color: 'white', onclick: () => this.expand()}) : null}
       </div>
     `
   }

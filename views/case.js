@@ -231,7 +231,7 @@ class Topic extends Component {
         </div>
         <div class="Text u-spaceB6">
           <div></div>
-          ${!this.local.expanded && props.body.length > 1 ? button(this.expand.bind(this), text`More`) : asElement(props.body.slice(1))}
+          ${!this.local.expanded && props.body.length > 1 ? button(text`More`, {onclick: () => this.expand()}) : asElement(props.body.slice(1))}
         </div>
       </div>
     `

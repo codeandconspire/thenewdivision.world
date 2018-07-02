@@ -53,7 +53,7 @@ module.exports = class Words extends Component {
             ${expanded ? asElement(props.body.slice(1)) : null}
           </div>
         ` : null}
-        ${!expanded && props.body.length > 1 ? button(() => this.expand(), text`More`) : null}
+        ${!expanded && props.body.length > 1 ? button(text`More`, {onclick: () => this.expand()}) : null}
       </article>
     `
   }

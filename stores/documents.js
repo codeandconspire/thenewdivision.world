@@ -29,7 +29,9 @@ function documents (state, emitter) {
   })
 
   // preemtively fetch homepage
-  if (state.prefetch) state.prefetch.push(api({type: 'homepage'}))
+  if (state.prefetch) {
+    state.prefetch.push(api({type: 'homepage'}), api({type: 'about'}))
+  }
 
   function api (query) {
     if (!query.id) assert.equal(typeof query.type, 'string', 'documents: type should be a string')
