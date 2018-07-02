@@ -5,17 +5,17 @@ var Component = require('choo/component')
 var {offset, vh, modulate, supports} = require('../base')
 
 var BRANCHES = [
-  // [[pathX, pathY], pathLine, branchTranslate, titleX, rotationAxisOffset, number, title, descriptionId]
-  [[701, 304.8], 'l172.6.2', '699.8 248.68', 32.7, 0.2, '01', 'Awareness', 'awareness_description'],
-  [[942.3, 409.4], 'l181-.2', '941.27 353.25', 36.6, 0.3, '02', 'Relationship', 'impact_description'],
-  [[1063.6, 588.1], 'l219.2.1', '1062.35 532.14', 37.4, 1, '03', 'Business Case', 'business_case_description'],
-  [[1065.8, 852.6], 'l149.2-.1', '1066.64 796.27', 38.3, 1, '04', 'Strategy', 'strategy_description'],
-  [[920, 1030.3], 'l137.5-.1', '925.27 973.97', 37.6, 0, '05', 'Culture', 'culture_description'],
-  [[692.3, 1118.3], 'l142.6-.2', '706.03 1062.17', 38.1, -0.5, '06', 'Design', 'design_description'],
-  [[471.4, 1018.4], 'l244.8-.2', '485.03 962.23', 35.4, -0.55, '07', 'Communication', 'communication_description'],
-  [[346.9, 826.6], 'l175-.2', '352.46 770.5', 38.3, -0.4, '08', 'Activation', 'activation_description'],
-  [[322.6, 581.5], 'l174.9.1', '325.9 525.5', 38.1, 0.15, '09', 'Evaluation', 'evaluation_description'],
-  [[465.3, 383.2], 'l159.2-.2', '471.44 326.99', 32.7, -0.21, '10', 'Evolution', 'evolution_description']
+  // [[pathX, pathY], pathLine, branchTranslate, numberX, titleX, rotationAxisOffset, title, descriptionId]
+  [[702.6, 288.8], 'l172.6.2', '701.4 232.68', 0, 29.7, 0.1, 'Awareness', 'awareness_description'],
+  [[932.9, 385], 'h195.6', '931.87 328.85', 0, 33.6, -0.3, 'Relationship', 'impact_description'],
+  [[1073.7, 582.2], 'l219.2.1', '1072.45 526.24', 0, 34.4, 1, 'Business Case', 'business_case_description'],
+  [[1071.6, 824.6], 'l149.2-.1', '1071.44 768.27', 1, 36.3, 1, 'Strategy', 'strategy_description'],
+  [[927.3, 1019.1], 'l137.5-.1', '926.57 962.77', 0, 40.6, 0, 'Culture', 'culture_description'],
+  [[696.87, 1092.3], 'l142.6-.2', '696.6 1036.17', 10, 49.1, 0, 'Design', 'design_description'],
+  [[467.1, 1015.4], 'l244.8-.2', '466.73 959.23', 6, 39.4, -0.1, 'Communication', 'communication_description'],
+  [[326.3, 818.4], 'l175-.2', '325.86 762.29', 6, 41.3, -0.1, 'Activation', 'activation_description'],
+  [[328.2, 575.6], 'l174.9.1', '327.5 519.61', 4, 39.1, 0.05, 'Evaluation', 'evaluation_description'],
+  [[472.1, 381.2], 'l159.2-.2', '471.24 324.99', 8, 37.7, -0.21, 'Evolution', 'evolution_description']
 ]
 
 module.exports = class Wheel extends Component {
@@ -40,7 +40,7 @@ module.exports = class Wheel extends Component {
       element.style.setProperty('--progress', progress.toFixed(5))
 
       for (let i = 0, len = this.branches.length; i < len; i++) {
-        let [ [x, y], , , , offset, , ] = this.branches[i][1]
+        let [ [x, y], , , , , offset, , ] = this.branches[i][1]
         let el = this.branches[i][0]
 
         if (i + 2 < progress * 10 || i - 3 > progress * 10) {
@@ -105,31 +105,21 @@ module.exports = class Wheel extends Component {
         <div class="Wheel-container">
           <svg class="Wheel-graphic" width="1400" height="1400" viewBox="0 0 1400 1400">
             <g fill="none" fill-rule="evenodd">
-              <g stroke="#FFF" stroke-width="23">
-                <path d="M871.4 464.8c-48.9-34-108.2-54.1-172.1-54.5"/>
-                <path d="M978.3 596.1a306.02 306.02 0 0 0-91.5-119.9"/>
-                <path d="M990.1 802.4c8.1-27.5 12.5-56.6 12.5-86.7 0-35.6-6.1-69.8-17.3-101.5"/>
-                <path d="M889.6 952.9c42.4-34.4 75.4-80 94.5-132.2"/>
-                <path d="M713.3 1020.7c59.6-3.1 114.8-23.3 160.5-55.8"/>
-                <path d="M530.4 971.6a303.27 303.27 0 0 0 163.5 49.5"/>
-                <path d="M412.2 825.7a306.41 306.41 0 0 0 102.5 134.9"/>
-                <path d="M403.4 632.1c-7.5 26.6-11.6 54.6-11.6 83.6 0 32 4.9 62.9 14.1 92"/>
-                <path d="M504.4 478.9c-43 35.1-76.4 81.7-95.2 135.1"/>
-                <path d="M679.6 410.8c-59 3.3-113.6 23.5-159 55.7"/>
-              </g>
+              <path fill="#BCB296" d="M0 0h1400v1400H0z"/>
               <g stroke="#FFF" stroke-width="3" class="js-anchors">
-                <path d="M700.7 421.8l.3-117"/>
-                <path d="M880.7 486.1l61.6-76.7"/>
-                <path d="M975.3 619.4l88.3-31.3"/>
-                <path d="M973.4 818.3l92.4 34.3"/>
-                <path d="M865.9 956.9l54.1 73.4"/>
-                <path d="M692.4 1010l-.7 108.3"/>
-                <path d="M520 950.8l-49.8 67.6"/>
-                <path d="M416 802.3l-71.1 24.3"/>
-                <path d="M419.6 616.2l-98.1-34.7"/>
-                <path d="M528 475.5l-62.5-92.3"/>
+                <path d="M702.7 405.5V288.9"/>
+                <path d="M875.1 463.2l58.15-78.25"/>
+                <path d="M980.97 611.5l92.91-29.3"/>
+                <path d="M979.3 793.6l92.37 31"/>
+                <path d="M870.9 939.9l56.52 79.39"/>
+                <path d="M697.66 994.5l-.8 97.49"/>
+                <path d="M525.1 936.8l-58.06 78.47"/>
+                <path d="M419.1 788.7l-92.88 29.42"/>
+                <path d="M420.6 606.7l-92.38-30.96"/>
+                <path d="M528.9 460.3l-56.6-79.38"/>
               </g>
               ${BRANCHES.map(branch)}
+              <path stroke="#FFF" stroke-dasharray="174.27 18" stroke-width="23" d="M716.548 1005.552c168.752-9.14 298.143-153.348 289.004-322.1-9.14-168.752-153.348-298.143-322.1-289.004-168.752 9.14-298.143 153.348-289.004 322.1 9.14 168.752 153.348 298.143 322.1 289.004z"/>
             </g>
           </svg>
         </div>
@@ -139,7 +129,7 @@ module.exports = class Wheel extends Component {
     // create and cache wheel branch from props
     // (arr, num) -> HTMLElement
     function branch (props, index) {
-      var [coordinates, line, translate, x, , num, title, descriptionId] = props
+      var [coordinates, line, translate, numX, titleX, , title, descriptionId] = props
       var d = 'M' + coordinates.join(' ') + line
 
       var el
@@ -155,10 +145,10 @@ module.exports = class Wheel extends Component {
           <circle r="1.4" fill="#FFF" cx="${coordinates[0]}" cy="${coordinates[1]}"/>
           <g transform="translate(${translate})">
             <text fill="#FFF">
-              <tspan x="0" y="42" class="Wheel-title Wheel-title--number">${num}</tspan>
+              <tspan x="${numX}" y="42" class="Wheel-title Wheel-title--number">${('0' + (index + 1)).substr(-2)}</tspan>
             </text>
             <text fill="#1D1D1B">
-              <tspan x="${x}" y="42" class="Wheel-title">${title}</tspan>
+              <tspan x="${titleX}" y="42" class="Wheel-title">${title}</tspan>
             </text>
             <text fill="#FFF">
               ${doc.data[descriptionId][0].text.split('\n').map((line, index) => html`
@@ -173,10 +163,4 @@ module.exports = class Wheel extends Component {
       return el
     }
   }
-}
-
-function checkSticky () {
-  var computedPseudoStyle = window.getComputedStyle(element, ':before')
-  var pseudoContent = computedPseudoStyle.getPropertyValue('content')
-  var hasSticky = pseudoContent.indexOf('sticky') !== -1
 }

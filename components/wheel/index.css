@@ -15,7 +15,7 @@
 }
 
 .Wheel-graphic {
-  height: 100%;
+  height: 94%;
   width: auto;
   position: absolute;
   top: 0;
@@ -26,18 +26,21 @@
 }
 
 @supports (position: sticky) {
+  .Wheel {
+    height: calc(100vh * 6);
+  }
+
   .Wheel-graphic {
     transform: scale(1.8) translate(-46%, 0) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
   }
 
   @media (min-width: 120vh) {
     .Wheel {
-      height: calc(100vh * 6);
       padding-top: 20vh;
     }
 
     .Wheel-graphic {
-      transform: scale(3) translate(-31%, 0) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
+      transform: scale(3) translate(-31%, 1%) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
     }
   }
 }
