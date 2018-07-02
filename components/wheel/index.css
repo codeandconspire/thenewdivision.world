@@ -1,10 +1,64 @@
 /* @define Wheel */
 
+@import "../base/global";
+
 .Wheel {
   width: 100vw;
 }
 
+.Wheel-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--space) * 4) calc(var(--space) * -3);
+  padding: 0;
+  padding-left: calc(var(--space) * 4);
+  padding-right: calc(var(--space) * 4);
+}
+
+.Wheel-item {
+  list-style: none;
+  border: solid transparent;
+  border-width: 0 calc(var(--space) * 3);
+  margin-top: calc(var(--space) * 6)
+}
+
+@media (min-width: 600px) {
+  .Wheel-item {
+    flex: 0 0 50%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .Wheel-item {
+    flex: 0 0 20%;
+  }
+}
+
+.Wheel-title {
+  border-bottom: 2px solid #fff;
+  margin-bottom: 16px;
+  font-size: 42px;
+  font-family: var(--giorgio-sans-bold);
+  line-height: var(--giorgio-sans-bold-line-height);
+  letter-spacing: var(--giorgio-sans-bold-letter-spacing);
+}
+
+.Wheel-number {
+  color: #fff;
+}
+
+.Wheel-text {
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 1400px) {
+  .Wheel-text {
+    font-size: var(--font-size-xs);
+  }
+}
+
 .Wheel-container {
+  display: none;
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -30,8 +84,23 @@
     height: calc(100vh * 6);
   }
 
+  .Wheel-list {
+    display: none;
+  }
+
+  .Wheel-container {
+    display: block;
+  }
+
   .Wheel-graphic {
     transform: scale(1.8) translate(-46%, 0) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
+  }
+
+  .Wheel-text {
+    font-size: 12px;
+    opacity: var(--part-progress);
+    transform: translateY(calc(var(--part-progress) * var(--part-inview) * 10vh));
+    will-change: transform, opacity;
   }
 
   @media (min-width: 120vh) {
@@ -43,18 +112,4 @@
       transform: scale(3) translate(-31%, 1%) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
     }
   }
-}
-
-.Wheel-title {
-  font-size: 42px;
-  font-family: var(--giorgio-sans-bold);
-  line-height: var(--giorgio-sans-bold-line-height);
-  letter-spacing: var(--giorgio-sans-bold-letter-spacing);
-}
-
-.Wheel-text {
-  font-size: 12px;
-  opacity: var(--part-progress);
-  transform: translateY(calc(var(--part-progress) * var(--part-inview) * 10vh));
-  will-change: transform, opacity;
 }

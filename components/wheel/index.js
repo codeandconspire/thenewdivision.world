@@ -7,7 +7,7 @@ var {offset, vh, modulate, supports} = require('../base')
 var BRANCHES = [
   // [[pathX, pathY], pathLine, branchTranslate, numberX, titleX, rotationAxisOffset, title, descriptionId]
   [[702.6, 288.8], 'l172.6.2', '701.4 232.68', 0, 31.7, 0.1, 'Awareness', 'awareness_description'],
-  [[932.9, 385], 'h195.6', '931.87 328.85', 0, 34.6, -0.3, 'Relationship', 'impact_description'],
+  [[932.9, 385], 'h195.6', '931.87 328.85', 0, 34.6, -0.3, 'Relationship', 'relationship_description'],
   [[1073.7, 582.2], 'l219.2.1', '1072.45 526.24', 0, 36.4, 1, 'Business Case', 'business_case_description'],
   [[1071.6, 824.6], 'l149.2-.1', '1071.44 768.27', 1, 38.3, 1, 'Strategy', 'strategy_description'],
   [[927.3, 1019.1], 'l137.5-.1', '926.57 962.77', 4, 40.6, 0, 'Culture', 'culture_description'],
@@ -26,7 +26,6 @@ module.exports = class Wheel extends Component {
 
   load (element) {
     if (!supports('position: sticky')) return
-
     var top, height
     var anchors = element.querySelector('.js-anchors').childNodes
 
@@ -102,6 +101,17 @@ module.exports = class Wheel extends Component {
 
     return html`
       <div class="Wheel">
+        <ol class="Wheel-list">
+          ${BRANCHES.map((props, index) => html`
+            <li class="Wheel-item">
+              <h3 class="Wheel-title">
+                <span class="Wheel-number">${('0' + (index + 1)).substr(-2)}</span>
+                ${props[6]}
+              </h3>
+              <p class="Wheel-text">${doc.data[props[7]][0].text.replace('\n', ' ')}</p>
+            </li>
+          `)}
+        </ol>
         <div class="Wheel-container">
           <svg class="Wheel-graphic" width="1400" height="1400" viewBox="0 0 1400 1400">
             <g fill="none" fill-rule="evenodd">
