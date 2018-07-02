@@ -6,8 +6,9 @@
   width: 100vw;
 }
 
-.Wheel.is-bottom {
+.Wheel.has-fallback {
   position: relative;
+  margin: calc(var(--space) * 2) 0;
 }
 
 .Wheel-list {
@@ -92,7 +93,7 @@
   transform: scale(1.3) translate(10%, -6%) rotate(calc(-1deg * ((360 * var(--progress)) - 72)));
 }
 
-.Wheel.is-sticky .Wheel-graphic {
+.Wheel.has-fallback .Wheel-graphic {
   will-change: transform;
 }
 
@@ -118,13 +119,13 @@
   transform: translateY(calc(var(--part-progress) * var(--part-inview) * 10vh));
 }
 
-.Wheel.is-sticky .Wheel-text {
+.Wheel.has-fallback .Wheel-text {
   will-change: transform, opacity;
 }
 
 @media (min-width: 120vh) {
-  :root.has-js .Wheel {
-    padding-top: 10vh;
+  :root.has-js .Wheel:not(.has-fallback) {
+    padding-top: 20vh;
   }
 
   :root.has-js .Wheel-graphic {

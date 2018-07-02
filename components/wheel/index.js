@@ -22,11 +22,11 @@ module.exports = class Wheel extends Component {
   constructor (id) {
     super(id)
     this.branches = []
+    this.hasSticky = typeof window === 'undefined' || supports('position: sticky')
   }
 
   load (element) {
     var top, height, isSticky
-    var hasSticky = supports('position: sticky')
     var anchors = element.querySelector('.js-anchors').childNodes
 
     var onscroll = nanoraf(() => {
@@ -36,7 +36,7 @@ module.exports = class Wheel extends Component {
         return
       }
 
-      if (!hasSticky) {
+      if (!this.hasSticky) {
         if (scrollY + viewport <= top + height && scrollY >= top) {
           if (!isSticky) {
             isSticky = true
@@ -116,7 +116,7 @@ module.exports = class Wheel extends Component {
     var self = this
 
     return html`
-      <div class="Wheel">
+      <div class="Wheel ${this.hasSticky ? '' : 'has-fallback'}">
         <ol class="Wheel-list">
           ${BRANCHES.map((props, index) => html`
             <li class="Wheel-item">
