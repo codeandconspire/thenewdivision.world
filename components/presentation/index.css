@@ -78,9 +78,9 @@
   }
 }
 
-@media (min-height: 670) and (max-width: 900px) {
+@media (min-height: 600px) and (max-width: 900px) {
   .Presentation-col {
-    height: 90px
+    height: 90px;
   }
 }
 
