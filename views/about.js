@@ -5,9 +5,9 @@ var {asText} = require('prismic-richtext')
 var view = require('../components/view')
 var Card = require('../components/card')
 var Wheel = require('../components/wheel')
+var intro = require('../components/intro')
 var {i18n} = require('../components/base')
 var Figure = require('../components/figure')
-var Presentation = require('../components/presentation')
 var button = require('../components/button')
 
 var text = i18n()
@@ -32,26 +32,34 @@ function about (state, emit) {
     description: doc.data.summary[0].text
   })
 
-  var presentation = state.cache(
-    Presentation,
-    `presentation-partial:${state.ui.isPartial}`,
-    {static: !state.ui.isPartial}
-  )
+  var first = html`
+  <div>
+    <div class="${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
+      ${intro(asText(doc.data.summary))}
+    </div>
+    <div class="${state.ui.isPartial ? 'u-slideInY u-spaceV8' : 'u-spaceV8'}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
+      <div class="View-grid View-grid--reverse u-spaceV8">
+        <div class="View-cell u-lg-size1of3">
+          <div class="Text u-textSizeLg u-spaceB2">
+            ${asElement(doc.data.we_introduction_aside)}
+          </div>
+        </div>
+        <div class="View-cell u-lg-size2of3">
+          <div class="Text u-textSizeLg">
+            ${asElement(doc.data.we_introduction)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
 
   return html`
     <main class="View-container View-container--fill">
-      ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
-      ${state.ui.isPartial ? null : html`
+      ${state.ui.isPartial ? first : html`
         <div>
-          <section id="about" class="u-slideInY">
-            <div class="View-grid u-spaceV8">
-              <div class="View-cell u-lg-size1of3"></div>
-              <div class="View-cell u-lg-size2of3 u-spaceV8">
-                <div class="Text u-textSizeLg u-spaceV4">
-                  ${asElement(doc.data.we_introduction)}
-                </div>
-              </div>
-            </div>
+          <section id="about">
+            ${first}
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
@@ -105,7 +113,7 @@ function about (state, emit) {
                       <div class="u-sizeFill u-flex u-column u-theme${background} u-color u-bg">
                         <div class="u-sizeFill u-flex u-column u-spaceA4">
                           <div class="u-sizeFill">
-                            <img src="${props.logotype.url}">
+                            <img width="150" src="${props.logotype.url}">
                           </div>
                           <blockquote class="Display Display--4 u-spaceB6 u-spaceT8">
                             ${asElement(props.quote)}

@@ -1,11 +1,12 @@
 var html = require('choo/html')
+var asElement = require('prismic-element')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
-var Intro = require('../components/intro')
 var Words = require('../components/words')
 var {i18n} = require('../components/base')
 var Figure = require('../components/figure')
 var Takeover = require('../components/takeover')
+var Presentation = require('../components/presentation')
 
 var text = i18n()
 
@@ -17,6 +18,12 @@ function home (state, emit) {
   if (state.ui.theme !== 'white' && !state.ui.isPartial) {
     emit('ui:theme', 'white')
   }
+
+  var presentation = state.cache(
+    Presentation,
+    `presentation-partial:${state.ui.isPartial}`,
+    {static: !state.ui.isPartial}
+  )
 
   var doc = state.documents.items.find((doc) => doc.type === 'homepage')
   if (!doc) {
@@ -30,14 +37,12 @@ function home (state, emit) {
   emit('meta', {
     image: 'https://www.thenewdivision.world/share.png',
     title: 'The New Division',
-    description: Intro.getWords(doc.data.intro).join(' ')
+    description: doc.data.summary[0].text
   })
 
   return html`
     <main class="View-container View-container--nudge">
-      <div class="${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
-        ${state.cache(Intro, `intro-partial:${state.ui.isPartial}`, {static: state.ui.inTransition}).render(doc.data.intro)}
-      </div>
+      ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
       <section id="cases">
         <h2 class="u-hiddenVisually">${text`Case studies`}</h2>
         <div class="View-grid View-grid--tight">

@@ -53,7 +53,6 @@
   border-radius: 50%;
   width: 290%;
   height: 290%;
-  z-index: -1;
   transform-origin: center;
   transition: ease-in 150ms;
   transition-property: transform, opacity;

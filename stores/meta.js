@@ -8,7 +8,7 @@ function meta (state, emitter, app) {
   state.meta = Object.assign({
     image: 'https://www.thenewdivision.world/share.png',
     title: 'The New Division',
-    description: doc && Intro.getWords(doc.data.intro).join(' ')
+    description: doc && doc.data.summary[0].text
   }, state.meta)
 
   emitter.on('DOMTitleChange', function (title) {

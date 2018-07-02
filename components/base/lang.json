@@ -42,5 +42,6 @@
   "t.map is not a function": "t.map is not a function",
   "Cannot read property 'map' of undefined": "Cannot read property 'map' of undefined",
   "Cannot read property '0' of undefined": "Cannot read property '0' of undefined",
-  "this.cache is not a function": "this.cache is not a function"
+  "this.cache is not a function": "this.cache is not a function",
+  "asElement is not defined": "asElement is not defined"
 }
