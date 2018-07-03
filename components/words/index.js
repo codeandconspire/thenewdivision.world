@@ -169,10 +169,21 @@ module.exports = class Words extends Component {
 // hyperlink hashtags and mentions in tweet text
 // (obj, str, arr) -> any
 function serializeTweet (type, node, content, children) {
-  console.log(node)
   switch (type) {
     case Elements.span: return content.split(/((?:@|#)\w+)/g).map(hyperlink)
-    case Elements.hyperlink: return html` <a class="u-zBump u-textWordBreak" href="${node.data.url}" target="_blank" rel="noopener noreferrer"> ${children} </a> `
+    case Elements.hyperlink: {
+      let attrs = {
+        href: node.data.url,
+        className: 'u-zBump u-textWordBreak'
+      }
+
+      if (node.data.target === '_blank') {
+        attrs.target = '_blank'
+        attrs.rel = 'noopener noreferrer'
+      }
+
+      return html`<a ${attrs}> ${children} </a>`
+    }
     case Elements.paragraph: return html`<p class="u-spaceT0">${children}</p>`
     default: return null
   }
