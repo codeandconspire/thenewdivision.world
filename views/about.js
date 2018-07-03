@@ -185,7 +185,7 @@ function coworker (state, doc) {
     var children = [
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
-          <article class="Link Link--aspect">
+          <article class="Link Link--aspect Button-wrapper">
             ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: false, aspect: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
             <p class="u-textSizeSm">${person.role}</p>
