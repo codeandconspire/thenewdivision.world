@@ -30,6 +30,8 @@ module.exports = class Wheel extends Component {
   load (element) {
     var top, height, isSticky
     var anchors = element.querySelector('.js-anchors').childNodes
+    var perf = window.performance ? 'high' : 'low'
+    var frames = []
 
     var onscroll = nanoraf(() => {
       var viewport = vh()
@@ -37,12 +39,14 @@ module.exports = class Wheel extends Component {
 
       if (!this.hasSticky) {
         if (scrollY + viewport <= top + height && scrollY >= top) {
+          // sticky polyfill in fixed position
           if (!isSticky) {
             isSticky = true
             element.classList.add('is-sticky')
             element.classList.remove('is-bottom')
           }
         } else if (isSticky) {
+          // sticky polyfill inview but not sticky
           isSticky = false
           element.classList.remove('is-sticky')
           if (scrollY + viewport >= top + height) {
@@ -51,7 +55,15 @@ module.exports = class Wheel extends Component {
         }
       }
 
+      // exit if completely out of view
       if (scrollY > top + height || scrollY + viewport < top) return
+
+      // measure perf, assuming high perf device
+      var id
+      if (perf === 'high' && window.performance) {
+        id = (new Date() % 9e6).toString(36)
+        window.performance.mark(`start-${id}`)
+      }
 
       var progress = (scrollY - top) / height
       element.style.setProperty('--progress', progress.toFixed(5))
@@ -86,6 +98,32 @@ module.exports = class Wheel extends Component {
 
         let value = `rotate(${360 * progress - 72}, ${x}, ${y + offset})`
         el.setAttribute('transform', value)
+      }
+
+      if (id) {
+        // wait for next frame to measure how long the frame took to render
+        window.requestAnimationFrame(function () {
+          window.performance.mark(`end-${id}`)
+          window.performance.measure(id, `start-${id}`, `end-${id}`)
+          var entry = window.performance.getEntriesByName(id)[0]
+          if (entry) {
+            // collect frame measures
+            frames.push(entry.duration)
+            if (frames.length >= 15) {
+              // calculate average frame render time, allow for ~4 ms slack
+              let total = frames.reduce((tot, num) => tot + num, 0)
+              let average = total / frames.length
+              if (average > 20) {
+                perf = 'low'
+                element.classList.add('is-lowperf')
+              }
+              // reset frames for next batch measure
+              frames = []
+            }
+          }
+          window.performance.clearMarks()
+          window.performance.clearMeasures()
+        })
       }
     })
 
@@ -176,9 +214,9 @@ module.exports = class Wheel extends Component {
             <text fill="#1D1D1B">
               <tspan x="${titleX}" y="42" class="Wheel-title">${title}</tspan>
             </text>
-            <text fill="#FFF">
+            <text fill="#FFF" class="Wheel-text">
               ${doc.data[descriptionId][0].text.split('\n').map((line, index) => html`
-                <tspan x="0" y="${88 + index * 20}" class="Wheel-text">${line}</tspan>
+                <tspan x="0" y="${88 + index * 20}">${line}</tspan>
               `)}
             </text>
           </g>
