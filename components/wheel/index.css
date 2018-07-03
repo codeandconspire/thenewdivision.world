@@ -114,9 +114,15 @@
 }
 
 :root.has-js .Wheel-text {
-  font-size: 12px;
+  font-size: 18px;
   opacity: var(--part-progress);
   transform: translateY(calc(var(--part-progress) * var(--part-inview) * 10vh));
+}
+
+@media (min-width: 600px) {
+  :root.has-js .Wheel-text {
+    font-size: 14px;
+  }
 }
 
 .Wheel.has-fallback .Wheel-text {

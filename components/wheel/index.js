@@ -178,7 +178,7 @@ module.exports = class Wheel extends Component {
             </text>
             <text fill="#FFF">
               ${doc.data[descriptionId][0].text.split('\n').map((line, index) => html`
-                <tspan x="0" y="${88 + index * 16}" class="Wheel-text">${line}</tspan>
+                <tspan x="0" y="${88 + index * 20}" class="Wheel-text">${line}</tspan>
               `)}
             </text>
           </g>
