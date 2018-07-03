@@ -61,7 +61,7 @@ exports.linkedin = function (opts = {}) {
 
 exports.globalgoals = function () {
   return html`
-    <svg class="Icon Icon--brand" width="22" height="22" viewBox="0 0 22 22">
+    <svg class="Icon Icon--fill" width="22" height="22" viewBox="0 0 22 22">
       <g fill="none" stroke="#FFF" stroke-width=".25" transform="translate(1 1)">
         <path fill="#56C02B" d="M5.16344371,7.14933775 C5.41178808,6.72741722 5.71298013,6.34066225 6.05821192,5.99827815 L3.12417219,2.78099338 C2.38596026,3.48642384 1.75649007,4.30423841 1.26139073,5.20562914 L5.16344371,7.14933775"/>
         <path fill="#DDA63A" d="M12.3560927,4.87649007 C12.8003311,5.08006623 13.2135099,5.33980132 13.5864238,5.64735099 L16.5288079,2.43496689 C15.7538411,1.76668874 14.8750993,1.21529801 13.9211921,0.80807947 L12.3560927,4.87649007"/>
