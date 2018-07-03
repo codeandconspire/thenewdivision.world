@@ -26,8 +26,9 @@ function ui (state, emitter, app) {
         params: matched.params,
         ui: Object.assign({}, state.ui, {isPartial: true})
       })
-      var result = matched.cb(_state, emitter.emit.bind(emitter))
-      return result
+      // pluck out header component and pre-rerender with next route
+      app._cache.get('header').render(matched.route)
+      return matched.cb(_state, emitter.emit.bind(emitter))
     })
   })
 

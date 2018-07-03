@@ -45,14 +45,6 @@ function home (state, emit) {
     description: doc.data.summary[0].text
   })
 
-  function delay (i) {
-    if (state.ui.isFirst) {
-      return 250 + 50 * (i % 2)
-    } else if (state.ui.isPartial) {
-      return 300 - 50 * (i % 2)
-    }
-  }
-
   return html`
     <main class="View-container">
       ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
@@ -78,6 +70,14 @@ function home (state, emit) {
       `}
     </main>
   `
+
+  function delay (i) {
+    if (state.ui.isFirst) {
+      return 250 + 50 * (i % 2)
+    } else if (state.ui.isPartial) {
+      return 300 - 50 * (i % 2)
+    }
+  }
 
   function explode (event) {
     var plus = event.currentTarget.querySelector('.js-plus')
