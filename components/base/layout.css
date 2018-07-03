@@ -4,6 +4,14 @@
   overflow: hidden !important;
 }
 
+.u-zBump {
+  z-index: calc(var(--z-index) + 1) !important;
+}
+
+.u-zDump {
+  z-index: calc(var(--z-index) - 1) !important;
+}
+
 /**
  * Position
  */

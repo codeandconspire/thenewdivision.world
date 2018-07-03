@@ -6,13 +6,23 @@ module.exports = button
 // (any, obj?) -> HTMLElement
 function button (content, opts = {}) {
   var color = opts.color || 'gray'
-  var className = `Button u-color${color[0].toUpperCase() + color.substr(1)}`
+  var attrs = {
+    onclick: opts.onclick || null,
+    className: `Button u-color${color[0].toUpperCase() + color.substr(1)}`
+  }
 
-  if (opts.wrap) className += ' Button--wrap'
+  if (opts.wrap) attrs.className += ' Button--wrap'
 
   if (opts.href) {
+    attrs.href = opts.href
+
+    if (opts.target) {
+      attrs.target = opts.target
+      if (opts.target === '_blank') attrs.rel = 'noopener noreferrer'
+    }
+
     return html`
-      <a href="${opts.href}" class="${className}" onclick=${opts.onclick || null}>
+      <a ${attrs}>
         <span class="Button-plus"><span class="Button-circle"></span></span>
         ${content}
       </a>
@@ -20,7 +30,7 @@ function button (content, opts = {}) {
   }
 
   return html`
-    <button class="${className}" onclick=${opts.onclick || null}>
+    <button ${attrs}>
       <span class="Button-plus"><span class="Button-circle"></span></span>
       ${content}
     </button>

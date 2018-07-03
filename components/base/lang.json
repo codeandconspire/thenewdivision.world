@@ -38,5 +38,7 @@
   "Read more": "Read more",
   "Store": "Store",
   "Case studies": "Case studies",
-  "Cannot read property 'text' of undefined": "Cannot read property 'text' of undefined"
+  "Cannot read property 'text' of undefined": "Cannot read property 'text' of undefined",
+  "More tweets": "More tweets",
+  "Cannot read property 'span' of undefined": "Cannot read property 'span' of undefined"
 }

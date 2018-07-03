@@ -6,6 +6,10 @@
  * All
  */
 
+ .u-spaceA0 {
+   margin: 0 !important;
+ }
+
 .u-spaceA1 {
   margin: var(--space) !important;
 }
@@ -41,6 +45,10 @@
 /**
  * Top
  */
+
+.u-spaceT0 {
+  margin-top: 0 !important;
+}
 
 .u-spaceT1 {
   margin-top: var(--space) !important;
@@ -78,6 +86,10 @@
  * Right
  */
 
+.u-spaceR0 {
+  margin-right: 0 !important;
+}
+
 .u-spaceR1 {
   margin-right: var(--space) !important;
 }
@@ -113,6 +125,10 @@
 /**
  * Bottom
  */
+
+.u-spaceB0 {
+  margin-bottom: 0 !important;
+}
 
 .u-spaceB1 {
   margin-bottom: var(--space) !important;
@@ -150,6 +166,10 @@
  * Left
  */
 
+ .u-spaceL0 {
+  margin-left: 0 !important;
+}
+
 .u-spaceL1 {
   margin-left: var(--space) !important;
 }
@@ -185,6 +205,11 @@
 /**
  * Vertical
  */
+
+.u-spaceV0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
 .u-spaceV1 {
   margin-top: var(--space) !important;
@@ -229,6 +254,11 @@
 /**
  * Horizontal
  */
+
+.u-spaceH0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
 
 .u-spaceH1 {
   margin-left: var(--space) !important;

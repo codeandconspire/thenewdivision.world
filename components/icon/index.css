@@ -56,3 +56,19 @@
 .Icon--twitter .Icon-image {
   right: -1px;
 }
+
+.Icon--brand {
+  background-color: transparent;
+}
+
+.Icon--brand .Icon-image {
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+.Icon--twitter.Icon--brand {
+  color: #00ADEE;
+}

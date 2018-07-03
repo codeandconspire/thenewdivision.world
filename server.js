@@ -61,12 +61,12 @@ app.use(route.get('/prismic-preview', async function (ctx) {
   var token = ctx.query.token
   var api = await Prismic.api(PRISMIC_ENDPOINT, {req: ctx.req})
   var href = await api.previewSession(token, resolvePreview, '/')
+  var expires = process.env.NODE_ENV === 'development'
+    ? new Date(Date.now() + (1000 * 60 * 60 * 12))
+    : new Date(Date.now() + (1000 * 60 * 30))
 
   ctx.set('Cache-Control', 'max-age=0')
-  ctx.cookies.set(Prismic.previewCookie, token, {
-    expires: new Date(Date.now() + (1000 * 60 * 30)),
-    path: '/'
-  })
+  ctx.cookies.set(Prismic.previewCookie, token, {expires: expires, path: '/'})
 
   ctx.redirect(href)
 }))

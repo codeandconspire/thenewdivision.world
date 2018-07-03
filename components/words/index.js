@@ -1,8 +1,15 @@
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
-var {asText} = require('prismic-richtext')
+var asElement = require('prismic-element')
+var {asText, Elements} = require('prismic-richtext')
+var button = require('../button')
+var Figure = require('../figure')
+var {i18n} = require('../base')
+var icon = require('../icon')
 var News = require('./news')
+
+var text = i18n(require('./lang.json'))
 
 module.exports = class Words extends Component {
   constructor (id, state, emit) {
@@ -81,6 +88,8 @@ module.exports = class Words extends Component {
     }
   }
 
+  // redistribute column items to get equal height(-ish) cols
+  // () -> void
   reflow () {
     var last = []
     var cols = [...this.element.querySelectorAll('.js-col')]
@@ -128,7 +137,24 @@ module.exports = class Words extends Component {
                     <h3 class="Display Display--3">${asText(props.text)}</h3>
                   </article>
                 `
-                case 'tweet': return null
+                case 'tweet': {
+                  var [, type, value] = props.link.url.match(/twitter\.com\/(\w+)\/(\w+)/)
+                  return html`
+                    <article class="Words-cell Button-wrapper js-cell" id="${this.id}">
+                      ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(props.image) : null}
+                      <div href="${props.link.url}" class="Text u-textSizeSm ${props.image.url ? 'u-spaceT2' : ''}">
+                        <div class="Words-icon">${icon.twitter({brand: true})}</div>
+                        ${type ? html`
+                          <p class="u-spaceB0 ${props.image.url ? '' : 'u-spaceT0'}">
+                            <strong>${type === 'hashtag' ? `#${value}` : `@${type}`}</strong>
+                          </p>
+                        ` : null}
+                        ${asElement(props.tweet, resolveDoc, serializeTweet)}
+                      </div>
+                      ${button(text`More tweets`, {href: props.link.url, target: props.link.target, wrap: true})}
+                    </article>
+                  `
+                }
                 case 'medium': return null
                 default: return null
               }
@@ -137,5 +163,42 @@ module.exports = class Words extends Component {
         `)}
       </div>
     `
+  }
+}
+
+// hyperlink hashtags and mentions in tweet text
+// (obj, str, arr) -> any
+function serializeTweet (type, node, content, children) {
+  switch (type) {
+    case Elements.span: return content.split(/((?:@|#)\w+)/g).map(hyperlink)
+    case Elements.paragraph: return html`<p class="u-spaceT0">${children}</p>`
+    default: return null
+  }
+}
+
+// replacer for matched linkable props in tweet text
+// (str, ...str) -> str
+function hyperlink (part) {
+  if (!/^@|#/.test(part)) return part
+  var [, type, value] = part.split(/(@|#)(\w+)/)
+  switch (type) {
+    case '#': return html`
+      <a class="u-zBump" href="https://mobile.twitter.com/hashtag/${value}">#${value}</a>
+    `
+    case '@': return html`
+      <a class="u-zBump" href="https://mobile.twitter.com/${value}">@${value}</a>
+    `
+    default: return value
+  }
+}
+
+// resolve document preview url
+// obj -> str
+function resolveDoc (doc) {
+  switch (doc.type) {
+    case 'homepage': return '/'
+    case 'about': return '/about'
+    case 'case': return `/${doc.uid}`
+    default: throw new Error(`Could not resolve url to document ${doc.id}`)
   }
 }
