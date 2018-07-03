@@ -21,6 +21,10 @@
   white-space: nowrap;
 }
 
+.u-textWordBreak {
+  word-break: break-word;
+}
+
 .u-textSystem {
   font-family: var(--system-font) !important;
   line-height: var(--system-font-line-height);
