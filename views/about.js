@@ -1,6 +1,7 @@
 var html = require('choo/html')
 var Component = require('choo/component')
 var asElement = require('prismic-element')
+var nanoraf = require('nanoraf')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
 var Card = require('../components/card')
@@ -230,6 +231,7 @@ var ContactInfo = class ContactInfo extends Component {
     this.id = id
     this.cache = state.cache
     this.local = state.components[id] = {}
+    this.narrow = true
   }
 
   static id (person) {
@@ -240,6 +242,21 @@ var ContactInfo = class ContactInfo extends Component {
       .slice(0, 6)
       .map((word) => word.replace(/[^\w]/g, ''))
       .join('-')
+  }
+
+  load () {
+    var self = this
+    var onresize = nanoraf(function () {
+      self.narrow = window.innerWidth < 700
+      self.rerender()
+    })
+
+    onresize()
+
+    window.addEventListener('resize', onresize, {passive: true})
+    this.unmount = function () {
+      window.removeEventListener('resize', onresize)
+    }
   }
 
   update () {
@@ -254,6 +271,10 @@ var ContactInfo = class ContactInfo extends Component {
   createElement (person) {
     var expanded = typeof window === 'undefined' || this.local.expanded
     var first = person.bio[0]
+    var email = person.email ? person.email.split('@')[0] : null
+
+    email = email ? (this.narrow ? email + '@tnd.world' : email + '@thenewdivision.world') : null
+
     return html`
       <div id="${this.id}">
         <div class="Text u-textSizeXs u-spaceT2">
@@ -261,12 +282,12 @@ var ContactInfo = class ContactInfo extends Component {
           ${expanded ? asElement(person.bio.slice(1)) : null}
           ${expanded ? html`
             <p class="Text u-textSizeXs u-spaceT2">
-              ${person.email ? html`<div>Email: <a href="mailto:${person.email}">${person.email}</div></a>` : null}
-              ${person.phone ? html`<div>Phone: <a href="tel:${person.phone}">${person.phone}</div></a>` : null}
+              ${person.email ? html`<div>Email: <a class="u-textNowrap" href="mailto:${person.email}">${email}</div></a>` : null}
+              ${person.phone ? html`<div>Phone: <a class="u-textNowrap" href="tel:${person.phone}">${person.phone}</div></a>` : null}
             </p>
           ` : null}
         </div>
-        ${!expanded && person.bio.length > 1 ? button(text`More info`, {color: 'white', onclick: () => this.expand()}) : null}
+        ${!expanded && person.bio.length > 1 ? button(text`More info`, {color: 'white', wrap: true, onclick: () => this.expand()}) : null}
       </div>
     `
   }

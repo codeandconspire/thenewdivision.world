@@ -17,6 +17,10 @@
   text-align: center !important;
 }
 
+.u-textNowrap {
+  white-space: nowrap;
+}
+
 .u-textSystem {
   font-family: var(--system-font) !important;
   line-height: var(--system-font-line-height);
