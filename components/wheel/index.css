@@ -100,7 +100,13 @@
 }
 
 :root.has-js .Wheel {
-  height: calc(100vh * 6);
+  height: calc(100vh * 3);
+}
+
+@media (min-width: 600px) and (min-height: 600px) {
+  :root.has-js .Wheel {
+    height: calc(100vh * 5);
+  }
 }
 
 :root.has-js .Wheel-list {
