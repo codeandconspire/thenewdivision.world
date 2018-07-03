@@ -142,7 +142,7 @@ module.exports = class Words extends Component {
                   return html`
                     <article class="Words-cell Button-wrapper js-cell" id="${this.id}">
                       ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(props.image) : null}
-                      <div href="${props.link.url}" class="Text u-textSizeSm ${props.image.url ? 'u-spaceT2' : ''}">
+                      <div href="${props.link.url}" class="Text Text--full u-textSizeSm ${props.image.url ? 'u-spaceT2' : ''}">
                         <div class="Words-icon">${icon.twitter({brand: true})}</div>
                         ${type ? html`
                           <p class="u-spaceB0 ${props.image.url ? '' : 'u-spaceT0'}">
