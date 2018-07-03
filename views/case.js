@@ -59,7 +59,7 @@ function caseView (state, emit) {
         <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 300ms;' : ''}">
           ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`, {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(doc.data.image) : null}
         </div>
-        <section class="View-grid u-spaceT4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
+        <section class="View-grid u-spaceT1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
             <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
               ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-')).render(item)}
@@ -223,7 +223,7 @@ class Topic extends Component {
         ${props.heading ? html`
           <div class="Text Text--full">
             <hr class="u-spaceB3">
-            <h2 class="u-textSizeSm">${asText(props.heading).trim()}</h2>
+            <h2 class="u-textSizeMd">${asText(props.heading).trim()}</h2>
           </div>
         ` : null}
         <div class="Text Text--wide u-spaceT1">

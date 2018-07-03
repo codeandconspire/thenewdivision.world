@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
-  padding: 19vh 0 4vh;
+  padding: 17vh 0 1vh;
 }
 
 .Presentation-text {
@@ -79,6 +79,9 @@
 }
 
 @media (min-height: 600px) and (max-width: 900px) {
+  .Presentation {
+    padding: 14vh 0 1vh;
+  }
   .Presentation-col {
     height: 90px;
   }
