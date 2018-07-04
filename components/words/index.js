@@ -138,7 +138,7 @@ module.exports = class Words extends Component {
                   </article>
                 `
                 case 'tweet': {
-                  var [, type, value] = props.link.url.match(/twitter\.com\/(\w+)\/(\w+)/)
+                  var [, type, value] = props.link.url.match(/twitter\.com\/(\w+)(?:\/(\w+))?/)
                   return html`
                     <article class="Words-cell Button-wrapper js-cell" id="${this.id}">
                       ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(props.image) : null}
