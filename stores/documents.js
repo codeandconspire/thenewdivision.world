@@ -30,12 +30,10 @@ function documents (state, emitter) {
 
   // preemtively fetch homepage
   if (state.prefetch) {
-    state.prefetch.push(api({type: 'homepage'}), api({type: 'about'}))
+    state.prefetch.push(api({type: ['about', 'homepage']}))
   }
 
   function api (query) {
-    if (!query.id) assert.equal(typeof query.type, 'string', 'documents: type should be a string')
-
     var opts = {}
     var predicates = []
     if (state.ref) opts.ref = state.ref
@@ -52,7 +50,11 @@ function documents (state, emitter) {
       if (query.uid) {
         predicates.push(Predicates.at(`my.${query.type}.uid`, query.uid))
       } else {
-        predicates.push(Predicates.at('document.type', query.type))
+        if (Array.isArray(query.type)) {
+          predicates.push(Predicates.any('document.type', query.type))
+        } else {
+          predicates.push(Predicates.at('document.type', query.type))
+        }
       }
     }
 
