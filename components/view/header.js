@@ -27,7 +27,7 @@ module.exports = class Header extends Component {
 
     return html`
       <div class="View-header" id="${this.id}">
-        <a href="/" class="View-home" onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'homepage'})} onclick=${top}>
+        <a href="/" class="View-home" onclick=${top}>
           <span class="u-hiddenVisually">The New Division</span>
           ${logo()}
         </a>
@@ -52,7 +52,7 @@ module.exports = class Header extends Component {
               </div>
             ` : null}
             <nav>
-              <a class="View-nav" href="/" onclick=${explode('white')} onmouseover=${prefetch({type: 'homepage'})} ontouchstart=${prefetch({type: 'about'})}>
+              <a class="View-nav" href="/" onclick=${explode('white')}>
                 <svg width="10" height="10" viewBox="0 0 10 10" class="View-navIcon">
                   <path fill-rule="evenodd" fill="currentColor" d="M6.4 5L10 8.6 8.6 10 5 6.4 1.4 10 0 8.6 3.6 5 0 1.4 1.4 0 5 3.6 8.6 0 10 1.4 6.4 5z"/>
                 </svg> ${text`Close`}
@@ -67,18 +67,11 @@ module.exports = class Header extends Component {
               <span class="View-navBanner">${icon.globalgoals()}</span>
               ${text`Store`}
             </a>
-            <a class="View-nav" href="/about" onclick=${explode('sand')} onmouseover=${prefetch({type: 'about'})} ontouchstart=${prefetch({type: 'about'})}>${text`About`}</a>
+            <a class="View-nav" href="/about" onclick=${explode('sand')}>${text`About`}</a>
           </nav>
         `}
       </div>
     `
-
-    function prefetch (query) {
-      return function () {
-        var doc = self.state.documents.items.find((item) => item.type === query.type)
-        if (!doc) self.emit('doc:fetch', query, {silent: true})
-      }
-    }
 
     function top () {
       window.scrollTo(0, 0)

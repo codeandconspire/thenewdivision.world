@@ -26,7 +26,7 @@ function home (state, emit) {
     `presentation-partial:${state.ui.isPartial}`,
     {
       static: !animate,
-      ltr: state.ui.isFirst
+      ltr: state.ui.isFirst && !state.ui.isPartial
     }
   )
 
@@ -82,8 +82,10 @@ function home (state, emit) {
   }
 
   function explode (event) {
-    var plus = event.currentTarget.querySelector('.js-plus')
-    state.cache(Takeover, Takeover.id()).open(event.currentTarget.pathname, plus.getBoundingClientRect())
+    if (state.ui.inTransition) return event.preventDefault()
+    var target = event.currentTarget
+    var origin = target.querySelector('.js-plus').getBoundingClientRect()
+    state.cache(Takeover, Takeover.id()).open(target.pathname, origin)
     event.preventDefault()
   }
 

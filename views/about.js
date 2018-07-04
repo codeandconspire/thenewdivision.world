@@ -28,10 +28,12 @@ function about (state, emit) {
     return html`<main class="View-container View-container--fill"></main>`
   }
 
-  emit('meta', {
-    image: 'https://www.thenewdivision.world/share.png',
-    description: doc.data.summary[0].text
-  })
+  if (!state.ui.isPartial) {
+    emit('meta', {
+      image: 'https://www.thenewdivision.world/share.png',
+      description: doc.data.summary[0].text
+    })
+  }
 
   var first = html`
   <div>
