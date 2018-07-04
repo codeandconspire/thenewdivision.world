@@ -1,7 +1,7 @@
 module.exports = ui
 
 var THEMES = {
-  white: 'u-themeWhite',
+  white: '',
   sand: 'u-themeSand'
 }
 
