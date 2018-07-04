@@ -43,7 +43,7 @@ module.exports = class Footer extends Component {
               ${text`All Rights Reserved.`}
               <br>
               <br>
-              <a href="https://github.com/codeandconspire/thenewdivision.world">${text`This website is open-source.`}</a>
+              <a href="https://github.com/codeandconspire/thenewdivision.world" target="_blank" rel="noopener noreferrer">${text`This website is open-source.`}</a>
             </p>
           </div>
         </div>

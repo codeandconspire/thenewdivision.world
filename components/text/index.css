@@ -38,54 +38,12 @@
 .Text a {
   position: relative;
   color: var(--link-color);
+  transition: color 100ms var(--snap);
 }
 
-/*
-
-.Text a::before {
-  content: "";
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  position: relative;
-  margin-right: 1ch;
-  background: url('./icon.svg');
+.Text a:hover {
+  color: var(--link-color-hover);
 }
-
-.Text a::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  border-radius: 50%;
-  width: 290%;
-  height: 290%;
-  z-index: -1;
-  transform-origin: center;
-  transition: ease-in 150ms;
-  transition-property: transform, opacity;
-  background: currentColor;
-  opacity: 0.2;
-}
-
-.Text a:hover::after {
-  transform: translate(-50%, -50%) scale(1);
-  transition-timing-function: ease-out;
-}
-
-.Text a:active::after {
-  transform: translate(-50%, -50%) scale(0.8);
-  transition-duration: 50ms;
-  opacity: 0.3;
-}
-
-@media (min-width: 1500px) {
-  .Text a::before {
-    width: 20px;
-    height: 20px;
-  }
-} */
 
 /**
  * 1. Maintain 16/9 aspect ratio for embedded content

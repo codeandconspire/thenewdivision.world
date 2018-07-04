@@ -47,6 +47,8 @@
 .u-themeWhite {
   --color: #000 !important;
   --background: #fff !important;
+  --link-color: var(--gray) !important;
+  --link-color-hover: #999 !important;
 }
 
 .u-themeBlack {
@@ -79,6 +81,7 @@
   --background: var(--sand) !important;
   --link-color: #fff !important;
   --selection-color: rgba(255, 255, 255, 0.6) !important;
+  --link-color-hover: #fff !important;
 }
 
 .u-themeLightSand {
