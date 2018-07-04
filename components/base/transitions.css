@@ -3,14 +3,14 @@
 .u-slideInY {
   opacity: 0;
   transform: translateY(150px);
-  animation: slideIn 500ms 200ms forwards var(--slide-in), fadeIn 350ms 200ms forwards var(--slide-in);
+  animation: slideIn 350ms 200ms forwards var(--slide-in), fadeIn 350ms 200ms forwards var(--slide-in);
   will-change: transform, opacity;
 }
 
-.u-fadeInX {
+.u-slideInX {
   opacity: 0;
   transform: translateX(150px);
-  animation: slideIn 500ms 200ms forwards var(--slide-in), slideIn 350ms 200ms forwards var(--slide-in);
+  animation: slideIn 350ms 200ms forwards var(--slide-in), fadeIn 350ms 200ms forwards var(--slide-in);
   will-change: transform, opacity;
 }
 

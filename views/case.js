@@ -46,11 +46,13 @@ function caseView (state, emit) {
     `
   }
 
-  emit('meta', {
-    image: doc.data.image.url,
-    title: doc.data.title[0].text,
-    description: doc.data.description[0].text
-  })
+  if (!state.ui.isPartial) {
+    emit('meta', {
+      image: doc.data.image.url,
+      title: doc.data.title[0].text,
+      description: doc.data.description[0].text
+    })
+  }
 
   return html`
     <main class="View-container View-container--nudge">

@@ -39,11 +39,13 @@ function home (state, emit) {
     `
   }
 
-  emit('meta', {
-    image: 'https://www.thenewdivision.world/share.png',
-    title: 'The New Division',
-    description: doc.data.summary[0].text
-  })
+  if (!state.ui.isPartial) {
+    emit('meta', {
+      image: 'https://www.thenewdivision.world/share.png',
+      title: 'The New Division',
+      description: doc.data.summary[0].text
+    })
+  }
 
   return html`
     <main class="View-container">
@@ -75,7 +77,7 @@ function home (state, emit) {
     if (state.ui.isFirst) {
       return 250 + 50 * (i % 2)
     } else if (state.ui.isPartial) {
-      return 300 - 50 * (i % 2)
+      return 225 - 50 * (i % 2)
     }
   }
 

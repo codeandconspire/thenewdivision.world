@@ -23,7 +23,7 @@
   background-position: 100% 0;
   transform: translate(-50%, -50%) scale(0);
   border-radius: 100%;
-  animation: Takeover--appear 375ms forwards linear;
+  animation: Takeover--appear 475ms forwards linear;
   will-change: transform;
 }
 
