@@ -11,21 +11,26 @@ var text = i18n(require('./lang.json'))
 
 module.exports = createView
 
-function createView (view, title) {
+function createView (view, meta) {
   return function (state, emit) {
     if (state.ui.isPartial) return view(state, emit)
 
     var children
     try {
-      let next = typeof title === 'function' ? title(state) : title
-      if (!next) next = DEFAULT_TITLE
-      else next = `${next} | ${DEFAULT_TITLE}`
-      if (state.title !== next) emit('DOMTitleChange', next)
       children = state.error ? error(state.error) : view(state, emit)
+      let next = meta(state)
+      if (next.title !== DEFAULT_TITLE) {
+        next.title = `${next.title} | ${DEFAULT_TITLE}`
+      }
+      emit('meta', next)
     } catch (err) {
       err.status = err.status || 500
       children = error(err)
-      emit('DOMTitleChange', `${text(err.message)} | ${DEFAULT_TITLE}`)
+      emit('meta', {
+        description: '',
+        'og:image': '/share.png',
+        title: `${text`Oops`} | ${DEFAULT_TITLE}`
+      })
     }
 
     return html`

@@ -10,7 +10,7 @@ var {i18n} = require('../components/base')
 
 var text = i18n()
 
-module.exports = view(caseView, title)
+module.exports = view(caseView, meta)
 
 function caseView (state, emit) {
   if (state.documents.error) throw state.documents.error
@@ -44,14 +44,6 @@ function caseView (state, emit) {
         <h1 class="Display Display--1 u-loading ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${text`Content is loading`}</h1>
       </main>
     `
-  }
-
-  if (!state.ui.isPartial) {
-    emit('meta', {
-      image: doc.data.image.url,
-      title: doc.data.title[0].text,
-      description: doc.data.description[0].text
-    })
   }
 
   return html`
@@ -247,8 +239,8 @@ class Topic extends Component {
   }
 }
 
-function title (state) {
-  if (state.documents.loading) return text`Loading`
+function meta (state) {
+  if (state.documents.loading) return {title: text`Loading`}
   var doc = state.documents.items.find((item) => item.uid === state.params.slug)
 
   if (!doc) {
@@ -266,5 +258,9 @@ function title (state) {
       throw err
     }
   }
-  return asText(doc.data.title).trim()
+  return {
+    'og:image': doc.data.image.url,
+    title: asText(doc.data.title).trim(),
+    description: doc.data.description[0].text
+  }
 }

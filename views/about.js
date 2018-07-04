@@ -13,7 +13,7 @@ var button = require('../components/button')
 
 var text = i18n()
 
-module.exports = view(about, title)
+module.exports = view(about, meta)
 
 function about (state, emit) {
   if (state.documents.error) throw state.documents.error
@@ -26,13 +26,6 @@ function about (state, emit) {
   if (!doc && !state.ui.isPartial) {
     emit('doc:fetch', {type: 'about'})
     return html`<main class="View-container View-container--fill"></main>`
-  }
-
-  if (!state.ui.isPartial) {
-    emit('meta', {
-      image: 'https://www.thenewdivision.world/share.png',
-      description: doc.data.summary[0].text
-    })
   }
 
   var first = html`
@@ -295,6 +288,12 @@ var ContactInfo = class ContactInfo extends Component {
   }
 }
 
-function title () {
-  return text`About`
+function meta (state) {
+  var doc = state.documents.items.find((doc) => doc.type === 'about')
+  if (!doc) return {title: text`Loading`}
+  return {
+    title: text`About`,
+    'og:image': '/share.png',
+    description: doc.data.summary[0].text
+  }
 }

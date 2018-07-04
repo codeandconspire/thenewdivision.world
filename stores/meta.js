@@ -1,19 +1,23 @@
 module.exports = meta
 
+var ROOT = 'https://www.thenewdivision.world'
+
 function meta (state, emitter, app) {
-  var doc = state.documents.items.find((item) => item.type === 'homepage')
+  state.meta = state.prefetch ? {'og:url': ROOT} : state.meta
 
-  state.meta = Object.assign({
-    image: 'https://www.thenewdivision.world/share.png',
-    title: 'The New Division',
-    description: doc && doc.data.summary[0].text
-  }, state.meta)
+  emitter.on('meta', function (next) {
+    if (next.title !== state.title) emitter.emit('DOMTitleChange', next.title)
+    Object.assign(state.meta, next)
 
-  emitter.on('DOMTitleChange', function (title) {
-    state.meta.title = title
-  })
+    if (typeof window === 'undefined') return
 
-  emitter.on('meta', function (meta) {
-    Object.assign(state.meta, meta)
+    var url = ROOT + state.href
+    var tags = Object.assign({'og:url': url}, next)
+    if (next.title && !next['og:title']) tags['og:title'] = next.title
+
+    Object.keys(tags).forEach(key => {
+      var el = document.head.querySelector(`meta[property="${key}"]`)
+      if (el) el.setAttribute('content', tags[key].replace(/^\//, ROOT + '/'))
+    })
   })
 }

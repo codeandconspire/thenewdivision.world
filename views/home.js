@@ -10,7 +10,7 @@ var Presentation = require('../components/presentation')
 
 var text = i18n()
 
-module.exports = view(home)
+module.exports = view(home, meta)
 
 function home (state, emit) {
   if (state.documents.error) throw state.documents.error
@@ -37,14 +37,6 @@ function home (state, emit) {
       <main class="View-container View-container--nudge View-container--fill">
       </main>
     `
-  }
-
-  if (!state.ui.isPartial) {
-    emit('meta', {
-      image: 'https://www.thenewdivision.world/share.png',
-      title: 'The New Division',
-      description: doc.data.summary[0].text
-    })
   }
 
   return html`
@@ -94,5 +86,15 @@ function home (state, emit) {
       var doc = state.documents.items.find((item) => item.id === id)
       if (!doc) emit('doc:fetch', {id}, {silent: true})
     }
+  }
+}
+
+function meta (state) {
+  var doc = state.documents.items.find((doc) => doc.type === 'homepage')
+  if (!doc) return {title: text`Loading`}
+  return {
+    'og:image': '/share.png',
+    title: 'The New Division',
+    description: doc.data.summary[0].text
   }
 }
