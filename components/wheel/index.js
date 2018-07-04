@@ -6,16 +6,16 @@ var {offset, vh, modulate, supports} = require('../base')
 
 var BRANCHES = [
   // [[pathX, pathY], pathLine, branchTranslate, numberX, titleX, rotationAxisOffset, title, descriptionId]
-  [[702.6, 288.8], 'l172.6.2', '701.4 232.68', 0, 31.7, 0.1, 'Awareness', 'awareness_description'],
-  [[932.9, 385], 'h195.6', '931.87 328.85', 0, 34.6, -0.3, 'Relationship', 'relationship_description'],
-  [[1073.7, 582.2], 'l219.2.1', '1072.45 526.24', 0, 36.4, 1, 'Business Case', 'business_case_description'],
-  [[1071.6, 824.6], 'l149.2-.1', '1071.44 768.27', 1, 38.3, 1, 'Strategy', 'strategy_description'],
-  [[927.3, 1019.1], 'l137.5-.1', '926.57 962.77', 4, 40.6, 0, 'Culture', 'culture_description'],
-  [[696.87, 1092.3], 'l142.6-.2', '696.6 1036.17', 10, 49.1, 0, 'Design', 'design_description'],
-  [[467.1, 1015.4], 'l244.8-.2', '466.73 959.23', 6, 39.4, -0.1, 'Communication', 'communication_description'],
-  [[326.3, 818.4], 'l175-.2', '325.86 762.29', 6, 41.3, -0.1, 'Activation', 'activation_description'],
-  [[328.2, 575.6], 'l174.9.1', '327.5 519.61', 4, 40.1, 0.05, 'Evaluation', 'evaluation_description'],
-  [[472.1, 381.2], 'l159.2-.2', '471.24 324.99', 8, 39.7, -0.21, 'Evolution', 'evolution_description']
+  [[702.6, 288.8], 'l172.6.2', '701.4 232.68', 1, 35, 0.1, 'Awareness', 'awareness_description'],
+  [[932.9, 385], 'h194.6', '931.87 328.85', 1, 39, -0.3, 'Relationship', 'relationship_description'],
+  [[1073.7, 582.2], 'l219.2.1', '1072.45 526.24', 1, 40, 1, 'Business Case', 'business_case_description'],
+  [[1071.6, 824.6], 'l148.2-.1', '1071.44 768.27', 1, 40, 1, 'Strategy', 'strategy_description'],
+  [[927.3, 1019.1], 'l129.5-.1', '926.57 962.77', 1, 39, 0, 'Culture', 'culture_description'],
+  [[696.87, 1092.3], 'l124.6-.2', '696.6 1036.17', 1, 40, 0, 'Design', 'design_description'],
+  [[467.1, 1015.4], 'l234.8-.2', '466.73 959.23', 1, 37, -0.1, 'Communication', 'communication_description'],
+  [[326.3, 818.4], 'l166-.2', '325.86 762.29', 1, 39, -0.1, 'Activation', 'activation_description'],
+  [[328.2, 575.6], 'l168.9.1', '327.5 519.61', 1, 40, 0.05, 'Evaluation', 'evaluation_description'],
+  [[472.1, 381.2], 'l149.2-.2', '471.24 324.99', 1, 35, -0.21, 'Evolution', 'evolution_description']
 ]
 
 module.exports = class Wheel extends Component {
@@ -216,7 +216,7 @@ module.exports = class Wheel extends Component {
             </text>
             <text fill="#FFF" class="Wheel-text">
               ${doc.data[descriptionId][0].text.split('\n').map((line, index) => html`
-                <tspan x="0" y="${88 + index * 20}">${line}</tspan>
+                <tspan x="2" y="${80 + index * 20}">${line}</tspan>
               `)}
             </text>
           </g>

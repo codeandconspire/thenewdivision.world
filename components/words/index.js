@@ -182,7 +182,7 @@ function serializeTweet (type, node, content, children) {
         attrs.rel = 'noopener noreferrer'
       }
 
-      return html`<a ${attrs}> ${children} </a>`
+      return html` <a ${attrs}> ${children} </a> `
     }
     case Elements.paragraph: return html`<p class="u-spaceT0">${children}</p>`
     default: return null
