@@ -34,10 +34,10 @@ module.exports = class Footer extends Component {
           </div>
 
           <div class="Text u-spaceV8 u-inlineBlock ${ICON_THEMES[theme]}">
-            <a href="#" class="u-inlineBlock u-spaceLch u-spaceRch">${icon.facebook()}</a>
-            <a href="#" class="u-inlineBlock u-spaceRch">${icon.twitter()}</a>
-            <a href="#" class="u-inlineBlock u-spaceRch">${icon.instagram()}</a>
-            <a href="#" class="u-inlineBlock u-spaceRch">${icon.linkedin()}</a>
+            <a href="https://www.facebook.com/thenewdiv/" class="u-inlineBlock u-spaceLch u-spaceRch">${icon.facebook()}</a>
+            <a href="https://twitter.com/thenewdiv/" class="u-inlineBlock u-spaceRch">${icon.twitter()}</a>
+            <a href="https://www.instagram.com/thenewdiv/" class="u-inlineBlock u-spaceRch">${icon.instagram()}</a>
+            <a href="https://www.linkedin.com/company/the-new-division-by-trollb%C3%A4ck-company/" class="u-inlineBlock u-spaceRch">${icon.linkedin()}</a>
             <p class="u-textSizeXs u-spaceT4">
               ${text`© 2018 The New Division by Trollbäck + Company.`}<br>
               ${text`All Rights Reserved.`}
