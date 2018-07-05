@@ -4,7 +4,6 @@ var asElement = require('prismic-element')
 var nanoraf = require('nanoraf')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
-var Card = require('../components/card')
 var Wheel = require('../components/wheel')
 var intro = require('../components/intro')
 var {i18n} = require('../components/base')
@@ -59,7 +58,7 @@ function about (state, emit) {
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
-            ${state.cache(Card, 'workspace').render(workspace(doc))}
+            ${workspace(doc)}
           </section>
           <section id="services" class="u-spaceT8">
             <div class="View-grid u-spaceT8">
@@ -144,34 +143,38 @@ function about (state, emit) {
 }
 
 function workspace (doc) {
-  return {
-    color: 'darkBlue',
-    image: doc.data.workspace_image,
-    caption: doc.data.workspace_image.alt,
-    children: html`
-      <div class="u-sizeFill u-flex u-column u-spaceA4">
-        <div class="u-sizeFill u-flex u-column u-justifyCenter">
-          <h3>
-            <span class="u-textSizeLg u-textBold">${text`Address`}</span>
-            <span class="Display Display--2 u-spaceT2">
-              ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
-                return els.concat(part, index < list.length - 1 ? html`<br>` : null)
-              }, [])}
-            </span>
-          </h3>
-          <div class="Text u-textSizeSm">
-            <p>${doc.data.address.slice(1).map((part) => [part.text, html`<br>`])}</p>
+  var image = doc.data.workspace_image
+  var caption = doc.data.workspace_image.alt
+
+  return html`
+    <div class="Card Card--banner" id="ncid-7290" data-nanocomponent="ncid-7290" data-onloadidtzmc="o14">
+      <figure class="Card-figure">
+        <img class="Card-image" src="${image.url}" alt="${image.alt || ''}">
+        ${caption ? html`<figcaption class="Card-caption">${caption}</figcaption>` : null}
+      </figure>
+      <div class="Card-block js-block u-themeDarkBlue u-bg u-color">
+        <div class="u-sizeFill u-flex u-column u-spaceA4">
+          <div class="u-sizeFill u-flex u-column u-justifyCenter">
+            <h3>
+              <span class="u-textSizeLg u-textBold">${text`Address`}</span>
+              <span class="Display Display--2 u-spaceT2">
+                ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
+                  return els.concat(part, index < list.length - 1 ? html`<br>` : null)
+                }, [])}
+              </span>
+            </h3>
+            <div class="Text u-textSizeSm">
+              <p>${doc.data.address.slice(1).map((part) => [part.text, html`<br>`])}</p>
+            </div>
+          </div>
+          <h4 class="u-textBold">${text`Inquiries`}</h4>
+          <div class="Text">
+            <p><a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a></p>
           </div>
         </div>
-        <h4 class="u-textBold">${text`Inquiries`}</h4>
-        <div class="Text">
-          <p>
-            <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a>
-          </p>
-        </div>
       </div>
-    `
-  }
+    </div>
+  `
 }
 
 function coworker (state, doc) {

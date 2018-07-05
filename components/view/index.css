@@ -2,6 +2,7 @@
 
 @import "../base/global";
 @import "../display";
+@import "../card";
 @import "../text";
 
 .View {
