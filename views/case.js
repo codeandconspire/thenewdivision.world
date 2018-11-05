@@ -16,9 +16,8 @@ function caseView (state, emit) {
   if (state.documents.error) throw state.documents.error
 
   var doc = state.documents.items.find((item) => item.uid === state.params.slug)
-
   if (!doc) {
-    emit('doc:fetch', {type: 'case', uid: state.params.slug})
+    emit('doc:fetch', { type: 'case', uid: state.params.slug }, { fatal: true })
 
     // try and lookup case as linked item on homepage
     let parent = state.documents.items.find((doc) => doc.type === 'homepage')

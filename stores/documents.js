@@ -14,13 +14,22 @@ function documents (state, emitter) {
     items: state.documents && !state.prefetch ? [...state.documents.items] : []
   }
 
+  emitter.on('navigate', function () {
+    state.documents.error = null
+  })
+
   var queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
       endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
-      if (state.prefetch) state.prefetch.push(api(query))
+      if (state.prefetch) {
+        state.prefetch.push(api(query, opts))
+      } else {
+        state.documents.error = new DocumentError('Page not found')
+        state.documents.error.status = state.status = 404
+      }
     } else {
-      api(query).then(done, done)
+      api(query, opts).then(done, done)
     }
 
     function done () {
@@ -33,9 +42,12 @@ function documents (state, emitter) {
     state.prefetch.push(api({type: ['about', 'homepage']}))
   }
 
-  function api (query) {
-    var opts = {}
+  function api (query, opts = {}) {
     var predicates = []
+    var fatal = opts.fatal
+
+    delete opts.fatal
+    delete opts.silent
     if (state.ref) opts.ref = state.ref
 
     // default to fetching primary case fields
@@ -64,6 +76,10 @@ function documents (state, emitter) {
     state.documents.loading = true
     return endpoint.then(function (api) {
       return api.query(predicates, opts).then(function (response) {
+        if (fatal && !response.results_size) {
+          state.status = 404
+          throw new Error('Page not found')
+        }
         if (typeof window !== 'undefined') response.results.forEach(preload)
         state.documents.items.push(...response.results.filter(function (doc) {
           return !state.documents.items.find((existing) => existing.id === doc.id)
@@ -71,6 +87,7 @@ function documents (state, emitter) {
       })
     }).catch(function (err) {
       state.documents.error = new DocumentError(err)
+      if (state.prefetch) throw state.documents.error
     }).then(function () {
       queue -= 1
       if (queue === 0) state.documents.loading = false
