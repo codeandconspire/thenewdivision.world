@@ -13,6 +13,13 @@ var PRISMIC_ENDPOINT = 'https://thenewdivision.cdn.prismic.io/api/v2'
 
 var app = jalla('index.js', {sw: 'sw.js'})
 
+app.use(function (ctx, next) {
+  switch (ctx.path) {
+    case '/the-global-goals-design': return ctx.redirect('/the-global-goals')
+    default: return next()
+  }
+})
+
 app.use(route.get('/robots.txt', function (ctx, next) {
   if (ctx.host === 'www.thenewdivision.world') return next()
   ctx.type = 'text/plain'
