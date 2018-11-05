@@ -7,6 +7,8 @@ function reset (state, emitter) {
     state.title = title
   })
 
+  if (state.prefetch) delete state.status
+
   // prevent leaking component state in-between renders
   state.components = Object.create({
     toJSON () {
