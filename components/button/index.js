@@ -8,10 +8,10 @@ function button (content, opts = {}) {
   var color = opts.color || 'gray'
   var attrs = {
     onclick: opts.onclick || null,
-    className: `Button u-color${color[0].toUpperCase() + color.substr(1)}`
+    class: `Button u-color${color[0].toUpperCase() + color.substr(1)}`
   }
 
-  if (opts.wrap) attrs.className += ' Button--wrap'
+  if (opts.wrap) attrs.class += ' Button--wrap'
 
   if (opts.href) {
     attrs.href = opts.href
