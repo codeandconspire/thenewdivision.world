@@ -24,24 +24,12 @@
   height: 13.5vh;
   margin: 0 0 3vh 0;
   position: relative;
-  opacity: 1;
+  opacity: 0;
   transform: translate(0px, 100px);
   animation:
     Presentation-col--fade 350ms forwards var(--slide-in),
     Presentation-col--slide 425ms forwards var(--slide-in);
   will-change: transform;
-}
-
-:root.has-js .Presentation-col {
-  opacity: 0;
-}
-
-:root.has-js .Presentation--static .Presentation-col {
-  opacity: 1;
-  transform: none;
-  animation: none;
-  will-change: unset;
-  transform: translate(0px, 0px);
 }
 
 .Presentation-col:first-child .Presentation-title {
@@ -115,7 +103,7 @@
     transition: transform 500ms var(--ease);
   }
 
-  :root.has-js .Presentation--static .Presentation-col:hover {
+  .Presentation--static .Presentation-col:hover {
     transform: translateY(-8px);
     transition-delay: 20ms;
   }
@@ -145,7 +133,7 @@
     transition-property: outline-color, background-color;
   }
 
-  :root.has-js .Presentation--static .Presentation-col:hover .Presentation-text strong {
+  .Presentation--static .Presentation-col:hover .Presentation-text strong {
     background: #f9d229;
     outline-color: #f9d229;
   }
@@ -205,4 +193,12 @@
   .Presentation .Presentation-col + .Presentation-col {
     margin-left: calc(var(--space) * 10);
   }
+}
+
+.Presentation--static .Presentation-col {
+  opacity: 1;
+  transform: none;
+  animation: none;
+  will-change: unset;
+  transform: translate(0px, 0px);
 }

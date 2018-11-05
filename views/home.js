@@ -19,15 +19,12 @@ function home (state, emit) {
     emit('ui:theme', 'white')
   }
 
-  var animate = state.ui.isPartial || (state.ui.isFirst && typeof window !== 'undefined')
+  var animate = state.ui.isPartial || state.ui.isFirst
 
   var presentation = state.cache(
     Presentation,
     `presentation-partial:${state.ui.isPartial}`,
-    {
-      static: !animate,
-      ltr: state.ui.isFirst && !state.ui.isPartial
-    }
+    { ltr: state.ui.isFirst && !state.ui.isPartial }
   )
 
   var doc = state.documents.items.find((doc) => doc.type === 'homepage')
@@ -41,7 +38,7 @@ function home (state, emit) {
 
   return html`
     <main class="View-container">
-      ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])))}
+      ${presentation.render(['we', 'create', 'good', 'forces'].map((key) => asElement(doc.data[key])), { static: !animate })}
       <section id="cases">
         <h2 class="u-hiddenVisually">${text`Case studies`}</h2>
         <div class="View-grid View-grid--tight">

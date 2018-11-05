@@ -12,26 +12,14 @@ module.exports = class Presentation extends Component {
     super(id)
     this.id = id
     Object.assign(this, opts)
-    if (typeof window === 'undefined') this.static = true
-    if (!this.static) this.load = this.done
-  }
-
-  done (element) {
-    var i = 0
-    var onanimationend = () => {
-      if (i++ < 7) return
-      element.removeEventListener('animationend', onanimationend)
-      this.static = true
-      this.rerender()
-    }
-    element.addEventListener('animationend', onanimationend)
   }
 
   update () {
     return false
   }
 
-  createElement (texts) {
+  createElement (texts, opts = {}) {
+    Object.assign(this, opts)
     return html`
       <div class="Presentation ${this.ltr ? 'Presentation--ltr' : ''} ${this.static ? 'Presentation--static' : ''}" id="${this.id.replace(/[^\w]+/g, '-')}">
         <div class="Presentation-col Button-wrapper" style="flex-basis: ${((167 / SIZE) * 100).toFixed(2)}%">
