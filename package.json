@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && dependency-check package.json",
-    "start": "node server.js"
+    "start": "node server.js",
+    "deploy": "npx now -T codeandconspire && npx now alias -T codeandconspire"
   },
   "documentify": {
     "transform": [
@@ -18,6 +19,7 @@
     ]
   },
   "now": {
+    "alias": "www.thenewdivision.world",
     "env": {
       "NODE_ENV": "production",
       "PRISMIC_THENEWDIVISION_SECRET": "@prismic-thenewdivision-secret",
