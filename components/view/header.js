@@ -39,13 +39,13 @@ module.exports = class Header extends Component {
                 <section class="View-navInfo">
                   <h1 class="View-navHeading">Contact us</h1>
                   <a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a><br />
-                  <a href="tel:+46834950230">+46 834 950 230</a>
+                  <a href="tel:+46733889915">+46 733 889 915</a>
                 </section>
                 <section class="View-navInfo">
                   <h1 class="View-navHeading">Address</h1>
                   <a href="https://goo.gl/maps/TEWDAjA4sds" target="_blank" rel="noopener noreferrer">
                     The New Divison<br />
-                    C/o Alma, Nybrogatan 8<br />
+                    Svartmangatan 16<br />
                     Stockholm, Sweden
                   </a>
                 </section>
