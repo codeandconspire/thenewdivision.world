@@ -210,7 +210,7 @@ function coworker (state, doc) {
                 <p>
                   <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
                   <br />
-                  <a href="tel:+46701234567">+46 (0)70 123 45 67</a>
+                  <a href="tel:+46733889915">+46 733 889 915</a>
                 </p>
               </div>
             </article>
