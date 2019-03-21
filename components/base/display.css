@@ -17,7 +17,7 @@
  */
 
  .u-nbfc {
-  display: table-cell !important;
+  overflow: hidden !important;
 }
 
 .u-hiddenVisually {
