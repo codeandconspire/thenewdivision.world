@@ -23,7 +23,7 @@ module.exports = class Header extends Component {
     var self = this
     var href = this.state.href
     var isAbout = route === '/about' || route === 'about'
-    var isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/words'))
+    var isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/news'))
 
     return html`
       <div class="View-header" id="${this.id}">
@@ -62,7 +62,7 @@ module.exports = class Header extends Component {
         ` : html`
           <nav>
             <a class="View-nav View-nav--supplemental" href="#cases" onclick=${cleanHash}>${text`Cases`}</a>
-            <a class="View-nav View-nav--supplemental" href="#words" onclick=${cleanHash}>${text`Words`}</a>
+            <a class="View-nav View-nav--supplemental" href="#news" onclick=${cleanHash}>${text`News`}</a>
             <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">
               <span class="View-navBanner">${icon.globalgoals()}</span>
               ${text`Store`}

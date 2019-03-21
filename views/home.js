@@ -54,8 +54,8 @@ function home (state, emit) {
         </div>
       </section>
       ${state.ui.isPartial ? null : html`
-        <section id="words" class="u-spaceT8 u-nbfc">
-          <h2 class="u-textSizeLg u-spaceT5 u-textBold">${text`Words`}</h2>
+        <section id="news" class="u-spaceT8 u-nbfc">
+          <h2 class="u-textSizeLg u-spaceT5 u-textBold">${text`News`}</h2>
           ${state.cache(Words, `${doc.id}-words`).render(doc.data.words)}
         </section>
       `}
