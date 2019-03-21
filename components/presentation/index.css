@@ -124,20 +124,6 @@
     margin-top: 1em;
   }
 
-  .Presentation-text strong {
-    font-weight: inherit;
-    position: relative;
-    background: none;
-    outline: 2px solid transparent;
-    transition: 350ms forwards var(--ease);
-    transition-property: outline-color, background-color;
-  }
-
-  .Presentation--static .Presentation-col:hover .Presentation-text strong {
-    background: #f9d229;
-    outline-color: #f9d229;
-  }
-
   .Presentation-col:nth-last-child(1) {
     animation-delay: 75ms;
   }
