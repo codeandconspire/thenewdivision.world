@@ -15,11 +15,21 @@
 .Figure-container {
   max-height: 95vh;
   position: relative;
-  background: var(--gray);
+  background: var(--bright-gray);
   transform:
     translateX(calc(0.5vw * var(--mouse-x)))
     translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
+}
+
+.Figure-container::before {
+  content: "…";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2.5rem;
+  color: var(--gray);
+  transform: translate(-50%, -75%);
 }
 
 .Figure-container:hover {
