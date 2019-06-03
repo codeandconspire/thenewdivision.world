@@ -3,6 +3,7 @@ var path = require('path')
 var assert = require('assert')
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
+var LRU = require('nanolru')
 var common = require('./lang.json')
 
 if (typeof window !== 'undefined') {
@@ -112,40 +113,6 @@ function observe (el, cb) {
   })
 }
 
-var IMAGE_CDN_URL = `https://ik.imagekit.io/ryozgj42m/`
-var PRISMIC_CDN_URL = 'https://thenewdivision.cdn.prismic.io/thenewdivision/'
-
-// construct image attr hash for prismic image
-// (obj, arr?) -> obj
-exports.imgattrs = imgattrs
-function imgattrs (props, sizes = []) {
-  var uri = decodeURIComponent(props.url).split(PRISMIC_CDN_URL)[1]
-  var attrs = {
-    alt: props.alt || '',
-    src: `${IMAGE_CDN_URL}tr:w-1280,q-90,pr-true/${uri}`,
-    width: props.dimensions.width,
-    height: props.dimensions.height
-  }
-
-  if (sizes.length) {
-    // Join sizes like: `[(min-width: <brk>)] <size>`
-    attrs.sizes = sizes.map(function ([size, brk]) {
-      return `${brk ? `(min-width: ${brk}px) ` : ''}${size}`
-    }).join(',')
-
-    // Join sizes like: `<url> <brk>w`
-    attrs.srcset = [`${IMAGE_CDN_URL}tr:w-${attrs.width},q-90,pr-true/${uri} ${attrs.width}w`]
-    for (let i = 0, len = sizes.length; i < len; i++) {
-      if (sizes[i][1] && sizes[i][1] !== attrs.width) {
-        attrs.srcset.push(`${IMAGE_CDN_URL}tr:w-${sizes[i][1]},q-90,pr-true/${uri} ${sizes[i][1]}w`)
-      }
-    }
-    attrs.srcset = attrs.srcset.join(',')
-  }
-
-  return attrs
-}
-
 // get viewport height
 // () -> num
 exports.vh = vh
@@ -237,4 +204,50 @@ function supports (rule) {
   style.parentElement.removeChild(style)
   el.parentElement.removeChild(el)
   return result
+}
+
+var MEMO = new LRU()
+
+// momize function
+// (fn, arr) -> any
+exports.memo = memo
+function memo (fn, keys) {
+  assert(Array.isArray(keys) && keys.length, 'memo: keys should be non-empty array')
+  var key = JSON.stringify(keys)
+  var result = MEMO.get(key)
+  if (!result) {
+    result = fn.apply(undefined, keys)
+    MEMO.set(key, result)
+  }
+  return result
+}
+
+// compose srcset attribute from url for given sizes
+// (str, arr, obj?) -> str
+exports.srcset = srcset
+function srcset (uri, sizes, opts = {}) {
+  var type = opts.type || 'fetch'
+  var transforms = opts.transforms
+  if (!transforms) transforms = 'c_fill,f_auto,q_auto'
+  if (!/c_/.test(transforms)) transforms += ',c_fill'
+  if (!/f_/.test(transforms)) transforms += ',f_auto'
+  if (!/q_/.test(transforms)) transforms += ',q_auto'
+
+  // trim prismic domain from uri
+  var parts = uri.split('codeandconspire.cdn.prismic.io/codeandconspire/')
+  uri = parts[parts.length - 1]
+
+  return sizes.map(function (size) {
+    var transform = transforms
+    if (Array.isArray(size)) {
+      transform = opts.transform ? size[1] + ',' + opts.transforms : size[1]
+      if (!/c_/.test(transform)) transform += ',c_fill'
+      if (!/f_/.test(transform)) transform += ',f_auto'
+      if (!/q_/.test(transform)) transform += ',q_auto'
+      size = size[0]
+    }
+    if (opts.aspect) transform += `,h_${Math.floor(size * opts.aspect)}`
+
+    return `/media/${type}/${transform},w_${size}/${uri} ${size}w`
+  }).join(',')
 }

@@ -45,7 +45,7 @@ function home (state, emit) {
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="View-cell u-md-size1of2 u-spaceT5 ${animate ? 'u-slideInY' : ''}" style="${animate ? `animation-delay: ${delay(i)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Figure-outer" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
-                ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, {interactive: true, sizes: [['50vw', 600]]}).render(props.image)}
+                ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, {interactive: true, size: 'half'}).render(props.image)}
                 <h3 class="u-textBold u-spaceT2">${asText(props.case.data.title)}</h3>
                 <p>${asText(props.case.data.description)}</p>
               </a>

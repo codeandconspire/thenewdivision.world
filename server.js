@@ -4,10 +4,11 @@ var url = require('url')
 var jalla = require('jalla')
 var body = require('koa-body')
 var dedent = require('dedent')
-var route = require('koa-route')
+var { get, post } = require('koa-route')
 var compose = require('koa-compose')
 var Prismic = require('prismic-javascript')
 var purge = require('./lib/purge')
+var imageproxy = require('./lib/cloudinary-proxy')
 
 var PRISMIC_ENDPOINT = 'https://thenewdivision.cdn.prismic.io/api/v2'
 
@@ -20,7 +21,7 @@ app.use(function (ctx, next) {
   }
 })
 
-app.use(route.get('/robots.txt', function (ctx, next) {
+app.use(get('/robots.txt', function (ctx, next) {
   if (ctx.host === process.env.npm_package_now_alias) return next()
   ctx.type = 'text/plain'
   ctx.body = dedent`
@@ -29,7 +30,17 @@ app.use(route.get('/robots.txt', function (ctx, next) {
   `
 }))
 
-app.use(route.post('/prismic-hook', compose([body(), async function (ctx) {
+// proxy cloudinary on-demand-transform API
+app.use(get('/media/:type/:transform/:uri(.+)', async function (ctx, type, transform, uri) {
+  if (ctx.querystring) uri += `?${ctx.querystring}`
+  var stream = await imageproxy(type, transform, uri)
+  var headers = ['etag', 'last-modified', 'content-length', 'content-type']
+  headers.forEach((header) => ctx.set(header, stream.headers[header]))
+  ctx.set('Cache-Control', `public, max-age=${60 * 60 * 24 * 365}`)
+  ctx.body = stream
+}))
+
+app.use(post('/prismic-hook', compose([body(), async function (ctx) {
   var secret = ctx.request.body && ctx.request.body.secret
   ctx.assert(secret === process.env.PRISMIC_THENEWDIVISION_SECRET, 403, 'Secret mismatch')
   return new Promise(function (resolve, reject) {
@@ -59,7 +70,7 @@ app.use(function (ctx, next) {
   return next()
 })
 
-app.use(route.get('/prismic-preview', async function (ctx) {
+app.use(get('/prismic-preview', async function (ctx) {
   var host = process.env.NOW_URL && url.parse(process.env.NOW_URL).host
   if (host && ctx.host !== host) {
     return ctx.redirect(url.resolve(process.env.NOW_URL, ctx.url))

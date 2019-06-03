@@ -58,7 +58,7 @@ function about (state, emit) {
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
-            ${workspace(doc)}
+            ${workspace(state, doc)}
           </section>
           <section id="services" class="u-spaceT8">
             <div class="View-grid u-spaceT8">
@@ -142,16 +142,12 @@ function about (state, emit) {
   `
 }
 
-function workspace (doc) {
+function workspace (state, doc) {
   var image = doc.data.workspace_image
-  var caption = doc.data.workspace_image.alt
 
   return html`
     <div class="Card Card--banner" id="ncid-7290" data-nanocomponent="ncid-7290" data-onloadidtzmc="o14">
-      <figure class="Card-figure">
-        <img class="Card-image" src="${image.url}" alt="${image.alt || ''}">
-        ${caption ? html`<figcaption class="Card-caption">${caption}</figcaption>` : null}
-      </figure>
+      ${state.cache(Figure, `'workspace'-${Figure.id(image)}`, {sizes: 'third'}).render(image, false, 'Card-figure')}
       <div class="Card-block js-block u-themeDarkBlue u-bg u-color">
         <div class="u-sizeFill u-flex u-column u-spaceA4">
           <div class="u-sizeFill u-flex u-column u-justifyCenter">
@@ -184,7 +180,7 @@ function coworker (state, doc) {
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect Button-wrapper">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {interactive: false, aspect: true, sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(person.image) : null}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'third'}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
             <p class="u-textSizeSm">${person.role}</p>
             ${state.cache(ContactInfo, ContactInfo.id(person)).render(person)}

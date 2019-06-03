@@ -1,35 +1,35 @@
-/* @define Figure */
-
 @import "../base/global";
 
+:root {
+  --Figure-aspect: 100%;
+}
+
+/* @define Figure */
 .Figure {
   display: block;
+  width: 100%;
   padding: 0;
   margin: 0;
   text-decoration: none;
   color: currentColor;
   background: transparent;
-  user-select: none;
 }
 
 .Figure-container {
-  max-height: 95vh;
+  padding-bottom: var(--Figure-aspect);
   position: relative;
-  background: var(--bright-gray);
   transform:
     translateX(calc(0.5vw * var(--mouse-x)))
     translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
+  user-select: none;
+  background: rgba(0, 0, 0, 0.1);
 }
 
-.Figure-container::before {
-  content: "…";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 2.5rem;
-  color: var(--gray);
-  transform: translate(-50%, -75%);
+@media (max-width: 599px) {
+  .Figure-container--alternative {
+    padding-bottom: var(--Figure-aspect-alternative);
+  }
 }
 
 .Figure-container:hover {
@@ -44,6 +44,40 @@
   left: 0;
   top: 0;
   object-fit: cover;
+}
+
+.Figure-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--space) * 4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color);
+  color: #fff;
+  padding-bottom: 40%;
+}
+
+.Figure-load {
+  display: none;
+}
+
+:root.has-js .Figure-load {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+:root.has-js .Figure.is-loaded .Figure-load {
+  display: none;
 }
 
 .Figure-caption {

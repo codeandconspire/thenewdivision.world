@@ -31,7 +31,7 @@ function caseView (state, emit) {
           <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <div class="View-reverse View-reverse--md">
             <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
-              ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`, {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(doc.data.image) : null}
+              ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
             </div>
           </div>
         </main>
@@ -50,7 +50,7 @@ function caseView (state, emit) {
       <h1 class="Display Display--1 u-spaceIntro ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
       <div class="View-reverse View-reverse--md">
         <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 225ms;' : ''}">
-          ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`, {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(doc.data.image) : null}
+          ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
         </div>
         <section class="View-grid u-spaceT1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 175ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
@@ -66,14 +66,14 @@ function caseView (state, emit) {
             <div class="View-grid">
               ${slice.items.map((item, index, list) => html`
                 <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length} u-spaceB4">
-                  ${state.cache(Figure, Figure.id(item.image), {sizes: [['50vw', 600]]}).render(item.image)}
+                  ${state.cache(Figure, Figure.id(item.image), {sizes: 'half'}).render(item.image)}
                 </div>
               `)}
             </div>
           `
           case 'image': return html`
             <div class="u-spaceB4">
-              ${state.cache(Figure, Figure.id(slice.primary.image), {sizes: [['100vw', 3260], ['100vw', 1280]]}).render(slice.primary.image)}
+              ${state.cache(Figure, Figure.id(slice.primary.image)).render(slice.primary.image)}
             </div>
           `
           case 'text': return html`

@@ -54,6 +54,7 @@
 
 /**
  * Pull banner image to full screen width
+ * 1. Fix hover issue when the banner version is used with Figure
  */
 
 .Card--banner {
@@ -65,6 +66,7 @@
 
 .Card-block {
   margin: -50% calc(var(--space) * 3) 0;
+  z-index: 1; /* 1 */
 }
 
 .Card-figure {
