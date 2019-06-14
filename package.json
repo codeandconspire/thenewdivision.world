@@ -8,16 +8,6 @@
     "start": "node server.js",
     "deploy": "npx now -T codeandconspire && npx now alias -T codeandconspire"
   },
-  "documentify": {
-    "transform": [
-      [
-        "./lib/document",
-        {
-          "order": "end"
-        }
-      ]
-    ]
-  },
   "now": {
     "alias": "www.thenewdivision.world",
     "env": {
@@ -47,13 +37,13 @@
   },
   "dependencies": {
     "cccpurge": "^1.4.0",
-    "choo": "^6.13.1",
+    "choo": "^7.0.0-0",
     "choo-service-worker": "^2.4.0",
     "cloudinary": "^1.13.2",
     "dedent": "^0.7.0",
     "dotenv": "^6.0.0",
     "hstream": "^1.2.0",
-    "jalla": "^0.9.3",
+    "jalla": "^1.0.0-2",
     "koa-body": "^4.0.4",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",

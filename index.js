@@ -1,9 +1,5 @@
 var choo = require('choo')
-var LRU = require('nanolru')
-
-var app = choo({cache: new LRU(100)})
-
-app.use(require('./stores/reset'))
+var app = choo()
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   app.use(require('choo-devtools')())
