@@ -36,24 +36,24 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
-    "cccpurge": "^1.4.0",
+    "cccpurge": "^2.0.0",
     "choo": "^7.0.0-0",
-    "choo-service-worker": "^2.4.0",
-    "cloudinary": "^1.13.2",
+    "choo-service-worker": "^3.0.0",
+    "cloudinary": "^1.14.0",
     "dedent": "^0.7.0",
-    "dotenv": "^6.0.0",
+    "dotenv": "^8.0.0",
     "hstream": "^1.2.0",
     "jalla": "^1.0.0-2",
-    "koa-body": "^4.0.4",
+    "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
     "nanolru": "^1.0.0",
-    "nanoraf": "^3.0.1",
-    "normalize.css": "^8.0.0",
-    "postcss-url": "^7.3.2",
+    "nanoraf": "^3.1.0",
+    "normalize.css": "^8.0.1",
+    "postcss-url": "^8.0.0",
     "prismic-element": "^1.0.0",
-    "prismic-javascript": "^1.5.0-beta.2",
-    "prismic-richtext": "^0.4.0",
-    "smoothscroll-polyfill": "^0.4.3"
+    "prismic-javascript": "^2.0.3",
+    "prismic-richtext": "^1.0.1",
+    "smoothscroll-polyfill": "^0.4.4"
   }
 }
