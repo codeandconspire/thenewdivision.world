@@ -2,7 +2,7 @@ var html = require('choo/html')
 var Component = require('choo/component')
 var {mousemove, memo, srcset} = require('../base')
 
-module.exports = class Header extends Component {
+module.exports = class Figure extends Component {
   constructor (id, state, emit, opts) {
     super(id)
     Object.assign(this, opts, { id })
@@ -81,6 +81,11 @@ function getImage (props, size) {
 
   if (size === 'third') {
     viewport = '(min-midth: 600px) 30vw, 50vw'
+    sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
+  }
+
+  if (size === 'fouth') {
+    viewport = '(min-midth: 1000px) 25vw, (min-midth: 600px) 30vw, 50vw'
     sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
   }
 

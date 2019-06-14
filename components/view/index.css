@@ -147,16 +147,25 @@
   height: calc(var(--font-size-xs) *1.4);
   vertical-align: middle;
   position: relative;
-  top: calc((var(--font-size-xs) * 0.15) * -1);
-  left: calc((var(--font-size-xs) * 0.4) * -1);
+  top: calc((var(--font-size-xs) * 0.1) * -1);
+  left: calc((var(--font-size-xs) * 0.3) * -1);
   display: none;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 600px) {
   .View-navBanner {
-    display: inline-block
+    display: inline-block;
+    transform: rotate(0turn);
+    animation: View-navBanner-rotate 15s forwards infinite linear;
   }
 }
+
+@keyframes View-navBanner-rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 
 /**
  * Nav address & contact

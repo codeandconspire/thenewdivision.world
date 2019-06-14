@@ -4,7 +4,6 @@ var asElement = require('prismic-element')
 var nanoraf = require('nanoraf')
 var {asText} = require('prismic-richtext')
 var view = require('../components/view')
-var Wheel = require('../components/wheel')
 var intro = require('../components/intro')
 var {i18n} = require('../components/base')
 var Figure = require('../components/figure')
@@ -55,10 +54,10 @@ function about (state, emit) {
         <div>
           <section id="about">
             ${first}
+            ${workspace(state, doc)}
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
-            ${workspace(state, doc)}
           </section>
           <section id="services" class="u-spaceT8">
             <div class="View-grid u-spaceT8">
@@ -68,9 +67,6 @@ function about (state, emit) {
                   ${asElement(doc.data.create_introduction)}
                 </div>
               </div>
-            </div>
-            <div class="View-uncontain">
-              ${state.cache(Wheel, 'services-wheel').render(doc)}
             </div>
             <div class="View-grid u-spaceB8">
               <div class="View-cell u-lg-size1of3"></div>
@@ -178,9 +174,9 @@ function coworker (state, doc) {
     var id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
     var children = [
       html`
-        <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
+        <div class="View-cell u-size1of2 u-md-size1of3 u-lg-size1of4 u-spaceT6">
           <article class="Link Link--aspect Button-wrapper">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'third'}).render(person.image) : null}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'forth'}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
             <p class="u-textSizeSm">${person.role}</p>
             ${state.cache(ContactInfo, ContactInfo.id(person)).render(person)}
@@ -191,7 +187,7 @@ function coworker (state, doc) {
 
     if (index === Math.floor((list.length - 1) / 2)) {
       children.push(html`
-        <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
+        <div class="View-cell u-size1of2 u-md-size1of3 u-lg-size1of4 u-spaceT6 u-spaceT6">
           <div class="Card u-themePetrol u-bg u-color">
             <article class="u-flex u-column u-spaceA4">
               <div class="u-sizeFill u-flex u-column u-justifyCenter">
