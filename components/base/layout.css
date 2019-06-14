@@ -111,13 +111,3 @@
 @media (max-width: 1499px) {
   .u-xl-show { display: none !important; }
 }
-
-/**
- * Print hide
- */
-
-@media print {
-  .u-printHide {
-    display: none !important;
-  }
-}

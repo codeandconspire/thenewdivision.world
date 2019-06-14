@@ -9,9 +9,12 @@
   --sand: #BCB296;
   --bright-sand: #F3F0EA;
   --dark-magenta: #960059;
+  
   --theme: var(--background);
+  
   --link-color: var(--bright-blue);
   --link-color-hover: #0085b7;
+
   --selection-color: rgba(188, 178, 150, 0.5);
 
   --space: 3px;

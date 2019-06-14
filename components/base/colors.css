@@ -13,36 +13,8 @@
 }
 
 /**
- * Explicit
- */
-
-.u-colorBlack { --color: #000 !important; }
-.u-colorWhite { --color: #fff !important; }
-.u-colorGray { --color: var(--gray) !important; }
-.u-colorBrightBlue { --color: var(--bright-blue) !important; }
-.u-colorPetrol { --color: var(--petrol) !important; }
-.u-colorDarkBlue { --color: var(--dark-blue) !important; }
-.u-colorSand { --color: var(--sand) !important; }
-.u-colorBrightSand { --color: var(--bright-sand) !important; }
-.u-colorDarkMagenta { --color: var(--dark-magenta) !important; }
-
-.u-bgWhite { --background: #fff !important; }
-.u-bgGray { --background: var(--gray) !important; }
-.u-bgBrightBlue { --background: var(--bright-blue) !important; }
-.u-bgPetrol { --background: var(--petrol) !important; }
-.u-bgDarkBlue { --background: var(--dark-blue) !important; }
-.u-bgSand { --background: var(--sand) !important; }
-.u-bgBrightSand { --background: var(--bright-sand) !important; }
-.u-bgDarkMagenta { --background: var(--dark-magenta) !important; }
-
-/**
  * Themes
  */
-
-.u-themeInvert {
-  --color: #fff !important;
-  --background: var(--color) !important;
-}
 
 .u-themeWhite {
   --color: #000 !important;
@@ -54,11 +26,6 @@
 .u-themeBlack {
   --color: var(--bright-sand) !important;
   --background: #000 !important;
-}
-
-.u-themeGray {
-  --color: #000 !important;
-  --background: var(--gray) !important;
 }
 
 .u-themeBrightBlue {

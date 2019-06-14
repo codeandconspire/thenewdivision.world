@@ -32,9 +32,7 @@
 .Card {
   display: flex;
   max-height: 95vh;
-  transform:
-    translateX(calc(0.5vw * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
+  transform: translateX(calc(0.5vw * var(--mouse-x))) translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
   transition: transform 180ms var(--snap);
 }
 
@@ -154,9 +152,7 @@
   top: calc(var(--space) * 0.8);
   right: calc(var(--space) * 0.8);
   pointer-events: none;
-  transform:
-    translateX(calc(0.7vw * var(--mouse-x)))
-    translateY(calc(0.7vw * var(--mouse-y)));
+  transform: translateX(calc(0.7vw * var(--mouse-x))) translateY(calc(0.7vw * var(--mouse-y)));
   transition: transform 260ms var(--snap);
 }
 

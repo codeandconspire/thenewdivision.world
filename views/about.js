@@ -28,10 +28,10 @@ function about (state, emit) {
 
   var first = html`
   <div>
-    <div class="${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
+    <div class="${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
       ${intro(asText(doc.data.summary))}
     </div>
-    <div class="${state.ui.isPartial ? 'u-slideInY u-spaceV8' : 'u-spaceV8'}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
+    <div class="${state.ui.isPartial ? 'u-slideIn u-spaceV8' : 'u-spaceV8'}" style="${state.ui.isPartial ? 'animation-delay: 250ms;' : ''}">
       <div class="View-grid View-grid--reverse u-spaceV8">
         <div class="View-cell u-lg-size1of3">
           <div class="Text u-textSizeLg u-spaceB2">

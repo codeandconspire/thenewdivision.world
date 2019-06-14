@@ -6,9 +6,9 @@
  * All
  */
 
- .u-spaceA0 {
+.u-spaceA0 {
    margin: 0 !important;
- }
+}
 
 .u-spaceA1 {
   margin: var(--space) !important;
@@ -36,10 +36,6 @@
 
 .u-spaceA8 {
   margin: calc(var(--space) * 8) !important;
-}
-
-.u-spaceAch {
-  margin: 1ch !important;
 }
 
 /**
@@ -78,10 +74,6 @@
   margin-top: calc(var(--space) * 8) !important;
 }
 
-.u-spaceTch {
-  margin-top: 1ch !important;
-}
-
 /**
  * Right
  */
@@ -116,10 +108,6 @@
 
 .u-spaceR8 {
   margin-right: calc(var(--space) * 8) !important;
-}
-
-.u-spaceRch {
-  margin-right: 1ch !important;
 }
 
 /**
@@ -158,15 +146,11 @@
   margin-bottom: calc(var(--space) * 8) !important;
 }
 
-.u-spaceBch {
-  margin-bottom: 1ch !important;
-}
-
 /**
  * Left
  */
 
- .u-spaceL0 {
+.u-spaceL0 {
   margin-left: 0 !important;
 }
 
@@ -196,10 +180,6 @@
 
 .u-spaceL8 {
   margin-left: calc(var(--space) * 8) !important;
-}
-
-.u-spaceLch {
-  margin-left: 1ch !important;
 }
 
 /**
@@ -246,11 +226,6 @@
   margin-bottom: calc(var(--space) * 8) !important;
 }
 
-.u-spaceVch {
-  margin-top: 1ch !important;
-  margin-bottom: 1ch !important;
-}
-
 /**
  * Horizontal
  */
@@ -295,11 +270,6 @@
   margin-right: calc(var(--space) * 8) !important;
 }
 
-.u-spaceHch {
-  margin-left: 1ch !important;
-  margin-right: 1ch !important;
-}
-
 /**
  * Intro
  */
@@ -311,7 +281,7 @@
 @media (min-width: 600px) {
   .u-spaceIntro {
     margin: 10vh 0 0;
-  }
+}
 }
 
 /**

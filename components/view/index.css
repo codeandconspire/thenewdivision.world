@@ -113,6 +113,10 @@
   white-space: nowrap;
 }
 
+.View-nav:last-child {
+  margin-right: 0;
+}
+
 .View-nav--supplemental {
   display: none;
 }

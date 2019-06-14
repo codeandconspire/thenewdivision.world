@@ -8,15 +8,11 @@
   display: inline-block !important;
 }
 
-.u-hidden {
-  display: none !important;
-}
-
 /**
  * New block formatting context
  */
 
- .u-nbfc {
+.u-nbfc {
   overflow: hidden !important;
 }
 
@@ -28,10 +24,4 @@
   padding: 0 !important;
   position: absolute !important;
   width: 1px !important;
-}
-
-@media print {
-  .u-printHidden {
-    display: none !important;
-  }
 }

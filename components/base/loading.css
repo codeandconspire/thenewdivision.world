@@ -1,8 +1,6 @@
 /* @define utilities */
 
-.u-loading,
-.u-loadingOnGray,
-.u-loadingOnColor {
+.u-loading {
   justify-self: flex-start !important;
   align-self: flex-start !important;
   display: inline !important;
@@ -11,14 +9,4 @@
   background: #e4e4e4 !important;
   box-shadow: inset 0 -0.09em #fff !important;
   animation: Loading--scanline 1000ms linear infinite;
-}
-
-.u-loadingOnGray {
-  box-shadow: inset 0 -0.09em #f8f8f8 !important;
-  background: #e8e8e8 !important;
-}
-
-.u-loadingOnColor {
-  box-shadow: none !important;
-  background: rgba(255, 255, 255, 0.3) !important;
 }

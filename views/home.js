@@ -43,7 +43,7 @@ function home (state, emit) {
         <h2 class="u-hiddenVisually">${text`Case studies`}</h2>
         <div class="View-grid View-grid--tight">
           ${doc.data.featured_cases.map((props, i) => html`
-            <div class="View-cell u-md-size1of2 u-spaceT5 ${animate ? 'u-slideInY' : ''}" style="${animate ? `animation-delay: ${delay(i)}ms;` : ''}">
+            <div class="View-cell u-md-size1of2 u-spaceT5 ${animate ? 'u-slideIn' : ''}" style="${animate ? `animation-delay: ${delay(i)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Figure-outer" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
                 ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, {interactive: true, size: 'half'}).render(props.image)}
                 <h3 class="u-textBold u-spaceT2">${asText(props.case.data.title)}</h3>
@@ -55,7 +55,7 @@ function home (state, emit) {
       </section>
       ${state.ui.isPartial ? null : html`
         <section id="news" class="u-spaceT8 u-nbfc">
-          <h2 class="u-textSizeLg u-spaceT5 u-textBold">${text`News`}</h2>
+          <h2 class="u-textSizeLg u-spaceT8 u-textBold">${text`News`}</h2>
           ${state.cache(Words, `${doc.id}-words`).render(doc.data.words)}
         </section>
       `}

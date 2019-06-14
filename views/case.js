@@ -28,9 +28,9 @@ function caseView (state, emit) {
 
       return html`
         <main class="View-container View-container--nudge View-container--fill">
-          <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
+          <h1 class="Display Display--1 ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
           <div class="View-reverse View-reverse--md">
-            <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
+            <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
               ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
             </div>
           </div>
@@ -40,19 +40,19 @@ function caseView (state, emit) {
 
     return html`
       <main class="View-container View-container--nudge View-container--fill">
-        <h1 class="Display Display--1 u-loading ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${text`Content is loading`}</h1>
+        <h1 class="Display Display--1 u-loading ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${text`Content is loading`}</h1>
       </main>
     `
   }
 
   return html`
     <main class="View-container View-container--nudge">
-      <h1 class="Display Display--1 u-spaceIntro ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
+      <h1 class="Display Display--1 u-spaceIntro ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 150ms;' : ''}">${asText(doc.data.title).trim()}</h1>
       <div class="View-reverse View-reverse--md">
-        <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 225ms;' : ''}">
+        <div class="u-spaceB4 ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 225ms;' : ''}">
           ${doc.data.image.url ? state.cache(Figure, `${Figure.id(doc.data.image)}-${state.ui.isPartial}`).render(doc.data.image) : null}
         </div>
-        <section class="View-grid u-spaceT1 ${state.ui.isPartial ? 'u-slideInY' : ''}" style="${state.ui.isPartial ? 'animation-delay: 175ms;' : ''}">
+        <section class="View-grid u-spaceT1 ${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 175ms;' : ''}">
           ${doc.data.introduction.map((item, index, list) => html`
             <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length}">
               ${state.cache(Topic, [doc.id, Topic.id(item), state.ui.isPartial].join('-')).render(item)}
