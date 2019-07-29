@@ -156,6 +156,11 @@
   display: none;
 }
 
+.View-navBanner svg {
+  background: none !important;
+  transform: scale(0);
+}
+
 @media (min-width: 600px) {
   .View-navBanner {
     display: inline-block;

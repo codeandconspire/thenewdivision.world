@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard && dependency-check package.json",
     "start": "node server.js",
-    "deploy": "npx now -T codeandconspire && npx now alias -T codeandconspire"
+    "deploy": "npx now --scope codeandconspire && npx now alias --scope codeandconspire"
   },
   "now": {
     "alias": "www.thenewdivision.world",
