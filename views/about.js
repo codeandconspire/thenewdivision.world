@@ -54,7 +54,9 @@ function about (state, emit) {
         <div>
           <section id="about">
             ${first}
-            ${workspace(state, doc)}
+            <div class="u-spaceB6">
+              ${workspace(state, doc)}
+            </div>
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
@@ -161,7 +163,7 @@ function workspace (state, doc) {
           </div>
           <h4 class="u-textBold">${text`Inquiries`}</h4>
           <div class="Text">
-            <p><a href="mailto:hello@thenewdivision.world">hello@thenewdivision.world</a></p>
+            <p><a href="mailto:hello@thenewdivision.world">hello@tnd.world</a></p>
           </div>
         </div>
       </div>
@@ -174,9 +176,9 @@ function coworker (state, doc) {
     var id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
     var children = [
       html`
-        <div class="View-cell u-size1of2 u-md-size1of3 u-lg-size1of4 u-spaceT6">
+        <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect Button-wrapper">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'forth'}).render(person.image) : null}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'third'}).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
             <p class="u-textSizeSm">${person.role}</p>
             ${state.cache(ContactInfo, ContactInfo.id(person)).render(person)}
@@ -185,9 +187,9 @@ function coworker (state, doc) {
       `
     ]
 
-    if (index === Math.floor((list.length - 1) / 2)) {
+    if (index === (Math.floor((list.length - 1) / 2) - 1)) {
       children.push(html`
-        <div class="View-cell u-size1of2 u-md-size1of3 u-lg-size1of4 u-spaceT6 u-spaceT6">
+        <div class="View-cell u-md-size1of2 u-lg-size1of3 u-spaceT6">
           <div class="Card u-themePetrol u-bg u-color">
             <article class="u-flex u-column u-spaceA4">
               <div class="u-sizeFill u-flex u-column u-justifyCenter">
@@ -200,7 +202,7 @@ function coworker (state, doc) {
               <h4 class="u-textBold">${text`Careers`}</h4>
               <div class="Text u-textSizeSm">
                 <p>
-                  <a href="mailto:hannah@thenewdivision.world">hannah@thenewdivision.world</a>
+                  <a href="mailto:hannah@thenewdivision.world">hannah@tnd.world</a>
                   <br />
                   <a href="tel:+46733889915">+46 733 889 915</a>
                 </p>

@@ -63,10 +63,7 @@ module.exports = class Header extends Component {
           <nav>
             <a class="View-nav View-nav--supplemental" href="#cases" onclick=${cleanHash}>${text`Cases`}</a>
             <a class="View-nav View-nav--supplemental" href="#news" onclick=${cleanHash}>${text`News`}</a>
-            <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer">
-              <span class="View-navBanner">${icon.globalgoals()}</span>
-              ${text`Store`}
-            </a>
+            <a class="View-nav" href="https://store.thenewdivision.world/" target="_blank" rel="noopener noreferrer"><span class="View-navBanner">${icon.globalgoals()}</span>${text`Store`}</a>
             <a class="View-nav" href="/about" onclick=${explode('sand')}>${text`About`}</a>
           </nav>
         `}

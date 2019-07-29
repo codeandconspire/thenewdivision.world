@@ -43,7 +43,7 @@ module.exports = class Words extends Component {
 
     return html`
       <article class="Words-cell js-cell" id="${this.id}">
-        ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {sizes: [[`${100 / 3}vw`, 1000], ['50vw']]}).render(props.image) : null}
+        ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {size: 'third'}).render(props.image) : null}
         ${heading.length ? html`
           <h3 class="Display Display--3 u-spaceB3">${heading}</h3>
         ` : null}

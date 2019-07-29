@@ -1,6 +1,6 @@
 var html = require('choo/html')
 var Component = require('choo/component')
-var {mousemove, memo, srcset} = require('../base')
+var {mousemove, memo, src, srcset} = require('../base')
 
 module.exports = class Figure extends Component {
   constructor (id, state, emit, opts) {
@@ -72,21 +72,21 @@ function getImage (props, size) {
   }
 
   var viewport = '100vw'
-  var sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
+  var sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
 
   if (size === 'half') {
     viewport = '(min-midth: 600px) 50vw, 100vw'
-    sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
+    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
   }
 
   if (size === 'third') {
     viewport = '(min-midth: 600px) 30vw, 50vw'
-    sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
+    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
   }
 
   if (size === 'fouth') {
     viewport = '(min-midth: 1000px) 25vw, (min-midth: 600px) 30vw, 50vw'
-    sizes = [640, 750, 1125, 1440, [2880, 'q_80'], [3840, 'q_70']]
+    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
   }
 
   if (!props.url) {
@@ -117,7 +117,7 @@ function getImage (props, size) {
       <img class="Figure-load" width="${attrs.width}" height="${attrs.height}" src="/media/fetch/q_0,w_20,f_png/${props.url}">
       <picture>
         <source srcset="${attrs.srcset}" media="(min-width: 600px)" sizes="${viewport}">
-        <img class="Figure-image js-image" alt="${attrs.alt}" srcset="${srcset(props.alternative.url, sizes)}" sizes="${viewport}" width="${attrs.width}" height="${attrs.height}" src="${attrs.src}">
+        <img class="Figure-image js-image" alt="${attrs.alt}" srcset="${srcset(props.alternative.url, sizes)}" sizes="${viewport}" width="${attrs.width}" height="${attrs.height}" ${src(props.url, 700)}>
       </picture>
     </div>
   `

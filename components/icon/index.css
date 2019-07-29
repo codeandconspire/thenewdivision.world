@@ -58,7 +58,7 @@
 }
 
 .Icon--brand {
-  background-color: transparent;
+  background-color: transparent !important;
   width: 22px;
   height: 22px;
 }

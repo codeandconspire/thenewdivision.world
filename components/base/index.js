@@ -222,32 +222,25 @@ function memo (fn, keys) {
   return result
 }
 
+// compose src attribute from url for a given size
+// (str, num, obj?) -> str
+exports.src = src
+function src (uri, size) {
+  var q = (size > 1000) ? 'q_50' : 'q_60'
+  var transforms = `c_fill,f_auto,${q}`
+
+  // trim prismic domain from uri
+  var parts = uri.split('thenewdivision.cdn.prismic.io/thenewdivision/')
+  uri = parts[parts.length - 1]
+
+  return `/media/fetch/${transforms ? transforms + ',' : ''}w_${size}/${uri}`
+}
+
 // compose srcset attribute from url for given sizes
 // (str, arr, obj?) -> str
 exports.srcset = srcset
-function srcset (uri, sizes, opts = {}) {
-  var type = opts.type || 'fetch'
-  var transforms = opts.transforms
-  if (!transforms) transforms = 'c_fill,f_auto,q_auto'
-  if (!/c_/.test(transforms)) transforms += ',c_fill'
-  if (!/f_/.test(transforms)) transforms += ',f_auto'
-  if (!/q_/.test(transforms)) transforms += ',q_auto'
-
-  // trim prismic domain from uri
-  var parts = uri.split('codeandconspire.cdn.prismic.io/codeandconspire/')
-  uri = parts[parts.length - 1]
-
+function srcset (uri, sizes) {
   return sizes.map(function (size) {
-    var transform = transforms
-    if (Array.isArray(size)) {
-      transform = opts.transform ? size[1] + ',' + opts.transforms : size[1]
-      if (!/c_/.test(transform)) transform += ',c_fill'
-      if (!/f_/.test(transform)) transform += ',f_auto'
-      if (!/q_/.test(transform)) transform += ',q_auto'
-      size = size[0]
-    }
-    if (opts.aspect) transform += `,h_${Math.floor(size * opts.aspect)}`
-
-    return `/media/${type}/${transform},w_${size}/${uri} ${size}w`
+    return `${src(uri, size)} ${size}w`
   }).join(',')
 }
