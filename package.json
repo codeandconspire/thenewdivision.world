@@ -43,7 +43,7 @@
     "dedent": "^0.7.0",
     "dotenv": "^8.0.0",
     "hstream": "^1.2.0",
-    "jalla": "^1.0.0-2",
+    "jalla": "^1.0.0-13",
     "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
@@ -51,7 +51,7 @@
     "nanoraf": "^3.1.0",
     "normalize.css": "^8.0.1",
     "postcss-url": "^8.0.0",
-    "prismic-element": "^1.0.0",
+    "prismic-element": "^2.0.1",
     "prismic-javascript": "^2.0.3",
     "prismic-richtext": "^1.0.1",
     "smoothscroll-polyfill": "^0.4.4"
