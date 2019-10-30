@@ -12,7 +12,7 @@ module.exports = class Figure extends Component {
   }
 
   static id (img) {
-    return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif|webp)$/)[1]
+    return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif|webp)(?:\?|$)/)[1]
   }
 
   static prefetch (props) {
@@ -61,7 +61,7 @@ module.exports = class Figure extends Component {
 }
 
 function getImage (props, size) {
-  if (/\.gifv?$/.test(props.url)) {
+  if (/\.gifv?(?:\?|$)/.test(props.url)) {
     let { alt, url, dimensions: { width, height } } = props
     return html`
       <div>
