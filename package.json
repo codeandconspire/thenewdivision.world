@@ -38,6 +38,7 @@
   "dependencies": {
     "cccpurge": "^2.0.0",
     "choo": "^7.0.0",
+    "choo-meta": "^2.0.0",
     "choo-service-worker": "^3.0.0",
     "cloudinary": "^1.15.0",
     "dedent": "^0.7.0",
