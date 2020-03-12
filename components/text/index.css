@@ -45,16 +45,10 @@
   color: var(--link-color-hover);
 }
 
-/**
- * 1. Maintain 16/9 aspect ratio for embedded content
- */
-
 .Text iframe {
-  width: 100vw;
-  height: calc((100vw - calc(var(--space) * 8)) * 9/16); /* 1 */
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
   vertical-align: top;
-  user-select: none;
 }
 
 .Text h1,

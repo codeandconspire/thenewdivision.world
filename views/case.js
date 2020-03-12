@@ -113,19 +113,25 @@ function caseView (state, emit) {
             </div>
           `
           case 'video': {
-            let embed = slice.primary.video.find((block) => block.type === 'embed')
-
-            if (embed) {
-              embed = asElement([embed])
-            } else {
-              embed = slice.primary.video.find((block) => block.type === 'preformatted')
-              if (!embed) return null
-              embed = raw(embed.text)
-            }
-
             return html`
-              <div class="Text Text--full u-spaceB4">
-                ${embed}
+              <div class="View-grid">
+                ${slice.items.map(function (item, index, list) {
+                  if (item.video[0] && item.video[0].text) {
+                    return html`
+                      <div class="View-cell u-md-size1of${list.length > 3 ? 2 : list.length} u-spaceB4">
+                        <div class="Text Text--full">
+                          <div style="position: relative; padding-bottom: calc(100% * (720 / 1280)); vertical-align: top; width: 100%; height: 0;">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                              ${raw(item.video[0].text)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    `
+                  } else {
+                    return null
+                  }
+                })}
               </div>
             `
           }
