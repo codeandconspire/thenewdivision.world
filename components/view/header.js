@@ -43,9 +43,9 @@ module.exports = class Header extends Component {
                 </section>
                 <section class="View-navInfo">
                   <h1 class="View-navHeading">Address</h1>
-                  <a href="https://goo.gl/maps/TEWDAjA4sds" target="_blank" rel="noopener noreferrer">
+                  <a href="https://goo.gl/maps/WDNuPmFECa1Qjz657" target="_blank" rel="noopener noreferrer">
                     The New Divison<br />
-                    Svartmangatan 16<br />
+                    Kungsgatan 30<br />
                     Stockholm, Sweden
                   </a>
                 </section>
