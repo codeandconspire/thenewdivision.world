@@ -73,7 +73,7 @@ function clear () {
 // () -> str
 function getCacheKey () {
   if (process.env.SOURCE_VERSION) {
-    return process.env.SOURCE_VERSION.match(/\w+(?=\.now\.sh)/)[0]
+    return process.env.SOURCE_VERSION
   } else {
     return process.env.npm_package_version
   }
