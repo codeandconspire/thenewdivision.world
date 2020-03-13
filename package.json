@@ -5,20 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && dependency-check package.json",
-    "start": "node server.js",
-    "deploy": "npx now --scope codeandconspire && npx now alias --scope codeandconspire"
-  },
-  "now": {
-    "alias": "www.thenewdivision.world",
-    "env": {
-      "NODE_ENV": "production",
-      "PRISMIC_SECRET": "@prismic-thenewdivision-secret",
-      "CLOUDINARY_KEY": "@cloudinary-key",
-      "CLOUDINARY_SECRET": "@cloudinary-secret",
-      "CLOUDFLARE_ZONE": "@cloudflare-thenewdivision-zone",
-      "CLOUDFLARE_EMAIL": "@cloudflare-codeandconspire-email",
-      "CLOUDFLARE_KEY": "@cloudflare-codeandconspire-key"
-    }
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

@@ -22,7 +22,7 @@ app.use(function (ctx, next) {
 })
 
 app.use(get('/robots.txt', function (ctx, next) {
-  if (ctx.host === process.env.npm_package_now_alias) return next()
+  if (ctx.host === process.env.HOST) return next()
   ctx.type = 'text/plain'
   ctx.body = dedent`
     User-agent: *
