@@ -72,8 +72,8 @@ function clear () {
 // get application cache key
 // () -> str
 function getCacheKey () {
-  if (process.env.NOW_URL) {
-    return process.env.NOW_URL.match(/\w+(?=\.now\.sh)/)[0]
+  if (process.env.SOURCE_VERSION) {
+    return process.env.SOURCE_VERSION.match(/\w+(?=\.now\.sh)/)[0]
   } else {
     return process.env.npm_package_version
   }

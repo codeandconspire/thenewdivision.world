@@ -1,4 +1,4 @@
-if (!process.env.NOW) require('dotenv/config')
+if (!process.env.HEROKU) require('dotenv/config')
 
 var url = require('url')
 var jalla = require('jalla')
@@ -42,7 +42,7 @@ app.use(get('/media/:type/:transform/:uri(.+)', async function (ctx, type, trans
 
 app.use(post('/prismic-hook', compose([body(), async function (ctx) {
   var secret = ctx.request.body && ctx.request.body.secret
-  ctx.assert(secret === process.env.PRISMIC_THENEWDIVISION_SECRET, 403, 'Secret mismatch')
+  ctx.assert(secret === process.env.PRISMIC_SECRET, 403, 'Secret mismatch')
   return new Promise(function (resolve, reject) {
     purge(function (err, response) {
       if (err) return reject(err)
@@ -71,9 +71,9 @@ app.use(function (ctx, next) {
 })
 
 app.use(get('/prismic-preview', async function (ctx) {
-  var host = process.env.NOW_URL && url.parse(process.env.NOW_URL).host
+  var host = process.env.SOURCE_VERSION && url.parse(process.env.SOURCE_VERSION).host
   if (host && ctx.host !== host) {
-    return ctx.redirect(url.resolve(process.env.NOW_URL, ctx.url))
+    return ctx.redirect(url.resolve(process.env.SOURCE_VERSION, ctx.url))
   }
 
   var token = ctx.query.token
@@ -89,7 +89,7 @@ app.use(get('/prismic-preview', async function (ctx) {
   ctx.redirect(href)
 }))
 
-if (process.env.NOW && process.env.NODE_ENV === 'production') {
+if (process.env.HEROKU && process.env.NODE_ENV === 'production') {
   purge(['/sw.js'], function (err) {
     if (err) throw err
     start()

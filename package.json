@@ -12,12 +12,12 @@
     "alias": "www.thenewdivision.world",
     "env": {
       "NODE_ENV": "production",
-      "PRISMIC_THENEWDIVISION_SECRET": "@prismic-thenewdivision-secret",
+      "PRISMIC_SECRET": "@prismic-thenewdivision-secret",
       "CLOUDINARY_KEY": "@cloudinary-key",
       "CLOUDINARY_SECRET": "@cloudinary-secret",
-      "CLOUDFLARE_THENEWDIVISION_ZONE": "@cloudflare-thenewdivision-zone",
-      "CLOUDFLARE_CODEANDCONSPIRE_EMAIL": "@cloudflare-codeandconspire-email",
-      "CLOUDFLARE_CODEANDCONSPIRE_KEY": "@cloudflare-codeandconspire-key"
+      "CLOUDFLARE_ZONE": "@cloudflare-thenewdivision-zone",
+      "CLOUDFLARE_EMAIL": "@cloudflare-codeandconspire-email",
+      "CLOUDFLARE_KEY": "@cloudflare-codeandconspire-key"
     }
   },
   "repository": {
