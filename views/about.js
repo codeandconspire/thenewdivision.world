@@ -57,6 +57,9 @@ function about (state, emit) {
             <div class="u-spaceB6">
               ${workspace(state, doc)}
             </div>
+              <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
+                ${text`The team`}
+              </h2>
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
             </div>
@@ -102,9 +105,11 @@ function about (state, emit) {
           </section>
           <section id="clients" class="u-spaceV8">
             <div class="u-nbfc">
+            ${doc.data.testimonies.length ? html`
               <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
                 ${text`What people say`}
               </h2>
+            ` : null}
               <div class="u-clip">
                 <div class="View-grid u-spaceT4">
                   ${doc.data.testimonies.map((props, index, list) => {
@@ -146,27 +151,6 @@ function workspace (state, doc) {
   return html`
     <div class="Card Card--banner" id="ncid-7290" data-nanocomponent="ncid-7290" data-onloadidtzmc="o14">
       ${state.cache(Figure, `'workspace'-${Figure.id(image)}`, {sizes: 'third'}).render(image, false, 'Card-figure')}
-      <div class="Card-block js-block u-themeDarkBlue u-bg u-color">
-        <div class="u-sizeFill u-flex u-column u-spaceA4">
-          <div class="u-sizeFill u-flex u-column u-justifyCenter">
-            <h3>
-              <span class="u-textSizeLg u-textBold">${text`Address`}</span>
-              <span class="Display Display--2 u-spaceT2">
-                ${doc.data.address[0].text.split('\n').reduce((els, part, index, list) => {
-                  return els.concat(part, index < list.length - 1 ? html`<br>` : null)
-                }, [])}
-              </span>
-            </h3>
-            <div class="Text u-textSizeSm">
-              <p>${doc.data.address.slice(1).map((part) => [part.text, html`<br>`])}</p>
-            </div>
-          </div>
-          <h4 class="u-textBold">${text`Inquiries`}</h4>
-          <div class="Text">
-            <p><a href="mailto:hello@thenewdivision.world">hello@tnd.world</a></p>
-          </div>
-        </div>
-      </div>
     </div>
   `
 }
