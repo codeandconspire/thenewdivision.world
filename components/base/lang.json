@@ -41,5 +41,7 @@
   "Cannot read property 'text' of undefined": "Cannot read property 'text' of undefined",
   "More tweets": "More tweets",
   "Cannot read property 'span' of undefined": "Cannot read property 'span' of undefined",
-  "The team": "The team"
+  "The team": "The team",
+  "Some of our clients": "Some of our clients",
+  "Our team": "Our team"
 }

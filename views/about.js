@@ -54,11 +54,14 @@ function about (state, emit) {
         <div>
           <section id="about">
             ${first}
+              <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
+                ${text`Some of our clients`}
+              </h2>
             <div class="u-spaceB6">
               ${workspace(state, doc)}
             </div>
               <h2 class="u-textSizeLg u-textBold u-textCenter u-spaceV8">
-                ${text`The team`}
+                ${text`Team`}
               </h2>
             <div class="View-grid u-spaceB6">
               ${doc.data.coworkers.map(coworker(state, doc))}
