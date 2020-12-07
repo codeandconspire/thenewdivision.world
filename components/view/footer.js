@@ -1,14 +1,14 @@
-var html = require('choo/html')
-var Component = require('choo/component')
-var {i18n} = require('../base')
-var icon = require('../icon')
+const html = require('choo/html')
+const Component = require('choo/component')
+const { i18n } = require('../base')
+const icon = require('../icon')
 
-var ICON_THEMES = {
-  'white': 'u-themeWhite',
-  'sand': 'u-themeBlack'
+const ICON_THEMES = {
+  white: 'u-themeWhite',
+  sand: 'u-themeBlack'
 }
 
-var text = i18n(require('./lang.json'))
+const text = i18n(require('./lang.json'))
 
 module.exports = class Footer extends Component {
   update (theme) {

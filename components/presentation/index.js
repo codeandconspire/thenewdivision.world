@@ -1,11 +1,11 @@
-var html = require('choo/html')
-var Component = require('choo/component')
-var {i18n} = require('../base')
-var button = require('../button')
+const html = require('choo/html')
+const Component = require('choo/component')
+const { i18n } = require('../base')
+const button = require('../button')
 
-var SIZE = 167 + 374 + 285 + 376
+const SIZE = 167 + 374 + 285 + 376
 
-var text = i18n(require('./lang.json'))
+const text = i18n(require('./lang.json'))
 
 module.exports = class Presentation extends Component {
   constructor (id, state, emit, opts) {
@@ -28,7 +28,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[0]}
-            ${button(text`Who we are`, {wrap: true, href: '/about'})}
+            ${button(text`Who we are`, { wrap: true, href: '/about' })}
           </div>
         </div>
         <div class="Presentation-col Button-wrapper" style="flex-basis: ${((374 / SIZE) * 100).toFixed(2)}%">
@@ -37,7 +37,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[1]}
-            ${button(text`What we do`, {wrap: true, href: '/about#services'})}
+            ${button(text`What we do`, { wrap: true, href: '/about#services' })}
           </div>
         </div>
         <div class="Presentation-col Button-wrapper" style="flex-basis: ${((285 / SIZE) * 100).toFixed(2)}%">
@@ -46,7 +46,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[2]}
-            ${button(text`How we work`, {wrap: true, href: '/about#process'})}
+            ${button(text`How we work`, { wrap: true, href: '/about#process' })}
           </div>
         </div>
         <div class="Presentation-col Button-wrapper" style="flex-basis: ${((376 / SIZE) * 100).toFixed(2)}%">
@@ -55,7 +55,7 @@ module.exports = class Presentation extends Component {
           </svg>
           <div class="Presentation-text">
             ${texts[3]}
-            ${button(text`Who we work with`, {wrap: true, href: '/about#clients'})}
+            ${button(text`Who we work with`, { wrap: true, href: '/about#clients' })}
           </div>
         </div>
       </div>

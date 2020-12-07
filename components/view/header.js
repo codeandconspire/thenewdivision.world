@@ -1,10 +1,10 @@
-var html = require('choo/html')
-var Component = require('choo/component')
-var Takeover = require('../takeover')
-var {i18n} = require('../base')
-var icon = require('../icon')
+const html = require('choo/html')
+const Component = require('choo/component')
+const Takeover = require('../takeover')
+const { i18n } = require('../base')
+const icon = require('../icon')
 
-var text = i18n(require('./lang.json'))
+const text = i18n(require('./lang.json'))
 
 module.exports = class Header extends Component {
   constructor (id, state, emit) {
@@ -20,10 +20,10 @@ module.exports = class Header extends Component {
 
   createElement (route) {
     this.route = route
-    var self = this
-    var href = this.state.href
-    var isAbout = route === '/about' || route === 'about'
-    var isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/news'))
+    const self = this
+    const href = this.state.href
+    const isAbout = route === '/about' || route === 'about'
+    const isHomepage = route === '/' || (!isAbout && (href === '/cases' || href === '/news'))
 
     return html`
       <div class="View-header" id="${this.id}">
@@ -81,7 +81,7 @@ module.exports = class Header extends Component {
     function explode (theme) {
       return function (event) {
         if (self.state.ui.inTransition) return event.preventDefault()
-        var href = event.target.pathname
+        const href = event.target.pathname
         self.state.cache(Takeover, Takeover.id()).open(href, event.target.getBoundingClientRect(), theme)
         window.requestAnimationFrame(function () {
           self.render(href)

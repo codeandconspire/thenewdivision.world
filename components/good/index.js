@@ -1,10 +1,10 @@
-var html = require('choo/html')
-var nanoraf = require('nanoraf')
-var Component = require('choo/component')
-var {offset} = require('../base')
+const html = require('choo/html')
+const nanoraf = require('nanoraf')
+const Component = require('choo/component')
+const { offset } = require('../base')
 
-var GOOD_WIDTH_PORPORTION = 0.23
-var GOOD_BORDER_PORPORTION = 0.01
+const GOOD_WIDTH_PORPORTION = 0.23
+const GOOD_BORDER_PORPORTION = 0.01
 
 module.exports = class Good extends Component {
   constructor (id, state) {
@@ -13,25 +13,25 @@ module.exports = class Good extends Component {
   }
 
   load (element) {
-    var top, height, size, width, border
-    var ontail = false
+    let top, height, size, width, border
+    let ontail = false
 
-    var sticky = element.querySelector('.js-sticky')
-    var rows = [...element.querySelectorAll('.js-row')]
+    const sticky = element.querySelector('.js-sticky')
+    const rows = [...element.querySelectorAll('.js-row')]
 
-    var onscroll = nanoraf(function () {
-      var {scrollY, innerHeight} = window
+    const onscroll = nanoraf(function () {
+      const { scrollY, innerHeight } = window
 
       // exit if element is not in view
       if ((scrollY + innerHeight) < top || scrollY > (top + size + height)) return
 
       // figure out if we're at the start or tail
-      var above = (scrollY + innerHeight) < (top + height)
-      var start = scrollY < top && (scrollY + innerHeight) >= (top + height)
-      var tail = (scrollY + innerHeight / 2) >= (top + size + (width / 2) - border)
-      var below = scrollY > (top + size)
+      const above = (scrollY + innerHeight) < (top + height)
+      const start = scrollY < top && (scrollY + innerHeight) >= (top + height)
+      const tail = (scrollY + innerHeight / 2) >= (top + size + (width / 2) - border)
+      const below = scrollY > (top + size)
 
-      var fraction = 1
+      let fraction = 1
       if (above) fraction = 0
       else if (below) fraction = 1
       else if (start) fraction = 1 - ((top - scrollY) / (innerHeight - height))
@@ -53,8 +53,8 @@ module.exports = class Good extends Component {
       element.style.setProperty('--inview', fraction)
     })
 
-    var onresize = nanoraf(function () {
-      var viewport = window.innerWidth
+    const onresize = nanoraf(function () {
+      const viewport = window.innerWidth
 
       height = sticky.offsetHeight
       width = viewport * GOOD_WIDTH_PORPORTION
@@ -67,8 +67,8 @@ module.exports = class Good extends Component {
 
     onresize()
 
-    window.addEventListener('scroll', onscroll, {passive: true})
-    window.addEventListener('resize', onresize, {passive: true})
+    window.addEventListener('scroll', onscroll, { passive: true })
+    window.addEventListener('resize', onresize, { passive: true })
     this.unmount = function () {
       window.removeEventListener('scroll', onscroll)
       window.removeEventListener('resize', onresize)

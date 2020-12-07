@@ -1,6 +1,6 @@
-var html = require('choo/html')
-var Component = require('choo/component')
-var {mousemove, memo, src, srcset} = require('../base')
+const html = require('choo/html')
+const Component = require('choo/component')
+const { mousemove, memo, src, srcset } = require('../base')
 
 module.exports = class Figure extends Component {
   constructor (id, state, emit, opts) {
@@ -17,12 +17,12 @@ module.exports = class Figure extends Component {
 
   static prefetch (props) {
     if (!props.url || typeof window === 'undefined') return
-    var img = new window.Image()
+    const img = new window.Image()
     img.src = `/media/fetch/q_0,w_20,f_png/${props.url}`
   }
 
   load (element) {
-    var self = this
+    const self = this
 
     if (this.interactive) {
       this.unload = mousemove(element)
@@ -45,7 +45,7 @@ module.exports = class Figure extends Component {
   }
 
   createElement (img, caption, className) {
-    var alt = img.alternative
+    const alt = img.alternative
     return html`
       <figure class="Figure ${className || ''} ${this.loaded ? 'is-loaded' : ''}" id="${this.id}">
         <div class="Figure-container ${alt ? 'Figure-container--alternative' : ''}" style="--Figure-aspect: ${(img.dimensions.height / img.dimensions.width * 100).toFixed(2)}%; ${alt ? `--Figure-aspect-alternative: ${(alt.dimensions.height / alt.dimensions.width * 100).toFixed(2)}%` : ''}">
@@ -62,7 +62,7 @@ module.exports = class Figure extends Component {
 
 function getImage (props, size) {
   if (/\.gifv?(?:\?|$)/.test(props.url)) {
-    let { alt, url, dimensions: { width, height } } = props
+    const { alt, url, dimensions: { width, height } } = props
     return html`
       <div>
         <img class="Figure-load" width="${width}" height="${height}" src="/media/fetch/q_0,w_20,f_png/${url}">
@@ -71,8 +71,8 @@ function getImage (props, size) {
     `
   }
 
-  var viewport = '100vw'
-  var sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
+  let viewport = '100vw'
+  let sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
 
   if (size === 'half') {
     viewport = '(min-midth: 600px) 50vw, 100vw'
@@ -93,8 +93,8 @@ function getImage (props, size) {
     return null
   }
 
-  var attrs = memo(function (url, sizes) {
-    var sources = srcset(props.url, sizes)
+  const attrs = memo(function (url, sizes) {
+    const sources = srcset(props.url, sizes)
     return Object.assign({
       sizes: viewport,
       srcset: sources,

@@ -1,14 +1,14 @@
-var html = require('choo/html')
-var asElement = require('prismic-element')
-var {asText} = require('prismic-richtext')
-var view = require('../components/view')
-var Words = require('../components/words')
-var {i18n} = require('../components/base')
-var Figure = require('../components/figure')
-var Takeover = require('../components/takeover')
-var Presentation = require('../components/presentation')
+const html = require('choo/html')
+const asElement = require('prismic-element')
+const { asText } = require('prismic-richtext')
+const view = require('../components/view')
+const Words = require('../components/words')
+const { i18n } = require('../components/base')
+const Figure = require('../components/figure')
+const Takeover = require('../components/takeover')
+const Presentation = require('../components/presentation')
 
-var text = i18n()
+const text = i18n()
 
 module.exports = view(home, meta)
 
@@ -19,17 +19,17 @@ function home (state, emit) {
     emit('ui:theme', 'white')
   }
 
-  var animate = state.ui.isPartial || state.ui.isFirst
+  const animate = state.ui.isPartial || state.ui.isFirst
 
-  var presentation = state.cache(
+  const presentation = state.cache(
     Presentation,
     `presentation-partial:${state.ui.isPartial}`,
     { ltr: state.ui.isFirst && !state.ui.isPartial }
   )
 
-  var doc = state.documents.items.find((doc) => doc.type === 'homepage')
+  const doc = state.documents.items.find((doc) => doc.type === 'homepage')
   if (!doc) {
-    emit('doc:fetch', {type: 'homepage'})
+    emit('doc:fetch', { type: 'homepage' })
     return html`
       <main class="View-container View-container--nudge View-container--fill">
       </main>
@@ -45,7 +45,7 @@ function home (state, emit) {
           ${doc.data.featured_cases.map((props, i) => html`
             <div class="View-cell u-md-size1of2 u-spaceT5 ${animate ? 'u-slideIn' : ''}" style="${animate ? `animation-delay: ${delay(i)}ms;` : ''}">
               <a href="${state.documents.resolve(props.case)}" class="Figure-outer" onclick=${explode} onmouseover=${prefetch(props.case.id)} ontouchstart=${prefetch(props.case.id)}>
-                ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, {interactive: true, size: 'half'}).render(props.image)}
+                ${state.cache(Figure, `${props.case.uid}-${Figure.id(props.image)}:${state.ui.isPartial}`, { interactive: true, size: 'half' }).render(props.image)}
                 <h3 class="u-textBold u-spaceT2">${asText(props.case.data.title)}</h3>
                 <p>${asText(props.case.data.description)}</p>
               </a>
@@ -72,23 +72,23 @@ function home (state, emit) {
 
   function explode (event) {
     if (state.ui.inTransition) return event.preventDefault()
-    var target = event.currentTarget
-    var origin = target.querySelector('.js-plus').getBoundingClientRect()
+    const target = event.currentTarget
+    const origin = target.querySelector('.js-plus').getBoundingClientRect()
     state.cache(Takeover, Takeover.id()).open(target.pathname, origin)
     event.preventDefault()
   }
 
   function prefetch (id) {
     return function () {
-      var doc = state.documents.items.find((item) => item.id === id)
-      if (!doc) emit('doc:fetch', {id}, {silent: true})
+      const doc = state.documents.items.find((item) => item.id === id)
+      if (!doc) emit('doc:fetch', { id }, { silent: true })
     }
   }
 }
 
 function meta (state) {
-  var doc = state.documents.items.find((doc) => doc.type === 'homepage')
-  if (!doc) return {title: text`Loading`}
+  const doc = state.documents.items.find((doc) => doc.type === 'homepage')
+  if (!doc) return { title: text`Loading` }
   return {
     'og:image': '/share.png',
     title: 'The New Division',

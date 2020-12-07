@@ -1,35 +1,30 @@
-var choo = require('choo')
-var app = choo()
+const splitRequire = require('split-require')
+const lazy = require('choo-lazy-view')
+const choo = require('choo')
 
-if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+const app = choo()
+
+if (process.env.NODE_ENV === 'development') {
   app.use(require('choo-devtools')())
   app.use(require('choo-service-worker/clear')())
 }
 
+app.use(lazy)
 app.use(require('choo-service-worker')('/sw.js'))
-app.use(require('./stores/documents'))
-app.use(require('choo-meta')({
-  origin: 'https://www.thenewdivision.world'
-}))
-app.use(require('./stores/ui'))
+app.use(require('choo-meta')({ origin: 'https://www.thenewdivision.world' }))
+app.use(require('./stores/prefetch'))
+app.use(require('./stores/prismic')())
 
-app.route('/', require('./views/home'))
-app.route('/:slug', catchall)
-app.route('/about', require('./views/about'))
-app.route('/about/:anchor', require('./views/about'))
-app.route('/404', require('./views/404'))
+app.route('/', lazy(() => splitRequire('./views/home')))
+app.route('/*', lazy(() => splitRequire('./views/page')))
 
 try {
   module.exports = app.mount('body')
+  // remove parse guard added in header
+  window.onerror = null
 } catch (err) {
   if (typeof window !== 'undefined') {
-    document.documentElement.classList.remove('has-js')
+    document.documentElement.removeAttribute('scripting-enabled')
+    document.documentElement.setAttribute('scripting-initial-only', '')
   }
-}
-
-function catchall (state, emit) {
-  if (typeof window !== 'undefined' && window.location.hash) {
-    return require('./views/home')(state, emit)
-  }
-  return require('./views/case')(state, emit)
 }

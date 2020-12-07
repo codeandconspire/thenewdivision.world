@@ -1,15 +1,15 @@
-var html = require('choo/html')
-var Component = require('choo/component')
-var asElement = require('prismic-element')
-var nanoraf = require('nanoraf')
-var {asText} = require('prismic-richtext')
-var view = require('../components/view')
-var intro = require('../components/intro')
-var {i18n} = require('../components/base')
-var Figure = require('../components/figure')
-var button = require('../components/button')
+const html = require('choo/html')
+const Component = require('choo/component')
+const asElement = require('prismic-element')
+const nanoraf = require('nanoraf')
+const { asText } = require('prismic-richtext')
+const view = require('../components/view')
+const intro = require('../components/intro')
+const { i18n } = require('../components/base')
+const Figure = require('../components/figure')
+const button = require('../components/button')
 
-var text = i18n()
+const text = i18n()
 
 module.exports = view(about, meta)
 
@@ -20,13 +20,13 @@ function about (state, emit) {
     emit('ui:theme', 'sand')
   }
 
-  var doc = state.documents.items.find((doc) => doc.type === 'about')
+  const doc = state.documents.items.find((doc) => doc.type === 'about')
   if (!doc && !state.ui.isPartial) {
-    emit('doc:fetch', {type: 'about'})
+    emit('doc:fetch', { type: 'about' })
     return html`<main class="View-container View-container--fill"></main>`
   }
 
-  var first = html`
+  const first = html`
   <div>
     <div class="${state.ui.isPartial ? 'u-slideIn' : ''}" style="${state.ui.isPartial ? 'animation-delay: 200ms;' : ''}">
       ${intro(asText(doc.data.summary))}
@@ -116,7 +116,7 @@ function about (state, emit) {
               <div class="u-clip">
                 <div class="View-grid u-spaceT4">
                   ${doc.data.testimonies.map((props, index, list) => {
-                    var background = props.color.split(' ').reduce((str, part) => {
+                    const background = props.color.split(' ').reduce((str, part) => {
                       return str + part[0].toUpperCase() + part.substr(1)
                     }, '') || 'white'
 
@@ -149,23 +149,23 @@ function about (state, emit) {
 }
 
 function workspace (state, doc) {
-  var image = doc.data.workspace_image
+  const image = doc.data.workspace_image
 
   return html`
     <div class="Card Card--banner" id="ncid-7290" data-nanocomponent="ncid-7290" data-onloadidtzmc="o14">
-      ${state.cache(Figure, `'workspace'-${Figure.id(image)}`, {sizes: 'third'}).render(image, false, 'Card-figure')}
+      ${state.cache(Figure, `'workspace'-${Figure.id(image)}`, { sizes: 'third' }).render(image, false, 'Card-figure')}
     </div>
   `
 }
 
 function coworker (state, doc) {
   return function (person, index, list) {
-    var id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
-    var children = [
+    const id = asText(person.name).trim().toLowerCase().replace(/[^\w]+/g, '')
+    const children = [
       html`
         <div class="View-cell u-size1of2 u-lg-size1of3 u-spaceT6">
           <article class="Link Link--aspect Button-wrapper">
-            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, {sizes: 'third'}).render(person.image) : null}
+            ${person.image.url ? state.cache(Figure, `${id}-${Figure.id(person.image)}`, { sizes: 'third' }).render(person.image) : null}
             <h3 class="u-textBold u-textSizeSm u-spaceT2">${asText(person.name)}</h3>
             <p class="u-textSizeSm">${person.role}</p>
             ${state.cache(ContactInfo, ContactInfo.id(person)).render(person)}
@@ -214,7 +214,7 @@ var ContactInfo = class ContactInfo extends Component {
   }
 
   static id (person) {
-    var first = person.bio[0]
+    const first = person.bio[0]
     return (first.text)
       .toLowerCase()
       .split(' ')
@@ -224,15 +224,15 @@ var ContactInfo = class ContactInfo extends Component {
   }
 
   load () {
-    var self = this
-    var onresize = nanoraf(function () {
+    const self = this
+    const onresize = nanoraf(function () {
       self.narrow = window.innerWidth < 700
       self.rerender()
     })
 
     onresize()
 
-    window.addEventListener('resize', onresize, {passive: true})
+    window.addEventListener('resize', onresize, { passive: true })
     this.unmount = function () {
       window.removeEventListener('resize', onresize)
     }
@@ -248,9 +248,9 @@ var ContactInfo = class ContactInfo extends Component {
   }
 
   createElement (person) {
-    var expanded = typeof window === 'undefined' || this.local.expanded
-    var first = person.bio[0]
-    var email = person.email ? person.email.split('@')[0] : null
+    const expanded = typeof window === 'undefined' || this.local.expanded
+    const first = person.bio[0]
+    let email = person.email ? person.email.split('@')[0] : null
 
     email = email ? (this.narrow ? email + '@tnd.world' : email + '@thenewdivision.world') : null
 
@@ -259,22 +259,22 @@ var ContactInfo = class ContactInfo extends Component {
         <div class="Text u-textSizeXs u-spaceT2">
           ${asElement([first])}
           ${expanded ? asElement(person.bio.slice(1)) : null}
-          ${expanded ? html`
+          ${(expanded && html`
             <p class="Text u-textSizeXs u-spaceT2">
               ${person.email ? html`<div>Email: <a class="u-textNowrap" href="mailto:${person.email}">${email}</div></a>` : null}
               ${person.phone ? html`<div>Phone: <a class="u-textNowrap" href="tel:${person.phone}">${person.phone}</div></a>` : null}
             </p>
-          ` : null}
+          `) || null}
         </div>
-        ${!expanded && person.bio.length > 1 ? button(text`More info`, {color: 'white', wrap: true, onclick: () => this.expand()}) : null}
+        ${!expanded && person.bio.length > 1 ? button(text`More info`, { color: 'white', wrap: true, onclick: () => this.expand() }) : null}
       </div>
     `
   }
 }
 
 function meta (state) {
-  var doc = state.documents.items.find((doc) => doc.type === 'about')
-  if (!doc) return {title: text`Loading`}
+  const doc = state.documents.items.find((doc) => doc.type === 'about')
+  if (!doc) return { title: text`Loading` }
   return {
     title: text`About`,
     'og:image': '/share.png',

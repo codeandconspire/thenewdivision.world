@@ -1,12 +1,12 @@
-var html = require('choo/html')
+const html = require('choo/html')
 
 module.exports = button
 
 // render button
 // (any, obj?) -> HTMLElement
 function button (content, opts = {}) {
-  var color = opts.color || 'gray'
-  var attrs = {
+  const color = opts.color || 'gray'
+  const attrs = {
     onclick: opts.onclick || null,
     class: `Button u-color${color[0].toUpperCase() + color.substr(1)}`
   }

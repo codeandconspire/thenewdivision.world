@@ -1,15 +1,15 @@
-var html = require('choo/html')
-var nanoraf = require('nanoraf')
-var Component = require('choo/component')
-var asElement = require('prismic-element')
-var {asText, Elements} = require('prismic-richtext')
-var button = require('../button')
-var Figure = require('../figure')
-var {i18n} = require('../base')
-var icon = require('../icon')
-var News = require('./news')
+const html = require('choo/html')
+const nanoraf = require('nanoraf')
+const Component = require('choo/component')
+const asElement = require('prismic-element')
+const { asText, Elements } = require('prismic-richtext')
+const button = require('../button')
+const Figure = require('../figure')
+const { i18n } = require('../base')
+const icon = require('../icon')
+const News = require('./news')
 
-var text = i18n(require('./lang.json'))
+const text = i18n(require('./lang.json'))
 
 module.exports = class Words extends Component {
   constructor (id, state, emit) {
@@ -28,14 +28,14 @@ module.exports = class Words extends Component {
   load (element) {
     this.reflow()
 
-    var cols = measure()
-    var prev = window.innerWidth
-    var top = element.offsetTop
+    let cols = measure()
+    let prev = window.innerWidth
+    const top = element.offsetTop
 
-    var above = false
-    var below = false
-    var onscroll = nanoraf(() => {
-      var {scrollY} = window
+    let above = false
+    let below = false
+    const onscroll = nanoraf(() => {
+      const { scrollY } = window
 
       if (scrollY < top && above) return
 
@@ -54,16 +54,16 @@ module.exports = class Words extends Component {
             below = true
           }
         } else {
-          let inview = scrollY - top
-          let fraction = inview / col.height
+          const inview = scrollY - top
+          const fraction = inview / col.height
           col.el.style.setProperty('--offset', fraction.toFixed(6))
           above = below = false
         }
       }
     })
 
-    var onresize = nanoraf(() => {
-      var next = window.innerWidth
+    const onresize = nanoraf(() => {
+      const next = window.innerWidth
       if ((prev >= 1000 && next < 1000) || (prev < 1000 && next >= 1000)) {
         this.rerender()
         this.reflow()
@@ -91,8 +91,8 @@ module.exports = class Words extends Component {
   // redistribute column items to get equal height(-ish) cols
   // () -> void
   reflow () {
-    var last = []
-    var cols = [...this.element.querySelectorAll('.js-col')]
+    const last = []
+    const cols = [...this.element.querySelectorAll('.js-col')]
 
     for (let i = 0, len = cols.length, col; i < len; i++) {
       col = cols[i]
@@ -102,9 +102,9 @@ module.exports = class Words extends Component {
     }
 
     for (let i = 0, len = last.length; i < len; i++) {
-      var shortest = cols.reduce((min, el) => {
-        var height = el.offsetHeight
-        return !min || height < min.height ? {el, height} : min
+      const shortest = cols.reduce((min, el) => {
+        const height = el.offsetHeight
+        return !min || height < min.height ? { el, height } : min
       }, null)
       shortest.el.appendChild(last[i])
     }
@@ -113,7 +113,7 @@ module.exports = class Words extends Component {
   createElement (slices) {
     this.slices = slices
 
-    var cols = [[], []]
+    const cols = [[], []]
     if (typeof window !== 'undefined' && window.innerWidth >= 1000) {
       cols.push([])
     }
@@ -129,7 +129,7 @@ module.exports = class Words extends Component {
         ${cols.map((cells, col) => html`
           <div class="Words-col Words-col--${col + 1} js-col">
             ${cells.map((slice, cell) => {
-              var props = slice.primary
+              const props = slice.primary
               switch (slice.slice_type) {
                 case 'news': return this.cache(News, `${this.id}-${News.id(props)}-${col}:${cell}`).render(props)
                 case 'quote': return html`
@@ -138,12 +138,12 @@ module.exports = class Words extends Component {
                   </article>
                 `
                 case 'tweet': {
-                  var [, type, value] = props.link.url.match(/twitter\.com\/(\w+)(?:\/(\w+))?/)
+                  const [, type, value] = props.link.url.match(/twitter\.com\/(\w+)(?:\/(\w+))?/)
                   return html`
                     <article class="Words-cell Button-wrapper js-cell" id="${this.id}">
-                      ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, {size: 'third'}).render(props.image) : null}
+                      ${props.image.url ? this.cache(Figure, `${this.id}-${Figure.id(props.image)}`, { size: 'third' }).render(props.image) : null}
                       <div class="Text Text--full u-textSizeSm ${props.image.url ? 'u-spaceT2' : ''}">
-                        <div class="Words-icon">${icon.twitter({brand: true})}</div>
+                        <div class="Words-icon">${icon.twitter({ brand: true })}</div>
                         ${type ? html`
                           <p class="u-spaceB0 ${props.image.url ? '' : 'u-spaceT0'}">
                             <strong>${type === 'hashtag' ? `#${value}` : `@${type}`}</strong>
@@ -151,7 +151,7 @@ module.exports = class Words extends Component {
                         ` : null}
                         ${asElement(props.tweet, resolveDoc, serializeTweet)}
                       </div>
-                      ${button(text`More tweets`, {href: props.link.url, target: props.link.target, wrap: true})}
+                      ${button(text`More tweets`, { href: props.link.url, target: props.link.target, wrap: true })}
                     </article>
                   `
                 }
@@ -172,7 +172,7 @@ function serializeTweet (type, node, content, children) {
   switch (type) {
     case Elements.span: return content.split(/((?:@|#)\w+)/g).map(hyperlink)
     case Elements.hyperlink: {
-      let attrs = {
+      const attrs = {
         href: node.data.url,
         className: 'u-zBump u-textWordBreak'
       }
@@ -193,7 +193,7 @@ function serializeTweet (type, node, content, children) {
 // (str, ...str) -> str
 function hyperlink (part) {
   if (!/^@|#/.test(part)) return part
-  var [, type, value] = part.split(/(@|#)(\w+)/)
+  const [, type, value] = part.split(/(@|#)(\w+)/)
   switch (type) {
     case '#': return html`
       <a class="u-zBump" target="_blank" rel="noopener noreferrer" href="https://mobile.twitter.com/hashtag/${value}">#${value}</a>

@@ -1,11 +1,35 @@
 {
   "name": "thenewdivision.world",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Public website for The New Division",
   "main": "index.js",
   "scripts": {
-    "test": "standard && dependency-check package.json",
-    "start": "node server.js"
+    "start": "node server.js",
+    "debug": "node --inspect server.js",
+    "build": "node build.js",
+    "test:js": "standard",
+    "test": "npm run test:js"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "documentify": {
+    "transform": [
+      [
+        "./lib/document.js",
+        {
+          "order": "end"
+        }
+      ]
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ]
   },
   "repository": {
     "type": "git",
@@ -18,30 +42,30 @@
   },
   "homepage": "https://github.com/codeandconspire/thenewdivision.world#readme",
   "devDependencies": {
-    "choo-devtools": "^2.5.1",
-    "dependency-check": "^3.4.1",
-    "standard": "^10.0.3"
+    "babel-eslint": "^10.1.0",
+    "standard": "^16.0.3"
   },
   "dependencies": {
     "cccpurge": "^2.0.0",
     "choo": "^7.0.0",
+    "choo-devtools": "^3.0.4",
+    "choo-lazy-view": "^2.0.0",
     "choo-meta": "^2.0.0",
     "choo-service-worker": "^3.0.0",
     "cloudinary": "^1.15.0",
     "dedent": "^0.7.0",
     "dotenv": "^8.1.0",
     "hstream": "^1.2.0",
-    "jalla": "^1.0.0-14",
+    "jalla": "^1.0.0-34",
     "koa-body": "^4.1.1",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
-    "nanohtml": "^1.9.0",
     "nanolru": "^1.0.0",
     "nanoraf": "^3.1.0",
     "normalize.css": "^8.0.1",
     "postcss-url": "^8.0.0",
-    "prismic-element": "^2.0.3",
-    "prismic-javascript": "^2.1.1",
+    "prismic-element": "^2.0.4",
+    "prismic-javascript": "^3.0.2",
     "prismic-richtext": "^1.0.3",
     "smoothscroll-polyfill": "^0.4.4"
   }
