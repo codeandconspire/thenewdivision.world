@@ -1,0 +1,292 @@
+@import "../base";
+@import "../slices";
+
+/** @define Footer */
+
+.Footer {
+  background: rgb(var(--color-bright-gray));
+  font-size: 0.9375rem;
+  padding: var(--Slices-item-padding) 0 2rem;
+}
+
+.Footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+}
+
+.Footer-section {
+  flex: 0 1 auto;
+}
+
+.Footer-title {
+  display: block;
+  font-size: 1.31rem;
+  font-weight: bold;
+  margin: 2rem 0 0.75rem;
+  user-select: none;
+}
+
+.Footer-section:nth-child(1) {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .Footer {
+    padding: var(--Slices-item-padding) 0 2rem;
+  }
+}
+
+@media (min-width: 950px) {
+  .Footer {
+    font-size: 1.0625rem;
+    padding: var(--Slices-item-padding) 0 2rem;
+  }
+
+  .Footer-title {
+    font-size: 1.31rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Footer {
+    padding-bottom: 6rem;
+  }
+}
+
+/**
+ * Link lists
+ */
+
+.Footer-section:nth-child(2),
+.Footer-section:nth-child(3) {
+  flex: 0 0 48%;
+}
+
+@media (min-width: 600px) {
+  .Footer-section:nth-child(2),
+  .Footer-section:nth-child(3) {
+    flex: 0 0 auto;
+  }
+}
+
+.Footer-item {
+  user-select: none;
+}
+
+.Footer-item:last-child {
+  margin-bottom: -0.9rem;
+}
+
+.Footer-link {
+  padding: 0.82rem 0.3rem;
+  margin: -0.3rem;
+  white-space: nowrap;
+  display: inline-block;
+  min-width: 3rem;
+  font-size: 1.0625rem;
+}
+
+/**
+ * Social
+ */
+
+.Footer-socials {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.Footer-socials .Footer-item {
+  margin: 0;
+}
+
+.Footer-socials .Footer-item + .Footer-item {
+  margin-left: 1rem;
+}
+
+.Footer-socials .Footer-link {
+  margin: 0;
+  padding: 0;
+}
+
+.Footer-social {
+  display: block;
+  font-size: 0.75rem;
+  color: rgb(var(--color-gray));
+  text-align: center;
+  box-shadow: var(--box-shadow-sm);
+  border-radius: 50%;
+  transition: var(--scale-transition), var(--box-shadow-transition);
+}
+
+.Footer-social:hover {
+  box-shadow: var(--box-shadow-sm-hover);
+  transform: scale(1.15);
+}
+
+.Footer-icon {
+  display: block;
+  margin: 0 auto 0.4rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+@media (min-width: 950px) {
+  .Footer-section:nth-child(4) {
+    width: 100%;
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Footer-section:nth-child(4) {
+    width: auto;
+    margin-top: 0;
+  }
+}
+
+/**
+ * Payment
+ */
+
+.Footer-section:nth-child(1) .Footer-title {
+  font-size: 1.31rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.Footer-badges {
+  display: flex;
+}
+
+.Footer-badge {
+  background: #fff;
+  border-radius: var(--border-radius-sm);
+  height: 3rem;
+  width: auto;
+  flex: 1 1 100%;
+  padding: 0.6rem 0.8rem;
+}
+
+.Footer-badge + .Footer-badge {
+  margin-left: 0.75rem;
+}
+
+.Footer-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 500px) {
+  .Footer-badge {
+    width: 6rem;
+    height: 3.5rem;
+    flex: 0 0 6rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .Footer-badge + .Footer-badge {
+    margin-left: 1.25rem;
+  }
+}
+
+@media (min-width: 950px) {
+  .Footer-section:nth-child(1) {
+    width: auto;
+  }
+}
+
+/**
+ * Super important marks
+ */
+
+.Footer-marks {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+.Footer-mark {
+  flex: 0 0 48%;
+}
+
+.Footer-symbol {
+  height: 4rem;
+  max-width: 5rem;
+  width: auto;
+  margin-bottom: 0.75rem;
+}
+
+.Footer-body {
+  font-size: 0.9375rem;
+  color: rgb(var(--color-gray));
+  max-width: 11rem;
+}
+
+.Footer-header {
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+@media (min-width: 500px) {
+  .Footer-marks {
+    max-width: 28rem;
+  }
+
+  .Footer-mark {
+    display: flex;
+  }
+
+  .Footer-symbol {
+    height: 3.5rem;
+    max-width: 4.3rem;
+    margin-bottom: 0;
+    margin-right: 1.05rem;
+    margin-top: -0.4rem;
+  }
+
+  .Footer-body {
+    font-size: 0.8125rem;
+  }
+}
+
+/**
+ * Copyright
+ */
+
+.Footer-copy {
+  font-size: 0.9375rem;
+  color: rgb(var(--color-gray));
+  margin-top: 2rem;
+  flex: 0 0 100%;
+}
+
+.Footer-meta {
+  display: inline-block;
+  padding: 0.9rem;
+  margin: -0.9rem;
+  position: relative;
+  z-index: 1;
+  text-decoration: underline;
+}
+
+@media (min-width: 950px) {
+  .Footer-copy {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Footer-copy {
+    bottom: -4rem;
+  }
+}

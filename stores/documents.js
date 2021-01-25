@@ -1,10 +1,10 @@
-var assert = require('assert')
-var html = require('choo/html')
-var {getApi, Predicates} = require('prismic-javascript')
+const assert = require('assert')
+const html = require('choo/html')
+const { getApi, Predicates } = require('prismic-javascript')
 
 module.exports = documents
 
-var endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
+let endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
 
 function documents (state, emitter) {
   state.documents = {
@@ -18,7 +18,7 @@ function documents (state, emitter) {
     state.documents.error = null
   })
 
-  var queue = 0
+  let queue = 0
   emitter.on('doc:fetch', function (query, opts = {}) {
     if (typeof window === 'undefined') {
       endpoint = getApi('https://thenewdivision.cdn.prismic.io/api/v2')
@@ -39,12 +39,12 @@ function documents (state, emitter) {
 
   // preemtively fetch homepage
   if (state.prefetch) {
-    state.prefetch.push(api({type: ['about', 'homepage']}))
+    state.prefetch.push(api({ type: ['about', 'homepage'] }))
   }
 
   function api (query, opts = {}) {
-    var predicates = []
-    var fatal = opts.fatal
+    const predicates = []
+    const fatal = opts.fatal
 
     delete opts.fatal
     delete opts.silent
@@ -140,7 +140,7 @@ class DocumentError extends Error {
   }
 
   toJSON () {
-    var props = {
+    const props = {
       name: this.name,
       message: this.message
     }

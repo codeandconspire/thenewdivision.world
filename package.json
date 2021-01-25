@@ -55,6 +55,7 @@
     "cloudinary": "^1.15.0",
     "dedent": "^0.7.0",
     "dotenv": "^8.1.0",
+    "focus-visible": "^5.2.0",
     "hstream": "^1.2.0",
     "jalla": "^1.0.0-34",
     "koa-body": "^4.1.1",

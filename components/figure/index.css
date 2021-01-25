@@ -1,10 +1,11 @@
-@import "../base/global";
+@import "../base";
+
+/** @define Figure */
 
 :root {
-  --Figure-aspect: 100%;
+  --Figure-aspect: 56.25%;
 }
 
-/* @define Figure */
 .Figure {
   display: block;
   width: 100%;
@@ -18,25 +19,19 @@
 .Figure-container {
   padding-bottom: var(--Figure-aspect);
   position: relative;
-  transform:
-    translateX(calc(0.5vw * var(--mouse-x)))
-    translateY(calc((20% * (1 - var(--inview))) + (0.5vw * var(--mouse-y))));
-  transition: transform 180ms var(--snap);
-  user-select: none;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(var(--color-dark-gray));
+  border-radius: var(--current-border-radius, var(--border-radius-xl));
+  overflow: hidden;
 }
 
-@media (max-width: 599px) {
-  .Figure-container--alternative {
-    padding-bottom: var(--Figure-aspect-alternative);
+@media (max-width: 699px) {
+  .Figure--mobile .Figure-container {
+    padding-bottom: var(--Figure-aspect-mobile);
   }
 }
 
-.Figure-container:hover {
-  transition: none;
-}
-
-.Figure-image {
+.Figure-image,
+.Figure-video {
   display: block;
   width: 100%;
   height: 100%;
@@ -44,149 +39,28 @@
   left: 0;
   top: 0;
   object-fit: cover;
-}
-
-.Figure-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--space) * 4);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--color);
-  color: #fff;
-  padding-bottom: 40%;
-}
-
-.Figure-load {
-  display: none;
-}
-
-:root.has-js .Figure-load {
-  display: block;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  image-rendering: pixelated;
-}
-
-:root.has-js .Figure.is-loaded .Figure-load {
-  display: none;
-}
-
-.Figure-caption {
-  display: block;
-  margin-top: var(--space);
-  color: var(--gray);
-  font-size: var(--font-size-xs);
-}
-
-/**
- * Decorator
- */
-
-.Figure-decorator {
-  width: 100%;
-  height: 100%;
-  padding: calc(var(--space) * 3);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  color: var(--bright-sand);
+  object-position: bottom;
   pointer-events: none;
+  border-radius: var(--current-border-radius, var(--border-radius-xl));
 }
 
-.Figure-plus {
-  float: right;
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  position: sticky;
-  top: calc(var(--space) * 3);
-  right: calc(var(--space) * 3);
-  pointer-events: none;
-  transform:
-    translateX(calc(0.7vw * var(--mouse-x)))
-    translateY(calc(0.7vw * var(--mouse-y)));
-  transition: transform 260ms var(--snap);
+.Figure-poster {
+  background-color: rgb(var(--color-gray));
+  user-select: none;
 }
 
-.Figure-plus::before,
-.Figure-plus::after {
-  content: "";
+.Figure--fill {
   position: absolute;
-  top: 6px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: currentColor;
-}
-
-.Figure-plus::after {
-  top: 0;
-  left: 6px;
-  width: 3px;
   height: 100%;
 }
 
-.Figure:hover .Figure-plus {
-  transition: none;
-}
-
-.Figure-circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  border-radius: 50%;
-  width: 290%;
-  height: 290%;
-  z-index: -1;
-  transform-origin: center;
-  transition: ease-in 150ms;
-  transition-property: transform, opacity;
-  background: #fff;
-  opacity: 0.2;
-}
-
-.Figure:hover {
-  z-index: 1;
-  position: relative;
-}
-
-.Figure-outer:hover .Figure-circle,
-.Figure:hover .Figure-circle {
-  transform: translate(-50%, -50%) scale(1);
-  transition-timing-function: ease-out;
-}
-
-.Figure-outer:active .Figure-circle,
-.Figure:active .Figure-circle {
-  transform: translate(-50%, -50%) scale(0.8);
-  transition-duration: 50ms;
-  opacity: 0.3;
-}
-
-@media (min-width: 1500px) {
-  .Figure-plus {
-    width: 20px;
-    height: 20px;
-  }
-
-  .Figure-plus::before {
-    top: 8px;
-    height: 4px;
-  }
-
-  .Figure-plus::after {
-    left: 8px;
-    width: 4px;
-  }
+.Figure--fill .Figure-container {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--current-border-radius, 0);
 }

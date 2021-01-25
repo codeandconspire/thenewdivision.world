@@ -1,132 +1,96 @@
 const html = require('choo/html')
 const Component = require('choo/component')
-const { mousemove, memo, src, srcset } = require('../base')
+const { memo, srcset, className } = require('../base')
 
 module.exports = class Figure extends Component {
-  constructor (id, state, emit, opts) {
+  constructor (id, state, emit) {
     super(id)
-    Object.assign(this, opts, { id })
-    this.state = state
-    this.interactive = opts && opts.interactive
-    this.emit = emit
-  }
-
-  static id (img) {
-    return img.url.match(/.+\/(.+?)\.(?:jpg|jpeg|png|svg|gif|webp)(?:\?|$)/)[1]
-  }
-
-  static prefetch (props) {
-    if (!props.url || typeof window === 'undefined') return
-    const img = new window.Image()
-    img.src = `/media/fetch/q_0,w_20,f_png/${props.url}`
+    this.local = state.components[id] = { id }
   }
 
   load (element) {
-    const self = this
+    const video = element.querySelector('.js-video')
+    if (!video) return
 
-    if (this.interactive) {
-      this.unload = mousemove(element)
-    }
-
-    // ready via cache
-    if (element.querySelector('.js-image').complete) {
-      element.classList.add('is-loaded')
-      self.loaded = true
-    }
-
-    element.querySelector('.js-image').addEventListener('load', function () {
-      element.classList.add('is-loaded')
-      self.loaded = true
+    // Play video on document interaction
+    document.documentElement.addEventListener('click', function onclick () {
+      video.play().catch(Function.prototype)
+      document.documentElement.removeEventListener('click', onclick)
+    })
+    document.documentElement.addEventListener('touchstart', function ontouchstart () {
+      video.play().catch(Function.prototype)
+      document.documentElement.removeEventListener('touchstart', ontouchstart)
     })
   }
 
-  update () {
-    return false
+  update (content) {
+    return true
   }
 
-  createElement (img, caption, className) {
-    const alt = img.alternative
+  createElement (content, opts = {}) {
+    if (!content) return null
+    const image = content.url ? content : null
+    const mobile = content.url && content.mobile?.url ? content.mobile : null
+    const video = content.video?.url ? content.video : null
+
+    const classes = className('Figure', {
+      'Figure--mobile': image && mobile,
+      'Figure--video': video,
+      'Figure--fill': opts.fill,
+      'Figure--children': opts.children
+    })
+
     return html`
-      <figure class="Figure ${className || ''} ${this.loaded ? 'is-loaded' : ''}" id="${this.id}">
-        <div class="Figure-container ${alt ? 'Figure-container--alternative' : ''}" style="--Figure-aspect: ${(img.dimensions.height / img.dimensions.width * 100).toFixed(2)}%; ${alt ? `--Figure-aspect-alternative: ${(alt.dimensions.height / alt.dimensions.width * 100).toFixed(2)}%` : ''}">
-          ${this.interactive ? decorator() : null}
-          ${img.url ? getImage(img, this.size) : null}
-        </div>
-        ${caption ? html`
-          <figcaption class="u-spaceT2 u-spaceB2">${caption}</figcaption>
+      <figure class="${classes} ${opts.class ? opts.class : ''}">
+        ${image ? html`
+          <div class="Figure-container" style="--Figure-aspect: ${(image.dimensions.height / image.dimensions.width * 100).toFixed(2)}%; ${mobile ? `--Figure-aspect-mobile: ${(mobile.dimensions.height / mobile.dimensions.width * 100).toFixed(2)}%` : ''}">
+            ${image.url ? getImage(image, this.size) : null}
+            ${opts.children ? html`<div class="Figure-children">${opts.children}</div>` : null}
+          </div>
+        ` : null}
+
+        ${video ? html`
+          <div class="Figure-container">
+            <div class="Figure-poster">
+              <video class="Figure-video js-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" disablepictureinpicture width="960" height="540" preload="auto" poster="${video.poster?.url || ''}">
+                <source src="${video.url}" type="video/mp4" />
+              </video>
+            </div>
+            ${opts.children ? html`<div class="Figure-children">${opts.children}</div>` : null}
+          </div>
         ` : null}
       </figure>
     `
+
+    function getImage (props) {
+      const sizes = [640, 750, 1125, 1440, [2880, 'q_70'], [3840, 'q_50']]
+      const viewport = '90vw'
+
+      if (!props.url) {
+        return null
+      }
+
+      const attrs = memo(function (url, sizes) {
+        const sources = srcset(props.url, sizes)
+        return Object.assign({
+          sizes: viewport,
+          srcset: sources,
+          mobile: mobile || '',
+          src: sources.split(' ')[0],
+          loading: 'lazy'
+        }, props.dimensions)
+      }, [props.url, sizes])
+
+      if (!mobile) {
+        return html`<img class="Figure-image" ${attrs}>`
+      }
+
+      return html`
+        <picture>
+          <source srcset="${attrs.srcset}" media="(min-width: 500px)" sizes="${viewport}">
+          <img class="Figure-image" alt="${attrs.alt}" srcset="${srcset(mobile.url, sizes)}" sizes="${viewport}" width="${attrs.width}" height="${attrs.height}" src="${attrs.src}" loading="${attrs.loading}">
+        </picture>
+      `
+    }
   }
-}
-
-function getImage (props, size) {
-  if (/\.gifv?(?:\?|$)/.test(props.url)) {
-    const { alt, url, dimensions: { width, height } } = props
-    return html`
-      <div>
-        <img class="Figure-load" width="${width}" height="${height}" src="/media/fetch/q_0,w_20,f_png/${url}">
-        <img class="Figure-image js-image" alt="${alt}" width="${width}" height="${height}" src="${url}">
-      </div>
-    `
-  }
-
-  let viewport = '100vw'
-  let sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
-
-  if (size === 'half') {
-    viewport = '(min-midth: 600px) 50vw, 100vw'
-    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
-  }
-
-  if (size === 'third') {
-    viewport = '(min-midth: 600px) 30vw, 50vw'
-    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
-  }
-
-  if (size === 'fouth') {
-    viewport = '(min-midth: 1000px) 25vw, (min-midth: 600px) 30vw, 50vw'
-    sizes = [400, 500, 600, 700, 900, 1100, 1400, 1700, 2200, 3000]
-  }
-
-  if (!props.url) {
-    return null
-  }
-
-  const attrs = memo(function (url, sizes) {
-    const sources = srcset(props.url, sizes)
-    return Object.assign({
-      sizes: viewport,
-      srcset: sources,
-      alt: props.alt || '',
-      src: sources.split(' ')[0]
-    }, props.dimensions)
-  }, [props.url, sizes])
-
-  if (!props.alternative) {
-    return html`
-      <div>
-        <img class="Figure-load" width="${attrs.width}" height="${attrs.height}" src="/media/fetch/q_0,w_20,f_png/${props.url}">
-        <img class="Figure-image js-image" ${attrs}>
-      </div>
-    `
-  }
-
-  return html`
-    <div>
-      <img class="Figure-load" width="${attrs.width}" height="${attrs.height}" src="/media/fetch/q_0,w_20,f_png/${props.url}">
-      <picture>
-        <source srcset="${attrs.srcset}" media="(min-width: 600px)" sizes="${viewport}">
-        <img class="Figure-image js-image" alt="${attrs.alt}" srcset="${srcset(props.alternative.url, sizes)}" sizes="${viewport}" width="${attrs.width}" height="${attrs.height}" ${src(props.url, 700)}>
-      </picture>
-    </div>
-  `
-}
-
-function decorator () {
-  return html`
-    <div class="Figure-decorator">
-      <div class="Figure-plus js-plus"><div class="Figure-circle"></div></div>
-    </div>
-  `
 }

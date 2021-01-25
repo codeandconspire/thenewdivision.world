@@ -1,0 +1,221 @@
+@import "./config";
+
+/** @define utilities */
+
+/**
+ * Text
+ */
+
+/* Dead static sizes */
+
+.u-textXs {
+  font-size: 0.8125rem !important;
+}
+
+.u-textSm {
+  font-size: 0.9375rem !important;
+}
+
+.u-textMd {
+  font-size: 1.0625rem !important;
+}
+
+.u-textLg {
+  font-size: 2rem !important;
+}
+
+.u-textXl {
+  font-size: 3rem !important;
+}
+
+/* Weights */
+
+.u-textNormal {
+  font-weight: normal !important;
+}
+
+.u-textBold {
+  font-weight: bold !important;
+}
+
+/* Colors */
+
+.u-textMuted {
+  color: rgb(var(--color-muted)) !important;
+
+  --color-link: var(--color-muted);
+  --color-link-hover: var(--color-dark-gray);
+  --link-decoration: underline;
+}
+
+.u-textUnmuted {
+  color: rgb(var(--color-text)) !important;
+}
+
+/* Alignment */
+
+.u-textCenter {
+  text-align: center !important;
+}
+
+/* Word wrapping */
+
+.u-textTruncate {
+  width: 0 !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.u-nowrap {
+  white-space: nowrap !important;
+}
+
+.u-breakword {
+  word-break: break-word !important;
+}
+
+/* Word spacing */
+
+.u-spaceBefore::before {
+  content: " ";
+  display: inline-block;
+}
+
+.u-spaceAfter::after {
+  content: " ";
+  display: inline-block;
+}
+
+/**
+ * Misc
+ */
+
+.u-relative {
+  position: relative;
+}
+
+.u-thumbnail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: text-bottom;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: var(--border-radius-xs);
+  background-color: rgb(var(--color-bright-gray));
+  user-select: none;
+}
+
+.u-prefix {
+  margin-right: 0.5em;
+}
+
+.u-suffix {
+  margin-left: 0.5em;
+}
+
+.u-link {
+  color: rgba(var(--color-link)) !important;
+}
+
+.u-link:hover {
+  text-decoration: underline !important;
+}
+
+/**
+ * Layout & Display
+ */
+
+.u-hidden { display: none !important; }
+.u-block { display: block !important; }
+.u-inlineBlock { display: inline-block !important; }
+.u-inline { display: inline !important; }
+.u-flex { display: flex !important; }
+
+.u-fill {
+  max-width: 100% !important;
+  width: 100% !important;
+  flex: 1 0 100% !important;
+}
+
+.u-centerChildren {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.u-alignRight {
+  margin-left: auto !important;
+}
+
+.u-alignLeft {
+  margin-right: auto !important;
+}
+
+.u-hiddenVisually {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
+/**
+ * Centered page container
+ */
+
+.u-container {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--document-margin) !important;
+  padding-right: var(--document-margin) !important;
+  max-width: calc(var(--container-large-width) + (var(--document-margin) * 2)) !important;
+}
+
+@supports (padding-left: constant(safe-area-inset-left)) {
+  .u-container {
+    padding-left: calc(var(--document-margin) + constant(safe-area-inset-left)) !important;
+    padding-right: calc(var(--document-margin) + constant(safe-area-inset-right)) !important;
+  }
+}
+
+@supports (padding-left: env(safe-area-inset-left)) {
+  .u-container {
+    padding-left: calc(var(--document-margin) + env(safe-area-inset-left)) !important;
+    padding-right: calc(var(--document-margin) + env(safe-area-inset-right)) !important;
+  }
+}
+
+/**
+ * Loading
+ * 1. Apply border radius on line breaks
+ */
+
+.u-loading {
+  background: rgba(var(--color-text), 0.06) !important;
+  color: transparent !important;
+  user-select: none !important;
+  animation: u-loading-pulse 1500ms infinite var(--ease);
+  border-radius: var(--border-radius-xs);
+  box-decoration-break: clone; /* 1 */
+}
+
+.u-loadingAlt {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: transparent !important;
+  user-select: none !important;
+  animation: u-loading-pulse 1500ms infinite var(--ease);
+  border-radius: var(--border-radius-xs);
+  box-decoration-break: clone; /* 1 */
+}
+
+@keyframes u-loading-pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}

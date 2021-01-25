@@ -36,7 +36,7 @@ function prismicStore (opts) {
     if (state.prismic) {
       assert(typeof state.prismic === 'object', 'choo-prismic: state.prismic should be type object')
       const cachekeys = Object.keys(state.prismic)
-      for (var i = 0, len = cachekeys.length, val; i < len; i++) {
+      for (let i = 0, len = cachekeys.length, val; i < len; i++) {
         val = state.prismic[cachekeys[i]]
         cache.set(cachekeys[i], val)
       }

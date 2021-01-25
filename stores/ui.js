@@ -1,6 +1,6 @@
 module.exports = ui
 
-var THEMES = {
+const THEMES = {
   white: '',
   sand: 'u-themeSand'
 }
@@ -19,12 +19,12 @@ function ui (state, emitter, app) {
 
   emitter.on('ui:partial', function (href, getPartial) {
     getPartial(function () {
-      var matched = app.router.match(href)
-      var _state = Object.assign({}, state, {
+      const matched = app.router.match(href)
+      const _state = Object.assign({}, state, {
         href: href,
         route: matched.route,
         params: matched.params,
-        ui: Object.assign({}, state.ui, {isPartial: true})
+        ui: Object.assign({}, state.ui, { isPartial: true })
       })
       // pluck out header component and pre-rerender with next route
       app._cache.get('header').render(matched.route)
@@ -35,9 +35,9 @@ function ui (state, emitter, app) {
   emitter.on('ui:theme', function (name) {
     state.ui.theme = name
     if (typeof window !== 'undefined') {
-      var theme = THEMES[name] || ''
+      const theme = THEMES[name] || ''
 
-      var value = document.documentElement.classList.value
+      let value = document.documentElement.classList.value
       if (/u-theme\w+/.test(value)) {
         value = value.replace(/u-theme\w+/, theme)
       } else {
@@ -54,18 +54,18 @@ function ui (state, emitter, app) {
     state.ui.isFirst = false
 
     window.requestAnimationFrame(function () {
-      var el = document.getElementById(window.location.hash.substr(1))
+      const el = document.getElementById(window.location.hash.substr(1))
 
       if (!el) {
         window.scrollTo(0, 0)
       } else {
-        let from = window.scrollY
+        const from = window.scrollY
         window.setTimeout(function () {
           // reset scroll to where it was before navigate
           window.scrollTo(window.scrollX, from)
           window.setTimeout(function () {
             // smoothly scroll element into view when everything has settled
-            el.scrollIntoView({behavior: 'smooth', block: 'start'})
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }, 0)
         }, 0)
       }

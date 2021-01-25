@@ -91,8 +91,7 @@ if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
 // obj -> str
 function resolvePreview (doc) {
   switch (doc.type) {
-    case 'homepage': return '/'
-    case 'case': return `/${doc.uid}`
+    case 'page': return `/${doc.uid}`
     default: throw new Error('Preview not available')
   }
 }

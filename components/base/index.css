@@ -1,87 +1,306 @@
 @import "normalize.css";
-@import "./transitions";
-@import "./display";
-@import "./loading";
-@import "./layout";
-@import "./colors";
-@import "./space";
-@import "./size";
-@import "./text";
+@import "./fonts";
+@import "./config";
+@import "./theme";
+@import "./utils";
 
-@font-face {
-  font-family: "Giorgio Sans Bold";
-  font-style: normal;
-  font-weight: bold;
-  src: url("./giorgio-sans-bold.woff") format("woff");
-  font-display: block;
+/**
+ * Shrink everything cross the app for tiny viewports widths.
+ * 320px (small iPhones) will fit more or less the same as regular 375px one.
+ */
+
+@media (max-width: 359px) {
+  :root {
+    font-size: 85% !important;
+  }
 }
+
+/**
+ * Reset inline styles that improve no-css usability
+ */
+
+img,
+video,
+svg {
+  max-width: initial;
+  height: initial;
+}
+
+[role="presentation"],
+[aria-hidden="true"] {
+  display: inherit;
+}
+
+/**
+ * Document styles
+ * 1. Global box sizing
+ * 2. Guard for horizontal scrolling
+ * 3. Support sticky footer solutions
+ * 4. Simply feels better then global text cursor
+ * 5. Fabulous text rendering
+ * 6. Fabulous svg text sizing
+ * 7. Disable Chrome on Android refreshing the page at scroll end
+ * 8. Enfoce smooth scrolling when using scrolling APIs
+ */
 
 :root {
-  background: var(--theme);
-  background-attachment: fixed;
-  font-size: var(--font-size-md);
-  line-height: var(--system-font-line-height);
-  letter-spacing: var(--system-font-letter-spacing);
+  box-sizing: border-box; /* 1 */
+  width: 100%; /* 2 */
+  height: 100%; /* 3 */
+  overflow-x: hidden; /* 2 */
+  cursor: default; /* 4 */
+  font-family: var(--document-font-family);
+  background: #fff;
+  color: rgb(var(--color-dark-gray));
+  font-size: 100%;
+  line-height: var(--document-line-height);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased; /* 5 */
+  -moz-osx-font-smoothing: grayscale; /* 5 */
+  text-rendering: geometricPrecision; /* 6 */
+  scroll-behavior: auto; /* 8 */
+  word-spacing: -0.05em;
 }
 
-::selection {
-  background: var(--selection-color);
+body {
+  height: 100%; /* 3 */
+  overscroll-behavior: none; /* 7 */
 }
 
-::-moz-selection {
-  background: var(--selection-color);
+@media (min-width: 1600px) {
+  :root {
+    font-size: 115%;
+  }
 }
 
-html {
-  min-height: 100%;
+@media (min-width: 1900px) {
+  :root {
+    font-size: 130%;
+  }
 }
 
 *,
-::before,
-::after {
-  box-sizing: border-box;
+*::before,
+*::after {
+  box-sizing: inherit; /* 1 */
 }
 
-p,
+/**
+ * Media elements
+ */
+
+svg,
+img,
+video,
+iframe {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/**
+ * 1. Improve alt text rendering for broken images
+ */
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  font-size: 0.8em; /* 1 */
+}
+
+/**
+ * Inline elements
+ */
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  cursor: pointer;
+}
+
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  resize: none;
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(var(--color-gray), 0.25);
+  margin: -1px 0 0;
+}
+
+/**
+ * Reset a few styles
+ */
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
+p,
 ul,
 ol,
-pre,
-blockquote {
-  margin: 0;
+blockquote,
+iframe,
+figure {
   font: inherit;
-  line-height: inherit;
+  margin: 0;
+  border: 0;
+  list-style: none;
+  padding: 0;
 }
 
-hr {
-  display: block;
-  width: 100%;
-  height: 2px;
+/**
+ * Clean out browser button styles
+ */
+
+button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+/**
+ * Handle link long-pressing (in mobile) as draggable attribute
+ */
+
+a[draggable="false"] {
+  -webkit-touch-callout: none;
+}
+
+/**
+ * Provide enhanced focus styles for keyboard focus
+ */
+
+:focus-visible {
+  outline: solid var(--current-focus-ring-width, var(--focus-ring-width)) !important;
+  outline-color: rgb(var(--current-focus-ring-color, var(--focus-ring-color))) !important;
+}
+
+/**
+ * Remove default focus styles for mouse users if :focus-visible is supported on
+ * this platform, or polyfilled with https://github.com/WICG/focus-visible
+ */
+
+:root[scripting-enabled] :focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+/**
+ * Let's leave input focus styles blank, for later declarations
+ */
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: 0 !important;
+}
+
+/**
+ * Forms
+ */
+
+fieldset {
   padding: 0;
   border: 0;
   margin: 0;
-  background-color: currentColor;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+::placeholder {
+  opacity: 1;
+  color: rgb(var(--color-gray));
 }
 
-blockquote {
+:focus::placeholder {
+  opacity: 1;
+  color: #bfc2cf;
+}
+
+/**
+ * Hide browser additions
+ */
+
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
 }
 
-pre {
-  white-space: pre-wrap;
-  font: 13px/1.4 monospace;
-  max-width: 100%;
-  overflow: scroll;
-  background: rgba(0, 0, 0, 0.03);
-  padding: 1em;
+video::-webkit-media-controls {
+  display: none;
+}
+
+/* Could Use thise as well for Individual Controls */
+video::-webkit-media-controls-play-button { display: none; }
+video::-webkit-media-controls-volume-slider { display: none; }
+video::-webkit-media-controls-mute-button { display: none; }
+video::-webkit-media-controls-timeline { display: none; }
+video::-webkit-media-controls-current-time-display { display: none; }
+
+dl,
+dd {
+  margin: 0;
+}
+
+/* Intercom */
+
+.intercom-launcher-frame {
+  z-index: 1 !important;
+  transform: scale(0.8) !important;
+  transform-origin: bottom right !important;
+  animation: none !important;
+}
+
+.intercom-lightweight-app-launcher {
+  transform: scale(0.8) !important;
+  transform-origin: bottom right !important;
+  animation: none !important;
+}
+
+.intercom-messenger-frame-enter-done + .intercom-launcher-frame {
+  z-index: 3 !important;
 }

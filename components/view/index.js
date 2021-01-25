@@ -1,45 +1,54 @@
 const html = require('choo/html')
 const error = require('./error')
-const Header = require('./header')
-const Footer = require('./footer')
-const { i18n } = require('../base')
-const Takeover = require('../takeover')
+const Footer = require('../footer')
+const { text } = require('../base')
 
-const DEFAULT_TITLE = 'The New Division'
-
-const text = i18n(require('./lang.json'))
+const DEFAULT_TITLE = text`SITE_NAME`
 
 module.exports = createView
 
-function createView (view, meta) {
+function createView (view, getMeta, _opts = {}) {
   return function (state, emit) {
-    if (state.ui.isPartial) return view(state, emit)
-
-    let children
+    const opts = _opts
+    let config, children, meta
     try {
-      children = state.error ? error(state.error) : view(state, emit)
-      const next = meta(state)
-      if (next.title !== DEFAULT_TITLE) {
-        next.title = `${next.title} | ${DEFAULT_TITLE}`
+      config = { ...opts }
+      if (typeof config.resolve === 'function') {
+        Object.assign(config, config.resolve(state))
       }
-      emit('meta', next)
+
+      children = view(state, emit)
+      meta = getMeta(state)
+
+      if (meta && meta.title && meta.title !== DEFAULT_TITLE) {
+        meta.title = `${meta.title.replace(/\.$/, '')} – ${DEFAULT_TITLE}`
+      }
+
+      if (meta && !meta['og:image']) {
+        Object.assign(meta, {
+          'og:image': '/share.jpg',
+          'og:image:width': 2160,
+          'og:image:height': 1606
+        })
+      }
     } catch (err) {
-      err.status = err.status || 500
-      children = error(err)
-      emit('meta', {
-        description: '',
-        'og:image': '/share.png',
-        title: `${text`Oops`} | ${DEFAULT_TITLE}`
-      })
+      config.theme = 'black'
+      const title = err.status === 404 ? text`Page not found` : text`Oh no`
+      err.status = state.offline ? 503 : err.status || 500
+      children = error(err, state, emit)
+      meta = { title: `${title} – ${DEFAULT_TITLE}` }
     }
 
+    emit('meta', Object.assign({ title: DEFAULT_TITLE }, meta))
+    emit('theme', config.theme)
+
     return html`
-      <body class="View">
-        ${state.cache(Header, 'header').render(state.route)}
-        ${children}
-        ${state.cache(Footer, 'footer').render(state.ui.theme)}
-        ${state.cache(Takeover, Takeover.id()).render()}
-      </body>
+      <div class="View" id="app">
+        <main class="View-main">
+          ${children}
+        </main>
+        ${config.internal ? null : state.cache(Footer, 'footer').render()}
+      </div>
     `
   }
 }

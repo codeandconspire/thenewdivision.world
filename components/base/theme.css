@@ -1,0 +1,151 @@
+/**
+ * Gray
+ */
+
+.theme-gray {
+  --color-theme: var(--color-gray);
+  --background: rgb(var(--color-gray));
+  --background-alt: rgba(var(--color-white), 0.4);
+  --background-alert: rgb(var(--color-yellow)) url("/yellow.png") repeat;
+  --color-text: var(--color-white);
+  --color-muted: var(--color-yellow);
+  --color-link: var(--color-blue);
+  --color-link-hover: var(--color-dark-blue);
+  --color-highlight: var(--color-yellow);
+  --color-background: var(--color-gray);
+  --logo-1: var(--color-white);
+  --logo-2: var(--color-yellow);
+  --logo-3: var(--color-blue);
+}
+
+.theme-gray > * {
+  --color-box-shadow: var(--color-blue);
+}
+
+/**
+ * Red
+ */
+
+.theme-red {
+  --color-theme: var(--color-red);
+  --background: rgb(var(--color-red));
+  --background-alt: rgba(var(--color-white), 0.4);
+  --background-alert: rgb(var(--color-yellow)) url("/yellow.png") repeat;
+  --color-text: var(--color-white);
+  --color-muted: var(--color-yellow);
+  --color-link: var(--color-blue);
+  --color-link-hover: var(--color-dark-blue);
+  --color-highlight: var(--color-yellow);
+  --color-background: var(--color-red);
+  --logo-1: var(--color-white);
+  --logo-2: var(--color-yellow);
+  --logo-3: var(--color-blue);
+}
+
+.theme-red > * {
+  --color-box-shadow: var(--color-blue);
+}
+
+/**
+ * Yellow
+ */
+
+.theme-yellow {
+  --color-theme: var(--color-yellow);
+  --background: rgb(var(--color-yellow)) url("/yellow.png") repeat;
+  --background-alt: rgba(var(--color-white), 0.4);
+  --background-alert: rgb(var(--color-red));
+  --color-text: var(--color-blue);
+  --color-muted: var(--color-blue);
+  --color-link: var(--color-red);
+  --color-link-hover: 197, 21, 54;
+  --color-highlight: var(--color-red);
+  --color-background: var(--color-yellow);
+  --logo-1: var(--color-blue);
+  --logo-2: var(--color-white);
+  --logo-3: var(--color-red);
+}
+
+.theme-yellow > * {
+  --color-box-shadow: var(--color-black);
+}
+
+/**
+ * Blue
+ */
+
+.theme-blue {
+  --color-theme: var(--color-blue);
+  --background: rgb(var(--color-blue));
+  --background-alt: rgb(var(--color-light-blue));
+  --background-alert: rgb(var(--color-yellow)) url("/yellow.png") repeat;
+  --color-text: var(--color-white);
+  --color-muted: var(--color-bright-blue);
+  --color-link: var(--color-white);
+  --color-link-hover: var(--color-white);
+  --color-highlight: var(--color-yellow);
+  --color-background: var(--color-blue);
+  --logo-1: var(--color-white);
+  --logo-2: var(--color-yellow);
+  --logo-3: var(--color-red);
+}
+
+.theme-blue > * {
+  --color-box-shadow: var(--color-blue);
+}
+
+/**
+ * Green
+ */
+
+.theme-green {
+  --color-theme: var(--color-green);
+  --background: rgb(var(--color-green));
+  --background-alt: rgb(var(--color-bright-green));
+  --background-alert: rgb(var(--color-light-yellow));
+  --color-text: var(--color-white);
+  --color-muted: var(--color-white);
+  --color-link: var(--color-white);
+  --color-link-hover: var(--color-white);
+  --color-highlight: var(--color-blue);
+  --color-background: var(--color-green);
+  --logo-1: var(--color-blue);
+  --logo-2: var(--color-yellow);
+  --logo-3: var(--color-red);
+}
+
+.theme-green > * {
+  --color-box-shadow: var(--color-blue);
+}
+
+/**
+ * White and off-white
+ */
+
+.theme-reset,
+.theme-white,
+.theme-smoke {
+  --color-theme: var(--color-white);
+  --background: rgb(var(--color-white));
+  --background-alt: rgb(var(--color-bright-gray));
+  --background-alert: rgb(var(--color-light-yellow));
+  --color-text: var(--color-dark-gray);
+  --color-muted: var(--color-gray);
+  --color-link: var(--color-red);
+  --color-link-hover: 197, 21, 54;
+  --color-highlight: var(--color-red);
+  --color-background: var(--color-white);
+  --logo-1: var(--color-blue);
+  --logo-2: var(--color-yellow);
+  --logo-3: var(--color-red);
+}
+
+.theme-smoke {
+  --background: rgb(var(--color-bright-gray));
+}
+
+.theme-reset > *,
+.theme-white > *,
+.theme-smoke > * {
+  --color-box-shadow: var(--color-blue);
+}
