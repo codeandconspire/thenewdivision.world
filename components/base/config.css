@@ -1,92 +1,59 @@
 :root {
-  /* Raw colors */
-  --color-black: 0, 0, 0;
-  --color-white: 255, 255, 255;
-  --color-gray: 127, 133, 159;
-  --color-dark-gray: 31, 31, 34;
-  --color-light-gray: 191, 194, 207;
-  --color-bright-gray: 244, 244, 244;
-  --color-red: 255, 35, 70;
-  --color-dark-red: 242, 25, 66;
-  --color-blue: 35, 1, 90;
-  --color-dark-blue: 28, 0, 72;
-  --color-light-blue: 56, 23, 128;
-  --color-bright-blue: 150, 151, 206;
-  --color-yellow: 255, 204, 51;
-  --color-light-yellow: 255, 242, 207;
-  --color-green: 0 186 89;
-  --color-bright-green: 0, 204, 85;
-
-  /* Somewhat semantic colors */
-  --background: rgb(var(--color-white));
-  --background-alt: rgba(0, 0, 0, 0.04);
-  --color-text: var(--color-dark-gray);
-  --color-muted: var(--color-gray);
-  --color-link: var(--color-red);
-  --color-link-hover: 197, 21, 54;
-  --color-highlight: var(--color-red);
-  --color-box-shadow: var(--color-blue);
-
-  /* Our beloved logo */
-  --logo-1: var(--color-blue);
-  --logo-2: var(--color-yellow);
-  --logo-3: var(--color-red);
-
-  /* Generics */
-  --document-font-family: "Neuzeit Grotesk", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --document-font-size: 1rem;
-  --document-line-height: 1.35;
-  --document-color: var(--color-black);
-  --document-width: 1600px;
+  /* Document dimentions */
+  --document-max-width: 1600px;
   --document-margin: 1.5rem;
+  --document-size: 1.5rem;
 
-  /* Containers */
-  --container-large-width: var(--document-width);
+  /* Color */
+  --color-background: rgb(0, 0, 0);
+  --color-text: rgb(255, 255, 255);
+  --color-alt: rgba(255, 255, 255, 1);
+
+  /* Typography */
+  --type-font-family: "Neuzeit Grotesk", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --type-font-size: 1rem;
+  --type-line-height: 1.35;
+
+  /* Heading */
+  --h1-font-size: 2rem;
+  --h1-line-height: 1.2;
+
+  /* Container */
+  --container-large-width: var(--document-max-width);
   --container-medium-width: 68rem;
   --container-small-width: 30rem;
 
   /* Focus handling */
   --focus-ring-width: 3px;
-  --focus-ring-color: rgb(var(--color-red));
+  --focus-ring-color: rgb(255, 0, 0);
 
   /* Easings */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  /* Border radius */
-  --border-radius-xs: 0.375rem;
-  --border-radius-sm: 0.5rem;
-  --border-radius-md: 0.75rem;
-  --border-radius-lg: 1rem;
-  --border-radius-lg-alt: 1.5rem;
-  --border-radius-xl: 2rem;
-  --border-radius-full: 10rem;
+/**
+ * Shrink everything cross the app for tiny viewports widths.
+ * 320px (small iPhones) will fit more or less the same as regular 375px one.
+ */
 
-  /* Box shadow */
+ @media (max-width: 359px) {
+  :root {
+    font-size: 85% !important;
+  }
+}
 
-  --box-shadow-sm: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 0.125rem 0.25rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-sm-hover: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 0.25rem 0.5rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-sm-active: 0 0.5px 0 0 rgba(var(--color-blue), 0.05), 0 0.125rem 0.2rem 0 rgba(var(--color-blue), 0.06);
-  --box-shadow-simple-sm: 0 0.125rem 0.25rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-simple-sm-hover: 0 0.25rem 0.5rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-simple-sm-hover-alt: 0 1.5rem 2rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-md: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 0.5rem 1rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-md-hover: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 1rem 1.7rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-md-active: 0 0.5px 0 0 rgba(var(--color-blue), 0), 0 0.25rem 0.5rem 0 rgba(var(--color-blue), 0.08);
-  --box-shadow-lg: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 2rem 3rem 0 rgba(var(--color-blue), 0.2);
-  --box-shadow-lg-alt: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 1.5rem 2rem 0 rgba(var(--color-blue), 0.05);
-  --box-shadow-lg-alt-hover: 0 0.5px 0 0 rgba(var(--color-blue), 0.1), 0 2rem 3rem 0 rgba(var(--color-blue), 0.07);
+@media (min-width: 1600px) {
+  :root {
+    font-size: 115%;
+  }
+}
 
-  /* Transitions */
-
-  --box-shadow-transition: box-shadow 100ms var(--ease);
-  --box-shadow-transition-slow: box-shadow 200ms var(--ease);
-  --box-shadow-active-transition: box-shadow 50ms var(--ease-out);
-  --color-transition: color 0 var(--ease-out);
-  --color-active-transition: color 50ms var(--ease-out);
-  --background-transition: background 100ms var(--ease);
-  --scale-transition: transform 100ms var(--ease);
+@media (min-width: 1900px) {
+  :root {
+    font-size: 130%;
+  }
 }
 
 @media (min-width: 500px) {
@@ -98,11 +65,6 @@
 @media (min-width: 800px) {
   :root {
     --document-margin: 3rem;
-    --border-radius-xl: 0.375rem;
-    --border-radius-sm: 0.75rem;
-    --border-radius-md: 1rem;
-    --border-radius-lg: 1.5rem;
-    --border-radius-xl: 2rem;
   }
 }
 

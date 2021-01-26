@@ -5,18 +5,7 @@
 @import "./utils";
 
 /**
- * Shrink everything cross the app for tiny viewports widths.
- * 320px (small iPhones) will fit more or less the same as regular 375px one.
- */
-
-@media (max-width: 359px) {
-  :root {
-    font-size: 85% !important;
-  }
-}
-
-/**
- * Reset inline styles that improve no-css usability
+ * Reset inlined (<head>) styles that improve no-css usability
  */
 
 img,
@@ -49,11 +38,11 @@ svg {
   height: 100%; /* 3 */
   overflow-x: hidden; /* 2 */
   cursor: default; /* 4 */
-  font-family: var(--document-font-family);
-  background: #fff;
-  color: rgb(var(--color-dark-gray));
+  font-family: var(--type-font-family);
+  background: var(--color-background);
+  color: var(--color-text);
   font-size: 100%;
-  line-height: var(--document-line-height);
+  line-height: var(--type-line-height);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased; /* 5 */
   -moz-osx-font-smoothing: grayscale; /* 5 */
@@ -65,18 +54,6 @@ svg {
 body {
   height: 100%; /* 3 */
   overscroll-behavior: none; /* 7 */
-}
-
-@media (min-width: 1600px) {
-  :root {
-    font-size: 115%;
-  }
-}
-
-@media (min-width: 1900px) {
-  :root {
-    font-size: 130%;
-  }
 }
 
 *,
@@ -235,72 +212,13 @@ fieldset {
 
 ::placeholder {
   opacity: 1;
-  color: rgb(var(--color-gray));
 }
 
 :focus::placeholder {
   opacity: 1;
-  color: #bfc2cf;
 }
-
-/**
- * Hide browser additions
- */
-
-input[type=search]::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-input[type=search]::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-video::-webkit-media-controls {
-  display: none;
-}
-
-/* Could Use thise as well for Individual Controls */
-video::-webkit-media-controls-play-button { display: none; }
-video::-webkit-media-controls-volume-slider { display: none; }
-video::-webkit-media-controls-mute-button { display: none; }
-video::-webkit-media-controls-timeline { display: none; }
-video::-webkit-media-controls-current-time-display { display: none; }
 
 dl,
 dd {
   margin: 0;
-}
-
-/* Intercom */
-
-.intercom-launcher-frame {
-  z-index: 1 !important;
-  transform: scale(0.8) !important;
-  transform-origin: bottom right !important;
-  animation: none !important;
-}
-
-.intercom-lightweight-app-launcher {
-  transform: scale(0.8) !important;
-  transform-origin: bottom right !important;
-  animation: none !important;
-}
-
-.intercom-messenger-frame-enter-done + .intercom-launcher-frame {
-  z-index: 3 !important;
 }

@@ -3,7 +3,7 @@ const assert = require('assert')
 const html = require('choo/html')
 const Prismic = require('prismic-javascript')
 
-const REPOSITORY = 'https://allaboard.cdn.prismic.io/api/v2'
+const REPOSITORY = 'https://thenewdivision.cdn.prismic.io/api/v2'
 
 module.exports = prismicStore
 
@@ -28,7 +28,7 @@ function prismicStore (opts) {
 
     emitter.on('DOMContentLoaded', function () {
       if (document.cookie.includes(Prismic.previewCookie)) {
-        document.head.appendChild(html`<script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=allaboard"></script>`)
+        document.head.appendChild(html`<script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=thenewdivision"></script>`)
       }
     })
 

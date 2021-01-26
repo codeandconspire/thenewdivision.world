@@ -1,74 +1,53 @@
 const html = require('choo/html')
+const { a, text, icon, resolve, className } = require('../base')
 const Component = require('choo/component')
 
 module.exports = class Header extends Component {
   constructor (id, state, emit) {
     super(id)
-    this.text = state.text
-    this.local = state.components[id] = { id, href: state.href }
+    this.prismic = state.prismic
+    this.href = state.href
+    this.local = state.components[id] = { id }
   }
 
-  static minimal (onclick = null) {
-    return html`
-      <div class="Header">
-        <div class="Header-content">
-          <a href="/" rel="home" class="Header-home" onclick=${onclick}>
-            <div class="Header-logo">The New Division…</div>
-          </a>
-        </div>
-      </div>
-    `
-  }
-
-  update (href, props = {}) {
-    const shouldUpdate = (href !== this.href) ||
-      (props.internal !== this.internal) ||
-      (props.adaptive !== this.adaptive) ||
-      (props.theme !== this.theme)
+  update (href) {
     this.href = href
-    this.internal = props.internal
-    this.adaptive = props.adaptive
-    this.theme = props.theme
-    return shouldUpdate
+    return true
   }
 
-  createElement (href, props = {}) {
-    const { text } = this
-    let { theme, internal, adaptive, onclick } = props
-
-    if (!theme && adaptive) {
-      theme = 'blue'
+  createElement (data) {
+    if (!data) return
+    const match = this.href.match(/^\/([^/]+\/)/)
+    let current = this.href
+    if (match) {
+      current = '/' + match[1].substring(0, match[1].length - 1)
     }
 
     return html`
-      <header class="Header theme-${theme} ${adaptive ? 'Header--adaptive' : ''} ${internal ? 'Header--internal' : ''}" id="${this.local.id}">
-        <nav class="Header-content">
-          <a href="/" rel="home" class="Header-home" onclick=${onclick}>
-            <span class="u-hiddenVisually">${text`Home`} – ${text`SITE_NAME`}</span>
+      <header class="Header u-container" id="${this.local.id}">
+        <nav>
+          <a class="Header-logo" href="/" rel="home">
+            <svg role="presentation" width="240" height="74" fill="none">
+              <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M12.1 13.5h13v4h-4v25.1h-5v-25h-4v-4zm24.3 16.3h-4.7v12.8h-5v-29h5v12.2h4.7V13.5h5v29.1h-5V29.8zm8-16.3h11.8v4h-6.9v8.3h5v4h-5v8.9h6.9v4H44.4V13.4zm22.7 10.9v18.2H63v-29h4.8L73 30.1V13.5h4.2v29.1h-4.4l-5.7-18.2zm13.1-10.9H92v4h-6.8v8.3H90v4h-4.8v8.9H92v4H80.2V13.4zm24.3 11.1l-2.8 18h-4.6l-3.9-29H98l2.3 18.4 2.4-18.5h4l2.8 18.5 2.2-18.5h4.1L112 42.6h-4.6l-2.9-18zm33-3.2v13.4c0 4.5-1.9 7.8-7 7.8h-7.7v-29h7.7c5.1 0 7 3.2 7 7.8zm-7.7 17.3c2 0 2.8-1.2 2.8-3V20.4c0-1.7-.7-2.9-2.8-2.9h-2v21.2h2zm10.3 4h5V13.4h-5v29.1zm22.8-29.2l-5.6 29.1H152l-5.5-29h5l3.3 20.2 3.5-20.3h4.6zm1.4 29.1h4.9v-29h-4.9v29zm7.3-6.2v-4h4.6v4c0 1.7.7 2.7 2.3 2.7 1.6 0 2.3-1 2.3-2.6v-1.1c0-1.7-.7-2.8-2.2-4.2l-2.9-2.8c-2.7-2.8-4-4.5-4-7.8v-1c0-3.6 2-6.4 6.8-6.4 5 0 6.9 2.4 6.9 6.6v2.3h-4.6v-2.5c0-1.7-.7-2.5-2.3-2.5-1.4 0-2.3.8-2.3 2.4v.6c0 1.7 1 2.6 2.3 4l3.2 3.1c2.6 2.7 4 4.3 4 7.5v1.4c0 4-2.2 6.9-7.2 6.9s-7-2.8-7-6.6h.1zm16 6.2h4.9v-29h-4.9v29zm7.5-7.5V21c0-4.5 2.3-7.8 7.4-7.8 5.3 0 7.5 3.3 7.5 7.8v14c0 4.6-2.2 8-7.5 8-5.1 0-7.4-3.4-7.4-8zm10 .8V20.2c0-1.7-.8-3-2.6-3-1.7 0-2.5 1.3-2.5 3V36c0 1.8.8 3 2.5 3 1.8 0 2.5-1.2 2.5-3zm11.6-11.5v18.2h-4.1v-29h4.8l5.3 16.6V13.5h4.1v29.1h-4.3l-5.8-18.2zm-90.6 43.5h-1.7v-1.3h5v1.3h-1.7v4.7H126V68zm4-1.3h2.9l1 .1a1.9 1.9 0 011.2 1.9c0 .4 0 .8-.3 1-.2.3-.5.6-.8.7l1.4 2.3h-1.7l-1.2-2h-.9v2h-1.5v-6zm2.8 2.8l.6-.3c.2-.1.2-.3.2-.5a.7.7 0 00-.2-.6l-.6-.1h-1.2v1.4h1.2zm6 3.4c-.5 0-.9 0-1.2-.2l-1-.7-.6-1-.2-1.3c0-.4 0-.8.2-1.2l.6-1c.3-.3.6-.6 1-.7l1.2-.2a2.7 2.7 0 012.8 1.9l.2 1.2c0 .5 0 1-.2 1.3-.1.4-.4.7-.6 1l-1 .7-1.2.2zm0-1.2a1.3 1.3 0 001.1-.6l.3-.6v-1.5l-.3-.7-.5-.4-.7-.1-.5.1-.5.4-.3.7a3 3 0 000 1.5l.3.6.5.4.6.2zm3.8-5h1.5v4.8h2.7v1.2h-4.2v-6zm5 0h1.5v4.8h2.7v1.2h-4.2v-6zm5 0h2.9l.8.1.6.3c.4.3.5.7.5 1.2 0 .2 0 .5-.2.7l-.7.5c.4 0 .7.3.9.5.2.3.2.6.2 1v.8l-.5.5c-.4.3-1 .4-1.5.4h-3v-6zm2.7 2.4l.5-.1c.2-.2.2-.3.2-.5s0-.4-.2-.4a.8.8 0 00-.5-.3h-1.2v1.4h1.2V69zm0 2.4c.3 0 .5 0 .7-.2l.2-.5c0-.2 0-.4-.2-.5a.8.8 0 00-.6-.2h-1.4v1.4h1.4zm4.9-4.8h1.5l2.2 6h-1.6l-.3-1H160l-.4 1H158l2-6h.2zm1.4 3.9l-.5-1.4-.2-1-.1.3-.2.6-.4 1.5h1.4zm5.3 2.3c-.5 0-.9 0-1.2-.2a2.8 2.8 0 01-1.6-1.7c-.2-.4-.3-.8-.2-1.3l.2-1.2c.1-.4.3-.7.6-1 .2-.3.5-.5.9-.7l1.3-.2 1 .1.6.4c.4.2.6.5.7.7l.3 1h-1.5c0-.3-.2-.5-.4-.7-.2-.2-.4-.3-.7-.3a1.3 1.3 0 00-1.2.6l-.2.6c-.2.5-.2 1 0 1.5l.3.6.4.4.7.2c.3 0 .6-.2.7-.3.3-.2.4-.5.4-.7h1.5a2.4 2.4 0 01-1.5 2l-1.1.2zm3.4-6.2h1.5v2.2l2-2.2h1.8l-2.3 2.4 2.5 3.6H174l-1.7-2.6-.5.5v2.1h-1.5v-6zm17.3 6.2c-.4 0-.9 0-1.2-.2a2.8 2.8 0 01-1.5-1.7c-.3-.8-.3-1.7 0-2.5l.5-1 1-.7a3 3 0 011.2-.2l1 .1.7.4.6.7c.2.3.3.7.3 1H189c-.1-.3-.3-.6-.5-.7-.1-.2-.4-.3-.7-.3a1.3 1.3 0 00-1 .6l-.4.6v1.5c0 .3.2.4.3.6l.5.4.6.2c.3 0 .7-.2.8-.3l.4-.7h1.5a2.4 2.4 0 01-1.6 2l-1.1.2zm6.2 0c-.5 0-1 0-1.3-.2l-1-.7-.5-1-.2-1.3c0-.4 0-.8.2-1.2l.6-1c.2-.3.6-.6 1-.7l1.2-.2a2.7 2.7 0 012.8 1.9l.2 1.2c0 .5 0 1-.2 1.3l-.7 1c-.2.3-.5.5-.9.7l-1.2.2zm0-1.2a1.3 1.3 0 001.1-.6l.3-.6v-1.5l-.3-.7-.5-.4-.7-.1-.5.1-.5.4-.3.7a3 3 0 000 1.5l.3.6.5.4.6.2zm3.8-5h2l.7 2.6c0 .3.2.6.3.8v.6l.4-1.4.7-2.6h2.1v6h-1.4v-3.3-1l-.2 1.2-1 3.1h-1l-1-3-.1-.7-.2-.5v4.2h-1.3v-6zm7.2 0h2.8c.3 0 .7 0 1 .2a1.9 1.9 0 011 1l.2.9-.1.7a1.8 1.8 0 01-1 1c-.3.2-.6.2-.9.2h-1.4v2.1H205v-6.1zm2.7 2.8c.2 0 .4 0 .7-.2v-.5-.3l-.1-.3-.6-.2h-1v1.5h1zm4-2.8h1.6l2.2 6h-1.6l-.3-1h-2.1l-.4 1h-1.5l2.1-6zm1.5 3.9l-.4-1.4-.3-1-.1.3-.1.6-.5 1.5h1.4zm2.9-4h1.5l1.8 3.1.3.5.2.3v-3.8h1.4v6h-1.4l-1.8-3-.1-.1-.2-.3-.2-.3v3.7h-1.4v-6h-.1zm8 4l-2.1-4h1.6l.7 1.7.2.3.1.3.2.3c0-.3.2-.6.4-1l.7-1.5h1.6l-2 3.8v2.2H224v-2.1zM176.8 69h2.4v-2.4h1.2V69h2.5v1.2h-2.5v2.4h-1.2v-2.4h-2.4V69z"/>
+              <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M160.1 66.1c.4 0 .6-.2.6-.6a.6.6 0 00-1-.3l-.2.3c0 .4.3.6.6.6zm1.8 0c.3 0 .6-.2.6-.6 0-.3-.3-.6-.6-.6s-.6.3-.6.6c0 .4.3.6.6.6zm-43.4 6.6l-.5-.1c-.2 0-.3-.3-.4-.4v.4h-.8v-4.4h.8v1.6l.4-.3.5-.2c.2 0 .4 0 .5.2l.5.3.3.5v1.4l-.3.6a1.3 1.3 0 01-1 .4zm-.2-.7c.2 0 .4 0 .5-.2.2-.2.2-.4.2-.7 0-.4 0-.6-.2-.8a.6.6 0 00-.5-.3.7.7 0 00-.5.3l-.2.4v.4c0 .3 0 .5.2.7l.5.2zm2 1h.6v-.7l-.1-.6-.9-2.3h.9l.5 1.4v.6l.2.2V71l.2-.2.4-1.4h.8l-1 3.2-.2.5-.2.3-.4.1h-.9V73zM0 55.8h239.9V.3H0v55.4l-.1.1zm2.4-2.4h235.2V2.7H2.4v50.7z"/>
+            </svg>
+            <span class="u-hiddenVisually">${text`SITE_NAME`}</span>
           </a>
 
-          ${internal ? html`
-            <ul class="Header-nav">
-              <li class="Header-item">
-                <a class="Header-link" href="/trips" onclick=${onclick}>${text`Search history`}</a>
-              </li>
-            </ul>
-          ` : html`
-            <ul class="Header-nav ${href === '/explore' || href === '/support' || href === '/product' || href === '/gift-cards' ? 'is-used' : ''}">
-              <li class="Header-item ${href === '/explore' ? 'is-active' : ''}">
-                <a class="Header-link" href="/explore" onclick=${onclick}>${text`Explore`}</a>
-              </li>
-              <li class="Header-item ${href === '/support' ? 'is-active' : ''}">
-                <a class="Header-link" href="/support" onclick=${onclick}>${text`Support`}</a>
-              </li>
-              <li class="Header-item ${href === '/product' ? 'is-active' : ''}">
-                <a class="Header-link" href="/product" onclick=${onclick}>${text`About`}</a>
-              </li>
-              <li class="Header-item Header-item--extra ${href === '/gift-cards' ? 'is-active' : ''}">
-                <a class="Header-link" href="/gift-cards" onclick=${onclick}>${text`Gift Cards`}</a>
-              </li>
-            </ul>
-          `}
+          <ul class="Header-list">
+            ${data.header.map(function (item) {
+              let children = html`<span class="Header-text">${item.text}</span>`
+              if (item.icon) {
+                children = html`${icon(item.icon, { class: 'Header-icon' })} ${children}`
+              }
+              const href = resolve(item.link)
+              const classes = className('Header-item', {
+                'is-current': current === href,
+                'Header-item--icon': item.icon
+              })
+              return html`<li class="${classes}">${a(item.link, { class: 'Header-link' }, children)}</li>`
+            }).filter(Boolean)}
+          </ul>
         </nav>
       </header>
     `
