@@ -1,0 +1,7 @@
+@import "../base";
+
+/** @define Footer */
+
+.Heading {
+  background: var(--color-highlight);
+}

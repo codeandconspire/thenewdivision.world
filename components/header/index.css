@@ -9,6 +9,11 @@
 .Header {
   position: relative;
   z-index: 0;
+  margin-bottom: 4rem;
+}
+
+.Header-item {
+  float: left;
 }
 
 .Header-item--icon .Header-link {

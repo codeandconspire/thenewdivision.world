@@ -8,6 +8,12 @@
  * Reset inlined (<head>) styles that improve no-css usability
  */
 
+body {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
 img,
 video,
 svg {

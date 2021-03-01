@@ -211,9 +211,12 @@ function asText (richtext) {
 // Custom Prismic HTML serialize
 function serialize (type, node, content, children) {
   switch (type) {
-    case Elements.paragraph: {
+    case Elements.paragraph:
+    case Elements.heading1:
+    case Elements.heading2:
+    case Elements.heading3: {
       if (node.text === '' || node.text.match(/^\s+$/)) {
-        return html`<!-- Removed empty paragraph -->`
+        return html`<!-- Removed empty node -->`
       }
       return null
     }
@@ -293,6 +296,22 @@ function icon (icon, attrs) {
     download: {
       size: 24,
       html: html`<path fill="currentColor" d="M14.8 5.8H12V4.3c0-2-1.6-3.6-3.6-3.6S4.8 2.3 4.8 4.3v1.5H2c-.6 0-1.1.5-1.1 1.1v14c0 .6.5 1.1 1.1 1.1h12.7c.6 0 1.1-.5 1.1-1.1v-14c0-.6-.5-1.1-1-1.1zM5.6 4.3a2.8 2.8 0 115.6 0v1.5H5.6V4.3zm9.1 16.6H2v-14h2.8v.9c-.1.1-.2.3-.2.5 0 .3.3.6.6.6s.6-.3.6-.6c0-.2-.1-.3-.2-.4v-1h5.5v.9c-.1.1-.2.3-.2.4 0 .3.3.6.6.6s.6-.3.6-.6c0-.2-.1-.3-.2-.4v-.9h2.8v14z"/>`
+    },
+    question: {
+      size: 80,
+      html: html`<path fill="currentColor" d="M16.1 18H1.3c-.3 0-.5.2-.5.5s.2.5.5.5H16c.3 0 .5-.2.5-.5s-.1-.5-.4-.5zM7.9 15.8c.2.1.3.2.5.2s.4-.1.5-.2l5.2-5.2c.2-.2.3-.5.2-.8-.1-.3-.4-.5-.7-.5h-1.9V1c0-.4-.3-.8-.8-.8H5.7C5.3.3 5 .6 5 1v8.3H3.3c-.3 0-.6.2-.7.5-.1.3-.1.6.2.8l5.1 5.2zm-2.6-5.4c.4 0 .8-.3.8-.8V1.4h4.5v8.3c0 .4.3.8.8.8h1.4l-4.3 4.3-4.3-4.3h1.1v-.1z"/>`
+    },
+    chat: {
+      size: 80,
+      html: html`<path fill="currentColor" d="M16.1 18H1.3c-.3 0-.5.2-.5.5s.2.5.5.5H16c.3 0 .5-.2.5-.5s-.1-.5-.4-.5zM7.9 15.8c.2.1.3.2.5.2s.4-.1.5-.2l5.2-5.2c.2-.2.3-.5.2-.8-.1-.3-.4-.5-.7-.5h-1.9V1c0-.4-.3-.8-.8-.8H5.7C5.3.3 5 .6 5 1v8.3H3.3c-.3 0-.6.2-.7.5-.1.3-.1.6.2.8l5.1 5.2zm-2.6-5.4c.4 0 .8-.3.8-.8V1.4h4.5v8.3c0 .4.3.8.8.8h1.4l-4.3 4.3-4.3-4.3h1.1v-.1z"/>`
+    },
+    team: {
+      size: 80,
+      html: html`<path fill="currentColor" d="M16.1 18H1.3c-.3 0-.5.2-.5.5s.2.5.5.5H16c.3 0 .5-.2.5-.5s-.1-.5-.4-.5zM7.9 15.8c.2.1.3.2.5.2s.4-.1.5-.2l5.2-5.2c.2-.2.3-.5.2-.8-.1-.3-.4-.5-.7-.5h-1.9V1c0-.4-.3-.8-.8-.8H5.7C5.3.3 5 .6 5 1v8.3H3.3c-.3 0-.6.2-.7.5-.1.3-.1.6.2.8l5.1 5.2zm-2.6-5.4c.4 0 .8-.3.8-.8V1.4h4.5v8.3c0 .4.3.8.8.8h1.4l-4.3 4.3-4.3-4.3h1.1v-.1z"/>`
+    },
+    contact: {
+      size: 80,
+      html: html`<path fill="currentColor" d="M16.1 18H1.3c-.3 0-.5.2-.5.5s.2.5.5.5H16c.3 0 .5-.2.5-.5s-.1-.5-.4-.5zM7.9 15.8c.2.1.3.2.5.2s.4-.1.5-.2l5.2-5.2c.2-.2.3-.5.2-.8-.1-.3-.4-.5-.7-.5h-1.9V1c0-.4-.3-.8-.8-.8H5.7C5.3.3 5 .6 5 1v8.3H3.3c-.3 0-.6.2-.7.5-.1.3-.1.6.2.8l5.1 5.2zm-2.6-5.4c.4 0 .8-.3.8-.8V1.4h4.5v8.3c0 .4.3.8.8.8h1.4l-4.3 4.3-4.3-4.3h1.1v-.1z"/>`
     }
   }
 

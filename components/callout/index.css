@@ -1,0 +1,7 @@
+@import "../base";
+
+/** @define Footer */
+
+.Callout {
+  background: var(--color-highlight);
+}

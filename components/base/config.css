@@ -7,7 +7,7 @@
   /* Color */
   --color-background: rgb(0, 0, 0);
   --color-text: rgb(255, 255, 255);
-  --color-alt: rgba(255, 255, 255, 1);
+  --color-highlight: rgba(255, 255, 255, 0.1);
 
   /* Typography */
   --type-font-family: "Neuzeit Grotesk", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

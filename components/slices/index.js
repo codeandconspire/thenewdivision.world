@@ -2,8 +2,10 @@ const html = require('choo/html')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
 const media = require('../media')
+const callout = require('../callout')
+const heading = require('../heading')
 const Figure = require('../figure')
-const { className, resolve, serialize } = require('../base')
+const { asText, className, resolve, serialize } = require('../base')
 
 module.exports = class Slices extends Component {
   constructor (id, state, emit) {
@@ -25,14 +27,15 @@ module.exports = class Slices extends Component {
     // (obj, num) -> Element
     function asSlice (slice, index) {
       if (!slice) return null
+      const data = slice.primary
 
       const layout = function (content) {
         const classes = className('Slices-item', {
-          'Slices-item--gray': slice.gray || (slice.primary && slice.primary.gray),
-          'Slices-item--half': slice.half || (slice.primary && slice.primary.half),
-          'Slices-item--center': slice.center || (slice.primary && slice.primary.center),
-          'Slices-item--stacked': slice.stacked || (slice.primary && slice.primary.stacked),
-          'Slices-item--hidden': slice.hidden || (slice.primary && slice.primary.hidden)
+          'Slices-item--gray': slice.gray || (data && data.gray),
+          'Slices-item--half': slice.half || (data && data.half),
+          'Slices-item--center': slice.center || (data && data.center),
+          'Slices-item--stacked': slice.stacked || (data && data.stacked),
+          'Slices-item--hidden': slice.hidden || (data && data.hidden)
         })
         return html`
           <div class="${classes}">
@@ -42,32 +45,48 @@ module.exports = class Slices extends Component {
           </div>
         `
       }
-
+      console.log('SLICE:', slice)
       switch (slice.slice_type) {
+        case 'heading': {
+          if (!data.heading || !data.heading.length) return null
+          return layout(heading({
+            label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
+            text: data.heading ? asElement(data.heading, resolve, serialize) : null
+          }))
+        }
         case 'body': {
-          if (!slice.primary.content.length) return null
-          if (slice.primary.middle) slice.primary.center = true
+          if (!data.content.length) return null
+          if (data.middle) data.center = true
           const classes = className('RichText', {
-            'RichText--middle': slice.center || slice.primary.middle,
-            'RichText--larger': slice.larger || slice.primary.larger,
-            'u-textCenter': slice.primary.middle
+            'RichText--middle': slice.center || data.middle,
+            'RichText--larger': slice.larger || data.larger,
+            'u-textCenter': data.middle
           })
           return layout(html`
             <div class="${classes}">
-              ${asElement(slice.primary.content, resolve, serialize)}
+              ${asElement(data.content, resolve, serialize)}
             </div>
           `)
         }
         case 'image':
         case 'photo': {
-          if (!slice.primary.image.url) return null
-          const caption = slice.primary.caption ? asElement(slice.primary.caption) : null
-          const figure = state.cache(Figure, `figure-${id}-${index}`).render(slice.primary.image)
+          if (!data.image.url) return null
+          const caption = data.caption ? asElement(data.caption) : null
+          const figure = state.cache(Figure, `figure-${id}-${index}`).render(data.image)
           return layout(media(figure, { caption: caption }))
         }
         case 'divider': {
           slice.stacked = true
           return layout(html`<hr>`)
+        }
+        case 'callout': {
+          if (!data.heading && !data.content) return null
+          return layout(callout({
+            heading: data.heading ? asText(data.heading) : null,
+            content: data.content ? asElement(data.content, resolve, serialize) : null,
+            link: data.link ? resolve(data.link) : null,
+            icon: data.icon
+          }))
         }
         default: {
           if (slice.children) return layout(slice.children)

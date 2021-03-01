@@ -19,6 +19,7 @@ function error (err, state, emit) {
         center: true,
         title: 'Page not found',
         body: html`
+          <pre>${err.stack}</pre>
           ${DEBUG ? html`<pre>${err.stack}</pre>` : null}
         `
       })}

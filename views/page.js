@@ -13,12 +13,6 @@ function wildcard (state, emit) {
     if (!doc) {
       return html`
         <div class="u-container">
-          ${intro({
-            loading: true,
-            body: true,
-            center: true,
-            larger: true
-          })}
           <div style="height: 80vh;"></div>
         </div>
       `
@@ -54,8 +48,6 @@ function meta (state) {
         'og:image:height': Math.round(1200 * share.dimensions.height / share.dimensions.width)
       })
     }
-
-    console.log(props)
 
     return props
   })
