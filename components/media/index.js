@@ -4,7 +4,7 @@ const { className } = require('../base')
 
 module.exports = media
 
-function media (figure, props) {
+function media (figure, props = {}) {
   if (!figure) return null
   const classes = className('Media', {
     'Media--banner': props.title,
@@ -17,13 +17,12 @@ function media (figure, props) {
         <div class="Media-figure">
           ${figure}
         </div>
+        ${props.label ? html`<div class="Media-label">${props.label}</div>` : null}
         ${props.title ? html`
           <div class="Media-content">
             ${intro({
-              center: true,
               wrapped: true,
               title: props.title,
-              label: props.label,
               children: props.children
             })}
 

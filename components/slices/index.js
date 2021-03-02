@@ -3,8 +3,14 @@ const Component = require('choo/component')
 const asElement = require('prismic-element')
 const media = require('../media')
 const callout = require('../callout')
-const heading = require('../heading')
+const intro = require('../intro')
+const Cases = require('../cases')
+const news = require('../news')
+const thoughts = require('../thoughts')
 const Figure = require('../figure')
+const Enterence = require('../enterence')
+const Teasers = require('../teasers')
+const Clients = require('../clients')
 const { asText, className, resolve, serialize } = require('../base')
 
 module.exports = class Slices extends Component {
@@ -28,14 +34,11 @@ module.exports = class Slices extends Component {
     function asSlice (slice, index) {
       if (!slice) return null
       const data = slice.primary
+      const items = slice.items
 
       const layout = function (content) {
         const classes = className('Slices-item', {
-          'Slices-item--gray': slice.gray || (data && data.gray),
-          'Slices-item--half': slice.half || (data && data.half),
-          'Slices-item--center': slice.center || (data && data.center),
-          'Slices-item--stacked': slice.stacked || (data && data.stacked),
-          'Slices-item--hidden': slice.hidden || (data && data.hidden)
+          'Slices-item--half': slice.half || (data && data.half)
         })
         return html`
           <div class="${classes}">
@@ -45,39 +48,36 @@ module.exports = class Slices extends Component {
           </div>
         `
       }
-      console.log('SLICE:', slice)
       switch (slice.slice_type) {
         case 'heading': {
           if (!data.heading || !data.heading.length) return null
-          return layout(heading({
+          return layout(intro({
             label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
-            text: data.heading ? asElement(data.heading, resolve, serialize) : null
+            title: data.heading ? asElement(data.heading, resolve, serialize) : null
           }))
         }
         case 'body': {
-          if (!data.content.length) return null
-          if (data.middle) data.center = true
+          if ((!data.text || !data.text.length) && (!data.heading || !data.heading.length)) return null
           const classes = className('RichText', {
-            'RichText--middle': slice.center || data.middle,
-            'RichText--larger': slice.larger || data.larger,
-            'u-textCenter': data.middle
+            'RichText--columns': data.columns,
+            'RichText--pushed': data.pushed
           })
           return layout(html`
             <div class="${classes}">
-              ${asElement(data.content, resolve, serialize)}
+              ${data.heading && data.heading.length ? html`
+                <div>
+                  ${asElement(data.heading, resolve, serialize)}
+                </div>
+              ` : null}
+              ${asElement(data.text, resolve, serialize)}
             </div>
           `)
         }
-        case 'image':
         case 'photo': {
-          if (!data.image.url) return null
-          const caption = data.caption ? asElement(data.caption) : null
+          if (!data.image || !data.image.url) return null
+          const caption = data.caption ? asElement(data.caption, resolve, serialize) : null
           const figure = state.cache(Figure, `figure-${id}-${index}`).render(data.image)
           return layout(media(figure, { caption: caption }))
-        }
-        case 'divider': {
-          slice.stacked = true
-          return layout(html`<hr>`)
         }
         case 'callout': {
           if (!data.heading && !data.content) return null
@@ -88,6 +88,99 @@ module.exports = class Slices extends Component {
             icon: data.icon
           }))
         }
+        case 'logos': {
+          return layout(state.cache(Clients, `clients-${id}-${index}`).render())
+        }
+        case 'news': {
+          if (!items && !items.length) return null
+          const articles = items.map(function (item) {
+            if (!item.heading || !item.heading.length) return null
+            return {
+              date: item.date ? item.date : null,
+              title: asElement(item.heading, resolve, serialize)
+            }
+          }).filter(Boolean)
+          if (!articles || !articles.length) return
+          return layout(news(articles))
+        }
+        case 'thoughts': {
+          if (!items && !items.length) return null
+          const title = data.heading ? asText(data.heading) : null
+          const articles = items.map(function (item) {
+            if (!item.heading || !item.heading.length) return null
+            return { title: asElement(item.heading, resolve, serialize) }
+          }).filter(Boolean)
+          if (!articles || !articles.length) return
+          return layout(thoughts(articles, title))
+        }
+        case 'cases': {
+          if (!items && !items.length) return null
+          const articles = items.map(function (item) {
+            if (!item.heading || !item.heading.length) return null
+            return {
+              title: asElement(item.heading, resolve, serialize),
+              client: item.client && item.client.id ? item.client.id : null
+            }
+          }).filter(Boolean)
+          if (!articles || !articles.length) return
+          return layout(state.cache(Cases, `cases-${id}-${index}`).render(articles))
+        }
+        case 'banner': {
+          if (!data.heading || !data.heading.length) return null
+          if (!data.image || !data.image.url) return null
+          const opts = {
+            label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
+            title: data.heading ? asText(data.heading, resolve, serialize) : null
+          }
+          const figure = state.cache(Figure, `figure-${id}-${index}`).render(data.image)
+          return layout(media(figure, opts))
+        }
+        case 'enterence': {
+          if (!data.heading || !data.heading.length) return null
+          if (!data.image || !data.image.url) return null
+          const figure = state.cache(Figure, `figure-${id}-${index}`).render(data.image)
+
+          let link = data.link
+          if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
+            link = null
+          }
+          if (!link) return null
+
+          const opts = {
+            label: data.label ? data.label : null,
+            title: data.heading ? asText(data.heading, resolve, serialize) : null,
+            client: data.client && data.client.id ? data.client.id : null,
+            link: link,
+            figure: figure
+          }
+          return layout(state.cache(Enterence, `enterence-${id}-${index}`).render(opts))
+        }
+        case 'teasers': {
+          if (!items && !items.length) return null
+          const articles = items.map(function (item) {
+            if (!item.heading || !item.heading.length) return null
+            if (!item.image || !item.image.url) return null
+
+            let link = item.link
+            if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
+              link = null
+            }
+            if (!link) return null
+            const figure = state.cache(Figure, `figure-${id}-${index}`).render(item.image)
+            return {
+              label: item.label ? item.label : null,
+              title: asText(item.heading),
+              link: link,
+              figure: figure
+            }
+          }).filter(Boolean)
+          if (!articles || !articles.length) return
+          return layout(state.cache(Teasers, `teasers-${id}-${index}`).render(articles))
+        }
+        case 'divider': {
+          slice.stacked = true
+          return layout(html`<hr>`)
+        }
         default: {
           if (slice.children) return layout(slice.children)
           return null
@@ -96,7 +189,7 @@ module.exports = class Slices extends Component {
     }
 
     return html`
-      <div class="Slices ${opts.stacked ? 'Slices--stacked' : ''}" id="${id}">
+      <div class="Slices" id="${id}">
         ${slices ? slices.map(asSlice) : null}
       </div>
     `

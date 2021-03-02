@@ -19,34 +19,6 @@
   padding-top: 0;
 }
 
-.Slices-item--gray {
-  background: rgb(var(--color-bright-gray));
-}
-
-/* Half white/gray, as if pulled down of gray area */
-
-.Slices-item--half {
-  position: relative;
-}
-
-.Slices-item--half::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: block;
-  height: 50%;
-  width: 100%;
-  background: rgb(var(--color-bright-gray));
-}
-
-/* Make sure we get a double margin between items with different backgrounds */
-
-.Slices-item--gray + .Slices-item:not(.Slices-item--gray),
-.Slices-item:not(.Slices-item--gray) + .Slices-item--gray {
-  padding-top: var(--Slices-item-padding);
-}
-
 /* Fix for items that shouldn't have any margin */
 
 .Slices-item--stacked {
@@ -55,45 +27,4 @@
 
 .Slices-item--stacked + .Slices-item {
   padding-top: var(--Slices-item-padding) !important;
-}
-
-.Slices-item--half + .Slices-item--gray {
-  padding-top: 0 !important;
-}
-
-.Slices-item--hidden {
-  margin-top: calc(var(--Slices-item-padding) * -1) !important;
-}
-
-/* Fix double margin with footer */
-
-.Slices-item--gray:last-child,
-.Slices-item--half:last-child {
-  padding-bottom: 0.5rem !important;
-}
-
-@media (min-width: 800px) {
-  .Slices-item--gray:last-child,
-  .Slices-item--half:last-child {
-    padding-bottom: 1.5rem !important;
-  }
-}
-
-/* Modifier for removing prefixed and suffed margin */
-
-.Slices--stacked .Slices-item:first-child {
-  padding-top: 0 !important;
-}
-
-.Slices--stacked .Slices-item:last-child {
-  padding-bottom: 0 !important;
-}
-
-/* Misc helpers */
-
-.Slices-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
