@@ -42,32 +42,3 @@
     padding-right: calc(var(--document-margin) + env(safe-area-inset-right)) !important;
   }
 }
-
-/**
- * Loading
- * 1. Apply border radius on line breaks
- */
-
-.u-loading {
-  background: rgba(var(--color-text), 0.06) !important;
-  color: transparent !important;
-  user-select: none !important;
-  animation: u-loading-pulse 1500ms infinite var(--ease);
-  border-radius: var(--border-radius-xs);
-  box-decoration-break: clone; /* 1 */
-}
-
-.u-loadingAlt {
-  background: rgba(0, 0, 0, 0.05) !important;
-  color: transparent !important;
-  user-select: none !important;
-  animation: u-loading-pulse 1500ms infinite var(--ease);
-  border-radius: var(--border-radius-xs);
-  box-decoration-break: clone; /* 1 */
-}
-
-@keyframes u-loading-pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}

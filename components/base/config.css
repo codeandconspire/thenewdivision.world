@@ -1,7 +1,7 @@
 :root {
   /* Document dimentions */
   --document-max-width: 1600px;
-  --document-margin: 1.5rem;
+  --document-margin: 0.75rem;
   --document-size: 1.5rem;
 
   /* Color */
@@ -10,7 +10,8 @@
   --color-highlight: rgba(255, 255, 255, 0.1);
 
   /* Typography */
-  --type-font-family: "Neuzeit Grotesk", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --type-font-family: "Helvetica", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --type-font-family-heading: "GT Pressura", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --type-font-size: 1rem;
   --type-line-height: 1.35;
 
@@ -24,52 +25,11 @@
   --container-small-width: 30rem;
 
   /* Focus handling */
-  --focus-ring-width: 3px;
-  --focus-ring-color: rgb(255, 0, 0);
+  --focus-ring-width: 0.125rem;
+  --focus-ring-color: 255, 0, 0;
 
   /* Easings */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/**
- * Shrink everything cross the app for tiny viewports widths.
- * 320px (small iPhones) will fit more or less the same as regular 375px one.
- */
-
- @media (max-width: 359px) {
-  :root {
-    font-size: 85% !important;
-  }
-}
-
-@media (min-width: 1600px) {
-  :root {
-    font-size: 115%;
-  }
-}
-
-@media (min-width: 1900px) {
-  :root {
-    font-size: 130%;
-  }
-}
-
-@media (min-width: 500px) {
-  :root {
-    --document-margin: 2rem;
-  }
-}
-
-@media (min-width: 800px) {
-  :root {
-    --document-margin: 3rem;
-  }
-}
-
-@media (min-width: 1100px) {
-  :root {
-    --document-margin: 5.5rem;
-  }
 }

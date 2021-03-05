@@ -1,7 +1,6 @@
 @import "normalize.css";
 @import "./fonts";
 @import "./config";
-@import "./theme";
 @import "./utils";
 
 /**
@@ -36,6 +35,7 @@ svg {
  * 6. Fabulous svg text sizing
  * 7. Disable Chrome on Android refreshing the page at scroll end
  * 8. Enfoce smooth scrolling when using scrolling APIs
+ * 9. About 16px at a viewport with of 375px
  */
 
 :root {
@@ -47,14 +47,13 @@ svg {
   font-family: var(--type-font-family);
   background: var(--color-background);
   color: var(--color-text);
-  font-size: 100%;
   line-height: var(--type-line-height);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased; /* 5 */
   -moz-osx-font-smoothing: grayscale; /* 5 */
   text-rendering: geometricPrecision; /* 6 */
   scroll-behavior: auto; /* 8 */
-  word-spacing: -0.05em;
+  font-size: 4.265vw; /* 9 */
 }
 
 body {
@@ -153,6 +152,10 @@ figure {
   border: 0;
   list-style: none;
   padding: 0;
+}
+
+address {
+  font-style: normal;
 }
 
 /**

@@ -5,7 +5,7 @@ const Slices = require('../components/slices')
 const intro = require('../components/intro')
 const { asText, src, HTTPError, resolve, serialize } = require('../components/base')
 
-module.exports = view(wildcard, meta)
+module.exports = view(wildcard, meta, { resolve: getOpts })
 
 function wildcard (state, emit) {
   return state.prismic.getByUID('page', state.params.wildcard, function (err, doc) {
@@ -13,7 +13,7 @@ function wildcard (state, emit) {
     if (!doc) {
       return html`
         <div class="u-container">
-          <div style="height: 80vh;"></div>
+          <div style="height: 80vh"></div>
         </div>
       `
     }
@@ -50,5 +50,22 @@ function meta (state) {
     }
 
     return props
+  })
+}
+
+function getOpts (state) {
+  return state.prismic.getByUID('page', state.params.wildcard, function (err, doc) {
+    if (err) throw HTTPError(404, err)
+    if (!doc) return {}
+    const opts = {
+      background: doc.data.light ? '#ffffff' : '#000000',
+      color: doc.data.light ? '#000000' : '#ffffff'
+    }
+    if (doc.data.theme) {
+      opts.themed = true
+      opts.background = doc.data.background ? doc.data.background : opts.background
+      opts.color = doc.data.color ? doc.data.color : opts.color
+    }
+    return opts
   })
 }

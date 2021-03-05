@@ -4,12 +4,13 @@ const asElement = require('prismic-element')
 const media = require('../media')
 const callout = require('../callout')
 const intro = require('../intro')
-const Cases = require('../cases')
+const cases = require('../cases')
 const news = require('../news')
+const team = require('../team')
 const thoughts = require('../thoughts')
 const Figure = require('../figure')
-const Enterence = require('../enterence')
-const Teasers = require('../teasers')
+const enterence = require('../enterence')
+const teasers = require('../teasers')
 const Clients = require('../clients')
 const { asText, className, resolve, serialize } = require('../base')
 
@@ -113,6 +114,22 @@ module.exports = class Slices extends Component {
           if (!articles || !articles.length) return
           return layout(thoughts(articles, title))
         }
+        case 'team': {
+          if (!items && !items.length) return null
+          const articles = items.map(function (item) {
+            if (!item.heading || !item.heading.length) return null
+            if (!item.image || !item.image.url) return null
+            const figure = state.cache(Figure, `figure-${id}-${index}`).render(item.image)
+            return {
+              figure: figure,
+              title: asText(item.heading),
+              position: item.position && item.position.length ? asText(item.position) : null,
+              intro: item.intro && item.intro.length ? asElement(item.intro, resolve, serialize) : null
+            }
+          }).filter(Boolean)
+          if (!articles || !articles.length) return
+          return layout(team(articles))
+        }
         case 'cases': {
           if (!items && !items.length) return null
           const articles = items.map(function (item) {
@@ -123,7 +140,7 @@ module.exports = class Slices extends Component {
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
-          return layout(state.cache(Cases, `cases-${id}-${index}`).render(articles))
+          return layout(cases(articles, Clients.logos(this.state, this.rerender.bind(this))))
         }
         case 'banner': {
           if (!data.heading || !data.heading.length) return null
@@ -153,7 +170,7 @@ module.exports = class Slices extends Component {
             link: link,
             figure: figure
           }
-          return layout(state.cache(Enterence, `enterence-${id}-${index}`).render(opts))
+          return layout(enterence(opts, Clients.logos(this.state, this.rerender.bind(this))))
         }
         case 'teasers': {
           if (!items && !items.length) return null
@@ -175,7 +192,7 @@ module.exports = class Slices extends Component {
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
-          return layout(state.cache(Teasers, `teasers-${id}-${index}`).render(articles))
+          return layout(teasers(articles))
         }
         case 'divider': {
           slice.stacked = true

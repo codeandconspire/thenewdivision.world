@@ -1,15 +1,7 @@
 @font-face {
-  font-family: "Neuzeit Grotesk";
+  font-family: "GT Pressura";
   font-display: auto;
   font-style: normal;
   font-weight: 400;
-  src: url("./fonts/neuzeitgro-reg.woff2") format("woff2"), url("./fonts/neuzeitgro-reg.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Neuzeit Grotesk";
-  font-display: auto;
-  font-style: normal;
-  font-weight: 700;
-  src: url("./fonts/neuzeitgro-bol.woff2") format("woff2"), url("./fonts/neuzeitgro-bol.woff") format("woff");
+  src: url("./fonts/gt-pressura-bold.woff2") format("woff2");
 }

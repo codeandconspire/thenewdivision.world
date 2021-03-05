@@ -8,15 +8,22 @@ const DEFAULT_TITLE = text`SITE_NAME`
 
 module.exports = createView
 
-function createView (view, getMeta) {
+function createView (view, getMeta, _opts = {}) {
   return function (state, emit) {
     let children, meta, setting
+    let config = { }
+    const opts = _opts
 
     state.prismic.getSingle('setting', function (err, doc) {
       if (err || !doc) return null
       setting = doc.data
 
       try {
+        config = { ...opts }
+        if (typeof config.resolve === 'function') {
+          Object.assign(config, config.resolve(state))
+        }
+
         children = view(state, emit)
         meta = getMeta(state)
 
@@ -33,6 +40,9 @@ function createView (view, getMeta) {
         }
       } catch (err) {
         const title = text`Nothing here`
+        config.theme = null
+        config.color = null
+        config.background = null
         err.status = state.offline ? 503 : err.status || 500
         children = error(err, state, emit)
         meta = { title: `${title} – ${DEFAULT_TITLE}` }
@@ -41,13 +51,15 @@ function createView (view, getMeta) {
       emit('meta', Object.assign({ title: DEFAULT_TITLE }, meta))
     })
 
+    const style = `--color-background: ${config.background}; --color-text: ${config.color}`
+
     return html`
-      <div class="View" id="app">
+      <div class="View" id="app" style="${style}">
         ${state.cache(Header, 'header').render(setting)}
         <main class="View-main">
           ${children}
         </main>
-        ${state.cache(Footer, 'footer').render(setting)}
+        ${state.cache(Footer, 'footer').render(setting, config)}
       </div>
     `
   }
