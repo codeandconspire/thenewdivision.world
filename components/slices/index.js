@@ -87,7 +87,7 @@ module.exports = class Slices extends Component {
         case 'photo': {
           if (!data.image || !data.image.url) return null
           const caption = data.caption ? asElement(data.caption, resolve, serialize) : null
-          return layout(media(figure(data.image), { caption: caption }))
+          return layout(media(figure(data.image), { caption: caption, half: data.half }))
         }
         case 'callout': {
           slice.half = true
@@ -130,7 +130,7 @@ module.exports = class Slices extends Component {
             if (!item.heading || !item.heading.length) return null
             if (!item.image || !item.image.url) return null
             return {
-              figure: figure(item.image),
+              figure: figure(item.image, { half: true }),
               title: asText(item.heading),
               position: item.position && item.position.length ? asText(item.position) : null,
               intro: item.intro && item.intro.length ? asElement(item.intro, resolve, serialize) : null
@@ -190,7 +190,7 @@ module.exports = class Slices extends Component {
             label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
             title: data.heading ? asText(data.heading, resolve, serialize) : null
           }
-          return layout(media(figure(data.image), opts))
+          return layout(media(figure(data.image, { half: data.half }), opts))
         }
         case 'enterence': {
           if (!data.heading || !data.heading.length) return null
@@ -219,7 +219,7 @@ module.exports = class Slices extends Component {
             link: link,
             small: data.half,
             color: data.light_label ? 'light' : 'dark',
-            figure: figure(data.image)
+            figure: figure(data.image, { half: data.half })
           }
           return layout(enterence(opts, Clients.logos(state)))
         }
@@ -238,7 +238,7 @@ module.exports = class Slices extends Component {
               label: item.label ? item.label : null,
               title: asText(item.heading),
               link: link,
-              figure: figure(item.image)
+              figure: figure(item.image, { half: data.half })
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return

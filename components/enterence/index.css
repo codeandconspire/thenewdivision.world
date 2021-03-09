@@ -17,6 +17,7 @@
   opacity: 0;
   color: transparent;
   font-size: 0;
+  -webkit-touch-callout: none;
 }
 
 .Enterence-link:active {
