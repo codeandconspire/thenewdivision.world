@@ -1,27 +1,26 @@
 const html = require('choo/html')
-const { className } = require('../base')
 
 module.exports = intro
 
-function intro (props = {}) {
-  const classes = className('Intro', {
-    'Intro--larger': props.larger,
-    'Intro--wrapped': props.wrapped
-  })
+// title: asElement(data.heading, resolve, serialize),
+// intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
+// client: data.client && data.client.id ? Clients.logos(state)(data.client) : null,
+// label: data.label ? data.label : null,
+// tags: data.tags ? data.tags : null,
+// type: data.type ? data.type : null
 
+function intro (props = {}) {
   return html`
-    <div class="${classes}">
-      <div class="Intro-layout">
-        <div class="Intro-content">
-          <h1 class="Intro-title">${props.title}</h1>
-          ${props.body ? html`
-            <div class="Intro-body">
-              <div class="RichText RichText--adaptive">
-                ${props.body}
-              </div>
+    <div class="Intro">
+      <div class="Intro-content">
+        ${props.title}
+        ${props.intro ? html`
+          <div class="Intro-body">
+            <div class="Words">
+              ${props.intro}
             </div>
-          ` : null}
-        </div>
+          </div>
+        ` : null}
       </div>
     </div>
   `

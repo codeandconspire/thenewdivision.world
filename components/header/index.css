@@ -37,6 +37,7 @@
   position: absolute;
   top: var(--document-margin);
   right: var(--document-margin);
+  outline: 0;
 }
 
 .Header-summary::-webkit-details-marker {
@@ -69,6 +70,7 @@
 .Header-details[open] {
   height: 100vh;
   padding: var(--document-margin);
+  box-shadow: 0 0 0 1rem var(--color-background);
 }
 
 .Header-list {

@@ -4,12 +4,12 @@ const { text, a } = require('../base')
 module.exports = enterence
 
 function enterence (props = {}, logos) {
-  const { title, client, figure, link, label } = props
+  const { title, client, figure, link, color, label, small } = props
   return html`
-    <div class="Enterence">
+    <div class="Enterence ${small ? 'Enterence--small' : ''}">
       <div class="Enterence-figure">
         ${figure}
-        ${label ? html`<span class="Enterence-label">${label}</span>` : null}
+        ${label ? html`<span class="Enterence-label Enterence-label--${color}">${label}</span>` : null}
       </div>
       <div class="Enterence-client">
         <div class="Enterence-title">

@@ -1,0 +1,174 @@
+@import "../base";
+
+/** @define Words */
+
+:root {
+  --Words-aspect: 0.5;
+  --Words-max-width: 32em;
+}
+
+/**
+ * Dimensions and alignment
+ */
+
+.Words {
+  max-width: var(--Words-max-width);
+}
+
+/**
+ * Default text styles
+ */
+
+.Words:not(.Words--adaptive) {
+  font-size: 1.0625rem;
+}
+
+@media (min-width: 800px) {
+  .Words--larger {
+    font-size: 1.5rem;
+  }
+}
+
+/**
+ * Links
+ */
+
+.Words a {
+  color: rgb(var(--color-link));
+  text-decoration: var(--link-decoration, none);
+  font-weight: bold;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.Words a:hover {
+  color: rgb(var(--color-link-hover));
+}
+
+.Words a:active {
+  opacity: 0.5;
+}
+
+/**
+ * Block elements
+ */
+
+.Words p,
+.Words ul,
+.Words ol,
+.Words h2,
+.Words h3,
+.Words h4 {
+  margin: 1rem 0;
+}
+
+.Words-header {
+  margin-bottom: 1rem;
+}
+
+.Words p:first-child,
+.Words ul:first-child,
+.Words ol:first-child,
+.Words h2:first-child,
+.Words h3:first-child,
+.Words h4:first-child {
+  margin-top: 0;
+}
+
+.Words p:last-child,
+.Words ul:last-child,
+.Words ol:last-child,
+.Words h2:last-child,
+.Words h3:last-child,
+.Words h4:last-child {
+  margin-bottom: 0;
+}
+
+.Words pre {
+  font-size: 12px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  margin: 1rem 0;
+  text-align: left;
+  border: 1px solid currentColor;
+}
+
+/**
+ * Lists
+ */
+
+.Words ul {
+  list-style-type: none;
+}
+
+.Words ol {
+  list-style-type: decimal;
+  padding-left: 1.7em;
+}
+
+.Words li + li {
+  margin-top: 0.4em;
+}
+
+.Words ul > li {
+  padding-left: 1em;
+  position: relative;
+}
+
+.Words ol > li {
+  padding-left: 0.5em;
+}
+
+.Words ul > li::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  background: currentColor;
+}
+
+/**
+ * Headings
+ */
+
+.Words h2,
+.Words h3,
+.Words h4 {
+  font-weight: bold;
+  font-family: var(--type-font-family-heading);
+  line-height: 1.1;
+}
+
+.Words h2 {
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.Words h3 {
+  line-height: 1.2;
+  font-size: 1.5rem;
+}
+
+.Words h4 {
+  font-size: 1em;
+  line-height: inherit;
+}
+
+@media (min-width: 800px) {
+  .Words h2 {
+    font-size: 3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .Words h3 {
+    font-size: 2rem;
+  }
+
+  .Words h4 {
+    font-size: 1.5rem;
+  }
+}

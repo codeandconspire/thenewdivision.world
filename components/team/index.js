@@ -11,7 +11,7 @@ function team (items) {
             ${figure}
             <h3 class="Team-title">${title}</h3>
             ${position ? html`<p>${position}</p>` : null}
-            ${intro ? html`<div>${intro}</div>` : null}
+            ${intro ? html`<div class="Team-body">${intro}</div>` : null}
           </div>
         `
       })}

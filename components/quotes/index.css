@@ -1,0 +1,24 @@
+@import "../base";
+
+/** @define Quotes */
+
+.Quotes {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.75rem;
+}
+
+.Quotes-item {
+  position: relative;
+  flex: 0 0 50%;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.Quotes-author {
+  margin-top: 0.625rem;
+}
+
+.Quotes-client {
+  margin-bottom: 0.5rem;
+}

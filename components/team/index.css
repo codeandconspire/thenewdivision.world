@@ -1,0 +1,36 @@
+@import "../base";
+
+/** @define Team */
+
+.Team {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.Team-item {
+  grid-column: span 3;
+}
+
+.Team-title {
+  font-size: 1.25rem;
+  font-family: var(--type-font-family-heading);
+  line-height: 1.1;
+  margin-top: 0.75rem;
+  margin-bottom: 0.1rem;
+}
+
+.Team-body {
+  font-size: 0.8125rem;
+  margin-top: 0.75rem;
+}
+
+.Team-body a {
+  font-weight: bold;
+}
+
+.Team-body a:active {
+  opacity: 0.5;
+}

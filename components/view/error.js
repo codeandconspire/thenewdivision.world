@@ -12,6 +12,7 @@ if (typeof window !== 'undefined') {
 module.exports = error
 
 function error (err, state, emit) {
+  console.log(err.stack)
   return html`
     <div class="u-container">
       ${intro({

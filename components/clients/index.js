@@ -32,8 +32,15 @@ module.exports = class Clients extends Component {
   static logos (state, render) {
     const self = this
     const clients = self.fetch(state, render)
+
     return function (id) {
-      if (!clients) return null
+      if (!clients) {
+        return html`
+          <div class="Clients Clients--standalone">
+            <div class="Clients-loading"></div>
+          </div>
+        `
+      }
       const client = self.match(id, clients)
       if (!client) return null
       const { width, height } = client.data.logo_light.dimensions
@@ -64,13 +71,10 @@ module.exports = class Clients extends Component {
   }
 
   createElement (props = {}) {
-    let clients = Clients.fetch(this.state)
-
-    if (typeof window !== 'undefined' && clients) {
-      clients = clients.concat(clients)
+    const clients = Clients.fetch(this.state)
+    if (!clients) {
+      return html`<div></div>`
     }
-
-    if (!clients) return null
 
     return html`
       <div class="Clients">

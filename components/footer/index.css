@@ -3,7 +3,7 @@
 /** @define Footer */
 
 .Footer {
-  margin-top: 4rem;
+  margin-top: 3rem;
   margin-bottom: 2rem;
   user-select: none;
 }
@@ -75,7 +75,7 @@
   font-size: 1.5rem;
 }
 
-.Footer-link:active {
+.Footer a:active {
   opacity: 0.5;
 }
 

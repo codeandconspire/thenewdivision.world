@@ -21,15 +21,7 @@ app.use(get('/robots.txt', function (ctx, next) {
   `
 }))
 
-// proxy cloudinary on-demand-transform API
-app.use(get('/media/:type/:transform/:uri(.+)', async function (ctx, type, transform, uri) {
-  if (ctx.querystring) uri += `?${ctx.querystring}`
-  const stream = await imageproxy(type, transform, uri)
-  const headers = ['etag', 'last-modified', 'content-length', 'content-type']
-  headers.forEach((header) => ctx.set(header, stream.headers[header]))
-  ctx.set('Cache-Control', `public, max-age=${60 * 60 * 24 * 365}`)
-  ctx.body = stream
-}))
+app.use(imageproxy)
 
 app.use(post('/prismic-hook', compose([body(), async function (ctx) {
   const secret = ctx.request.body && ctx.request.body.secret

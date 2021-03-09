@@ -17,6 +17,12 @@ module.exports = class Footer extends Component {
   createElement (data, opts = {}) {
     if (!data) return
 
+    function top () {
+      window.requestAnimationFrame(function () {
+        window.scrollTo(0, 0)
+      })
+    }
+
     return html`
       <footer class="Footer" id="${this.local.id}">
         <div class="u-container">
@@ -31,19 +37,19 @@ module.exports = class Footer extends Component {
             <ul class="Footer-col">
               ${data.col2.map(function (item) {
                 const children = item.icon ? html`${icon(item.icon, { class: 'Footer-icon', mono: opts.themed })} ${item.text}` : item.text
-                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link' }, children)}</li>`
+                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link', onclick: top }, children)}</li>`
               }).filter(Boolean)}
             </ul>
             <ul class="Footer-col">
               ${data.col3.map(function (item) {
                 const children = item.icon ? html`${icon(item.icon, { class: 'Footer-icon', mono: opts.themed })} ${item.text}` : item.text
-                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link' }, children)}</li>`
+                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link', onclick: top }, children)}</li>`
               }).filter(Boolean)}
             </ul>
             <ul class="Footer-col">
               ${data.col4.map(function (item) {
                 const children = item.icon ? html`${icon(item.icon, { class: 'Footer-icon', mono: opts.themed })} ${item.text}` : item.text
-                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link' }, children)}</li>`
+                return html`<li class="Footer-item">${a(item.link, { class: 'Footer-link', onclick: top }, children)}</li>`
               }).filter(Boolean)}
             </ul>
             <address class="Footer-col">

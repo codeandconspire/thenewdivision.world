@@ -1,0 +1,20 @@
+@import "../base";
+
+/** @define Clients */
+
+.Clients {
+  user-select: none;
+}
+
+.Clients-img,
+.Clients-loading {
+  width: auto;
+  height: 100%;
+  max-height: 1.75rem;
+}
+
+.Clients-loading {
+  width: 4.5rem;
+  height: 10rem;
+  background: var(--color-highlight);
+}

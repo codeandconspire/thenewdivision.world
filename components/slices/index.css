@@ -1,30 +1,22 @@
 @import "../base";
 
 /** @define Slices */
-:root {
-  --Slices-item-padding: 3.5rem;
-}
 
-@media (min-width: 600px) {
-  :root {
-    --Slices-item-padding: 6rem;
-  }
+.Slices {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
 }
 
 .Slices-item {
-  padding: var(--Slices-item-padding) 0;
+  grid-column: 1 / 7;
 }
 
-.Slices-item + .Slices-item {
-  padding-top: 0;
+.Slices-item--half {
+  grid-column: span 3;
 }
 
-/* Fix for items that shouldn't have any margin */
-
-.Slices-item--stacked {
-  padding: 0 !important;
-}
-
-.Slices-item--stacked + .Slices-item {
-  padding-top: var(--Slices-item-padding) !important;
+.Slices-item--space {
+  height: 1.75rem;
 }
