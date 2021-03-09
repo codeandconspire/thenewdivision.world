@@ -6,7 +6,6 @@ function navigation (state, emitter) {
   emitter.on('pushState', onnavigate)
 
   function onnavigate () {
-    console.log('nav')
     if (typeof window === 'undefined') return
     window.requestAnimationFrame(function () {
       window.requestAnimationFrame(function () {
