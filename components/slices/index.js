@@ -187,9 +187,18 @@ module.exports = class Slices extends Component {
         case 'banner': {
           if (!data.heading || !data.heading.length) return null
           if (!data.image || !data.image.url) return null
+
+          let link = data.link
+          if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
+            link = null
+          }
+          if (!link) return null
+
           const opts = {
             label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
-            title: data.heading ? asText(data.heading, resolve, serialize) : null
+            title: data.heading ? asText(data.heading, resolve, serialize) : null,
+            link: link,
+            dark: data.dark
           }
           return layout(media(figure(data.image, { half: data.half }), opts))
         }

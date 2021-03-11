@@ -5,12 +5,13 @@
 .Intro h1,
 .Intro h2 {
   font-size: 3rem;
-  line-height: 1;
+  line-height: 0.95;
   font-family: var(--type-font-family-heading);
   margin-left: -0.02em;
   max-width: 14em;
   margin-bottom: 0.75rem;
-  letter-spacing: -0.004em;
+  letter-spacing: -0.005em;
+  word-spacing: -0.03em;
 }
 
 .Intro a {

@@ -120,9 +120,10 @@
 
   .Header-item {
     font-size: 3rem;
-    letter-spacing: -0.004em;
-    line-height: 1;
+    letter-spacing: -0.005em;
+    line-height: 0.95;
     padding-bottom: 0.3rem;
+    word-spacing: -0.03em;
   }
 }
 
