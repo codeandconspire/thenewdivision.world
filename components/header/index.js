@@ -18,6 +18,16 @@ module.exports = class Header extends Component {
     return true
   }
 
+  load (el) {
+    const menu = document.querySelector('.js-header')
+    menu.addEventListener('touchmove', onscroll, false)
+    menu.addEventListener('wheel', onscroll, false)
+
+    function onscroll (event) {
+      event.preventDefault()
+    }
+  }
+
   createElement (data) {
     const prismic = this.prismic
 
@@ -50,7 +60,9 @@ module.exports = class Header extends Component {
       window.requestAnimationFrame(function () {
         window.scrollTo(0, 0)
         window.requestAnimationFrame(function () {
-          document.querySelector('.js-header').removeAttribute('open')
+          window.requestAnimationFrame(function () {
+            document.querySelector('.js-header').removeAttribute('open')
+          })
         })
       })
     }

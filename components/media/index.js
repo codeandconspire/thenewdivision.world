@@ -25,7 +25,6 @@ function media (figure, props = {}) {
               title: props.title,
               children: props.children
             })}
-
           </div>
         ` : null}
       </div>

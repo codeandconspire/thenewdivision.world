@@ -15,6 +15,10 @@
   max-width: var(--Words-max-width);
 }
 
+.Words--half {
+  margin-top: 0.5rem;
+}
+
 /**
  * Default text styles
  */
@@ -145,7 +149,7 @@
 
 .Words h2 {
   font-size: 2rem;
-  line-height: 1.05;
+  line-height: 1;
 }
 
 .Words h3 {

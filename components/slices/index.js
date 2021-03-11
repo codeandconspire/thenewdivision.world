@@ -80,13 +80,14 @@ module.exports = class Slices extends Component {
           return layout(words({
             columns: data.columns,
             pushed: data.pushed,
+            half: data.half,
             header: data.heading && data.heading.length ? asElement(data.heading, resolve, serialize) : null,
             main: asElement(data.text, resolve, serialize)
           }))
         }
         case 'photo': {
           if (!data.image || !data.image.url) return null
-          const caption = data.caption ? asElement(data.caption, resolve, serialize) : null
+          const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
           return layout(media(figure(data.image), { caption: caption, half: data.half }))
         }
         case 'callout': {

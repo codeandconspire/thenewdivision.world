@@ -10,7 +10,9 @@
 .Clients-loading {
   width: auto;
   height: 100%;
+  max-width: 6rem;
   max-height: 1.75rem;
+  vertical-align: top;
 }
 
 .Clients-loading {
