@@ -1,0 +1,73 @@
+@import "../base";
+
+/** @define Reel */
+
+.Reel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  position: relative;
+  padding-top: 1rem;
+  margin-top: -1rem;
+}
+
+.Reel::before,
+.Reel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 0.25rem;
+  background: var(--color-text);
+  opacity: 0.1;
+}
+
+.Reel::after {
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: top left;
+  animation: Reel-progress var(--Reel-delay) linear infinite;
+  opacity: 0.2;
+}
+
+.Reel-item {
+  flex: 0 0 100%;
+  animation: Reel-tick calc(var(--Reel-delay) * var(--Reel-count)) steps(var(--Reel-count), end) infinite;
+}
+
+.Reel-quote {
+  flex: 0 0 100%;
+  font-size: 3rem;
+  line-height: 0.98;
+  font-family: var(--type-font-family-heading);
+  max-width: 14em;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.005em;
+  word-spacing: -0.03em;
+}
+
+.Reel-client {
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-right: 0.75rem;
+}
+
+.Reel-author {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -0.1rem;
+  font-size: 0.75rem;
+}
+
+@keyframes Reel-tick {
+  to {
+    transform: translateX(calc(-100% * var(--Reel-count)));
+  }
+}
+
+@keyframes Reel-progress {
+  to {
+    transform: scaleX(1);
+  }
+}

@@ -5,9 +5,8 @@
 .Intro h1,
 .Intro h2 {
   font-size: 3rem;
-  line-height: 0.95;
+  line-height: 0.98;
   font-family: var(--type-font-family-heading);
-  margin-left: -0.02em;
   max-width: 14em;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;
@@ -19,5 +18,11 @@
 }
 
 .Intro a:active {
-  opacity: 0.5;
+  opacity: 0.7;
+}
+
+.Intro-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  margin-top: -0.25rem;
 }

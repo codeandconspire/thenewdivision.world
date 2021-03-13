@@ -1,5 +1,4 @@
 const html = require('choo/html')
-const intro = require('../intro')
 const { className, a, text } = require('../base')
 
 module.exports = media

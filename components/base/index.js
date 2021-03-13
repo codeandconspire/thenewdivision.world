@@ -26,6 +26,7 @@ exports.asText = asText
 exports.serialize = serialize
 exports.HTTPError = HTTPError
 exports.memo = memo
+exports.vh = vh
 exports.icon = icon
 
 // create anchor element based on supplied attributes
@@ -261,6 +262,10 @@ function memo (fn, keys) {
     MEMO.set(key, result)
   }
   return result
+}
+
+function vh () {
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 }
 
 // Get icon svg

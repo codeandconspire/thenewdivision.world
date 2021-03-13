@@ -18,5 +18,6 @@
 .Clients-loading {
   width: 4.5rem;
   height: 10rem;
-  background: var(--color-highlight);
+  background: var(--color-text);
+  opacity: 0.07;
 }

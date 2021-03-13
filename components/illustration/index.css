@@ -1,0 +1,39 @@
+@import "../base";
+
+/** @define Illustration */
+
+:root {
+  --Illustration-offset: 0;
+}
+
+.Illustration {
+  position: relative;
+  z-index: 0;
+}
+
+.Illustration-planet {
+  position: relative;
+  animation: 300s linear Illustration-planet infinite;
+  transform: rotate(0turn);
+  will-change: transform;
+}
+
+.Illustration-lines,
+.Illustration-dots {
+  width: 100%;
+  height: auto;
+}
+
+.Illustration-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: var(--Illustration-offset);
+}
+
+@keyframes Illustration-planet {
+  to {
+    transform: rotate(1turn);
+  }
+}

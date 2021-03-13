@@ -103,7 +103,6 @@
 @media (min-height: 420px) {
   .Header-item {
     font-size: 2rem;
-    margin-left: -0.02em;
   }
 }
 
@@ -121,7 +120,7 @@
   .Header-item {
     font-size: 3rem;
     letter-spacing: -0.005em;
-    line-height: 0.95;
+    line-height: 0.98;
     padding-bottom: 0.3rem;
     word-spacing: -0.03em;
   }

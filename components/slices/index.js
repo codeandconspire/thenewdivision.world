@@ -6,6 +6,8 @@ const callout = require('../callout')
 const intro = require('../intro')
 const cases = require('../cases')
 const quotes = require('../quotes')
+const Illustration = require('../illustration')
+const reel = require('../reel')
 const news = require('../news')
 const team = require('../team')
 const words = require('../words')
@@ -14,7 +16,7 @@ const figure = require('../figure')
 const enterence = require('../enterence')
 const teasers = require('../teasers')
 const Clients = require('../clients')
-const { asText, className, resolve, serialize } = require('../base')
+const { asText, className, resolve, serialize, text } = require('../base')
 
 module.exports = class Slices extends Component {
   constructor (id, state, emit) {
@@ -32,6 +34,24 @@ module.exports = class Slices extends Component {
     // Prepared for usage of choo components
     const { state, id } = this
 
+    function preload (link) {
+      if (typeof window !== 'undefined') {
+        if (link.type !== 'page') return null
+        state.prismic.getByUID('page', link.uid, function (err, doc) {
+          if (err) return null
+          if (doc) return null
+          return doc
+        })
+      }
+    }
+
+    function validate (link) {
+      if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
+        return null
+      }
+      return link
+    }
+
     // render slice as element
     // (obj, num) -> Element
     function asSlice (slice, index) {
@@ -46,6 +66,7 @@ module.exports = class Slices extends Component {
         })
         return html`<div class="${classes}">${content}</div>`
       }
+
       switch (slice.slice_type) {
         case 'space': {
           slice.space = true
@@ -93,10 +114,15 @@ module.exports = class Slices extends Component {
         case 'callout': {
           slice.half = true
           if (!data.heading && !data.content) return null
+          const link = validate(data.link)
+          if (link) {
+            preload(link)
+          }
+
           return layout(callout({
             heading: data.heading ? asText(data.heading) : null,
             content: data.content ? asElement(data.content, resolve, serialize) : null,
-            link: data.link ? resolve(data.link) : null,
+            link: link ? resolve(link) : null,
             icon: data.icon
           }))
         }
@@ -145,22 +171,9 @@ module.exports = class Slices extends Component {
           const title = data.heading && data.heading.length ? asText(data.heading) : null
           const articles = items.map(function (item) {
             if (!item.heading || !item.heading.length) return null
-
-            let link = item.link
-            if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
-              link = null
-            }
+            const link = validate(item.link)
             if (!link) return null
-
-            // Preload case
-            if (typeof window !== 'undefined') {
-              if (link.type !== 'page') return null
-              state.prismic.getByUID('page', link.uid, function (err, doc) {
-                if (err) return null
-                if (doc) return null
-                return doc
-              })
-            }
+            preload(link)
 
             return {
               title: asElement(item.heading, resolve, serialize),
@@ -187,12 +200,9 @@ module.exports = class Slices extends Component {
         case 'banner': {
           if (!data.heading || !data.heading.length) return null
           if (!data.image || !data.image.url) return null
-
-          let link = data.link
-          if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
-            link = null
-          }
+          const link = validate(data.link)
           if (!link) return null
+          preload(link)
 
           const opts = {
             label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
@@ -206,21 +216,9 @@ module.exports = class Slices extends Component {
           if (!data.heading || !data.heading.length) return null
           if (!data.image || !data.image.url) return null
 
-          let link = data.link
-          if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
-            link = null
-          }
+          const link = validate(data.link)
           if (!link) return null
-
-          // Preload page
-          if (typeof window !== 'undefined') {
-            if (link.type !== 'page') return null
-            state.prismic.getByUID('page', link.uid, function (err, doc) {
-              if (err) return null
-              if (doc) return null
-              return doc
-            })
-          }
+          preload(link)
 
           const opts = {
             label: data.label ? data.label : null,
@@ -239,11 +237,10 @@ module.exports = class Slices extends Component {
             if (!item.heading || !item.heading.length) return null
             if (!item.image || !item.image.url) return null
 
-            let link = item.link
-            if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
-              link = null
-            }
+            const link = validate(item.link)
             if (!link) return null
+            preload(link)
+
             return {
               label: item.label ? item.label : null,
               title: asText(item.heading),
@@ -254,9 +251,34 @@ module.exports = class Slices extends Component {
           if (!articles || !articles.length) return
           return layout(teasers(articles))
         }
-        case 'divider': {
-          slice.stacked = true
-          return layout(html`<hr>`)
+        case 'reel': {
+          if (!items && !items.length) return null
+          const opts = {
+            delay: data.delay ? data.delay : null,
+            logos: Clients.logos(state)
+          }
+          const articles = items.map(function (item) {
+            if (!item.quote || !item.quote.length) return null
+            return {
+              quote: asElement(item.quote, resolve, serialize),
+              author: item.author && item.author.length ? asText(item.author) : null,
+              desc: item.desc && item.desc.length ? asText(item.desc) : null,
+              client: item.client && item.client.id ? item.client.id : null
+            }
+          }).filter(Boolean)
+
+          // Forgive me lord, but I have sinned
+          // When this is used as page intro on the cases page, we need a h1
+          if (state.params.wildcard === 'cases') {
+            opts.title = text`Cases`
+          }
+
+          if (!articles || !articles.length) return
+          return layout(reel(articles, opts))
+        }
+
+        case 'illustration': {
+          return layout(state.cache(Illustration, `illustration-${id}-${index}`).render(data.version))
         }
         default: {
           if (slice.children) return layout(slice.children)
