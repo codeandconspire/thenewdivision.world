@@ -17,6 +17,7 @@
 .Team-title {
   font-size: 1.25rem;
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   line-height: 1.1;
   margin-top: 0.75rem;
   margin-bottom: 0.1rem;

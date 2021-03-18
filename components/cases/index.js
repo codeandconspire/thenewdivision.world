@@ -3,9 +3,9 @@ const { a, text } = require('../base')
 
 module.exports = cases
 
-function cases (items, title, logos) {
+function cases (items, title) {
   return html`
-    <div class="Cases">
+    <section class="Cases">
       ${title ? html`<h3 class="Cases-title">${title}</h3>` : null}
       ${items.map(function (item) {
         const { title, client, link } = item
@@ -14,11 +14,11 @@ function cases (items, title, logos) {
             <div class="Cases-name">
               ${title}
             </div>
-            ${client ? logos(item.client) : null}
+            ${client}
             ${a(link, { class: 'Cases-link' }, text`View case`)}
           </div>
         `
       })}
-    </div>
+    </section>
   `
 }

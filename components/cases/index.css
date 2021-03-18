@@ -23,12 +23,15 @@
   padding: 0 0.75rem;
   font-size: 1.25rem;
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   text-decoration: underline;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.02em;
   line-height: 1.1;
 }
 
 .Cases-item:active {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .Cases-name {

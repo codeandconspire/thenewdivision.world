@@ -22,7 +22,7 @@
 }
 
 .Teasers-link:active {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .Teasers-figure {
@@ -37,6 +37,7 @@
 
 .Teasers-title {
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   user-select: text;
   font-size: 1.25rem;
   line-height: 1.1;

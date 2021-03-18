@@ -7,18 +7,23 @@ module.exports = class Clients extends Component {
   constructor (id, state, emit) {
     super(id)
     this.state = state
+    this.fetched = []
   }
 
   static fetch (state, render) {
+    if (this.fetched) return this.fetched
     const predicate = Predicates.at('document.type', 'client')
     const opts = { pageSize: 100, render }
-    return state.prismic.get(predicate, opts, function (err, res) {
+    this.fetched = state.prismic.get(predicate, opts, function (err, res) {
       if (err || !res || !res.results_size) return null
       return res.results.map(function (doc) {
-        if (!doc.data.logo_light || !doc.data.logo_light.url) return null
+        const hasLight = doc.data.logo_light || doc.data.logo_light.url
+        const hasDark = doc.data.logo_dark || doc.data.logo_dark.url
+        if (!hasLight && !hasDark) return null
         return doc
       })
     })
+    return this.fetched
   }
 
   static match (id, clients) {
@@ -32,18 +37,32 @@ module.exports = class Clients extends Component {
   static logos (state, render) {
     const self = this
     const clients = self.fetch(state, render)
+    let logo
 
-    return function (id) {
+    return function (id, opts = {}) {
       if (!clients) {
         return html`
-          <div class="Clients Clients--standalone">
+          <div class="Clients ${opts.small ? 'Clients--small' : ''}">
             <div class="Clients-loading"></div>
           </div>
         `
       }
+
       const client = self.match(id, clients)
       if (!client) return null
-      const { width, height } = client.data.logo_light.dimensions
+
+      const hasLight = client.data.logo_light.length || client.data.logo_light.url
+      const hasDark = client.data.logo_dark.length || client.data.logo_dark.url
+
+      if ((opts.dark && hasDark) || (!hasLight)) {
+        logo = client.data.logo_dark
+      } else {
+        logo = client.data.logo_light
+      }
+
+      if (!logo) return null
+
+      const { width, height } = logo.dimensions
       const attrs = {
         width,
         height,
@@ -59,8 +78,8 @@ module.exports = class Clients extends Component {
       }
 
       return html`
-        <div class="Clients Clients--standalone">
-          <img ${attrs} src="/media/fetch/_/${encodeURIComponent(client.data.logo_light.url)}">
+        <div class="Clients ${opts.small ? 'Clients--small' : ''}">
+          <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
         </div>
       `
     }
@@ -70,18 +89,43 @@ module.exports = class Clients extends Component {
     return true
   }
 
-  createElement (props = {}) {
+  createElement (opts = {}) {
     const clients = Clients.fetch(this.state)
+
     if (!clients) {
-      return html`<div></div>`
+      return html`
+        <div class="Clients">
+          <div class="Clients-list">
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+            <div class="Clients-item"><div class="Clients-loading"></div></div>
+          </div>
+        </div>
+      `
     }
 
     return html`
       <div class="Clients">
         <ul class="Clients-list">
-          ${clients.map(function (doc) {
-            if (doc.data.unlisted) return null
-            const { width, height } = doc.data.logo_light.dimensions
+          ${clients.map(function (client) {
+            if (client.data.unlisted) return null
+            let logo
+
+            const hasLight = client.data.logo_light.length || client.data.logo_light.url
+            const hasDark = client.data.logo_dark.length || client.data.logo_dark.url
+
+            if ((opts.dark && hasDark) || (!hasLight)) {
+              logo = client.data.logo_dark
+            } else {
+              logo = client.data.logo_light
+            }
+
+            if (!logo) return null
+
+            const { width, height } = logo.dimensions
             const attrs = {
               width,
               height,
@@ -91,14 +135,14 @@ module.exports = class Clients extends Component {
               alt: ''
             }
 
-            if (doc.data.title) {
-              attrs.title = asText(doc.data.title)
+            if (client.data.title) {
+              attrs.title = asText(client.data.title)
               attrs.alt = attrs.title
             }
 
             return html`
               <li class="Clients-item">
-                <img ${attrs} src="/media/fetch/_/${encodeURIComponent(doc.data.logo_light.url)}">
+                <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
               </li>
             `
           })}

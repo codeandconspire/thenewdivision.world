@@ -25,6 +25,7 @@ module.exports = class Footer extends Component {
 
     return html`
       <footer class="Footer" id="${this.local.id}">
+        <hr aria-hidden class="u-hiddenVisually">
         <div class="u-container">
           <div class="Footer-wrapper">
             <div class="Footer-col" role="contentinfo">

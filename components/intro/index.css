@@ -7,22 +7,55 @@
   font-size: 3rem;
   line-height: 0.98;
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   max-width: 14em;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;
   word-spacing: -0.03em;
+  word-break: break-word;
 }
 
 .Intro a {
   text-decoration: underline;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.02em;
 }
 
 .Intro a:active {
   opacity: 0.7;
 }
 
-.Intro-label {
+.Intro-sup {
   display: block;
   margin-bottom: 0.25rem;
   margin-top: -0.25rem;
+}
+
+.Intro-details {
+  margin-bottom: 0.75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 0.75rem;
+}
+
+.Intro-details br {
+  display: none;
+}
+
+.Intro-detail {
+  margin-top: 1rem;
+}
+
+.Intro-label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.Intro-tags {
+  font-family: var(--type-font-family-heading);
+  font-weight: bold;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  word-break: break-word;
 }

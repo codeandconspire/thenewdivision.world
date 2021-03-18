@@ -2,7 +2,7 @@ const html = require('choo/html')
 
 module.exports = quotes
 
-function quotes (items, logos) {
+function quotes (items) {
   return html`
     <div class="Quotes">
       ${items.map(function (item) {
@@ -11,7 +11,7 @@ function quotes (items, logos) {
           <div class="Quotes-item">
             ${client ? html`
               <div class="Quotes-client">
-                ${logos(item.client)}
+                ${client}
               </div>
             ` : null}
             <div class="Quotes-content">

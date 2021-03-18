@@ -21,7 +21,7 @@ function wildcard (state, emit) {
     }
     return html`
       <div class="u-container">
-        ${state.cache(Slices, `page-${uid}-slices`).render(doc.data.body)}
+        ${state.cache(Slices, `page-${uid}-slices`).render(doc.data.body, { light: doc.data.light })}
       </div>
     `
   })
@@ -57,8 +57,8 @@ function getOpts (state) {
     if (err) throw HTTPError(404, err)
     if (!doc) return {}
     const opts = {
-      background: doc.data.light ? '#ffffff' : '#000000',
-      color: doc.data.light ? '#000000' : '#ffffff'
+      background: doc.data.light ? '#ffffff' : '#010101',
+      color: doc.data.light ? '#010101' : '#ffffff'
     }
     if (doc.data.theme) {
       opts.themed = true

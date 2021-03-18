@@ -83,7 +83,7 @@ module.exports = class Slices extends Component {
           return layout(intro({
             title: asElement(data.heading, resolve, serialize),
             intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-            client: data.client && data.client.id ? Clients.logos(state)(data.client) : null,
+            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light }) : null,
             label: data.label ? data.label : null,
             tags: data.tags ? data.tags : null,
             type: data.type ? data.type : null
@@ -92,7 +92,7 @@ module.exports = class Slices extends Component {
         case 'heading': {
           if (!data.heading || !data.heading.length) return null
           return layout(intro({
-            label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
+            sup: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
             title: data.heading ? asElement(data.heading, resolve, serialize) : null
           }))
         }
@@ -127,7 +127,7 @@ module.exports = class Slices extends Component {
           }))
         }
         case 'logos': {
-          return layout(state.cache(Clients, `clients-${id}-${index}`).render())
+          return layout(state.cache(Clients, `clients-${id}-${index}`).render({ dark: opts.light }))
         }
         case 'news': {
           if (!items && !items.length) return null
@@ -177,12 +177,12 @@ module.exports = class Slices extends Component {
 
             return {
               title: asElement(item.heading, resolve, serialize),
-              client: item.client && item.client.id ? item.client.id : null,
+              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, small: true }) : null,
               link: link
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
-          return layout(cases(articles, title, Clients.logos(state)))
+          return layout(cases(articles, title))
         }
         case 'quotes': {
           if (!items && !items.length) return null
@@ -191,11 +191,11 @@ module.exports = class Slices extends Component {
             return {
               content: asElement(item.content, resolve, serialize),
               author: item.author && item.author.length ? asElement(item.author, resolve, serialize) : null,
-              client: item.client && item.client.id ? item.client.id : null
+              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light }) : null
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
-          return layout(quotes(articles, Clients.logos(state)))
+          return layout(quotes(articles))
         }
         case 'banner': {
           if (!data.heading || !data.heading.length) return null
@@ -220,16 +220,16 @@ module.exports = class Slices extends Component {
           if (!link) return null
           preload(link)
 
-          const opts = {
+          const props = {
             label: data.label ? data.label : null,
             title: data.heading ? asText(data.heading, resolve, serialize) : null,
-            client: data.client && data.client.id ? data.client.id : null,
+            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, small: true }) : null,
             link: link,
             small: data.half,
             color: data.light_label ? 'light' : 'dark',
             figure: figure(data.image, { half: data.half })
           }
-          return layout(enterence(opts, Clients.logos(state)))
+          return layout(enterence(props))
         }
         case 'teasers': {
           if (!items && !items.length) return null
@@ -254,8 +254,7 @@ module.exports = class Slices extends Component {
         case 'reel': {
           if (!items && !items.length) return null
           const opts = {
-            delay: data.delay ? data.delay : null,
-            logos: Clients.logos(state)
+            delay: data.delay ? data.delay : null
           }
           const articles = items.map(function (item) {
             if (!item.quote || !item.quote.length) return null
@@ -263,7 +262,7 @@ module.exports = class Slices extends Component {
               quote: asElement(item.quote, resolve, serialize),
               author: item.author && item.author.length ? asText(item.author) : null,
               desc: item.desc && item.desc.length ? asText(item.desc) : null,
-              client: item.client && item.client.id ? item.client.id : null
+              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, small: true }) : null
             }
           }).filter(Boolean)
 

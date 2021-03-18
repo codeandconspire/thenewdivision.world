@@ -30,7 +30,7 @@
 }
 
 .Footer-col:nth-child(1) p {
-  opacity: 0.5;
+  opacity: 0.6;
   flex-basis: 50%;
   padding-left: 0.5rem;
   max-width: 17em;
@@ -72,6 +72,7 @@
   display: flex;
   align-items: center;
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   font-size: 1.5rem;
 }
 

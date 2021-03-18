@@ -127,7 +127,7 @@ hr {
   width: 100%;
   height: 0;
   border: 0;
-  border-bottom: 1px solid rgba(var(--color-gray), 0.25);
+  border-bottom: 1px solid #fff;
   margin: -1px 0 0;
 }
 
@@ -187,8 +187,8 @@ a[draggable="false"] {
  */
 
 :focus-visible {
-  outline: solid var(--current-focus-ring-width, var(--focus-ring-width)) !important;
-  outline-color: rgb(var(--current-focus-ring-color, var(--focus-ring-color))) !important;
+  outline: solid var(--focus-ring-width) !important;
+  outline-color: var(--focus-ring-color) !important;
 }
 
 /**

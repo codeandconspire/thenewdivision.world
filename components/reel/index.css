@@ -18,9 +18,9 @@
   top: 0;
   left: 0;
   width: 2rem;
-  height: 0.25rem;
+  height: 0.35rem;
   background: var(--color-text);
-  opacity: 0.1;
+  opacity: 0.2;
 }
 
 .Reel::after {
@@ -28,7 +28,7 @@
   transform: scaleX(0);
   transform-origin: top left;
   animation: Reel-progress var(--Reel-delay) linear infinite;
-  opacity: 0.2;
+  opacity: 0.35;
 }
 
 .Reel-item {
@@ -41,6 +41,7 @@
   font-size: 3rem;
   line-height: 0.98;
   font-family: var(--type-font-family-heading);
+  font-weight: bold;
   max-width: 14em;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;

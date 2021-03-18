@@ -7,6 +7,7 @@ function callout (props = {}) {
   const { heading, content, link } = props
   return html`
     <section class="Callout">
+      <hr aria-hidden class="u-hiddenVisually">
       ${props.icon ? icon(props.icon, { class: 'Callout-icon' }) : null}
       <div>
         ${heading ? html`<h2 class="Callout-title">${heading}</h2>` : null}

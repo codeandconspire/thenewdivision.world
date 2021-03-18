@@ -4,38 +4,146 @@
 
 :root {
   --Illustration-offset: 0;
+  --Illustration-neg-offset: calc(var(--Illustration-offset) * -1);
+  --Illustration-stroke-width: 1.5;
+  /* --Illustration-stroke-width: 0.8; */
 }
 
 .Illustration {
-  width: 100%;
-  overflow: hidden;
+  width: calc(100% + (var(--document-margin) * 2));
+  margin-left: calc(var(--document-margin) * -1);
   position: relative;
   z-index: 0;
 }
 
+.Illustration svg {
+  overflow: visible;
+}
+
+/**
+ * Version 1
+ */
+
 .Illustration-planet {
   position: relative;
   animation: 300s linear Illustration-planet infinite;
-  transform: rotate(0turn);
   will-change: transform;
+  width: 103%;
+  margin-left: -0.4rem;
 }
 
-.Illustration-lines,
+.Illustration-stars {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  height: auto;
+}
+
+.Illustration-line1,
+.Illustration-line2,
+.Illustration-line3,
 .Illustration-dots {
   width: 100%;
   height: auto;
 }
 
-.Illustration-lines {
+.Illustration-line1,
+.Illustration-line2,
+.Illustration-line3 {
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   opacity: var(--Illustration-offset);
+  will-change: opacity;
 }
 
 @keyframes Illustration-planet {
   to {
     transform: rotate(1turn);
   }
+}
+
+/**
+ * Version 2
+ */
+
+.Illustartion-papers {
+  width: 88%;
+  margin-left: auto;
+  display: block;
+  margin-right: 0.7rem;
+}
+
+.Illustration-paper:nth-child(5) {
+  transform: translate(0, 10%) rotate(24deg);
+  transform-origin: center;
+}
+
+g.Illustration-paper:nth-child(4) {
+  transform: translate(0, 12%) rotate(8deg);
+  transform-origin: center;
+}
+
+.Illustration-paper:nth-child(3) {
+  transform: translate(2%, 16%) rotate(3deg);
+  transform-origin: center;
+}
+
+.Illustration-paper:nth-child(2) {
+  transform: translate(-4%, 17%) rotate(20deg);
+  transform-origin: center;
+}
+
+.Illustration-paper:nth-child(1) {
+  transform: translate(8%, 24%);
+  transform-origin: center;
+}
+
+.Illustration-paper > g:nth-child(5) {
+  transform: translate(0, calc(-10% * var(--Illustration-offset))) rotate(calc(-24deg * var(--Illustration-offset)));
+  transform-origin: center;
+}
+
+g.Illustration-paper > g:nth-child(4) {
+  transform: translate(0, calc(-12% * var(--Illustration-offset))) rotate(calc(-8deg * var(--Illustration-offset)));
+  transform-origin: center;
+}
+
+.Illustration-paper > g:nth-child(3) {
+  transform: translate(calc(-2% * var(--Illustration-offset)), calc(-16% * var(--Illustration-offset))) rotate(calc(-3deg * var(--Illustration-offset)));
+  transform-origin: center;
+}
+
+.Illustration-paper > g:nth-child(2) {
+  transform: translate(calc(4% * var(--Illustration-offset)), calc(-17% * var(--Illustration-offset))) rotate(calc(-20deg * var(--Illustration-offset)));
+  transform-origin: center;
+}
+
+.Illustration-paper > g:nth-child(1) {
+  transform: translate(calc(-8% * var(--Illustration-offset)), calc(-24% * var(--Illustration-offset)));
+  transform-origin: center;
+}
+
+.Illustartion-pencil {
+  position: absolute;
+  top: 10rem;
+  left: 0.5rem;
+  width: 2rem;
+  transform: rotate(-4deg);
+}
+
+.Illustartion-goals {
+  width: 95%;
+  transform: rotate(7deg);
+  margin-left: 1.5rem;
+  margin-top: -1.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.Illustartion-arrow {
+  display: none;
 }

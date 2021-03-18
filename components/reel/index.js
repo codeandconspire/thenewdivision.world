@@ -15,7 +15,7 @@ function reel (items, opts) {
             </div>
             ${client ? html`
               <div class="Reel-client">
-                ${opts.logos(item.client)}
+                ${client}
               </div>
             ` : null}
             <p class="Reel-author">
