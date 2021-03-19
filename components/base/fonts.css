@@ -1,7 +1,7 @@
 @font-face {
   font-family: "GT Pressura";
   font-display: auto;
-  font-style: bold;
+  font-style: normal;
   font-weight: bold;
   src: url("./fonts/gt-pressura-bold.woff2") format("woff2");
 }
@@ -9,7 +9,7 @@
 @font-face {
   font-family: "GT Pressura";
   font-display: auto;
-  font-style: bold;
+  font-style: normal;
   font-weight: normal;
   src: url("./fonts/gt-pressura-bold.woff2") format("woff2");
 }
