@@ -58,7 +58,7 @@ function getOpts (state) {
     if (!doc) return {}
     const opts = {
       background: doc.data.light ? '#ffffff' : '#010101',
-      color: doc.data.light ? '#010101' : '#ffffff'
+      color: doc.data.light ? '#000000' : '#ffffff'
     }
     if (doc.data.theme) {
       opts.themed = true

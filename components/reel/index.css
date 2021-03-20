@@ -36,16 +36,39 @@
   animation: Reel-tick calc(var(--Reel-delay) * var(--Reel-count)) steps(var(--Reel-count), end) infinite;
 }
 
+@media (min-width: 700px) {
+  .Reel-item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
 .Reel-quote {
   flex: 0 0 100%;
   font-size: 3rem;
   line-height: 0.98;
   font-family: var(--type-font-family-heading);
   font-weight: bold;
-  max-width: 14em;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;
   word-spacing: -0.03em;
+}
+
+@media (min-width: 700px) {
+  .Reel-quote {
+    font-size: 7.5rem;
+    max-width: 95%;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.Reel-quote > *::before {
+  content: "“";
+  display: in
+}
+
+.Reel-quote > *::after {
+  content: "”"
 }
 
 .Reel-client {
@@ -53,12 +76,34 @@
   vertical-align: text-bottom;
   margin-right: 0.75rem;
 }
+@media (min-width: 700px) {
+  .Reel-client {
+    display: flex;
+    align-items: center;
+  }
+}
 
 .Reel-author {
   display: inline-block;
   vertical-align: top;
   margin-top: -0.1rem;
   font-size: 0.75rem;
+}
+
+@media (min-width: 700px) {
+  .Reel-author {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .Reel-author br {
+    display: none;
+  }
+
+  .Reel-author strong {
+    margin: 0 1.5rem 0 1.25rem;
+  }
 }
 
 @keyframes Reel-tick {

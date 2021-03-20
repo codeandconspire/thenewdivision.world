@@ -3,6 +3,7 @@
   --document-max-width: 1600px;
   --document-margin: 0.75rem;
   --document-size: 1.5rem;
+  --document-narrow: 1;
 
   /* Color */
   --color-background: #010101;
@@ -11,8 +12,10 @@
   /* Typography */
   --type-font-family: "Helvetica", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --type-font-family-heading: "GT Pressura", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --type-font-size: 1rem;
   --type-line-height: 1.35;
+
+  /* About 16px at a viewport with of 375px */
+  --type-font-size: 4.265vw;
 
   /* Heading */
   --h1-font-size: 2rem;
@@ -31,4 +34,14 @@
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 700px) {
+  :root {
+    --document-narrow: 0;
+    --document-margin: 2rem;
+
+    /* About 16px at a viewport with of 1440px */
+    --type-font-size: 1.112vw;
+  }
 }

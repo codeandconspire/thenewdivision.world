@@ -36,14 +36,16 @@
   min-height: 4.25rem;
 }
 
-.Clients--small .Clients-img,
-.Clients--small .Clients-loading {
-  height: 100%;
-  max-width: 6rem;
-  max-height: 1.75rem;
-}
+@media (max-width: 699px) {
+  .Clients--small .Clients-img,
+  .Clients--small .Clients-loading {
+    height: 100%;
+    max-width: 6rem;
+    max-height: 1.75rem;
+  }
 
-.Clients--small  .Clients-loading {
-  width: 4.5rem;
-  height: 10rem;
+  .Clients--small  .Clients-loading {
+    width: 4.5rem;
+    height: 10rem;
+  }
 }

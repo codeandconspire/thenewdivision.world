@@ -8,11 +8,18 @@
   line-height: 0.98;
   font-family: var(--type-font-family-heading);
   font-weight: bold;
-  max-width: 14em;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;
   word-spacing: -0.03em;
   word-break: break-word;
+}
+
+@media (min-width: 700px) {
+  .Intro h1,
+  .Intro h2 {
+    font-size: 7.5rem;
+    max-width: 95%;
+  }
 }
 
 .Intro a {
@@ -29,6 +36,13 @@
   display: block;
   margin-bottom: 0.25rem;
   margin-top: -0.25rem;
+}
+
+@media (min-width: 700px) {
+  .Intro-sup {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .Intro-details {

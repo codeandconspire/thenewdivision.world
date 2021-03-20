@@ -35,7 +35,6 @@ svg {
  * 6. Fabulous svg text sizing
  * 7. Disable Chrome on Android refreshing the page at scroll end
  * 8. Enfoce smooth scrolling when using scrolling APIs
- * 9. About 16px at a viewport with of 375px
  */
 
 :root {
@@ -45,6 +44,7 @@ svg {
   overflow-x: hidden; /* 2 */
   cursor: default; /* 4 */
   font-family: var(--type-font-family);
+  font-size: var(--type-font-size);
   background: var(--color-background);
   color: var(--color-text);
   line-height: var(--type-line-height);
@@ -53,7 +53,6 @@ svg {
   -moz-osx-font-smoothing: grayscale; /* 5 */
   text-rendering: geometricPrecision; /* 6 */
   scroll-behavior: auto; /* 8 */
-  font-size: 4.265vw; /* 9 */
 }
 
 body {
@@ -79,15 +78,10 @@ iframe {
   vertical-align: bottom;
 }
 
-/**
- * 1. Improve alt text rendering for broken images
- */
-
 img {
   width: 100%;
   max-width: 100%;
   height: auto;
-  font-size: 0.8em; /* 1 */
 }
 
 /**
