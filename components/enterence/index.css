@@ -7,6 +7,18 @@
   user-select: none;
 }
 
+@media (min-width: 700px) {
+  .Enterence:not(.Enterence--small) .Enterence-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .Enterence:not(.Enterence--small) .Enterence-client {
+    margin-top: 1.75rem;
+  }
+}
+
 .Enterence-link {
   position: absolute;
   top: 0;
@@ -43,6 +55,15 @@
   left: 0.5rem;
 }
 
+@media (min-width: 700px) {
+  .Enterence-label,
+  .Enterence--small .Enterence-label {
+    font-size: 1.5rem;
+    top: 1.875rem;
+    left: 2rem;
+  }
+}
+
 .Enterence-label--light {
   color: #ffffff;
 }
@@ -60,4 +81,20 @@
   font-size: 1.25rem;
   line-height: 1;
   margin: 0.625rem 0 0.5rem;
+}
+
+@media (min-width: 700px) {
+  .Enterence-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 1.5rem 0 0;
+    max-width: 16em;
+  }
+
+  .Enterence--small .Enterence-title {
+    font-size: 2rem;
+    line-height: 1.1;
+    margin: 1rem 0 0.625rem;
+    max-width: 15em;
+  }
 }

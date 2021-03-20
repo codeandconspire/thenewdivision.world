@@ -2,30 +2,30 @@
 
 /** @define Words */
 
-:root {
-  --Words-aspect: 0.5;
-  --Words-max-width: 32em;
-}
-
-/**
- * Dimensions and alignment
- */
-
 .Words {
-  max-width: var(--Words-max-width);
+  max-width: 52.5rem;
+  font-size: 1.25rem;
+  line-height: 1.3
 }
 
 .Words--half {
   margin-top: 0.5rem;
 }
 
-/**
- * Default text styles
- */
+@media (min-width: 700px) {
+  .Words {
+    font-size: 1.5rem;
+  }
 
-.Words:not(.Words--adaptive) {
-  font-size: 1.0625rem;
+  .Words--half {
+    margin-top: 3rem;
+  }
+
+  .Words--pushed {
+    margin-left: 29rem;
+  }
 }
+
 
 /**
  * Links
@@ -57,6 +57,12 @@
 
 .Words-header {
   margin-bottom: 1rem;
+}
+
+@media (min-width: 700px) {
+  .Words-header {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .Words p:first-child,
@@ -150,4 +156,10 @@
 .Words h4 {
   font-size: 1em;
   line-height: inherit;
+}
+
+@media (min-width: 700px) {
+  .Words h2 {
+    font-size: 4rem;
+  }
 }

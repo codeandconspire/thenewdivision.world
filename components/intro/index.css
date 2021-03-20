@@ -18,7 +18,13 @@
   .Intro h1,
   .Intro h2 {
     font-size: 7.5rem;
+    margin-bottom: 1rem;
     max-width: 95%;
+  }
+
+  .Intro h2 {
+    font-size: 6rem;
+    max-width: 52.5rem;
   }
 }
 

@@ -11,7 +11,7 @@ function enterence (props = {}) {
         ${figure}
         ${label ? html`<span class="Enterence-label Enterence-label--${color}">${label}</span>` : null}
       </div>
-      <div class="Enterence-client">
+      <div class="Enterence-meta">
         <div class="Enterence-title">
           ${title}
           ${a(link, { class: 'Enterence-link' }, text`Read more`)}

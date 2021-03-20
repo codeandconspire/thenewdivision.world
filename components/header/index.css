@@ -8,6 +8,12 @@
   user-select: none;
 }
 
+@media (min-width: 700px) {
+  .Header {
+    margin-bottom: 9rem
+  }
+}
+
 .Header-logo {
   display: block;
   width: 10.75rem;

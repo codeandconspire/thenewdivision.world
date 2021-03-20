@@ -29,6 +29,14 @@
   grid-row-gap: 0.75rem;
 }
 
+@media (min-width: 700px) {
+  .Clients-list {
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+}
+
 .Clients-item {
   display: flex;
   align-items: center;

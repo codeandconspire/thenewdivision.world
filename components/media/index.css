@@ -24,6 +24,14 @@
   user-select: text;
 }
 
+@media (min-width: 700px) {
+  .Media-caption {
+    font-size: 1rem;
+    margin-top: 1rem;
+    max-width: 52.5rem;
+  }
+}
+
 /**
  * Overlay text content
  */

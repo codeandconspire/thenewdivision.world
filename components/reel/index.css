@@ -31,6 +31,13 @@
   opacity: 0.35;
 }
 
+@media (min-width: 700px) {
+  .Reel::before,
+  .Reel::after {
+    left: 0.25rem;
+  }
+}
+
 .Reel-item {
   flex: 0 0 100%;
   animation: Reel-tick calc(var(--Reel-delay) * var(--Reel-count)) steps(var(--Reel-count), end) infinite;
@@ -76,10 +83,12 @@
   vertical-align: text-bottom;
   margin-right: 0.75rem;
 }
+
 @media (min-width: 700px) {
   .Reel-client {
     display: flex;
     align-items: center;
+    margin-left: 0.25rem;
   }
 }
 

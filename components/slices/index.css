@@ -9,6 +9,13 @@
   grid-row-gap: 0.75rem;
 }
 
+@media (min-width: 700px) {
+  .Slices {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+}
+
 .Slices-item {
   grid-column: 1 / 7;
 }
@@ -19,4 +26,10 @@
 
 .Slices-item--space {
   height: 1.75rem;
+}
+
+@media (min-width: 700px) {
+  .Slices-item--space {
+    height: 1.5rem;
+  }
 }

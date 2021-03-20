@@ -10,8 +10,22 @@
   margin-bottom: 1rem;
 }
 
+@media (min-width: 700px) {
+  .Team {
+    grid-column-gap: 2rem;
+    grid-row-gap: 3rem;
+  }
+}
+
 .Team-item {
   grid-column: span 3;
+}
+
+@media (min-width: 700px) {
+  .Team-item {
+    grid-column: span 2;
+    font-size: 1.5rem;
+  }
 }
 
 .Team-title {
@@ -34,4 +48,16 @@
 
 .Team-body a:active {
   opacity: 0.5;
+}
+
+@media (min-width: 700px) {
+  .Team-title {
+    font-size: 2rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .Team-body {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+  }
 }

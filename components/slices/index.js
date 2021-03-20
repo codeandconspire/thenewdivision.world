@@ -39,7 +39,14 @@ module.exports = class Slices extends Component {
         if (link.type !== 'page') return null
         state.prismic.getByUID('page', link.uid, function (err, doc) {
           if (err) return null
-          if (doc) return null
+          if (!doc) return null
+          // const photo = doc.data.body.slice(0, 3).find(function (item) {
+          //   if (item.slice_type === 'photo') {
+          //     if (!item.primary.image || !item.primary.image.url) return null
+          //     return layout(media(figure(item.primary.image), { half: item.primary.half }))
+          //   }
+          // })
+
           return doc
         })
       }
