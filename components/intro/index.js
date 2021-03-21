@@ -17,7 +17,7 @@ function intro (props = {}) {
                 </div>
               </div>
             ` : null}
-            ${props.intro ? html`
+            ${props.client || props.tags ? html`
               <div class="Intro-details">
                 ${props.client ? html`
                   <div class="Intro-detail">

@@ -66,6 +66,7 @@ module.exports = class Slices extends Component {
       if (!slice) return null
       const data = slice.primary || {}
       const items = slice.items
+      const logos = Clients.logos(state)
 
       const layout = function (content) {
         const classes = className('Slices-item', {
@@ -95,7 +96,7 @@ module.exports = class Slices extends Component {
             title: asElement(data.heading, resolve, serialize),
             large: true,
             intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, large: true }) : null,
+            client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, large: true }) : null,
             label: data.label ? data.label : null,
             tags: data.tags ? data.tags : null,
             type: data.type ? data.type : null
@@ -191,7 +192,7 @@ module.exports = class Slices extends Component {
 
             return {
               title: asElement(item.heading, resolve, serialize),
-              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, small: true }) : null,
+              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null,
               link: link
             }
           }).filter(Boolean)
@@ -205,7 +206,7 @@ module.exports = class Slices extends Component {
             return {
               content: asElement(item.content, resolve, serialize),
               author: item.author && item.author.length ? asElement(item.author, resolve, serialize) : null,
-              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, large: true }) : null
+              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, large: true }) : null
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
@@ -237,7 +238,7 @@ module.exports = class Slices extends Component {
           const props = {
             label: data.label ? data.label : null,
             title: data.heading ? asText(data.heading, resolve, serialize) : null,
-            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, small: data.half }) : null,
+            client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, small: data.half }) : null,
             link: link,
             small: data.half,
             color: data.light_label ? 'light' : 'dark',
@@ -276,7 +277,7 @@ module.exports = class Slices extends Component {
               quote: asElement(item.quote, resolve, serialize),
               author: item.author && item.author.length ? asText(item.author) : null,
               desc: item.desc && item.desc.length ? asText(item.desc) : null,
-              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, small: true }) : null
+              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null
             }
           }).filter(Boolean)
 

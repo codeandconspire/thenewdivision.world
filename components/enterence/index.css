@@ -5,6 +5,7 @@
 .Enterence {
   position: relative;
   user-select: none;
+  z-index: 0;
 }
 
 @media (min-width: 700px) {
@@ -30,6 +31,7 @@
   color: transparent;
   font-size: 0;
   -webkit-touch-callout: none;
+  z-index: 1;
 }
 
 .Enterence-link:active {

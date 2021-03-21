@@ -11,7 +11,7 @@ module.exports = class Clients extends Component {
   }
 
   static fetch (state, render) {
-    if (this.fetched) return this.fetched
+    // if (this.fetched) return this.fetched
     const predicate = Predicates.at('document.type', 'client')
     const opts = { pageSize: 100, render }
     this.fetched = state.prismic.get(predicate, opts, function (err, res) {
@@ -89,7 +89,7 @@ module.exports = class Clients extends Component {
   }
 
   update () {
-    return true
+    return false
   }
 
   createElement (opts = {}, render) {
