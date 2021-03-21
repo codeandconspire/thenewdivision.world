@@ -200,7 +200,12 @@
     position: relative;
     padding: 0.6rem;
     margin-left: 1.45rem;
-    top: -0.1rem;
+    top: -0.05rem;
+  }
+
+  .Header-icon {
+    width: auto;
+    height: 1.375rem;
   }
 
   .Header-item--icon .Header-text {
@@ -214,8 +219,13 @@
   }
 
   .Header-item--icon .Header-link:hover .Header-text,
-  .Header-item--icon .Header-link:focus .Header-text {
-    opacity: 0.6;
+  .Header-item--icon .Header-link:focus-visible .Header-text {
+    opacity: 0.5;
     z-index: 1;
+  }
+
+
+  .Header-item--icon .Header-link:active .Header-text {
+    opacity: 1;
   }
 }

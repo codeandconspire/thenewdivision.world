@@ -16,7 +16,6 @@ module.exports = class Footer extends Component {
   }
 
   createElement (data, opts = {}) {
-    console.log(opts)
     this.local.themed = opts.themed
     if (!data) return
 

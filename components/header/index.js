@@ -7,6 +7,7 @@ module.exports = class Header extends Component {
   constructor (id, state, emit) {
     super(id)
     this.prismic = state.prismic
+    this.preloaded = []
     this.local = state.components[id] = {
       id: id,
       get href () {
@@ -15,8 +16,10 @@ module.exports = class Header extends Component {
     }
   }
 
-  update (data) {
-    return true
+  update (data, href) {
+    const shouldUpdate = (href !== this.href)
+    this.href = href
+    return shouldUpdate
   }
 
   load (el) {
@@ -46,8 +49,8 @@ module.exports = class Header extends Component {
     }
   }
 
-  createElement (data) {
-    const prismic = this.prismic
+  createElement (data, href) {
+    const { prismic, preloaded } = this
 
     if (!data) return
     const match = this.local.href.match(/^\/([^/]+\/)/)
@@ -61,15 +64,18 @@ module.exports = class Header extends Component {
       data.header.map(function (item) {
         if (item.link.type !== 'page') return null
         return prismic.getByUID('page', item.link.uid, function (err, doc) {
-          if (err) return null
-          if (doc) return null
+          if (err || !doc || preloaded.includes(item.link.uid)) return null
+          preloaded.push(item.link.uid)
+          // setTimeout(function () {
+          //   const photo = doc.data.body.slice(0, 3).find(item => item.slice_type === 'photo')
+          //   if (photo) document.querySelector('.js-slices').appendChild(asSlice(photo, 1))
+          // }, 2000)
           return doc
         })
-      }).filter(Boolean)
+      })
 
       prismic.getByUID('page', 'home', function (err, doc) {
-        if (err) return null
-        if (doc) return null
+        if (err || !doc) return null
         return doc
       })
     }

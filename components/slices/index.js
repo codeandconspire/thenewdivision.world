@@ -24,6 +24,7 @@ module.exports = class Slices extends Component {
     this.id = id
     this.state = state
     this.emit = emit
+    this.preloaded = []
   }
 
   update () {
@@ -32,21 +33,21 @@ module.exports = class Slices extends Component {
 
   createElement (slices, opts = {}) {
     // Prepared for usage of choo components
-    const { state, id } = this
+    const { state, id, preloaded } = this
 
     function preload (link) {
       if (typeof window !== 'undefined') {
-        if (link.type !== 'page') return null
+        if (link.type !== 'page') return
         state.prismic.getByUID('page', link.uid, function (err, doc) {
-          if (err) return null
-          if (!doc) return null
-          // const photo = doc.data.body.slice(0, 3).find(function (item) {
-          //   if (item.slice_type === 'photo') {
-          //     if (!item.primary.image || !item.primary.image.url) return null
-          //     return layout(media(figure(item.primary.image), { half: item.primary.half }))
-          //   }
-          // })
-
+          if (err || !doc || preloaded.includes(link.uid)) return null
+          preloaded.push(link.uid)
+          setTimeout(function () {
+            const photo = doc.data.body.slice(0, 3).find(item => item.slice_type === 'photo')
+            if (photo) {
+              const elm = asSlice(photo, 1).add('u-hiddenVisually')
+              document.querySelector('.js-slices').appendChild(elm)
+            }
+          }, 3000)
           return doc
         })
       }
@@ -63,34 +64,38 @@ module.exports = class Slices extends Component {
     // (obj, num) -> Element
     function asSlice (slice, index) {
       if (!slice) return null
-      const data = slice.primary
+      const data = slice.primary || {}
       const items = slice.items
 
       const layout = function (content) {
         const classes = className('Slices-item', {
-          'Slices-item--half': slice.half || (data && data.half),
-          'Slices-item--space': slice.space
+          'Slices-item--half': data.half,
+          'Slices-item--space': data.space,
+          'u-hiddenVisually': data.hidden
         })
         return html`<div class="${classes}">${content}</div>`
       }
 
       switch (slice.slice_type) {
         case 'space': {
-          slice.space = true
+          data.space = true
           return layout()
         }
         case 'intro': {
           if (!data.heading || !data.heading.length) return null
           return layout(intro({
-            title: asElement(data.heading, resolve, serialize)
+            title: asElement(data.heading, resolve, serialize),
+            intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
+            large: true
           }))
         }
         case 'intro_case': {
           if (!data.heading || !data.heading.length) return null
           return layout(intro({
             title: asElement(data.heading, resolve, serialize),
+            large: true,
             intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light }) : null,
+            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, large: true }) : null,
             label: data.label ? data.label : null,
             tags: data.tags ? data.tags : null,
             type: data.type ? data.type : null
@@ -100,7 +105,9 @@ module.exports = class Slices extends Component {
           if (!data.heading || !data.heading.length) return null
           return layout(intro({
             sup: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
-            title: data.heading ? asElement(data.heading, resolve, serialize) : null
+            large: data.large,
+            title: data.heading ? asElement(data.heading, resolve, serialize) : null,
+            pushed: data.pushed
           }))
         }
         case 'body': {
@@ -108,18 +115,17 @@ module.exports = class Slices extends Component {
           return layout(words({
             columns: data.columns,
             pushed: data.pushed,
-            half: data.half,
-            header: data.heading && data.heading.length ? asElement(data.heading, resolve, serialize) : null,
+            header: data.heading && data.heading.length && data.heading[0].text ? asElement(data.heading, resolve, serialize) : null,
             main: asElement(data.text, resolve, serialize)
           }))
         }
         case 'photo': {
           if (!data.image || !data.image.url) return null
           const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
-          return layout(media(figure(data.image), { caption: caption, half: data.half }))
+          return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption: caption }))
         }
         case 'callout': {
-          slice.half = true
+          data.half = true
           if (!data.heading && !data.content) return null
           const link = validate(data.link)
           if (link) {
@@ -130,7 +136,8 @@ module.exports = class Slices extends Component {
             heading: data.heading ? asText(data.heading) : null,
             content: data.content ? asElement(data.content, resolve, serialize) : null,
             link: link ? resolve(link) : null,
-            icon: data.icon
+            icon: data.icon,
+            loose: data.loose
           }))
         }
         case 'logos': {
@@ -164,7 +171,7 @@ module.exports = class Slices extends Component {
             if (!item.heading || !item.heading.length) return null
             if (!item.image || !item.image.url) return null
             return {
-              figure: figure(item.image, { half: true }),
+              figure: figure(item.image, { team: true }),
               title: asText(item.heading),
               position: item.position && item.position.length ? asText(item.position) : null,
               intro: item.intro && item.intro.length ? asElement(item.intro, resolve, serialize) : null
@@ -198,7 +205,7 @@ module.exports = class Slices extends Component {
             return {
               content: asElement(item.content, resolve, serialize),
               author: item.author && item.author.length ? asElement(item.author, resolve, serialize) : null,
-              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light }) : null
+              client: item.client && item.client.id ? Clients.logos(state)(item.client.id, { dark: opts.light, large: true }) : null
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
@@ -230,7 +237,7 @@ module.exports = class Slices extends Component {
           const props = {
             label: data.label ? data.label : null,
             title: data.heading ? asText(data.heading, resolve, serialize) : null,
-            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, small: true }) : null,
+            client: data.client && data.client.id ? Clients.logos(state)(data.client.id, { dark: opts.light, small: data.half }) : null,
             link: link,
             small: data.half,
             color: data.light_label ? 'light' : 'dark',
@@ -252,7 +259,7 @@ module.exports = class Slices extends Component {
               label: item.label ? item.label : null,
               title: asText(item.heading),
               link: link,
-              figure: figure(item.image, { half: data.half })
+              figure: figure(item.image, { teaser: true })
             }
           }).filter(Boolean)
           if (!articles || !articles.length) return
@@ -273,7 +280,7 @@ module.exports = class Slices extends Component {
             }
           }).filter(Boolean)
 
-          // Forgive me lord, but I have sinned
+          // Forgive me, Lord, for I have sinned
           // When this is used as page intro on the cases page, we need a h1
           if (state.params.wildcard === 'cases') {
             opts.title = text`Cases`
@@ -282,7 +289,6 @@ module.exports = class Slices extends Component {
           if (!articles || !articles.length) return
           return layout(reel(articles, opts))
         }
-
         case 'illustration': {
           return layout(state.cache(Illustration, `illustration-${id}-${index}`).render(data.version))
         }
@@ -294,7 +300,7 @@ module.exports = class Slices extends Component {
     }
 
     return html`
-      <div class="Slices" id="${id}">
+      <div class="Slices js-slices" id="${id}">
         ${slices ? slices.map(asSlice) : null}
       </div>
     `

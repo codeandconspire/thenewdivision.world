@@ -50,6 +50,13 @@
   z-index: 1;
 }
 
+
+@media (min-width: 700px) {
+  .Media-content {
+    padding: 4rem 2.75rem;
+  }
+}
+
 .Media-link {
   position: absolute;
   top: 0;
@@ -84,4 +91,19 @@
   max-width: 14em;
   letter-spacing: -0.005em;
   word-spacing: -0.03em;
+}
+
+
+@media (min-width: 700px) {
+  .Media-label {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 0.25rem;
+  }
+
+  .Media-title {
+    font-size: 7.5rem;
+    line-height: 0.9;
+    max-width: 60rem;
+  }
 }

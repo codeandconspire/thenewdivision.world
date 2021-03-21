@@ -8,6 +8,12 @@
   margin: 0 -0.75rem;
 }
 
+@media (min-width: 700px) {
+  .Cases {
+    margin: 0 -1.5rem;
+  }
+}
+
 .Cases-title {
   flex-basis: 100%;
   padding: 0 0.75rem;
@@ -15,6 +21,15 @@
   margin-bottom: 1rem;
   opacity: 0.5;
   font-size: 1rem;
+}
+
+@media (min-width: 700px) {
+  .Cases-title {
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+    padding: 0 1.5rem;
+  }
 }
 
 .Cases-item {
@@ -30,12 +45,26 @@
   line-height: 1.1;
 }
 
+@media (min-width: 700px) {
+  .Cases-item {
+    flex: 0 0 17.5rem;
+    padding: 0 1.5rem;
+  }
+}
+
 .Cases-item:active {
   opacity: 0.4;
 }
 
 .Cases-name {
   margin-bottom: 0.625rem;
+}
+
+@media (min-width: 700px) {
+  .Cases-name {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+  }
 }
 
 .Cases-link {

@@ -55,7 +55,7 @@ function createView (view, getMeta, _opts = {}) {
 
     return html`
       <div class="View" id="app" style="${style}">
-        ${state.cache(Header, 'header').render(setting)}
+        ${state.cache(Header, 'header').render(setting, state.href)}
         <main class="View-main">
           ${children}
         </main>

@@ -14,21 +14,34 @@
   word-break: break-word;
 }
 
+.Intro-body {
+  margin-top: 1.5rem;
+}
+
 @media (min-width: 700px) {
   .Intro h1,
   .Intro h2 {
     font-size: 7.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     max-width: 95%;
   }
 
-  .Intro h2 {
+  .Intro:not(.Intro--large) h2 {
     font-size: 6rem;
     max-width: 52.5rem;
+  }
+
+  .Intro--pushed {
+    margin-left: 29rem;
+  }
+
+  .Intro-body {
+    margin-top: 3.5rem;
   }
 }
 
 .Intro a {
+  font-weight: bold;
   text-decoration: underline;
   text-decoration-thickness: 0.07em;
   text-underline-offset: 0.02em;
@@ -78,4 +91,33 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   word-break: break-word;
+}
+
+@media (min-width: 700px) {
+  .Intro-wrap {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .Intro-details {
+    display: block;
+    margin-left: 6rem;
+  }
+
+  .Intro-label {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .Intro-tags {
+    font-size: 1.5rem;
+  }
+
+  .Intro-detail {
+    margin-top: 3.7rem;
+  }
+
+  .Intro-detail + .Intro-detail {
+    margin-top: 2rem;
+  }
 }

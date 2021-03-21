@@ -8,24 +8,44 @@
   line-height: 1.3
 }
 
-.Words--half {
-  margin-top: 0.5rem;
-}
-
 @media (min-width: 700px) {
   .Words {
     font-size: 1.5rem;
   }
 
-  .Words--half {
-    margin-top: 3rem;
-  }
-
   .Words--pushed {
     margin-left: 29rem;
   }
+
+  .Words--large {
+    font-size: 2rem;
+    max-width: 56rem;
+  }
 }
 
+@media (min-width: 700px) {
+  .Words--columns {
+    max-width: 100%;
+  }
+
+  .Words--columns .Words-main {
+    column-count: 2;
+    max-width: 100%;
+    column-gap: 4rem;
+  }
+
+  .Words--columns .Words-header {
+    max-width: 52.5rem;
+  }
+
+  .Words--columns.Words--large .Words-header {
+    max-width: 56rem;
+  }
+
+  .Words--columns .Words-main > * {
+    break-inside: avoid;
+  }
+}
 
 /**
  * Links
@@ -33,8 +53,10 @@
 
 .Words a {
   color: inherit;
-  text-decoration: underline;
   font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.02em;
   word-break: break-word;
 }
 
@@ -61,7 +83,7 @@
 
 @media (min-width: 700px) {
   .Words-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -161,5 +183,7 @@
 @media (min-width: 700px) {
   .Words h2 {
     font-size: 4rem;
+    word-spacing: -0.03em;
+    letter-spacing: -0.005em;
   }
 }

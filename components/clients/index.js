@@ -42,8 +42,10 @@ module.exports = class Clients extends Component {
     return function (id, opts = {}) {
       if (!clients) {
         return html`
-          <div class="Clients ${opts.small ? 'Clients--small' : ''}">
-            <div class="Clients-loading"></div>
+          <div class="Clients ${opts.small ? 'Clients--small' : ''} ${opts.large ? 'Clients--large' : ''}">
+            <div class="Clients-item">
+              <div class="Clients-loading"></div>
+            </div>
           </div>
         `
       }
@@ -68,7 +70,6 @@ module.exports = class Clients extends Component {
         height,
         class: 'Clients-img',
         draggable: 'false',
-        loading: 'lazy',
         alt: ''
       }
 
@@ -78,8 +79,10 @@ module.exports = class Clients extends Component {
       }
 
       return html`
-        <div class="Clients ${opts.small ? 'Clients--small' : ''}">
-          <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
+        <div class="Clients ${opts.small ? 'Clients--small' : ''} ${opts.large ? 'Clients--large' : ''}" style="--Clients-size: ${(height / width).toFixed(2)};">
+          <div class="Clients-item">
+            <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
+          </div>
         </div>
       `
     }
@@ -89,12 +92,13 @@ module.exports = class Clients extends Component {
     return true
   }
 
-  createElement (opts = {}) {
-    const clients = Clients.fetch(this.state)
+  createElement (opts = {}, render) {
+    // const render = this.rerender.bind(this)
+    const clients = Clients.fetch(this.state, render)
 
     if (!clients) {
       return html`
-        <div class="Clients">
+        <div class="Clients Clients--large">
           <div class="Clients-list">
             <div class="Clients-item"><div class="Clients-loading"></div></div>
             <div class="Clients-item"><div class="Clients-loading"></div></div>
@@ -108,7 +112,7 @@ module.exports = class Clients extends Component {
     }
 
     return html`
-      <div class="Clients">
+      <div class="Clients Clients--large">
         <ul class="Clients-list">
           ${clients.map(function (client) {
             if (client.data.unlisted) return null
@@ -141,7 +145,7 @@ module.exports = class Clients extends Component {
             }
 
             return html`
-              <li class="Clients-item">
+              <li class="Clients-item" style="--Clients-size: ${(height / width).toFixed(2)};">
                 <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
               </li>
             `

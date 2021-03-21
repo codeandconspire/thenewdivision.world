@@ -6,53 +6,81 @@
   user-select: none;
 }
 
-.Clients-img,
-.Clients-loading {
-  width: auto;
-  height: auto;
-  max-width: 8.6rem;
-  max-height: 2.5rem;
-  vertical-align: top;
-}
-
-.Clients-loading {
-  width: 4.5rem;
-  height: 10rem;
-  background: var(--color-text);
-  opacity: 0.1;
-}
-
 .Clients-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 0.75rem;
-  grid-row-gap: 0.75rem;
+  grid-row-gap: 2rem;
 }
 
 @media (min-width: 700px) {
   .Clients-list {
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 2rem;
-    grid-row-gap: 2rem;
+    grid-row-gap: 3.5rem;
+    margin-top: 1.5rem;
   }
 }
 
 .Clients-item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 4.25rem;
+  width: 7rem;
+  height: calc(1.2rem + (2rem * (var(--Clients-size))));
+}
+
+.Clients-list .Clients-item {
+  margin: auto;
+  width: 8.7rem;
+  height: calc(1.9rem + (1.8rem * (var(--Clients-size))));
+}
+
+.Clients-img,
+.Clients-loading {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  object-position: left;
+}
+
+.Clients-list .Clients-img {
+  object-position: center;
+}
+
+/* .Clients-loading {
+  background: var(--color-text);
+  opacity: 0.1;
+} */
+
+@media (min-width: 700px) {
+  .Clients-item {
+    width: 11rem;
+    height: calc(2.3rem + (2rem * (var(--Clients-size))));
+  }
+
+  .Clients--small .Clients-item {
+    width: 7rem;
+    height: calc(1.2rem + (2rem * (var(--Clients-size))));
+  }
+
+  .Clients--large .Clients-item {
+    width: 13.5rem;
+    height: calc(3.3rem + (1.6rem * (var(--Clients-size))));
+  }
 }
 
 @media (max-width: 699px) {
-  .Clients--small .Clients-img,
-  .Clients--small .Clients-loading {
-    height: 100%;
-    max-width: 6rem;
-    max-height: 1.75rem;
+  .Clients--small .Clients-item {
+    width: 5rem;
+    height: calc(0.6rem + (2.1rem * (var(--Clients-size))));
   }
 
-  .Clients--small  .Clients-loading {
+  .Clients--small .Clients-loading {
     width: 4.5rem;
     height: 10rem;
   }

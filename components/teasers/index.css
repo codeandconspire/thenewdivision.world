@@ -42,3 +42,35 @@
   font-size: 1.25rem;
   line-height: 1.1;
 }
+
+@media (min-width: 700px) {
+  .Teasers {
+    margin: 2rem 0;
+  }
+
+  .Teasers-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 4rem;
+  }
+
+  .Teaser-item {
+    margin: 0;
+  }
+
+  .Teasers-figure {
+    flex-basis: 12.5rem;
+    margin-right: 2rem;
+  }
+
+  .Teasers-label {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+  }
+
+  .Teasers-title {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+}

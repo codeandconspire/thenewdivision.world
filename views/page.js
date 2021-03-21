@@ -10,9 +10,6 @@ function wildcard (state, emit) {
   return state.prismic.getByUID('page', uid, function (err, doc) {
     if (err) throw HTTPError(404, err)
     if (!doc) {
-      console.log('----------------------------------------------------')
-      console.log('-------LOADING--------------------------------------')
-      console.log('----------------------------------------------------')
       return html`
         <div class="u-container">
           <div style="height: 80vh"></div>

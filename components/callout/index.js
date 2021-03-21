@@ -6,7 +6,7 @@ module.exports = callout
 function callout (props = {}) {
   const { heading, content, link } = props
   return html`
-    <section class="Callout">
+    <section class="Callout ${props.loose ? 'Callout--loose' : ''}">
       <hr aria-hidden class="u-hiddenVisually">
       ${props.icon ? icon(props.icon, { class: 'Callout-icon' }) : null}
       <div>

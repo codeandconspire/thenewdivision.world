@@ -20,5 +20,28 @@
 }
 
 .Quotes-client {
-  margin-bottom: 0.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 700px) {
+  .Quotes {
+    margin: 0 -1rem;
+  }
+
+  .Quotes-item {
+    padding: 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  .Quotes-author {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .Quotes-client {
+    height: 7rem;
+    margin-bottom: 0;
+  }
 }
