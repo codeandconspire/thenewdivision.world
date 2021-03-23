@@ -24,34 +24,16 @@ module.exports = class Slices extends Component {
     this.id = id
     this.state = state
     this.emit = emit
-    this.preloaded = []
   }
 
   update () {
     return true
   }
 
-  createElement (slices, opts = {}) {
-    // Prepared for usage of choo components
-    const { state, id, preloaded } = this
-
-    function preload (link) {
-      if (typeof window !== 'undefined') {
-        if (link.type !== 'page') return
-        state.prismic.getByUID('page', link.uid, function (err, doc) {
-          if (err || !doc || preloaded.includes(link.uid)) return null
-          preloaded.push(link.uid)
-          setTimeout(function () {
-            const photo = doc.data.body.slice(0, 3).find(item => item.slice_type === 'photo')
-            if (photo) {
-              const elm = asSlice(photo, 1).add('u-hiddenVisually')
-              document.querySelector('.js-slices').appendChild(elm)
-            }
-          }, 3000)
-          return doc
-        })
-      }
-    }
+  // render slice as element
+  // (obj, num) -> Element
+  static asSlice (slice, index, opts) {
+    const { state, id, emit } = opts
 
     function validate (link) {
       if (!link || link.link_type === 'Any' || (link && link.isBroken)) {
@@ -60,249 +42,262 @@ module.exports = class Slices extends Component {
       return link
     }
 
-    // render slice as element
-    // (obj, num) -> Element
-    function asSlice (slice, index) {
-      if (!slice) return null
-      const data = slice.primary || {}
-      const items = slice.items
-      const logos = Clients.logos(state)
+    if (!slice) return null
+    const data = slice.primary || {}
+    const items = slice.items
+    const logos = Clients.logos(state)
 
-      const layout = function (content) {
-        const classes = className('Slices-item', {
-          'Slices-item--half': data.half,
-          'Slices-item--space': data.space,
-          'u-hiddenVisually': data.hidden
-        })
-        return html`<div class="${classes}">${content}</div>`
-      }
-
-      switch (slice.slice_type) {
-        case 'space': {
-          data.space = true
-          return layout()
-        }
-        case 'intro': {
-          if (!data.heading || !data.heading.length) return null
-          return layout(intro({
-            title: asElement(data.heading, resolve, serialize),
-            intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-            large: true
-          }))
-        }
-        case 'intro_case': {
-          if (!data.heading || !data.heading.length) return null
-          return layout(intro({
-            title: asElement(data.heading, resolve, serialize),
-            large: true,
-            intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-            client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, large: true }) : null,
-            label: data.label ? data.label : null,
-            tags: data.tags ? data.tags : null,
-            type: data.type ? data.type : null
-          }))
-        }
-        case 'heading': {
-          if (!data.heading || !data.heading.length) return null
-          return layout(intro({
-            sup: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
-            large: data.large,
-            title: data.heading ? asElement(data.heading, resolve, serialize) : null,
-            pushed: data.pushed
-          }))
-        }
-        case 'body': {
-          if ((!data.text || !data.text.length) && (!data.heading || !data.heading.length)) return null
-          return layout(words({
-            columns: data.columns,
-            pushed: data.pushed,
-            header: data.heading && data.heading.length && data.heading[0].text ? asElement(data.heading, resolve, serialize) : null,
-            main: asElement(data.text, resolve, serialize)
-          }))
-        }
-        case 'photo': {
-          if (!data.image || !data.image.url) return null
-          const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
-          return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption: caption }))
-        }
-        case 'callout': {
-          data.half = true
-          if (!data.heading && !data.content) return null
-          const link = validate(data.link)
-          if (link) {
-            preload(link)
-          }
-
-          return layout(callout({
-            heading: data.heading ? asText(data.heading) : null,
-            content: data.content ? asElement(data.content, resolve, serialize) : null,
-            link: link ? resolve(link) : null,
-            icon: data.icon,
-            loose: data.loose
-          }))
-        }
-        case 'logos': {
-          return layout(state.cache(Clients, `clients-${id}-${index}`).render({ dark: opts.light }))
-        }
-        case 'news': {
-          if (!items && !items.length) return null
-          const articles = items.map(function (item) {
-            if (!item.heading || !item.heading.length) return null
-            return {
-              date: item.date ? item.date : null,
-              title: asElement(item.heading, resolve, serialize)
-            }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(news(articles))
-        }
-        case 'thoughts': {
-          if (!items && !items.length) return null
-          const title = data.heading ? asText(data.heading) : null
-          const articles = items.map(function (item) {
-            if (!item.heading || !item.heading.length) return null
-            return { title: asElement(item.heading, resolve, serialize) }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(thoughts(articles, title))
-        }
-        case 'team': {
-          if (!items && !items.length) return null
-          const articles = items.map(function (item) {
-            if (!item.heading || !item.heading.length) return null
-            if (!item.image || !item.image.url) return null
-            return {
-              figure: figure(item.image, { team: true }),
-              title: asText(item.heading),
-              position: item.position && item.position.length ? asText(item.position) : null,
-              intro: item.intro && item.intro.length ? asElement(item.intro, resolve, serialize) : null
-            }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(team(articles))
-        }
-        case 'cases': {
-          if (!items && !items.length) return null
-          const title = data.heading && data.heading.length ? asText(data.heading) : null
-          const articles = items.map(function (item) {
-            if (!item.heading || !item.heading.length) return null
-            const link = validate(item.link)
-            if (!link) return null
-            preload(link)
-
-            return {
-              title: asElement(item.heading, resolve, serialize),
-              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null,
-              link: link
-            }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(cases(articles, title))
-        }
-        case 'quotes': {
-          if (!items && !items.length) return null
-          const articles = items.map(function (item) {
-            if (!item.content || !item.content.length) return null
-            return {
-              content: asElement(item.content, resolve, serialize),
-              author: item.author && item.author.length ? asElement(item.author, resolve, serialize) : null,
-              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, large: true }) : null
-            }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(quotes(articles))
-        }
-        case 'banner': {
-          if (!data.heading || !data.heading.length) return null
-          if (!data.image || !data.image.url) return null
-          const link = validate(data.link)
-          if (!link) return null
-          preload(link)
-
-          const opts = {
-            label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
-            title: data.heading ? asText(data.heading, resolve, serialize) : null,
-            link: link,
-            dark: data.dark
-          }
-          return layout(media(figure(data.image, { half: data.half }), opts))
-        }
-        case 'enterence': {
-          if (!data.heading || !data.heading.length) return null
-          if (!data.image || !data.image.url) return null
-
-          const link = validate(data.link)
-          if (!link) return null
-          preload(link)
-
-          const props = {
-            label: data.label ? data.label : null,
-            title: data.heading ? asText(data.heading, resolve, serialize) : null,
-            client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, small: data.half }) : null,
-            link: link,
-            small: data.half,
-            color: data.light_label ? 'light' : 'dark',
-            figure: figure(data.image, { half: data.half })
-          }
-          return layout(enterence(props))
-        }
-        case 'teasers': {
-          if (!items && !items.length) return null
-          const articles = items.map(function (item) {
-            if (!item.heading || !item.heading.length) return null
-            if (!item.image || !item.image.url) return null
-
-            const link = validate(item.link)
-            if (!link) return null
-            preload(link)
-
-            return {
-              label: item.label ? item.label : null,
-              title: asText(item.heading),
-              link: link,
-              figure: figure(item.image, { teaser: true })
-            }
-          }).filter(Boolean)
-          if (!articles || !articles.length) return
-          return layout(teasers(articles))
-        }
-        case 'reel': {
-          if (!items && !items.length) return null
-          const opts = {
-            delay: data.delay ? data.delay : null
-          }
-          const articles = items.map(function (item) {
-            if (!item.quote || !item.quote.length) return null
-            return {
-              quote: asElement(item.quote, resolve, serialize),
-              author: item.author && item.author.length ? asText(item.author) : null,
-              desc: item.desc && item.desc.length ? asText(item.desc) : null,
-              client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null
-            }
-          }).filter(Boolean)
-
-          // Forgive me, Lord, for I have sinned
-          // When this is used as page intro on the cases page, we need a h1
-          if (state.params.wildcard === 'cases') {
-            opts.title = text`Cases`
-          }
-
-          if (!articles || !articles.length) return
-          return layout(reel(articles, opts))
-        }
-        case 'illustration': {
-          return layout(state.cache(Illustration, `illustration-${id}-${index}`).render(data.version))
-        }
-        default: {
-          if (slice.children) return layout(slice.children)
-          return null
-        }
-      }
+    const layout = function (content) {
+      const classes = className('Slices-item', {
+        'Slices-item--half': data.half,
+        'Slices-item--space': data.space,
+        'u-hiddenVisually': data.hidden
+      })
+      return html`<div class="${classes}">${content}</div>`
     }
 
+    switch (slice.slice_type) {
+      case 'space': {
+        data.space = true
+        return layout()
+      }
+      case 'intro': {
+        if (!data.heading || !data.heading.length) return null
+        return layout(intro({
+          title: asElement(data.heading, resolve, serialize),
+          intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
+          large: true
+        }))
+      }
+      case 'intro_case': {
+        if (!data.heading || !data.heading.length) return null
+        return layout(intro({
+          title: asElement(data.heading, resolve, serialize),
+          large: true,
+          intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
+          client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, large: true }) : null,
+          label: data.label ? data.label : null,
+          tags: data.tags ? data.tags : null,
+          type: data.type ? data.type : null
+        }))
+      }
+      case 'heading': {
+        if (!data.heading || !data.heading.length) return null
+        return layout(intro({
+          sup: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
+          large: data.large,
+          title: data.heading ? asElement(data.heading, resolve, serialize) : null,
+          pushed: data.pushed
+        }))
+      }
+      case 'body': {
+        if ((!data.text || !data.text.length) && (!data.heading || !data.heading.length)) return null
+        return layout(words({
+          columns: data.columns,
+          pushed: data.pushed,
+          header: data.heading && data.heading.length && data.heading[0].text ? asElement(data.heading, resolve, serialize) : null,
+          main: asElement(data.text, resolve, serialize)
+        }))
+      }
+      case 'photo': {
+        if (!data.image || !data.image.url) return null
+        const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
+        return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption: caption }))
+      }
+      case 'callout': {
+        data.half = true
+        if (!data.heading && !data.content) return null
+        const link = validate(data.link)
+        if (link && emit) {
+          emit('preload', link)
+        }
+
+        return layout(callout({
+          heading: data.heading ? asText(data.heading) : null,
+          content: data.content ? asElement(data.content, resolve, serialize) : null,
+          link: link ? resolve(link) : null,
+          icon: data.icon,
+          loose: data.loose
+        }))
+      }
+      case 'logos': {
+        return layout(state.cache(Clients, `clients-${id}-${index}`).render({ dark: opts.light }))
+      }
+      case 'news': {
+        if (!items && !items.length) return null
+        const articles = items.map(function (item) {
+          if (!item.heading || !item.heading.length) return null
+          return {
+            date: item.date ? item.date : null,
+            title: asElement(item.heading, resolve, serialize)
+          }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(news(articles))
+      }
+      case 'thoughts': {
+        if (!items && !items.length) return null
+        const title = data.heading ? asText(data.heading) : null
+        const articles = items.map(function (item) {
+          if (!item.heading || !item.heading.length) return null
+          return { title: asElement(item.heading, resolve, serialize) }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(thoughts(articles, title))
+      }
+      case 'team': {
+        if (!items && !items.length) return null
+        const articles = items.map(function (item) {
+          if (!item.heading || !item.heading.length) return null
+          if (!item.image || !item.image.url) return null
+          return {
+            figure: figure(item.image, { team: true }),
+            title: asText(item.heading),
+            position: item.position && item.position.length ? asText(item.position) : null,
+            intro: item.intro && item.intro.length ? asElement(item.intro, resolve, serialize) : null
+          }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(team(articles))
+      }
+      case 'cases': {
+        if (!items && !items.length) return null
+        const title = data.heading && data.heading.length ? asText(data.heading) : null
+        const articles = items.map(function (item) {
+          if (!item.heading || !item.heading.length) return null
+          const link = validate(item.link)
+          if (!link) return null
+          if (emit) {
+            emit('preload', link)
+          }
+
+          return {
+            title: asElement(item.heading, resolve, serialize),
+            client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null,
+            link: link
+          }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(cases(articles, title))
+      }
+      case 'quotes': {
+        if (!items && !items.length) return null
+        const articles = items.map(function (item) {
+          if (!item.content || !item.content.length) return null
+          return {
+            content: asElement(item.content, resolve, serialize),
+            author: item.author && item.author.length ? asElement(item.author, resolve, serialize) : null,
+            client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, large: true }) : null
+          }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(quotes(articles))
+      }
+      case 'banner': {
+        if (!data.heading || !data.heading.length) return null
+        if (!data.image || !data.image.url) return null
+        const link = validate(data.link)
+        if (!link) return null
+        if (emit) {
+          emit('preload', link)
+        }
+
+        const opts = {
+          label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
+          title: data.heading ? asText(data.heading, resolve, serialize) : null,
+          link: link,
+          dark: data.dark
+        }
+        return layout(media(figure(data.image, { half: data.half }), opts))
+      }
+      case 'enterence': {
+        if (!data.heading || !data.heading.length) return null
+        if (!data.image || !data.image.url) return null
+
+        const link = validate(data.link)
+        if (!link) return null
+        if (emit) {
+          emit('preload', link)
+        }
+
+        const props = {
+          label: data.label ? data.label : null,
+          title: data.heading ? asText(data.heading, resolve, serialize) : null,
+          client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, small: data.half }) : null,
+          link: link,
+          small: data.half,
+          color: data.light_label ? 'light' : 'dark',
+          figure: figure(data.image, { half: data.half })
+        }
+        return layout(enterence(props))
+      }
+      case 'teasers': {
+        if (!items && !items.length) return null
+        const articles = items.map(function (item) {
+          if (!item.heading || !item.heading.length) return null
+          if (!item.image || !item.image.url) return null
+
+          const link = validate(item.link)
+          if (!link) return null
+          if (emit) {
+            emit('preload', link)
+          }
+
+          return {
+            label: item.label ? item.label : null,
+            title: asText(item.heading),
+            link: link,
+            figure: figure(item.image, { teaser: true })
+          }
+        }).filter(Boolean)
+        if (!articles || !articles.length) return
+        return layout(teasers(articles))
+      }
+      case 'reel': {
+        if (!items && !items.length) return null
+        const opts = {
+          delay: data.delay ? data.delay : null
+        }
+        const articles = items.map(function (item) {
+          if (!item.quote || !item.quote.length) return null
+          return {
+            quote: asElement(item.quote, resolve, serialize),
+            author: item.author && item.author.length ? asText(item.author) : null,
+            desc: item.desc && item.desc.length ? asText(item.desc) : null,
+            client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null
+          }
+        }).filter(Boolean)
+
+        // Forgive me, Lord, for I have sinned
+        // When this is used as page intro on the cases page, we need a h1
+        if (state.params.wildcard === 'cases') {
+          opts.title = text`Cases`
+        }
+
+        if (!articles || !articles.length) return
+        return layout(reel(articles, opts))
+      }
+      case 'illustration': {
+        return layout(state.cache(Illustration, `illustration-${id}-${index}`).render(data.version))
+      }
+      default: {
+        if (slice.children) return layout(slice.children)
+        return null
+      }
+    }
+  }
+
+  createElement (slices, opts = {}) {
+    // Prepared for usage of choo components
+    opts.state = this.state
+    opts.emit = this.emit
+    opts.id = this.id
+
     return html`
-      <div class="Slices js-slices" id="${id}">
-        ${slices ? slices.map(asSlice) : null}
+      <div class="Slices js-slices" id="${this.id}">
+        ${slices ? slices.map(function (item, index) {
+          return Slices.asSlice(item, index, opts)
+        }) : null}
       </div>
     `
   }

@@ -45,6 +45,7 @@
   text-decoration: underline;
   text-decoration-thickness: 0.07em;
   text-underline-offset: 0.02em;
+  -webkit-touch-callout: none;
 }
 
 .Intro a:active {

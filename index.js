@@ -13,6 +13,7 @@ app.use(lazy)
 app.use(require('choo-service-worker')('/sw.js'))
 app.use(require('choo-meta')({ origin: 'https://www.thenewdivision.world' }))
 app.use(require('./stores/navigation'))
+app.use(require('./stores/preload'))
 app.use(require('./stores/prefetch'))
 app.use(require('./stores/prismic')())
 

@@ -40,6 +40,10 @@
   height: auto;
 }
 
+.Header-link {
+  -webkit-touch-callout: none;
+}
+
 .Header-link:active {
   opacity: 0.5;
 }

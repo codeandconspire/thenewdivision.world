@@ -46,6 +46,7 @@
   left: 0;
   object-fit: contain;
   object-position: left;
+  -webkit-touch-callout: none;
 }
 
 .Clients-list .Clients-img {

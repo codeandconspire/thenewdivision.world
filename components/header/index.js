@@ -6,8 +6,7 @@ const Component = require('choo/component')
 module.exports = class Header extends Component {
   constructor (id, state, emit) {
     super(id)
-    this.prismic = state.prismic
-    this.preloaded = []
+    this.emit = emit
     this.local = state.components[id] = {
       id: id,
       get href () {
@@ -50,7 +49,7 @@ module.exports = class Header extends Component {
   }
 
   createElement (data, href) {
-    const { prismic, preloaded } = this
+    const { emit } = this
 
     if (!data) return
     const match = this.local.href.match(/^\/([^/]+\/)/)
@@ -60,25 +59,10 @@ module.exports = class Header extends Component {
     }
 
     // Preload pages in header
-    if (typeof window !== 'undefined') {
-      data.header.map(function (item) {
-        if (item.link.type !== 'page') return null
-        return prismic.getByUID('page', item.link.uid, function (err, doc) {
-          if (err || !doc || preloaded.includes(item.link.uid)) return null
-          preloaded.push(item.link.uid)
-          // setTimeout(function () {
-          //   const photo = doc.data.body.slice(0, 3).find(item => item.slice_type === 'photo')
-          //   if (photo) document.querySelector('.js-slices').appendChild(asSlice(photo, 1))
-          // }, 2000)
-          return doc
-        })
-      })
-
-      prismic.getByUID('page', 'home', function (err, doc) {
-        if (err || !doc) return null
-        return doc
-      })
-    }
+    data.header.map(function (item) {
+      return emit('preload', item.link)
+    })
+    emit('preload', { uid: 'home', type: 'page' })
 
     function close () {
       window.requestAnimationFrame(function () {
@@ -89,6 +73,14 @@ module.exports = class Header extends Component {
           })
         })
       })
+    }
+
+    function toggle () {
+      const closing = document.querySelector('.js-switch').checked
+      const scroll = window.scrollY
+      if (closing && scroll !== 0 && scroll < 60) {
+        close()
+      }
     }
 
     return html`
@@ -103,7 +95,7 @@ module.exports = class Header extends Component {
           </a>
 
           <input id="switch" class="Header-switch js-switch" type="checkbox" aria-hidden />
-          <label class="Header-toggle" for="switch" aria-hidden touchstart="">
+          <label class="Header-toggle" for="switch" aria-hidden touchstart="" onclick=${toggle}>
             <svg role="presentation" class="Header-line" viewBox="0 0 24 2"><path fill="currentColor" d="M0 0h24v1.75H0z"/></svg>
             <svg role="presentation" class="Header-line" viewBox="0 0 24 2"><path fill="currentColor" d="M0 0h24v1.75H0z"/></svg>
             ${text`Toggle menu`}
