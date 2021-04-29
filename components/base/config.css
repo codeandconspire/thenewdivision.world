@@ -1,9 +1,9 @@
 :root {
   /* Document dimentions */
-  --document-max-width: 2500px;
   --document-margin: 0.75rem;
   --document-size: 1.5rem;
   --document-narrow: 1;
+  --document-max-width: calc(1440px - (var(--document-margin) * 2));
 
   /* Color */
   --color-background: #010101;
@@ -41,7 +41,14 @@
     --document-narrow: 0;
     --document-margin: 2rem;
 
-    /* About 16px at a viewport with of 1440px */
+    /* About 16px at a viewport width of 1440px */
     --type-font-size: 1.112vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    /* About 16px at a viewport with of 1440px */
+    --type-font-size: 16px;
   }
 }

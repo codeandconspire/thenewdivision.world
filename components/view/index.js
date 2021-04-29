@@ -53,6 +53,8 @@ function createView (view, getMeta, _opts = {}) {
 
     const style = `--color-background: ${config.background}; --color-text: ${config.color}`
 
+    emit('scrolltop')
+
     return html`
       <div class="View" id="app" style="${style}">
         ${state.cache(Header, 'header').render(setting, state.href)}
