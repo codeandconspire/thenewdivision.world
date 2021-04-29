@@ -92,8 +92,8 @@ module.exports = class Clients extends Component {
     return false
   }
 
-  createElement (opts = {}, render) {
-    // const render = this.rerender.bind(this)
+  createElement (opts = {}) {
+    const render = this.rerender.bind(this)
     const clients = Clients.fetch(this.state, render)
 
     if (!clients) {

@@ -128,10 +128,6 @@
   padding-left: 1.7em;
 }
 
-.Words li + li {
-  margin-top: 0.4em;
-}
-
 .Words ul > li {
   padding-left: 1em;
   position: relative;
@@ -176,7 +172,7 @@
 }
 
 .Words h4 {
-  font-size: 1em;
+  font-size: 1.25rem;
   line-height: inherit;
 }
 
@@ -185,5 +181,9 @@
     font-size: 4rem;
     word-spacing: -0.03em;
     letter-spacing: -0.005em;
+  }
+
+  .Words h4 {
+    font-size: 1.5rem;
   }
 }

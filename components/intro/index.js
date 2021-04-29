@@ -4,7 +4,6 @@ const { a } = require('../base')
 module.exports = intro
 
 function intro (props = {}) {
-  console.log(props)
   return html`
     <div class="Intro ${props.large ? 'Intro--large' : ''} ${props.pushed ? 'Intro--pushed' : ''}">
       <div class="Intro-content">

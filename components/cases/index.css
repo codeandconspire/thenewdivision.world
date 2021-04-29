@@ -12,6 +12,10 @@
   .Cases {
     margin: 0 -1.5rem;
   }
+
+  .Cases--pushed {
+    margin-left: calc(29rem - 1.5rem);
+  }
 }
 
 .Cases-title {

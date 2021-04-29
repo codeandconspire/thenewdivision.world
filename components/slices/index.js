@@ -193,7 +193,7 @@ module.exports = class Slices extends Component {
           }
         }).filter(Boolean)
         if (!articles || !articles.length) return
-        return layout(cases(articles, title))
+        return layout(cases(articles, title, data.pushed))
       }
       case 'quotes': {
         if (!items && !items.length) return null
@@ -241,7 +241,7 @@ module.exports = class Slices extends Component {
           client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, small: data.half }) : null,
           link: link,
           small: data.half,
-          color: data.light_label ? 'light' : 'dark',
+          color: data.dark_label ? 'light' : 'dark',
           figure: figure(data.image, { half: data.half })
         }
         return layout(enterence(props))
