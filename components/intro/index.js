@@ -1,8 +1,10 @@
 const html = require('choo/html')
+const { a } = require('../base')
 
 module.exports = intro
 
 function intro (props = {}) {
+  console.log(props)
   return html`
     <div class="Intro ${props.large ? 'Intro--large' : ''} ${props.pushed ? 'Intro--pushed' : ''}">
       <div class="Intro-content">
@@ -14,6 +16,7 @@ function intro (props = {}) {
               <div class="Intro-body">
                 <div class="Words Words--large">
                   ${props.intro}
+                  ${props.action ? a(props.action.link, { class: 'Intro-link' }, props.action.text) : null}
                 </div>
               </div>
             ` : null}

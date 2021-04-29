@@ -52,6 +52,20 @@
   opacity: 0.7;
 }
 
+.Intro-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none !important;
+}
+
+.Intro-link {
+  background-image: url("data:image/svg+xml,%3Csvg width='26' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10h24' stroke='%23fff' stroke-width='1.75'/%3E%3Cpath d='M16 2l8 8M16 18l8-8' stroke='%23fff' stroke-width='1.75' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: auto 1.75rem;
+  padding: 0 3.5rem 0 0;
+}
+
 .Intro-sup {
   display: block;
   margin-bottom: 0.25rem;

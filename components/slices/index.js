@@ -63,10 +63,25 @@ module.exports = class Slices extends Component {
       }
       case 'intro': {
         if (!data.heading || !data.heading.length) return null
+        const link = validate(data.link)
+        let action
+
+        if (link && emit) {
+          emit('preload', link)
+        }
+
+        if (link) {
+          action = {
+            link: link,
+            text: data.link_text ? data.link_text : text`Read more`
+          }
+        }
+
         return layout(intro({
           title: asElement(data.heading, resolve, serialize),
           intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
-          large: true
+          large: true,
+          action: action
         }))
       }
       case 'intro_case': {
