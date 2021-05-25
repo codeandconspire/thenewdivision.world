@@ -200,6 +200,11 @@
     display: none;
   }
 
+  .Header-item:not(.Header-item--icon).is-current .Header-text {
+    border-bottom: 1px solid;
+    padding-bottom: 0.25rem;
+  }
+
   .Header-item--icon .Header-link {
     position: relative;
     padding: 0.6rem;

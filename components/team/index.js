@@ -3,7 +3,7 @@ const html = require('choo/html')
 module.exports = team
 function team (items) {
   return html`
-    <div class="Team">
+    <div class="Team ${items.length === 4 ? 'Team--alt' : ''}">
       ${items.map(function (item) {
         const { figure, title, position, intro } = item
         return html`

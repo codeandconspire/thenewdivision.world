@@ -16,6 +16,10 @@
     grid-row-gap: 3rem;
     margin-bottom: 0;
   }
+
+  .Team--alt {
+    grid-template-columns: repeat(8, 1fr);
+  }
 }
 
 .Team-item {
