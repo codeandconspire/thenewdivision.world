@@ -47,6 +47,7 @@ module.exports = class Slices extends Component {
     const data = slice.primary || {}
     const items = slice.items
     const logos = Clients.logos(state)
+    const clients = Clients.list(state)
 
     const layout = function (content) {
       const classes = className('Slices-item', {
@@ -142,7 +143,7 @@ module.exports = class Slices extends Component {
         }))
       }
       case 'logos': {
-        return layout(state.cache(Clients, `clients-${id}-${index}`).render({ dark: opts.light }))
+        return layout(clients({ dark: opts.light }))
       }
       case 'news': {
         if (!items && !items.length) return null

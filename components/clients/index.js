@@ -92,66 +92,74 @@ module.exports = class Clients extends Component {
     return false
   }
 
-  createElement (opts = {}) {
-    const render = this.rerender.bind(this)
-    const clients = Clients.fetch(this.state, render)
+  static list (state, render) {
+    const self = this
+    const clients = self.fetch(state, render)
 
-    if (!clients) {
+    return function (id, opts = {}) {
+      if (!clients) {
+        return html`
+          <div class="Clients Clients--large">
+            <div class="Clients-list">
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+              <div class="Clients-item"><div class="Clients-loading"></div></div>
+            </div>
+          </div>
+        `
+      }
+
       return html`
         <div class="Clients Clients--large">
-          <div class="Clients-list">
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-            <div class="Clients-item"><div class="Clients-loading"></div></div>
-          </div>
+          <ul class="Clients-list">
+            ${clients.map(function (client) {
+              if (client.data.unlisted) return null
+              let logo
+
+              const hasLight = client.data.logo_light.length || client.data.logo_light.url
+              const hasDark = client.data.logo_dark.length || client.data.logo_dark.url
+
+              if ((opts.dark && hasDark) || (!hasLight)) {
+                logo = client.data.logo_dark
+              } else {
+                logo = client.data.logo_light
+              }
+
+              if (!logo) return null
+
+              const { width, height } = logo.dimensions
+              const attrs = {
+                width,
+                height,
+                class: 'Clients-img',
+                draggable: 'false',
+                loading: 'lazy',
+                alt: ''
+              }
+
+              if (client.data.title) {
+                attrs.title = asText(client.data.title)
+                attrs.alt = attrs.title
+              }
+
+              return html`
+                <li class="Clients-item" style="--Clients-size: ${(height / width).toFixed(2)};">
+                  <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
+                </li>
+              `
+            })}
+          </ul>
         </div>
       `
     }
+  }
 
+  createElement (opts = {}) {
     return html`
-      <div class="Clients Clients--large">
-        <ul class="Clients-list">
-          ${clients.map(function (client) {
-            if (client.data.unlisted) return null
-            let logo
-
-            const hasLight = client.data.logo_light.length || client.data.logo_light.url
-            const hasDark = client.data.logo_dark.length || client.data.logo_dark.url
-
-            if ((opts.dark && hasDark) || (!hasLight)) {
-              logo = client.data.logo_dark
-            } else {
-              logo = client.data.logo_light
-            }
-
-            if (!logo) return null
-
-            const { width, height } = logo.dimensions
-            const attrs = {
-              width,
-              height,
-              class: 'Clients-img',
-              draggable: 'false',
-              loading: 'lazy',
-              alt: ''
-            }
-
-            if (client.data.title) {
-              attrs.title = asText(client.data.title)
-              attrs.alt = attrs.title
-            }
-
-            return html`
-              <li class="Clients-item" style="--Clients-size: ${(height / width).toFixed(2)};">
-                <img ${attrs} src="/media/fetch/_/${encodeURIComponent(logo.url)}">
-              </li>
-            `
-          })}
-        </ul>
-      </div>
+      <div class="Clients"></div>
     `
   }
 }
