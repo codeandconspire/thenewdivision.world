@@ -1,4 +1,5 @@
 const html = require('choo/html')
+const raw = require('choo/html/raw')
 const Component = require('choo/component')
 const asElement = require('prismic-element')
 const media = require('../media')
@@ -118,6 +119,11 @@ module.exports = class Slices extends Component {
         if (!data.image || !data.image.url) return null
         const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
         return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption: caption }))
+      }
+      case 'video': {
+        if (!data.vimeo) return null
+        const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
+        return layout(media(raw(data.vimeo), { caption: caption }))
       }
       case 'callout': {
         data.half = true

@@ -57,12 +57,22 @@
   left: 0.5rem;
 }
 
+.Enterence-client {
+  margin-bottom: 1.1rem;
+  margin-top: 0.6rem;
+}
+
 @media (min-width: 700px) {
   .Enterence-label,
   .Enterence--small .Enterence-label {
     font-size: 1.5rem;
     top: 1.875rem;
     left: 2rem;
+  }
+
+  .Enterence-client {
+    margin-bottom: 0;
+    margin-top: 0.8rem;
   }
 }
 
@@ -97,6 +107,6 @@
     font-size: 2rem;
     line-height: 1.1;
     margin: 1rem 0 0.625rem;
-    max-width: 15em;
+    max-width: 19.5em;
   }
 }
