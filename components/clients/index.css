@@ -37,6 +37,13 @@
   height: calc(1.9rem + (1.8rem * (var(--Clients-size))));
 }
 
+@media (max-width: 699px) {
+  .Clients--odd .Clients-item:last-child {
+    display: none;
+  }
+}
+
+
 .Clients-img,
 .Clients-loading {
   width: 100%;

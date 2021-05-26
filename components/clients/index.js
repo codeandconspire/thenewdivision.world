@@ -113,7 +113,7 @@ module.exports = class Clients extends Component {
       }
 
       return html`
-        <div class="Clients Clients--large">
+        <div class="Clients Clients--large ${clients.length % 2 ? 'Clients--odd' : ''}">
           <ul class="Clients-list">
             ${clients.map(function (client) {
               if (client.data.unlisted) return null

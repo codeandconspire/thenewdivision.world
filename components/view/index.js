@@ -5,6 +5,7 @@ const Footer = require('../footer')
 const { text } = require('../base')
 
 const DEFAULT_TITLE = text`SITE_NAME`
+const DEFAULT_LINE = text`SITE_LINE`
 
 module.exports = createView
 
@@ -29,13 +30,15 @@ function createView (view, getMeta, _opts = {}) {
 
         if (meta && meta.title && meta.title !== DEFAULT_TITLE) {
           meta.title = `${meta.title.replace(/\.$/, '')} – ${DEFAULT_TITLE}`
+        } else {
+          meta.title = `${DEFAULT_TITLE} – ${DEFAULT_LINE}`
         }
 
         if (meta && !meta['og:image']) {
           Object.assign(meta, {
-            'og:image': doc.data.share.url,
-            'og:image:width': doc.data.share.dimensions.width,
-            'og:image:height': doc.data.share.dimensions.height
+            'og:image': setting.share.url,
+            'og:image:width': setting.share.dimensions.width,
+            'og:image:height': setting.share.dimensions.height
           })
         }
       } catch (err) {
