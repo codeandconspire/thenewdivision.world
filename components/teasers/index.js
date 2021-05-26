@@ -16,7 +16,7 @@ function teasers (items) {
               <div class="Teasers-body">
                 ${item.label ? html`<span class="Teasers-label">${item.label}</span>` : null}
                 ${item.title ? html`<h4 class="Teasers-title">${item.title}</h4>` : null}
-                ${a(item.link, { class: 'Teasers-link' }, text`Read more`)}
+                ${a(item.link, { class: 'Teasers-link' }, text`Read more about: ${item.title}`)}
               </div>
             </li>
           `

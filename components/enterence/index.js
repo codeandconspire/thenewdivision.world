@@ -14,7 +14,7 @@ function enterence (props = {}) {
       <div class="Enterence-meta">
         <div class="Enterence-title">
           ${title}
-          ${a(link, { class: 'Enterence-link' }, text`Read more`)}
+          ${a(link, { class: 'Enterence-link' }, text`Read more about: ${title}`)}
         </div>
         ${client ? html`
           <div class="Enterence-client">

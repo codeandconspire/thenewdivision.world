@@ -18,7 +18,7 @@ function media (figure, props = {}) {
           <div class="Media-content">
             ${props.label ? html`<div class="Media-label">${props.label}</div>` : null}
             <h3 class="Media-title">${props.title}</h3>
-            ${a(props.link, { class: 'Media-link' }, text`Read more`)}
+            ${a(props.link, { class: 'Media-link' }, text`Read more about: ${props.title}`)}
           </div>
         ` : null}
       </div>

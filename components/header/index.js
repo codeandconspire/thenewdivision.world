@@ -94,8 +94,8 @@ module.exports = class Header extends Component {
             <strong class="u-hiddenVisually">${text`SITE_NAME`}</strong>
           </a>
 
-          <input id="switch" class="Header-switch js-switch" type="checkbox" aria-hidden />
-          <label class="Header-toggle" for="switch" aria-hidden touchstart="" onclick=${toggle}>
+          <input id="switch" class="Header-switch js-switch" type="checkbox" aria-hidden="true" />
+          <label class="Header-toggle" for="switch" aria-hidden="true" touchstart="" onclick=${toggle}>
             <svg role="presentation" class="Header-line" viewBox="0 0 24 2"><path fill="currentColor" d="M0 0h24v1.75H0z"/></svg>
             <svg role="presentation" class="Header-line" viewBox="0 0 24 2"><path fill="currentColor" d="M0 0h24v1.75H0z"/></svg>
             ${text`Toggle menu`}
@@ -125,7 +125,7 @@ module.exports = class Header extends Component {
             </ul>
           </menu>
         </nav>
-        <hr aria-hidden class="u-hiddenVisually">
+        <hr aria-hidden="true" class="u-hiddenVisually">
       </header>
     `
   }

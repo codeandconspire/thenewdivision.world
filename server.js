@@ -10,6 +10,19 @@ const purge = require('./lib/purge')
 const imageproxy = require('./lib/media')
 
 const PRISMIC_ENDPOINT = 'https://thenewdivision.cdn.prismic.io/api/v2'
+const REDIRECTS = [
+  ['/about', 'company'],
+  ['/thekidsshow', 'global-goals-kids-show'],
+  ['/varldens-plan', 'global-goals-kids-show'],
+  ['/undp', 'film-for-equality'],
+  ['/sei', 'interconnected-agenda'],
+  ['/icc', '/'],
+  ['/sustainordic', 'the-nordic-report'],
+  ['/boverket', 'branding-for-natures-living-infrastructure'],
+  ['/climate_action', '/'],
+  ['/hallbarhetsfokus-2019', 'sustainability-focus-2019'],
+  ['/communicating-the-goals', 'communicating-the-global-goals']
+]
 
 const app = jalla('index.js', { sw: 'sw.js' })
 
@@ -20,6 +33,8 @@ app.use(get('/robots.txt', function (ctx, next) {
     Disallow: ${process.env.NODE_ENV === 'production' ? '' : '/'}
   `
 }))
+
+REDIRECTS.map((path) => app.use(get(path[0], async (ctx) => ctx.redirect(path[1]))))
 
 app.use(imageproxy)
 
