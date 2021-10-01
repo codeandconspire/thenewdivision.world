@@ -16,6 +16,7 @@ app.use(require('./stores/navigation'))
 app.use(require('./stores/preload'))
 app.use(require('./stores/prefetch'))
 app.use(require('./stores/prismic')())
+app.use(require('./stores/tracking'))
 
 app.route('/', lazy(() => splitRequire('./views/page')))
 app.route('/*', lazy(() => splitRequire('./views/page')))

@@ -17,6 +17,7 @@ const REDIRECTS = [
   ['/undp', 'film-for-equality'],
   ['/sei', 'interconnected-agenda'],
   ['/icc', '/'],
+  ['/ghg-calculation', 'offer'],
   ['/sustainordic', 'the-nordic-report'],
   ['/boverket', 'branding-for-natures-living-infrastructure'],
   ['/climate_action', '/'],
