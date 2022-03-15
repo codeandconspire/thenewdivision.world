@@ -88,7 +88,8 @@ app.use(get('/prismic-preview', async function (ctx) {
 
 if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
   purge(['/sw.js'], function (err) {
-    if (err) throw err
+    //if (err) throw err
+    if (err) console.log(err)
     start()
   })
 } else {
