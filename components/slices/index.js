@@ -50,12 +50,13 @@ module.exports = class Slices extends Component {
     const clients = Clients.list(state)
 
     const layout = function (content) {
+      const id = `${slice.slice_type}-${index}`
       const classes = className('Slices-item', {
         'Slices-item--half': data.half,
         'Slices-item--space': data.space,
         'u-hiddenVisually': data.hidden
       })
-      return html`<div class="${classes}">${content}</div>`
+      return html`<div class="${classes}" id="${id}">${content}</div>`
     }
 
     switch (slice.slice_type) {
