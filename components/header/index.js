@@ -4,27 +4,27 @@ const nanoraf = require('nanoraf')
 const Component = require('choo/component')
 
 module.exports = class Header extends Component {
-  constructor(id, state, emit) {
+  constructor (id, state, emit) {
     super(id)
     this.emit = emit
     this.local = state.components[id] = {
       id: id,
-      get href() {
+      get href () {
         return state.href
       }
     }
   }
 
-  update(data, href) {
+  update (data, href) {
     const shouldUpdate = (href !== this.href)
     this.href = href
     return shouldUpdate
   }
 
-  load(el) {
+  load (el) {
     const menu = document.querySelector('.js-menu')
 
-    function onscroll(event) {
+    function onscroll (event) {
       event.preventDefault()
     }
 
@@ -48,7 +48,7 @@ module.exports = class Header extends Component {
     }
   }
 
-  createElement(data, href) {
+  createElement (data, href) {
     const { emit } = this
 
     if (!data) return html`<header class="Header u-container" id="${this.local.id}"></header>`
@@ -65,7 +65,7 @@ module.exports = class Header extends Component {
     })
     emit('preload', { uid: 'home', type: 'page' })
 
-    function close() {
+    function close () {
       window.requestAnimationFrame(function () {
         window.scrollTo(0, 0)
         window.requestAnimationFrame(function () {
@@ -76,7 +76,7 @@ module.exports = class Header extends Component {
       })
     }
 
-    function toggle() {
+    function toggle () {
       const closing = document.querySelector('.js-switch').checked
       const scroll = window.scrollY
       if (closing && scroll !== 0 && scroll < 60) {
@@ -96,7 +96,7 @@ module.exports = class Header extends Component {
             </svg>
             <strong class="u-hiddenVisually">${text`SITE_NAME`}</strong>
           </a>
-      
+
           <input id="switch" class="Header-switch js-switch" type="checkbox" aria-hidden="true" />
           <label class="Header-toggle" for="switch" aria-hidden="true" touchstart="" onclick=${toggle}>
             <svg role="presentation" class="Header-line" viewBox="0 0 24 2">
@@ -105,7 +105,7 @@ module.exports = class Header extends Component {
               <path fill="currentColor" d="M0 0h24v1.75H0z" /></svg>
             ${text`Toggle menu`}
           </label>
-      
+
           <menu class="Header-menu js-menu">
             <a class="Header-logo" href="/" rel="home" onclick="${close}">
               <svg role="presentation" viewBox="0 0 150 35" width="150" height="35" fill="none">

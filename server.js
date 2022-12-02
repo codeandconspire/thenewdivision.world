@@ -45,12 +45,14 @@ app.use(imageproxy)
 app.use(post('/prismic-hook', compose([body(), async function (ctx) {
   const secret = ctx.request.body && ctx.request.body.secret
   ctx.assert(secret === process.env.PRISMIC_SECRET, 403, 'Secret mismatch')
-  return new Promise(function (resolve, reject) {
+  await new Promise(function (resolve, reject) {
     purge(function (err, response) {
       if (err) return reject(err)
       resolve()
     })
   })
+  ctx.type = 'application/json'
+  ctx.body = JSON.stringify({ success: true })
 }])))
 
 app.use(function (ctx, next) {
@@ -91,7 +93,7 @@ app.use(get('/prismic-preview', async function (ctx) {
 
 if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
   purge(['/sw.js'], function (err) {
-    //if (err) throw err
+    // if (err) throw err
     if (err) console.log(err)
     start()
   })
@@ -101,7 +103,7 @@ if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
 
 // resolve document preview url
 // obj -> str
-function resolvePreview(doc) {
+function resolvePreview (doc) {
   switch (doc.type) {
     case 'page': return `/${doc.uid}`
     default: throw new Error('Preview not available')
@@ -110,6 +112,6 @@ function resolvePreview(doc) {
 
 // start server
 // () -> void
-function start() {
+function start () {
   app.listen(process.env.PORT || 8080)
 }
