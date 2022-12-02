@@ -57,7 +57,7 @@
     "dotenv": "^8.1.0",
     "focus-visible": "^5.2.0",
     "hstream": "^1.2.0",
-    "jalla": "^1.0.0-34",
+    "jalla": "^1.0.0-40",
     "koa-body": "^4.1.1",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
