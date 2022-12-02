@@ -25,7 +25,10 @@ const REDIRECTS = [
   ['/communicating-the-goals', 'communicating-the-global-goals']
 ]
 
-const app = jalla('index.js', { sw: 'sw.js' })
+const app = jalla('index.js', {
+  sw: 'sw.js',
+  serve: process.env.NODE_ENV === 'production'
+})
 
 app.use(get('/robots.txt', function (ctx, next) {
   ctx.type = 'text/plain'
@@ -98,7 +101,7 @@ if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
 
 // resolve document preview url
 // obj -> str
-function resolvePreview (doc) {
+function resolvePreview(doc) {
   switch (doc.type) {
     case 'page': return `/${doc.uid}`
     default: throw new Error('Preview not available')
@@ -107,6 +110,6 @@ function resolvePreview (doc) {
 
 // start server
 // () -> void
-function start () {
+function start() {
   app.listen(process.env.PORT || 8080)
 }

@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "build": "jalla build --sw sw.js index.js",
     "debug": "node --inspect server.js",
     "test:js": "standard",
     "test": "npm run test:js"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "documentify": {
     "transform": [
