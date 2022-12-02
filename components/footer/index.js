@@ -17,7 +17,8 @@ module.exports = class Footer extends Component {
 
   createElement (data, opts = {}) {
     this.local.themed = opts.themed
-    if (!data) return
+
+    if (!data) return html`<footer class="Footer" id="${this.local.id}"></footer>`
 
     function top () {
       window.requestAnimationFrame(function () {
