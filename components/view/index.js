@@ -30,7 +30,7 @@ function createView (view, getMeta, _opts = {}) {
 
         if (meta && meta.title && meta.title !== DEFAULT_TITLE) {
           meta.title = `${meta.title.replace(/\.$/, '')} – ${DEFAULT_TITLE}`
-        } else {
+        } else if (meta) {
           meta.title = `${DEFAULT_TITLE} – ${DEFAULT_LINE}`
         }
 
