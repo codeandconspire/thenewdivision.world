@@ -177,12 +177,12 @@ function prismicStore (opts) {
     }
 
     state.prismic = Object.create({
-      get: get,
-      cache: cache,
-      getByID: getByID,
-      getByIDs: getByIDs,
-      getByUID: getByUID,
-      getSingle: getSingle,
+      get,
+      cache,
+      getByID,
+      getByIDs,
+      getByUID,
+      getSingle,
       toJSON () {
         const json = {}
         for (let i = 0, value; i < cache.keys.length; i++) {

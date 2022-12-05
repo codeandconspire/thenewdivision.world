@@ -75,7 +75,7 @@ module.exports = class Slices extends Component {
 
         if (link) {
           action = {
-            link: link,
+            link,
             text: data.link_text ? data.link_text : text`Read more`
           }
         }
@@ -84,7 +84,7 @@ module.exports = class Slices extends Component {
           title: asElement(data.heading, resolve, serialize),
           intro: data.intro && data.intro.length ? asElement(data.intro, resolve, serialize) : null,
           large: true,
-          action: action
+          action
         }))
       }
       case 'intro_case': {
@@ -120,12 +120,12 @@ module.exports = class Slices extends Component {
       case 'photo': {
         if (!data.image || !data.image.url) return null
         const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
-        return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption: caption }))
+        return layout(media(figure(data.image, { half: data.half, eager: index < 3 }), { caption }))
       }
       case 'video': {
         if (!data.vimeo) return null
         const caption = data.caption && data.caption.length ? asElement(data.caption, resolve, serialize) : null
-        return layout(media(raw(data.vimeo), { caption: caption }))
+        return layout(media(raw(data.vimeo), { caption }))
       }
       case 'callout': {
         data.half = true
@@ -197,7 +197,7 @@ module.exports = class Slices extends Component {
           return {
             title: asElement(item.heading, resolve, serialize),
             client: item.client && item.client.id ? logos(item.client.id, { dark: opts.light, small: true }) : null,
-            link: link
+            link
           }
         }).filter(Boolean)
         if (!articles || !articles.length) return
@@ -228,7 +228,7 @@ module.exports = class Slices extends Component {
         const opts = {
           label: data.label && data.label.length ? asElement(data.label, resolve, serialize) : null,
           title: data.heading ? asText(data.heading, resolve, serialize) : null,
-          link: link,
+          link,
           dark: data.dark
         }
         return layout(media(figure(data.image, { half: data.half }), opts))
@@ -247,7 +247,7 @@ module.exports = class Slices extends Component {
           label: data.label ? data.label : null,
           title: data.heading ? asText(data.heading, resolve, serialize) : null,
           client: data.client && data.client.id ? logos(data.client.id, { dark: opts.light, small: data.half }) : null,
-          link: link,
+          link,
           small: data.half,
           color: data.dark_label ? 'light' : 'dark',
           figure: figure(data.image, { half: data.half })
@@ -269,7 +269,7 @@ module.exports = class Slices extends Component {
           return {
             label: item.label ? item.label : null,
             title: asText(item.heading),
-            link: link,
+            link,
             figure: figure(item.image, { teaser: true })
           }
         }).filter(Boolean)
@@ -318,9 +318,11 @@ module.exports = class Slices extends Component {
 
     return html`
       <div class="Slices js-slices" id="${this.id}">
-        ${slices ? slices.map(function (item, index) {
-          return Slices.asSlice(item, index, opts)
-        }) : null}
+        ${slices
+          ? slices.map(function (item, index) {
+              return Slices.asSlice(item, index, opts)
+            })
+          : null}
       </div>
     `
   }

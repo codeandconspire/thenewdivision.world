@@ -8,7 +8,7 @@ module.exports = class Header extends Component {
     super(id)
     this.emit = emit
     this.local = state.components[id] = {
-      id: id,
+      id,
       get href () {
         return state.href
       }

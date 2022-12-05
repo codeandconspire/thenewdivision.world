@@ -84,7 +84,7 @@ app.use(get('/prismic-preview', async function (ctx) {
 
   ctx.set('Cache-Control', 'no-cache, private, max-age=0')
   ctx.cookies.set(Prismic.previewCookie, token, {
-    expires: expires,
+    expires,
     httpOnly: false,
     path: '/'
   })

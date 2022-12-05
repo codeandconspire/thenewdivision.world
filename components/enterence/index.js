@@ -16,11 +16,13 @@ function enterence (props = {}) {
           ${title}
           ${a(link, { class: 'Enterence-link' }, text`Read more about: ${title}`)}
         </div>
-        ${client ? html`
-          <div class="Enterence-client">
-            ${client}
-          </div>
-        ` : null}
+        ${client
+          ? html`
+              <div class="Enterence-client">
+                ${client}
+              </div>
+            `
+          : null}
       </div>
     </div>
   `

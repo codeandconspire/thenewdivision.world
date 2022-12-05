@@ -14,18 +14,22 @@ function media (figure, props = {}) {
         <div class="Media-figure">
           ${figure}
         </div>
-        ${props.title ? html`
-          <div class="Media-content">
-            ${props.label ? html`<div class="Media-label">${props.label}</div>` : null}
-            <h3 class="Media-title">${props.title}</h3>
-            ${a(props.link, { class: 'Media-link' }, text`Read more about: ${props.title}`)}
-          </div>
-        ` : null}
+        ${props.title
+          ? html`
+              <div class="Media-content">
+                ${props.label ? html`<div class="Media-label">${props.label}</div>` : null}
+                <h3 class="Media-title">${props.title}</h3>
+                ${a(props.link, { class: 'Media-link' }, text`Read more about: ${props.title}`)}
+              </div>
+            `
+          : null}
       </div>
 
-      ${props.caption ? html`
-        <span class="Media-caption">${props.caption}</span>
-      ` : null}
+      ${props.caption
+        ? html`
+            <span class="Media-caption">${props.caption}</span>
+          `
+        : null}
     </div>
   `
 }

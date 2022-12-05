@@ -16,12 +16,14 @@ function figure (image, opts = {}) {
 
   return html`
     <figure class="${classes} ${opts.class ? opts.class : ''}">
-      ${desktop ? html`
-        <div class="Figure-container" style="--Figure-aspect: ${(desktop.dimensions.height / desktop.dimensions.width * 100).toFixed(2)}%; ${mobile ? `--Figure-aspect-mobile: ${(mobile.dimensions.height / mobile.dimensions.width * 100).toFixed(2)}%` : ''}">
-          ${desktop.url ? getImage(desktop, opts) : null}
-          ${opts.children ? html`<div class="Figure-children">${opts.children}</div>` : null}
-        </div>
-      ` : null}
+      ${desktop
+        ? html`
+            <div class="Figure-container" style="--Figure-aspect: ${(desktop.dimensions.height / desktop.dimensions.width * 100).toFixed(2)}%; ${mobile ? `--Figure-aspect-mobile: ${(mobile.dimensions.height / mobile.dimensions.width * 100).toFixed(2)}%` : ''}">
+              ${desktop.url ? getImage(desktop, opts) : null}
+              ${opts.children ? html`<div class="Figure-children">${opts.children}</div>` : null}
+            </div>
+          `
+        : null}
     </figure>
   `
 

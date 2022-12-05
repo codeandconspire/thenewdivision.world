@@ -13,11 +13,13 @@ function reel (items, opts) {
             <div class="Reel-quote">
               ${quote}
             </div>
-            ${client ? html`
-              <div class="Reel-client">
-                ${client}
-              </div>
-            ` : null}
+            ${client
+              ? html`
+                  <div class="Reel-client">
+                    ${client}
+                  </div>
+                `
+              : null}
             <p class="Reel-author">
               <strong>${author}</strong>
               <br />

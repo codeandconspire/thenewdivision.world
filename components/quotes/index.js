@@ -9,11 +9,13 @@ function quotes (items) {
         const { content, client, author } = item
         return html`
           <div class="Quotes-item">
-            ${client ? html`
-              <div class="Quotes-client">
-                ${client}
-              </div>
-            ` : null}
+            ${client
+              ? html`
+                  <div class="Quotes-client">
+                    ${client}
+                  </div>
+                `
+              : null}
             <div class="Quotes-content">
               ${content}
             </div>

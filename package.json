@@ -23,14 +23,6 @@
       ]
     ]
   },
-  "standard": {
-    "parser": "babel-eslint"
-  },
-  "eslintConfig": {
-    "extends": [
-      "standard"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codeandconspire/thenewdivision.world.git"
@@ -42,8 +34,7 @@
   },
   "homepage": "https://github.com/codeandconspire/thenewdivision.world#readme",
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "standard": "^16.0.4"
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "cccpurge": "^2.0.0",
