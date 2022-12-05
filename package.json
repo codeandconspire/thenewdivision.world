@@ -43,29 +43,28 @@
   "homepage": "https://github.com/codeandconspire/thenewdivision.world#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.4"
   },
   "dependencies": {
     "cccpurge": "^2.0.0",
-    "choo": "^7.0.0",
+    "choo": "^7.1.0",
     "choo-devtools": "^3.0.4",
-    "choo-lazy-view": "^2.0.0",
     "choo-meta": "^2.0.0",
     "choo-service-worker": "^3.0.0",
-    "cloudinary": "^1.15.0",
+    "cloudinary": "^1.32.0",
     "dedent": "^0.7.0",
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.6.0",
     "focus-visible": "^5.2.0",
     "hstream": "^1.2.0",
     "jalla": "^1.0.0-34",
-    "koa-body": "^4.1.1",
+    "koa-body": "^4.2.0",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
     "nanolru": "^1.0.0",
     "nanoraf": "^3.1.0",
     "normalize.css": "^8.0.1",
     "postcss-url": "^8.0.0",
-    "prismic-element": "^2.0.4",
+    "prismic-element": "^2.1.0",
     "prismic-javascript": "^3.0.2",
     "prismic-richtext": "^1.0.3"
   }
