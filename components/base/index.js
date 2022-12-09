@@ -157,6 +157,7 @@ function resolve (doc) {
     case 'page': return `/${doc.uid}`
     case 'Web':
     case 'Media': return doc.url
+    case 'broken_type': return '/404'
     default: {
       // handle links to web and media
       const type = doc.link_type
