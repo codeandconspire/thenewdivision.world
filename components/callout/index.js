@@ -8,7 +8,7 @@ function callout (props = {}) {
   return html`
     <section class="Callout ${props.loose ? 'Callout--loose' : ''}">
       <hr aria-hidden="true" class="u-hiddenVisually">
-      ${props.icon ? icon(props.icon, { class: 'Callout-icon' }) : null}
+      ${props.icon ? icon(props.icon, { class: 'Callout-icon', mono: true }) : null}
       <div>
         ${heading ? html`<h2 class="Callout-title">${heading}</h2>` : null}
         ${content ? html`<div class="Callout-body">${content}</div>` : null}

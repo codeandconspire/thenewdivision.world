@@ -12,7 +12,7 @@ module.exports = createView
 function createView (view, getMeta, _opts = {}) {
   return function (state, emit) {
     let children, meta, setting
-    let config = { }
+    let config = {}
     const opts = _opts
 
     state.prismic.getSingle('setting', function (err, doc) {
@@ -55,6 +55,10 @@ function createView (view, getMeta, _opts = {}) {
     })
 
     const style = `--color-background: ${config.background}; --color-text: ${config.color}`
+
+    if (typeof window !== 'undefined') {
+      document.documentElement.style = style
+    }
 
     emit('scrolltop')
 
