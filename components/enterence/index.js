@@ -1,5 +1,5 @@
 const html = require('choo/html')
-const { text, a } = require('../base')
+const { a } = require('../base')
 
 module.exports = enterence
 
@@ -13,8 +13,7 @@ function enterence (props = {}) {
       </div>
       <div class="Enterence-meta">
         <div class="Enterence-title">
-          ${title}
-          ${a(link, { class: 'Enterence-link' }, text`Read more about: ${title}`)}
+          ${a(link, { class: 'Enterence-link' }, title)}
         </div>
         ${client
           ? html`

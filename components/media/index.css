@@ -57,7 +57,8 @@
   }
 }
 
-.Media-link {
+.Media-link::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -70,7 +71,7 @@
   -webkit-touch-callout: none;
 }
 
-.Media-link:active {
+.Media-link:active::after {
   opacity: 0.4;
 }
 

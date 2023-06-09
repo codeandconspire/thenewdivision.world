@@ -1,12 +1,9 @@
-const fs = require('fs')
-const path = require('path')
 const assert = require('assert')
 const LRU = require('nanolru')
 const html = require('choo/html')
 const splitRequire = require('split-require')
 const { Elements } = require('prismic-richtext')
 const LinkHelper = require('prismic-helpers').Link
-const lang = require('./lang.json')
 
 if (typeof window !== 'undefined') {
   splitRequire('focus-visible')
@@ -20,7 +17,6 @@ exports.img = img
 exports.src = src
 exports.srcset = srcset
 exports.metaKey = metaKey
-exports.text = text
 exports.resolve = resolve
 exports.asText = asText
 exports.serialize = serialize
@@ -154,7 +150,12 @@ function metaKey (e) {
 // obj -> str
 function resolve (doc) {
   switch (doc.type) {
-    case 'page': return `/${doc.uid}`
+    case 'page': {
+      const prefix = doc.lang === 'en-us' ? '' : `/${doc.lang.substring(0, 2)}`
+      return doc.uid === 'home' ? prefix || '/' : `${prefix}/${doc.uid}`
+    }
+    case 'settings':
+      return doc.lang === 'en-us' ? '/' : `/${doc.lang.substring(0, 2)}`
     case 'Web':
     case 'Media': return doc.url
     case 'broken_type': return '/404'
@@ -165,34 +166,6 @@ function resolve (doc) {
       throw new Error(`Could not resolve href for document type "${doc.type}"`)
     }
   }
-}
-
-// Get text by applying as tagged template literal i.e. text`Hello ${str}`
-function text (strings, ...parts) {
-  parts = parts || []
-
-  const key = Array.isArray(strings) ? strings.join('%s') : strings
-  let value = lang[key]
-
-  if (!value) {
-    value = lang[key] = key
-    if (typeof window === 'undefined') {
-      const file = path.join(__dirname, 'lang.json')
-      fs.writeFileSync(file, JSON.stringify(lang, null, 2))
-    }
-  }
-
-  let hasForeignPart = false
-  const res = value.split('%s').reduce(function (result, str, index) {
-    const part = parts[index] || ''
-    if (!hasForeignPart) {
-      hasForeignPart = (typeof part !== 'string' && typeof part !== 'number')
-    }
-    result.push(str, part)
-    return result
-  }, [])
-
-  return hasForeignPart ? res : res.join('')
 }
 
 // Nullable text getter for Prismic text fields

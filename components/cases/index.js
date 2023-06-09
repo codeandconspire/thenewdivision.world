@@ -1,5 +1,5 @@
 const html = require('choo/html')
-const { a, text } = require('../base')
+const { a } = require('../base')
 
 module.exports = cases
 
@@ -12,10 +12,9 @@ function cases (items, title, pushed) {
         return html`
           <div class="Cases-item">
             <div class="Cases-name">
-              ${title}
+              ${a(link, { class: 'Cases-link' }, title)}
             </div>
             ${client}
-            ${a(link, { class: 'Cases-link' }, text`View case`)}
           </div>
         `
       })}

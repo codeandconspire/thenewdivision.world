@@ -8,7 +8,8 @@
   margin-top: 0.75rem;
 }
 
-.Teasers-link {
+.Teasers-link::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +22,7 @@
   font-size: 0;
 }
 
-.Teasers-link:active {
+.Teasers-link:active::after {
   opacity: 0.4;
 }
 

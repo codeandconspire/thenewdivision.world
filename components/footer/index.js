@@ -6,8 +6,14 @@ const { a, icon } = require('../base')
 module.exports = class Footer extends Component {
   constructor (id, state, emit) {
     super(id)
+    this.emit = emit
+    this.state = state
     this.prismic = state.prismic
     this.local = state.components[id] = { id }
+  }
+
+  static placeholder () {
+    return html`<footer class="Footer"></footer>`
   }
 
   update (data, opts) {
@@ -15,10 +21,10 @@ module.exports = class Footer extends Component {
     return false
   }
 
-  createElement (data, opts = {}) {
-    this.local.themed = opts.themed
+  createElement (data, languages = [], opts = {}) {
+    const { state, emit, local } = this
 
-    if (!data) return html`<footer class="Footer" id="${this.local.id}"></footer>`
+    local.themed = opts.themed
 
     function top () {
       window.requestAnimationFrame(function () {
@@ -27,7 +33,7 @@ module.exports = class Footer extends Component {
     }
 
     return html`
-      <footer class="Footer" id="${this.local.id}">
+      <footer class="Footer" id="${local.id}">
         <hr aria-hidden="true" class="u-hiddenVisually">
         <div class="u-container">
           <div class="Footer-wrap">
@@ -63,6 +69,32 @@ module.exports = class Footer extends Component {
               ${asElement(data.col6)}
             </div>
           </div>
+          ${languages.length > 1
+              ? html`
+                  <ol class="Footer-languages">
+                    ${languages.map(function (lang) {
+                      const isActive = state.language === lang
+                      const href = lang === 'en' ? '/' : `/${lang}`
+                      return html`
+                        <li class="Footer-language">
+                          ${a(
+                            href,
+                            {
+                              class: `Footer-link ${isActive ? 'is-active' : ''}`,
+                              onclick (event) {
+                                emit('languagechange', lang)
+                                emit('pushState', this.href)
+                                event.preventDefault()
+                              }
+                            },
+                            lang.toUpperCase()
+                          )}
+                        </li>
+                      `
+                    })}
+                  </ol>
+                `
+              : null}
         </div>
       </footer>
     `

@@ -8,6 +8,7 @@ const compose = require('koa-compose')
 const Prismic = require('prismic-javascript')
 const purge = require('./lib/purge')
 const imageproxy = require('./lib/media')
+const { resolve } = require('./components/base')
 
 const PRISMIC_ENDPOINT = 'https://thenewdivision.cdn.prismic.io/api/v2'
 const REDIRECTS = [
@@ -77,7 +78,7 @@ app.use(function (ctx, next) {
 app.use(get('/prismic-preview', async function (ctx) {
   const { token, documentId } = ctx.query
   const api = await Prismic.api(PRISMIC_ENDPOINT)
-  const href = await api.getPreviewResolver(token, documentId).resolve(resolvePreview, '/')
+  const href = await api.getPreviewResolver(token, documentId).resolve(resolve, '/')
   const expires = process.env.NODE_ENV === 'development'
     ? new Date(Date.now() + (1000 * 60 * 60 * (24 - new Date().getHours())))
     : new Date(Date.now() + (1000 * 60 * 30))
@@ -99,15 +100,6 @@ if (+process.env.HEROKU && process.env.NODE_ENV === 'production') {
   })
 } else {
   start()
-}
-
-// resolve document preview url
-// obj -> str
-function resolvePreview (doc) {
-  switch (doc.type) {
-    case 'page': return `/${doc.uid}`
-    default: throw new Error('Preview not available')
-  }
 }
 
 // start server

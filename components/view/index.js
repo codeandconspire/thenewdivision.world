@@ -2,25 +2,21 @@ const html = require('choo/html')
 const error = require('./error')
 const Header = require('../header')
 const Footer = require('../footer')
-const { text } = require('../base')
 
-const DEFAULT_TITLE = text`SITE_NAME`
-const DEFAULT_LINE = text`SITE_LINE`
+const SITE_NAME = 'The New Division'
 
 module.exports = createView
 
-function createView (view, getMeta, _opts = {}) {
+function createView (view, getMeta, opts = {}) {
   return function (state, emit) {
-    let children, meta, setting
-    let config = { }
-    const opts = _opts
+    return state.prismic.getSingle('setting', function (err, doc) {
+      const setting = doc?.data
 
-    state.prismic.getSingle('setting', function (err, doc) {
-      if (err || !doc) return null
-      setting = doc.data
-
+      let children, meta
+      const config = { ...opts }
       try {
-        config = { ...opts }
+        if (err) throw err
+
         if (typeof config.resolve === 'function') {
           Object.assign(config, config.resolve(state))
         }
@@ -28,10 +24,10 @@ function createView (view, getMeta, _opts = {}) {
         children = view(state, emit)
         meta = getMeta(state)
 
-        if (meta && meta.title && meta.title !== DEFAULT_TITLE) {
-          meta.title = `${meta.title.replace(/\.$/, '')} – ${DEFAULT_TITLE}`
+        if (meta && meta.title && meta?.title !== SITE_NAME) {
+          meta.title = `${meta.title.replace(/\.$/, '')} – ${SITE_NAME}`
         } else if (meta) {
-          meta.title = `${DEFAULT_TITLE} – ${DEFAULT_LINE}`
+          meta.title = `${SITE_NAME} – ${doc?.data.fallback_title || state.text`Loading`}`
         }
 
         if (meta && !meta['og:image']) {
@@ -42,30 +38,34 @@ function createView (view, getMeta, _opts = {}) {
           })
         }
       } catch (err) {
-        const title = text`Nothing here`
+        const title = state.text`Nothing here`
         config.theme = null
         config.color = null
         config.background = null
         err.status = state.offline ? 503 : err.status || 500
         children = error(err, state, emit)
-        meta = { title: `${title} – ${DEFAULT_TITLE}` }
+        meta = { title: `${title} – ${SITE_NAME}` }
       }
 
-      emit('meta', Object.assign({ title: DEFAULT_TITLE }, meta))
+      emit('meta', Object.assign({ title: SITE_NAME }, meta))
+
+      const style = `--color-background: ${config.background}; --color-text: ${config.color}`
+      const languages = [doc?.lang]
+        .concat(doc?.alternate_languages.map((lang) => lang.lang))
+        .filter(Boolean)
+        .map((lang) => lang.substring(0, 2))
+
+      emit('scrolltop')
+
+      return html`
+        <div class="View" id="app" style="${style}">
+          ${doc ? state.cache(Header, 'header').render(setting, state.href) : Header.placeholder()}
+          <main class="View-main">
+            ${children}
+          </main>
+          ${doc ? state.cache(Footer, 'footer').render(setting, languages, config) : Footer.placeholder()}
+        </div>
+      `
     })
-
-    const style = `--color-background: ${config.background}; --color-text: ${config.color}`
-
-    emit('scrolltop')
-
-    return html`
-      <div class="View" id="app" style="${style}">
-        ${state.cache(Header, 'header').render(setting, state.href)}
-        <main class="View-main">
-          ${children}
-        </main>
-        ${state.cache(Footer, 'footer').render(setting, config)}
-      </div>
-    `
   }
 }

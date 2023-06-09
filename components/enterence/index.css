@@ -20,7 +20,8 @@
   }
 }
 
-.Enterence-link {
+.Enterence-link::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -34,7 +35,7 @@
   z-index: 1;
 }
 
-.Enterence-link:active {
+.Enterence-link:active::after {
   opacity: 0.4;
 }
 
