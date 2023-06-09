@@ -17,7 +17,7 @@ const figure = require('../figure')
 const enterence = require('../enterence')
 const teasers = require('../teasers')
 const Clients = require('../clients')
-const { asText, className, resolve, serialize, text } = require('../base')
+const { asText, className, resolve, serialize } = require('../base')
 
 module.exports = class Slices extends Component {
   constructor (id, state, emit) {
@@ -76,7 +76,7 @@ module.exports = class Slices extends Component {
         if (link) {
           action = {
             link,
-            text: data.link_text ? data.link_text : text`Read more`
+            text: data.link_text ? data.link_text : state.text`Read more`
           }
         }
 
@@ -267,9 +267,9 @@ module.exports = class Slices extends Component {
           }
 
           return {
-            label: item.label ? item.label : null,
-            title: asText(item.heading),
             link,
+            title: asText(item.heading),
+            label: item.label ? item.label : null,
             figure: figure(item.image, { teaser: true })
           }
         }).filter(Boolean)
@@ -294,7 +294,7 @@ module.exports = class Slices extends Component {
         // Forgive me, Lord, for I have sinned
         // When this is used as page intro on the cases page, we need a h1
         if (state.params.wildcard === 'cases') {
-          opts.title = text`Cases`
+          opts.title = state.text`Cases`
         }
 
         if (!articles || !articles.length) return

@@ -4,6 +4,10 @@ const html = require('choo/html')
 const Prismic = require('prismic-javascript')
 
 const REPOSITORY = 'https://thenewdivision.cdn.prismic.io/api/v2'
+const LANGUAGE_CODES = {
+  en: 'en-us',
+  sv: 'sv-se'
+}
 
 module.exports = prismicStore
 
@@ -64,9 +68,10 @@ function prismicStore (opts) {
       }
 
       // pluck out prefetch from opts
+      const lang = LANGUAGE_CODES[opts.lang || state.language]
       const prefetch = state.prefetch || opts.prefetch
       const cb = opts.render || render
-      opts = Object.assign({}, opts)
+      opts = { ...opts, lang }
       delete opts.prefetch
       delete opts.render
 

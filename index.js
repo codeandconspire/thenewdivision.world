@@ -1,9 +1,24 @@
 const splitRequire = require('split-require')
-const choo = require('choo')
+const Choo = require('choo')
+
+const languages = require('./lib/i18n.json')
 
 const SELECTOR = '#app'
+const ALTERNATE_LANGUAGES = Object.keys(languages)
+  .filter((lang) => lang !== 'en')
 
-const app = choo()
+class App extends Choo {
+  _setCache (state) {
+    super._setCache(state)
+    const render = state.cache
+    state.cache = function (Component, id, ...args) {
+      // Markup id with current language to prevent stale content
+      return render(Component, `${id}-${state.language}`, ...args)
+    }
+  }
+}
+
+const app = new App()
 
 if (process.env.NODE_ENV === 'development') {
   app.use(require('choo-devtools')())
@@ -18,9 +33,14 @@ app.use(require('./stores/preload'))
 app.use(require('./stores/prefetch'))
 app.use(require('./stores/prismic')())
 app.use(require('./stores/tracking'))
+app.use(require('./stores/i18n'))
 
 app.route('/', lazy(() => splitRequire('./views/page')))
 app.route('/*', lazy(() => splitRequire('./views/page')))
+for (const lang of ALTERNATE_LANGUAGES) {
+  app.route(`/${lang}`, lazy(() => splitRequire('./views/page')))
+  app.route(`/${lang}/*`, lazy(() => splitRequire('./views/page')))
+}
 
 try {
   module.exports = app.mount(SELECTOR)

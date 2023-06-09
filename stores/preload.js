@@ -22,6 +22,7 @@ function preload (state, emit) {
         })
         if (photo) {
           const elm = asSlice(photo, 1, { state, id: 'preload' })
+          if (!elm) return
           elm.classList.add('u-hiddenVisually')
           document.querySelector('.js-slices').appendChild(elm)
         }
