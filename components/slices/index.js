@@ -18,6 +18,7 @@ const enterence = require('../enterence')
 const teasers = require('../teasers')
 const Clients = require('../clients')
 const { asText, className, resolve, serialize } = require('../base')
+const { offerAnswers, OfferQuestions } = require('../offer')
 
 module.exports = class Slices extends Component {
   constructor (id, state, emit) {
@@ -215,6 +216,40 @@ module.exports = class Slices extends Component {
         }).filter(Boolean)
         if (!articles || !articles.length) return
         return layout(quotes(articles))
+      }
+      case 'offer_questions': {
+        if (!items && !items.length) return null
+        const questions = items.map(function (item) {
+          if (!item.question || !item.question.length) return null
+          return {
+            content: asElement(item.question, resolve, serialize),
+            target: item.target || null
+          }
+        }).filter(Boolean)
+        if (!questions || !questions.length) return
+        const props = {
+          heading: asElement(data.heading, resolve, serialize) || null,
+          questions
+        }
+        return layout(state.cache(OfferQuestions, `questions-${id}-${index}`).render(props))
+      }
+      case 'offer_answers': {
+        if (!items && !items.length) return null
+        const answers = items.map(function (item) {
+          if (!item.answer || !item.answer.length) return null
+          return {
+            content: asElement(item.answer, resolve, serialize),
+            target: item.target || null
+          }
+        }).filter(Boolean)
+        if (!answers || !answers.length) return
+        const props = {
+          heading: asElement(data.heading, resolve, serialize) || null,
+          target: data.target,
+          introduction: asElement(data.introduction, resolve, serialize) || null,
+          answers
+        }
+        return layout(offerAnswers(props))
       }
       case 'banner': {
         if (!data.heading || !data.heading.length) return null

@@ -1,0 +1,103 @@
+@import "../base";
+
+/** @define Offer */
+
+.Offer-section {
+  margin-top: 1.75rem;
+  scroll-margin-top: 1.5rem;
+}
+
+ @media (min-width: 700px) {
+  .Offer-section {
+    margin-top: 3.25rem;
+  }
+}
+
+.Offer--questions section {
+  border-top: 1px solid;
+}
+
+.Offer--questions a {
+  font-weight: normal;
+  text-decoration: none;
+  text-wrap: balance;
+  display: block;
+  margin: 0;
+  padding: 0.9rem 0px;
+}
+
+.Offer--answers {
+	display: block;
+	border-top: 1.5px solid currentColor;
+	cursor: default;
+	outline: 0;
+	position: relative;
+  scroll-margin-top: -3px;
+}
+
+.Offer--answers[open] {
+  padding-bottom: 2.5rem;
+}
+
+@media (min-width: 700px) {
+	.Offer--answers[open] {
+		padding-bottom: 3rem;
+	}
+}
+
+.Offer--answers summary {
+	display: block;
+	list-style: none;
+	user-select: none;
+	padding: 1rem 0 1.5rem;
+	position: relative;
+	outline: 0;
+}
+
+.Offer--answers[open] summary {
+  padding-bottom: 0;
+}
+
+@media (min-width: 700px) {
+	.Offer--answers summary {
+		padding: 1.5rem 0;
+	}
+}
+
+.Offer--answers summary:active {
+	opacity: 0.6;
+}
+
+.Offer--answers summary::-webkit-details-marker {
+	display: none;
+}
+
+@media (min-width: 700px) {
+  .Offer--answers summary::before {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    right: 0;
+    width: 2rem;
+    height: 2px;
+    transform: translateY(-50%);
+    background-color: currentColor;
+  }
+
+  .Offer--answers summary::after {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
+    width: 2px;
+    height: 2rem;
+    transform: translate(50%, -50%);
+    background-color: currentColor;
+    transform-origin: center;
+  }
+
+  .Offer--answers[open] summary::after {
+    transform: translate(50%, -50%) scaleY(0);
+  }
+}
+

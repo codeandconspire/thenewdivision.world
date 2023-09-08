@@ -184,6 +184,12 @@
     letter-spacing: -0.005em;
   }
 
+  .Words h3 {
+    font-size: 2.25rem;
+    line-height: 1.05;
+    max-width: 70%;
+  }
+
   .Words h4 {
     font-size: 1.35rem;
   }
