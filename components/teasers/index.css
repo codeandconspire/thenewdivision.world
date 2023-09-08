@@ -71,7 +71,9 @@
   }
 
   .Teasers-title {
-    font-size: 3rem;
-    line-height: 1.1;
+    font-size: 2.5rem;
+    line-height: 1.05;
+    text-wrap: balance;
+    width: 95%;
   }
 }

@@ -27,7 +27,7 @@
 @media (min-width: 700px) {
   .Callout {
     padding: 3.25rem 3rem 3.25rem 3rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .Callout--loose {
@@ -62,11 +62,12 @@
   font-weight: bold;
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  text-wrap: balance;
 }
 
 @media (min-width: 700px) {
   .Callout-title {
-    font-size: 5rem;
+    font-size: 3.5rem;
     line-height: 1;
     margin-bottom: 1rem;
     letter-spacing: -0.005em;
@@ -81,6 +82,7 @@
 
 .Callout-body {
   max-width: 21em;
+  text-wrap: balance;
 }
 
 @media (min-width: 700px) {
@@ -93,7 +95,11 @@
   font-weight: bold;
   text-decoration: underline;
   text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.02em;
+  text-underline-offset: 0.05em;
+}
+
+.Callout [data-icon="Linkedin"] {
+  margin-left: -0.75rem;
 }
 
 .Callout-body a:active {

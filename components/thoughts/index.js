@@ -6,13 +6,10 @@ function thoughts (items, title = null) {
     <section class="Thoughts">
       ${title ? html`<h2 class="Thoughts-title">${title}</h2>` : null}
       ${items.map(function (item) {
-        const { date, title } = item
+        const { title } = item
         return html`
           <div class="Thoughts-item">
-            ${date ? html`<span class="Thoughts-date">${date}</span>` : null}
-            <div class="Thoughts-title">
-              ${title}
-            </div>
+            ${title}
           </div>
         `
       })}

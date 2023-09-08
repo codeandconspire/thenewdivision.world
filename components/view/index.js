@@ -52,6 +52,7 @@ function createView (view, getMeta, opts = {}) {
       const style = `--color-background: ${config.background}; --color-text: ${config.color}`
       if (typeof window !== 'undefined') {
         document.documentElement.style = style
+        document.querySelector('[name="theme-color"]').setAttribute('content', config.background)
       }
 
       const languages = [doc?.lang]

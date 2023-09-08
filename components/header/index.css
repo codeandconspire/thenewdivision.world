@@ -180,7 +180,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 
   .Header-list {
@@ -191,7 +191,9 @@
   .Header-link {
     display: block;
     padding: 0.5rem;
-    margin-left: 1.375rem;
+    margin-left: 1.25rem;
+    position: relative;
+    top: 0.25rem;
   }
 
   .Header-toggle,
@@ -201,8 +203,8 @@
   }
 
   .Header-item:not(.Header-item--icon).is-current .Header-text {
-    border-bottom: 1px solid;
-    padding-bottom: 0.25rem;
+    border-bottom: 1.5px solid;
+    padding-bottom: 0.15rem;
   }
 
   .Header-item--icon .Header-link {
@@ -215,6 +217,8 @@
   .Header-icon {
     width: auto;
     height: 1.375rem;
+    position: relative;
+    top: 0.15rem;
   }
 
   .Header-item--icon .Header-text {

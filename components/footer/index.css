@@ -23,8 +23,8 @@
 }
 
 .Footer-link.is-active {
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid;
+  padding-bottom: 0;
+  border-bottom: 1.5px solid;
 }
 
 .Footer a:active {

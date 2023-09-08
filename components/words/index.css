@@ -10,7 +10,7 @@
 
 @media (min-width: 700px) {
   .Words {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 
   .Words--pushed {
@@ -18,8 +18,8 @@
   }
 
   .Words--large {
-    font-size: 2rem;
-    max-width: 56rem;
+    font-size: 1.75rem;
+    max-width: 60rem;
   }
 }
 
@@ -56,7 +56,7 @@
   font-weight: bold;
   text-decoration: underline;
   text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.02em;
+  text-underline-offset: 0.05em;
   word-break: break-word;
 }
 
@@ -158,6 +158,7 @@
   font-family: var(--type-font-family-heading);
   font-weight: bold;
   line-height: 1.1;
+  text-wrap: balance;
 }
 
 .Words h2 {
@@ -168,7 +169,7 @@
 
 .Words h3 {
   line-height: 1.2;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
 }
 
 .Words h4 {
@@ -178,12 +179,12 @@
 
 @media (min-width: 700px) {
   .Words h2 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     word-spacing: -0.03em;
     letter-spacing: -0.005em;
   }
 
   .Words h4 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 }

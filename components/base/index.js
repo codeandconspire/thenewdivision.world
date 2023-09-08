@@ -269,7 +269,7 @@ function icon (icon, opts = {}) {
     linkedin: {
       width: 24,
       height: 24,
-      html: html`<path fill="${opts.mono ? 'currentColor' : '#0E76A8'}" d="M15.15 8.4a5.83 5.83 0 00-5.85 5.82v5.88a.9.9 0 00.9.9h2.1a.9.9 0 00.9-.9v-5.88a1.94 1.94 0 012.15-1.93 2 2 0 011.75 2v5.8a.9.9 0 00.9.9h2.1a.9.9 0 00.9-.9v-5.87a5.83 5.83 0 00-5.85-5.82zM6.6 9.3H3.9c-.5 0-.9.4-.9.9v9.9c0 .5.4.9.9.9h2.7c.5 0 .9-.4.9-.9v-9.9c0-.5-.4-.9-.9-.9zM5.25 7.5a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>`
+      html: html`<path style="transform-origin: center; transform: scale(0.8) translateX(4%)" fill="${opts.mono ? 'currentColor' : '#0E76A8'}" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>`
     },
     shop: {
       width: 15,
@@ -313,7 +313,7 @@ function icon (icon, opts = {}) {
   if (!select) return null
 
   return html`
-    <svg class="${opts.class}" role="presentation" width="${select.width}" height="${select.height}" viewBox="0 0 ${select.width} ${select.height}" style="${select.fix ? 'position: relative; top: 0.125rem; left: 0.1875rem' : ''}">
+    <svg data-icon="${icon}" class="${opts.class}" role="presentation" width="${select.width}" height="${select.height}" viewBox="0 0 ${select.width} ${select.height}" style="${select.fix ? 'position: relative; top: 0.125rem; left: 0.1875rem' : ''}">
       <g fill="currentColor" fill-rule="evenodd">${select.html}</g>
     </svg>
   `
