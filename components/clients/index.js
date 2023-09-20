@@ -96,7 +96,7 @@ module.exports = class Clients extends Component {
     const self = this
     const clients = self.fetch(state, render)
 
-    return function (id, opts = {}) {
+    return function (opts = {}) {
       if (!clients) {
         return html`
           <div class="Clients Clients--large">

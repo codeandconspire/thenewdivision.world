@@ -19,7 +19,7 @@
 
 .Offer--questions a {
   font-weight: normal;
-  text-decoration: none;
+  text-decoration: none !important;
   text-wrap: balance;
   display: block;
   margin: 0;
