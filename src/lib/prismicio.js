@@ -28,7 +28,7 @@ export function createClient ({ fetch, cookies, ...config } = {}) {
 }
 
 // Read an active Prismic preview ref from document.cookie (browser only).
-function getBrowserPreviewRef () {
+export function getBrowserPreviewRef () {
   if (typeof document === 'undefined') return undefined
   const match = document.cookie.match(/(?:^|;\s*)io\.prismic\.preview=([^;]+)/)
   if (!match) return undefined

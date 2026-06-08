@@ -20,7 +20,16 @@ export async function GET ({ url, cookies, fetch }) {
 
   if (previewToken) {
     // Readable by client JS so createClient() can pick up the preview ref.
-    cookies.set(prismic.cookie.preview, previewToken, { path: '/', httpOnly: false })
+    // SameSite=None + Secure is required so the cookie is accepted in the
+    // cross-site context Prismic previews run in (the editor iframe / a
+    // navigation referred from prismic.io). A Lax cookie is silently dropped
+    // there — most visibly in Safari — leaving no preview ref to read.
+    cookies.set(prismic.cookie.preview, previewToken, {
+      path: '/',
+      httpOnly: false,
+      sameSite: 'none',
+      secure: true
+    })
   }
 
   redirect(307, redirectURL)

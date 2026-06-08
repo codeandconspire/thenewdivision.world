@@ -2,10 +2,10 @@
   import '../app.css'
   import { onMount } from 'svelte'
   import { dev } from '$app/environment'
-  import { afterNavigate } from '$app/navigation'
+  import { afterNavigate, invalidateAll } from '$app/navigation'
   import { page } from '$app/state'
   import { PrismicPreview } from '@prismicio/svelte/kit'
-  import { repositoryName } from '$lib/prismicio.js'
+  import { repositoryName, getBrowserPreviewRef } from '$lib/prismicio.js'
 
   let { children } = $props()
 
@@ -13,6 +13,11 @@
 
   // Load Google Analytics (ported from lib/document.js) — production only.
   onMount(() => {
+    // If we entered the page with an active Prismic preview session, the
+    // prerendered loads used published content — re-run them so the browser
+    // client picks up the preview ref and renders draft content.
+    if (getBrowserPreviewRef()) invalidateAll()
+
     if (dev) return
     const script = document.createElement('script')
     script.async = true
