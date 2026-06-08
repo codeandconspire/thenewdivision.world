@@ -1,0 +1,33 @@
+/** @define Slices */
+
+.Slices {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
+}
+
+@media (min-width: 700px) {
+  .Slices {
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+}
+
+.Slices-item {
+  grid-column: 1 / 7;
+}
+
+.Slices-item--half {
+  grid-column: span 3;
+}
+
+.Slices-item--space {
+  height: 1.75rem;
+}
+
+@media (min-width: 700px) {
+  .Slices-item--space {
+    height: 3.25rem;
+  }
+}

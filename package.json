@@ -1,27 +1,15 @@
 {
   "name": "thenewdivision.world",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Public website for The New Division",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "build": "jalla build --sw sw.js index.js",
-    "debug": "node --inspect server.js",
-    "test:js": "standard",
-    "test": "npm run test:js"
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "engines": {
-    "node": "18.x"
-  },
-  "documentify": {
-    "transform": [
-      [
-        "./lib/document.js",
-        {
-          "order": "end"
-        }
-      ]
-    ]
+    "node": ">=20"
   },
   "repository": {
     "type": "git",
@@ -34,29 +22,15 @@
   },
   "homepage": "https://github.com/codeandconspire/thenewdivision.world#readme",
   "devDependencies": {
-    "standard": "^17.0.0"
+    "@sveltejs/adapter-cloudflare": "^4.7.0",
+    "@sveltejs/kit": "^2.8.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "svelte": "^5.1.0",
+    "vite": "^5.4.0"
   },
   "dependencies": {
-    "cccpurge": "^2.0.0",
-    "choo": "^7.1.0",
-    "choo-devtools": "^3.0.4",
-    "choo-meta": "^2.0.0",
-    "choo-service-worker": "^3.0.0",
-    "cloudinary": "^1.32.0",
-    "dedent": "^0.7.0",
-    "dotenv": "^8.6.0",
-    "focus-visible": "^5.2.0",
-    "hstream": "^1.2.0",
-    "jalla": "^1.0.0-34",
-    "koa-body": "^4.2.0",
-    "koa-compose": "^4.1.0",
-    "koa-route": "^3.2.0",
-    "nanolru": "^1.0.0",
-    "nanoraf": "^3.1.0",
-    "normalize.css": "^8.0.1",
-    "postcss-url": "^8.0.0",
-    "prismic-element": "^2.1.0",
-    "prismic-javascript": "^3.0.2",
-    "prismic-richtext": "^1.0.3"
+    "@prismicio/client": "^7.13.0",
+    "@prismicio/svelte": "^1.3.0",
+    "normalize.css": "^8.0.1"
   }
 }

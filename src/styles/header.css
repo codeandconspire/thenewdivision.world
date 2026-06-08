@@ -1,0 +1,242 @@
+/** @define Header */
+
+.Header {
+  margin-top: var(--document-margin);
+  margin-bottom: 4rem;
+  user-select: none;
+}
+
+@media (min-width: 700px) {
+  .Header {
+    margin-bottom: 9rem
+  }
+}
+
+.Header-logo {
+  display: block;
+  width: 10.75rem;
+  position: relative;
+}
+
+.Header-menu {
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 700px) {
+  .Header-logo {
+    width: 15rem;
+  }
+}
+
+.Header-logo:active {
+  opacity: 0.5;
+}
+
+.Header-logo svg {
+  width: 100%;
+  height: auto;
+}
+
+.Header-link {
+  -webkit-touch-callout: none;
+}
+
+.Header-link:active {
+  opacity: 0.5;
+}
+
+/**
+ * Narrow viewport menu
+ */
+
+@media (max-width: 699px) {
+  .Header-menu {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: var(--color-background);
+  }
+
+  .Header-toggle {
+    font-size: 0;
+    position: fixed;
+    z-index: 2;
+    width: 1.25rem;
+    height: 0.625rem;
+    padding: 1rem;
+    box-sizing: content-box;
+    list-style: none;
+    top: var(--document-margin);
+    right: var(--document-margin);
+    outline: 0;
+  }
+
+  .Header-toggle:active {
+    opacity: 0.5;
+  }
+
+  .Header-line {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 1.25rem;
+  }
+
+  .Header-line:nth-child(2) {
+    top: auto;
+    bottom: 1rem;
+  }
+
+  .Header-switch {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  .Header-switch:checked ~ .Header-toggle .Header-line {
+    top: 48%;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  .Header-switch:checked ~ .Header-toggle .Header-line:nth-child(2) {
+    transform: rotate(-45deg);
+    transform-origin: center;
+  }
+
+  .Header-switch:checked ~ .Header-menu {
+    display: block;
+    overflow: hidden;
+    height: 100vh;
+    padding: var(--document-margin);
+    box-shadow: 0 0 0 1rem var(--color-background);
+  }
+
+  .Header-list {
+    margin-top: 2rem;
+  }
+
+  .Header-item {
+    align-items: center;
+    font-family: var(--type-font-family-heading);
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .Header-icon {
+    display: none;
+  }
+}
+
+
+@media (max-width: 699px) and (min-height: 370px) {
+  .Header-item {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 699px) and (min-height: 420px) {
+  .Header-item {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 699px) and (min-height: 480px) {
+  .Header-list {
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 699px) and (min-height: 540px) {
+  .Header-list {
+    margin-top: 4rem;
+  }
+
+  .Header-item {
+    font-size: 3rem;
+    letter-spacing: -0.005em;
+    line-height: 0.98;
+    padding-bottom: 0.3rem;
+    word-spacing: -0.03em;
+  }
+}
+
+/**
+ * Wider viewport menu
+ */
+
+@media (min-width: 700px) {
+  .Header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 1.35rem;
+  }
+
+  .Header-list {
+    display: flex;
+    align-items: center;
+  }
+
+  .Header-link {
+    display: block;
+    padding: 0.5rem;
+    margin-left: 1.25rem;
+    position: relative;
+    top: 0.25rem;
+  }
+
+  .Header-toggle,
+  .Header-switch,
+  .Header-menu .Header-logo {
+    display: none;
+  }
+
+  .Header-item:not(.Header-item--icon).is-current .Header-text {
+    border-bottom: 1.5px solid;
+    padding-bottom: 0.15rem;
+  }
+
+  .Header-item--icon .Header-link {
+    position: relative;
+    padding: 0.6rem;
+    margin-left: 1.45rem;
+    top: -0.05rem;
+  }
+
+  .Header-icon {
+    width: auto;
+    height: 1.375rem;
+    position: relative;
+    top: 0.15rem;
+  }
+
+  .Header-item--icon .Header-text {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 90%);
+    opacity: 0;
+    pointer-events: none;
+    font-size: 0.9375rem;
+  }
+
+  .Header-item--icon .Header-link:hover .Header-text,
+  .Header-item--icon .Header-link:focus-visible .Header-text {
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+
+  .Header-item--icon .Header-link:active .Header-text {
+    opacity: 1;
+  }
+}

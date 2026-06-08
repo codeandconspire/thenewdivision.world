@@ -1,0 +1,24 @@
+/* Base (also pulls in normalize.css, fonts, config, utils) */
+@import "./styles/base/index.css";
+
+/* Components — reused verbatim from the original Choo build */
+@import "./styles/view.css";
+@import "./styles/slices.css";
+@import "./styles/header.css";
+@import "./styles/footer.css";
+@import "./styles/intro.css";
+@import "./styles/words.css";
+@import "./styles/callout.css";
+@import "./styles/cases.css";
+@import "./styles/clients.css";
+@import "./styles/enterence.css";
+@import "./styles/figure.css";
+@import "./styles/illustration.css";
+@import "./styles/media.css";
+@import "./styles/news.css";
+@import "./styles/offer.css";
+@import "./styles/quotes.css";
+@import "./styles/reel.css";
+@import "./styles/team.css";
+@import "./styles/teasers.css";
+@import "./styles/thoughts.css";
