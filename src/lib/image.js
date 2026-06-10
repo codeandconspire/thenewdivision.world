@@ -44,6 +44,13 @@ export function transform (uri, transforms = 'f_auto') {
   return cloudflareUrl(uri, transforms)
 }
 
+// Resolve a legacy `/media/:type/:transform/:uri` URL (the old Cloudinary
+// proxy format, still living in search indexes, hotlinks and stale service
+// worker caches) to its Cloudflare transformation equivalent.
+export function legacyMediaUrl (uri, transforms) {
+  return cloudflareUrl(uri, transforms || 'f_auto')
+}
+
 // Translate a Cloudinary-style transform string to a Cloudflare options path.
 function cloudflareUrl (uri, transforms) {
   // Cloudflare Image Transformations only exist on the Cloudflare edge. During

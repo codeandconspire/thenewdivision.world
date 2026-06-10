@@ -1,3 +1,4 @@
+import { NotFoundError } from '@prismicio/client'
 import { error } from '@sveltejs/kit'
 import { createClient, LANGUAGE_CODES } from '$lib/prismicio.js'
 import { asText } from '$lib/prismic.js'
@@ -16,7 +17,7 @@ export async function load ({ params }) {
   try {
     doc = await client.getByUID('page', uid, { lang })
   } catch (err) {
-    if (err?.name === 'NotFoundError') error(404, 'Page not found')
+    if (err instanceof NotFoundError) error(404, 'Page not found')
     throw err
   }
 

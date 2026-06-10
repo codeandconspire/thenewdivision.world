@@ -13,6 +13,23 @@
 
   // Load Google Analytics (ported from lib/document.js) — production only.
   onMount(() => {
+    // Clean up the previous site's service worker and its caches. The old
+    // (Choo/Jalla) site registered a caching worker at /sw.js; that URL now
+    // 404s (which unregisters on the browser's update check) and this removes
+    // it immediately for visitors who reach the new app code first.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .getRegistrations()
+        .then((regs) => Promise.all(regs.map((reg) => reg.unregister())))
+        .catch(() => {})
+    }
+    if ('caches' in window) {
+      caches
+        .keys()
+        .then((keys) => Promise.all(keys.map((key) => caches.delete(key))))
+        .catch(() => {})
+    }
+
     // If we entered the page with an active Prismic preview session, the
     // prerendered loads used published content — re-run them so the browser
     // client picks up the preview ref and renders draft content.

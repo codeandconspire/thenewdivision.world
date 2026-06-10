@@ -5,12 +5,13 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 const config = {
   preprocess: vitePreprocess(),
   kit: {
-    // Only the preview endpoints are dynamic; everything else is static, so
-    // route just /api/* to the Cloudflare Function (avoids the _routes.json
-    // exclude-rule limit warning from listing every prerendered page).
+    // Only the preview endpoints and the legacy /media redirects are dynamic;
+    // everything else is static, so route just those to the Cloudflare Function
+    // (avoids the _routes.json exclude-rule limit warning from listing every
+    // prerendered page).
     adapter: adapter({
       routes: {
-        include: ['/api/*'],
+        include: ['/api/*', '/media/*'],
         exclude: []
       }
     }),
